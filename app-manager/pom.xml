@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hao</groupId>
+		<artifactId>app</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<groupId>com.hao.app</groupId>
+	<artifactId>app-manager</artifactId>
+	<packaging>war</packaging>
+
+	<name>app-manager Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<!-- app相关jar包 -->
+		<dependency>
+			<groupId>com.hao.app</groupId>
+			<artifactId>app-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hao.app</groupId>
+			<artifactId>app-dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hao.app</groupId>
+			<artifactId>app-service</artifactId>
+		</dependency>
+
+		<!-- 其他包 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>env</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<build>
+				<filters>
+					<filter>src/main/resources/env/dev.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>online</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>env</name>
+					<value>online</value>
+				</property>
+			</activation>
+			<build>
+				<filters>
+					<filter>src/main/resources/env/online.properties</filter>
+				</filters>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>app-manager</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>

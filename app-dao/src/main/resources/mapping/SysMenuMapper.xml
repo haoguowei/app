@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.app.dao.SysMenuMapper">
+  
+  <resultMap id="BaseResultMap" type="com.hao.app.pojo.SysMenu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent" jdbcType="INTEGER" property="parent" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    id, parent, name, url, sort
+  </sql>
+  
+  <select id="queryMenuByParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where parent = #{parentId,jdbcType=INTEGER}
+    order by sort
+  </select>
+  
+</mapper>
