@@ -1,9 +1,13 @@
 package com.hao.app.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SysLogs {
-    private Integer id;
+public class SysLogs implements Serializable{
+	
+	private static final long serialVersionUID = -3984543850705972217L;
+
+	private Integer id;
 
     private Date operatorTime;
 

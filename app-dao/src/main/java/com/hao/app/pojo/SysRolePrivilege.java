@@ -1,7 +1,14 @@
 package com.hao.app.pojo;
 
-public class SysRolePrivilege {
-    private Integer roleId;
+import java.io.Serializable;
+
+public class SysRolePrivilege implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2102874433102883871L;
+
+	private Integer roleId;
 
     private Integer privilegeId;
 

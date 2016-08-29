@@ -1,7 +1,12 @@
 package com.hao.app.pojo;
 
-public class SysMenu {
-    private Integer id;
+import java.io.Serializable;
+
+public class SysMenu implements Serializable{
+
+	private static final long serialVersionUID = -5615754741766804666L;
+
+	private Integer id;
 
     private Integer parent;
 

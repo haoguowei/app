@@ -1,15 +1,31 @@
 package com.hao.app.pojo;
 
-public class SysPrivilege {
-    private Integer id;
+import java.io.Serializable;
+
+public class SysPrivilege implements Serializable {
+	
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6407803666512759200L;
+
+	private Integer id;
+    
+    private Integer menuId;
 
     private String name;
 
     private String url;
 
-    private String intro;
+    public Integer getMenuId() {
+		return menuId;
+	}
 
-    public Integer getId() {
+	public void setMenuId(Integer menuId) {
+		this.menuId = menuId;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -33,11 +49,4 @@ public class SysPrivilege {
         this.url = url == null ? null : url.trim();
     }
 
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro == null ? null : intro.trim();
-    }
 }

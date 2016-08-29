@@ -1,7 +1,14 @@
 package com.hao.app.pojo;
 
-public class SysRole {
-    private Integer id;
+import java.io.Serializable;
+
+public class SysRole implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6916722107421779478L;
+
+	private Integer id;
 
     private String name;
 
