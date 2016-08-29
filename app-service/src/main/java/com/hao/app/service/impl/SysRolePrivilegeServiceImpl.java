@@ -20,28 +20,26 @@ public class SysRolePrivilegeServiceImpl implements SysRolePrivilegeService {
 	@Transactional
 	public Boolean saveRolePrivileges(int role, String priIds) {
 		if(role > 0){
-			try {
-				//1.删除该角色所有权限
-				deletePrivilegesByRoleId(role);
-				
-				//2.添加新权限
-				if(StringUtils.isNotBlank(priIds)){
-					String[] str = priIds.split(",");
-					for(String tmp : str){
-						int p = NumberUtils.toInt(tmp);
-						if(p > 0){
-							SysRolePrivilege rp = new SysRolePrivilege();
-							rp.setRoleId(role);
-							rp.setPrivilegeId(p);
-							
-							sysRolePrivilegeMapper.insert(rp);
-						}
+			//1.删除该角色所有权限
+			deletePrivilegesByRoleId(role);
+			
+			System.out.println(1/0);
+			
+			//2.添加新权限
+			if(StringUtils.isNotBlank(priIds)){
+				String[] str = priIds.split(",");
+				for(String tmp : str){
+					int p = NumberUtils.toInt(tmp);
+					if(p > 0){
+						SysRolePrivilege rp = new SysRolePrivilege();
+						rp.setRoleId(role);
+						rp.setPrivilegeId(p);
+						
+						sysRolePrivilegeMapper.insert(rp);
 					}
 				}
-				return true;
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+			return true;
 		}
 		return false;
 	}

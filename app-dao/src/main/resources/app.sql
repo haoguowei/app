@@ -26,7 +26,7 @@ CREATE TABLE `sys_logs` (
   `operator` varchar(50) DEFAULT NULL COMMENT '操作人',
   `description` varchar(500) COMMENT '操作内容',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='操作日志';
 
 /*Data for the table `sys_logs` */
 
@@ -44,7 +44,7 @@ CREATE TABLE `sys_member` (
   `phone` varchar(20) DEFAULT NULL COMMENT '电话',
   `email` varchar(50) DEFAULT NULL COMMENT 'email',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
 
 /*Data for the table `sys_member` */
 
@@ -61,7 +61,7 @@ CREATE TABLE `sys_menu` (
   `url` varchar(200) DEFAULT '#' COMMENT '地址',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
 
 /*Data for the table `sys_menu` */
 
@@ -77,7 +77,7 @@ CREATE TABLE `sys_privilege` (
   `url` varchar(50) DEFAULT NULL COMMENT '权限地址',
   `intro` varchar(500) DEFAULT NULL COMMENT '权限描述',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='权限表';
 
 /*Data for the table `sys_privilege` */
 
@@ -92,7 +92,7 @@ CREATE TABLE `sys_role` (
   `name` varchar(200) DEFAULT NULL COMMENT '角色名',
   `intro` varchar(300) DEFAULT NULL COMMENT '角色描述',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 /*Data for the table `sys_role` */
 
@@ -107,7 +107,7 @@ CREATE TABLE `sys_role_privilege` (
   `privilege_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '权限',
   KEY `idx_member` (`role_id`),
   KEY `idx_privilege` (`privilege_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户权限表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户权限表';
 
 /*Data for the table `sys_role_privilege` */
 
