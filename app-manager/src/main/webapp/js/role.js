@@ -65,7 +65,7 @@ Ext.onReady(function(){
     							alert("操作成功！");
     							window.hide();
     						}else{
-    							alert('操作失败');
+    							alert("操作失败：" + resp.data);
     						}
     					}
     				});
