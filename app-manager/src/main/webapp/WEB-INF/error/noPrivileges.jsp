@@ -10,6 +10,6 @@
 <body>
 	<h1>错误</h1><hr>
 	<h3><span style="color: red;">抱歉，您没有操作权限！</span></h3>
-	<h5><a href="javascript:void(0)" onclick="_back()" style="text-decoration:none;">返回</a></h5>
+	<h4><a href="javascript:void(0)" onclick="_back()" style="text-decoration:none;">返回</a></h4>
 </body>
 </html>

@@ -21,6 +21,10 @@ public enum ResultCodeEnum {
 	
 	private String msg;
 	
+	public String toString(){
+		return this.code + ":" + this.msg;
+	}
+	
 	private ResultCodeEnum(int code, String msg) {
 		this.code = code;
 		this.msg = msg;
@@ -45,6 +49,7 @@ public enum ResultCodeEnum {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	
 	
 	
 }
