@@ -109,26 +109,21 @@ public class SysMemberController extends BaseController {
 		int id = NumberUtils.toInt(request.getParameter("hideId"));
 		String oldpwd = request.getParameter("oldpwd");
 		String pwd = request.getParameter("pwd");
+		
+		SysMember member = sysMemeberService.queryByPrimaryKey(id);
 
-		try {
-			SysMember member = sysMemeberService.queryByPrimaryKey(id);
+		String oldpwdMd5 = Md5Util.genMD5Str(oldpwd);
+		String pwdMd5 = Md5Util.genMD5Str(pwd);
 
-			String oldpwdMd5 = Md5Util.genMD5Str(oldpwd);
-			String pwdMd5 = Md5Util.genMD5Str(pwd);
-
-			if (member != null && !member.getPwd().equals(oldpwdMd5)) {
-				return failResult(request, ResultCodeEnum.FAIL_OLDPWD);
-			}
-			
-			if (member != null && member.getPwd().equals(oldpwdMd5)) {
-				member.setPwd(pwdMd5);
-				sysMemeberService.updateMember(member);
-				sysLogsService.writeLog(getCurrentUserName(request), "修改用户密码:" + member.toString());
-				return successResult(request, "用户管理", "initMemberManager.do");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			setErrorAttribute(request, e.getMessage());
+		if (member != null && !member.getPwd().equals(oldpwdMd5)) {
+			return failResult(request, ResultCodeEnum.FAIL_OLDPWD);
+		}
+		
+		if (member != null && member.getPwd().equals(oldpwdMd5)) {
+			member.setPwd(pwdMd5);
+			sysMemeberService.updateMember(member);
+			sysLogsService.writeLog(getCurrentUserName(request), "修改用户密码:" + member.toString());
+			return successResult(request, "用户管理", "initMemberManager.do");
 		}
 		
 		return "WEB-INF/error/fail";

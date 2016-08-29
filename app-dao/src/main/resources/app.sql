@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS `sys_member`;
 CREATE TABLE `sys_member` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL COMMENT '登录名',
-  `valid` tinyint(11) DEFAULT '0' COMMENT '0有效，1禁用',
+  `valid` tinyint(2) DEFAULT '0' COMMENT '0有效，1禁用',
   `pwd` varchar(32) DEFAULT NULL COMMENT '密码',
   `show_name` varchar(50) DEFAULT NULL COMMENT '显示名',
   `role_id` int(11) DEFAULT NULL COMMENT '角色id',

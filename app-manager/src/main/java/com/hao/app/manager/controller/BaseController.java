@@ -62,16 +62,6 @@ public class BaseController {
 		return "WEB-INF/error/fail";
 	}
 	
-	/**
-	 * 输出提示
-	 * @param request
-	 * @param msg
-	 */
-	public void setErrorAttribute(HttpServletRequest request, String msg){
-		if(msg != null){
-			request.setAttribute("msg", msg);
-		}
-	}
 	
 	/**
 	 * 成功后返回提示
@@ -89,8 +79,6 @@ public class BaseController {
 		}
 		return "WEB-INF/error/success";
 	}
-	
-	
 	
 	
 	/**

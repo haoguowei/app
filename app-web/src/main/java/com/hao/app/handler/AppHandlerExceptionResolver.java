@@ -10,10 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.result.JsonResultAjax;
-import com.hao.app.commons.error.AppAjaxRuntimeException;
-import com.hao.app.commons.error.AppRuntimeException;
 
 /**
  * 统一异常处理
@@ -27,21 +25,21 @@ public class AppHandlerExceptionResolver implements HandlerExceptionResolver {
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 		try {
-			if (ex instanceof AppRuntimeException) {
-				return new ModelAndView("error/500");
+			if (!(request.getHeader("accept").contains("application/json") 
+					|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").contains("XMLHttpRequest") ))) {
+				
+				return new ModelAndView("WEB-INF/error/500");
 			}
-			else if (ex instanceof AppAjaxRuntimeException) {
-				//错误提示
+			else{
+				//json错误请求处理
 				JsonResultAjax result = new JsonResultAjax(false, ex.getMessage());
 				
+				String json = new Gson().toJson(result);
 				PrintWriter pw = response.getWriter();
-				pw.write(JSONObject.toJSONString(result));
+				pw.write(json);
 				pw.flush();
 				
 				return null;
-			}
-			else{
-				return new ModelAndView("error/500");
 			}
 		}
 		catch (Exception handlerException) {
