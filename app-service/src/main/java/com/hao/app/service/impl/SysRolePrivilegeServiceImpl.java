@@ -23,8 +23,6 @@ public class SysRolePrivilegeServiceImpl implements SysRolePrivilegeService {
 			//1.删除该角色所有权限
 			deletePrivilegesByRoleId(role);
 			
-			System.out.println(1/0);
-			
 			//2.添加新权限
 			if(StringUtils.isNotBlank(priIds)){
 				String[] str = priIds.split(",");
