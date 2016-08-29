@@ -23,7 +23,7 @@ public class AppHandlerExceptionResolver implements HandlerExceptionResolver {
 	private final Logger logger = LoggerFactory.getLogger(AppHandlerExceptionResolver.class);
 
 	@Override
-	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
 		try {
 			if (!(request.getHeader("accept").contains("application/json") 
 					|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").contains("XMLHttpRequest") ))) {
@@ -32,7 +32,7 @@ public class AppHandlerExceptionResolver implements HandlerExceptionResolver {
 			}
 			else{
 				//json错误请求处理
-				JsonResultAjax result = new JsonResultAjax(false, ex.getMessage());
+				JsonResultAjax result = new JsonResultAjax(false, e.getMessage());
 				
 				String json = new Gson().toJson(result);
 				PrintWriter pw = response.getWriter();
@@ -43,7 +43,7 @@ public class AppHandlerExceptionResolver implements HandlerExceptionResolver {
 			}
 		}
 		catch (Exception handlerException) {
-			logger.warn("Handling of [" + ex.getClass().getName() + "] resulted in Exception", handlerException);
+			logger.warn("Handling of [" + e.getClass().getName() + "] resulted in Exception", handlerException);
 		}
 		return null;
 	}

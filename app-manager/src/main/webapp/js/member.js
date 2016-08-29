@@ -21,7 +21,7 @@ Ext.onReady(function(){
 						alert("该账号已被禁用！");
 						gridStore.reload();
 					}else{
-						alert("操作失败：" + resp.data);
+						alert("操作失败：" + resp.resultTipMsg);
 					}
 				}
 			});
@@ -37,7 +37,7 @@ Ext.onReady(function(){
 						alert("该账号已可用！");
 						gridStore.reload();
 					}else{
-						alert("操作失败：" + resp.data);
+						alert("操作失败：" + resp.resultTipMsg);
 					}
 				}
 			});

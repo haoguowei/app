@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>操作失败！请重试，或联系管理员！</h1><hr>
-	<h3><span style="color: red;">错误信息：${msg}</span></h3>
-	<h5><a href="javascript:void(0)" onclick="_back()" style="text-decoration:none;">返回</a></h5>
+	<h3><span style="color: red;">${msg}</span></h3>
+	<h4><a href="javascript:void(0)" onclick="_back()" style="text-decoration:none;">返回</a></h4>
 </body>
 </html>

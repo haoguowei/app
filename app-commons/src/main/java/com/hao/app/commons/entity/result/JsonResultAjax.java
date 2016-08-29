@@ -2,8 +2,6 @@ package com.hao.app.commons.entity.result;
 
 import java.io.Serializable;
 
-import com.hao.app.commons.enums.ResultCodeEnum;
-
 /**
  * 前端返回结果ajax用
  * 
@@ -14,10 +12,13 @@ public class JsonResultAjax implements Serializable {
 
 	private static final long serialVersionUID = 6059518073716169394L;
 
+	//结果是否正确
 	private boolean success;
 
-	private ResultCodeEnum resultCode;
-
+	//结果提示语
+	private String resultTipMsg;
+	
+	//返回业务操作数据
 	private Object data;
 
 	public JsonResultAjax() {
@@ -28,18 +29,19 @@ public class JsonResultAjax implements Serializable {
 		this.success = success;
 	}
 	
-	public JsonResultAjax(ResultCodeEnum resultCode) {
-		this.success = resultCode.equals(ResultCodeEnum.SUCCESS);
-		this.resultCode = resultCode;
-	}
-
-	public JsonResultAjax(boolean success, ResultCodeEnum resultCode) {
-		this.success = success;
-		this.resultCode = resultCode;
-	}
-	
 	public JsonResultAjax(boolean success, Object data) {
 		this.success = success;
+		this.data = data;
+	}
+	
+	public JsonResultAjax(boolean success, String resultTipMsg) {
+		this.success = success;
+		this.resultTipMsg = resultTipMsg;
+	}
+	
+	public JsonResultAjax(boolean success, String resultTipMsg, Object data) {
+		this.success = success;
+		this.resultTipMsg = resultTipMsg;
 		this.data = data;
 	}
 
@@ -51,12 +53,12 @@ public class JsonResultAjax implements Serializable {
 		this.success = success;
 	}
 
-	public ResultCodeEnum getResultCode() {
-		return resultCode;
+	public String getResultTipMsg() {
+		return resultTipMsg;
 	}
 
-	public void setResultCode(ResultCodeEnum resultCode) {
-		this.resultCode = resultCode;
+	public void setResultTipMsg(String resultTipMsg) {
+		this.resultTipMsg = resultTipMsg;
 	}
 
 	public Object getData() {
@@ -69,7 +71,9 @@ public class JsonResultAjax implements Serializable {
 
 	@Override
 	public String toString() {
-		return "JsonResultAjax [success=" + success + ", resultCode=" + resultCode + ", data=" + data + "]";
+		return "JsonResultAjax [success=" + success + ", resultTipMsg=" + resultTipMsg + ", data=" + data + "]";
 	}
+	
+	
 
 }

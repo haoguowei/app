@@ -57,7 +57,7 @@ public class BaseController {
 	 */
 	public String failResult(HttpServletRequest request, ResultCodeEnum resultCode){
 		if(resultCode != null){
-			request.setAttribute("msg", resultCode);
+			request.setAttribute("msg", resultCode.toString());
 		}
 		return "WEB-INF/error/fail";
 	}

@@ -11,6 +11,6 @@
 <body>
 	<h1>404</h1><hr>
 	<h3><span style="color: red;">页面不存在</span></h3>
-	<h5><a href="javascript:void(0)" onclick="_back()" style="text-decoration:none;">返回</a></h5>
+	<h4><a href="javascript:void(0)" onclick="_back()" style="text-decoration:none;">返回</a></h4>
 </body>
 </html>

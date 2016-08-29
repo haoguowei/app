@@ -8,7 +8,7 @@ import java.util.List;
  * @author haoguowei
  *
  */
-public class TreeNodeMode {
+public class TreeNodeMode{
 	
 	private int id; //唯一
 	
