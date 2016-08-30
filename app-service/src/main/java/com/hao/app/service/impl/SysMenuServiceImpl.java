@@ -25,6 +25,27 @@ public class SysMenuServiceImpl implements SysMenuService {
 		List<SysMenu> ls = getMenuByParentId(0);
 		return getChilds(ls);
 	}
+	
+	/**
+	 * 菜单列表
+	 * @return
+	 */
+	@Override
+	public List<SysMenu> getMenuList() {
+		List<SysMenu> ls = getMenuByParentId(0);
+		return getChildList(ls);
+	}
+	
+	public List<SysMenu> getChildList(List<SysMenu> list) {
+		List<SysMenu> ls = new ArrayList<SysMenu>();
+		for (SysMenu menu : list) {
+			ls.add(menu);
+			
+			List<SysMenu> childList = getMenuByParentId(menu.getId());
+			ls.addAll(childList);
+		}
+		return ls;
+	}
 
 	/**
 	 * 根据父节点id找所有子节点

@@ -1,7 +1,6 @@
 package com.hao.app.manager.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hao.app.commons.entity.Constants;
-import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.commons.utils.Md5Util;
 import com.hao.app.pojo.SysMember;
 import com.hao.app.service.SysMemeberService;
-import com.hao.app.service.SysMenuService;
 import com.hao.app.service.SysPrivilegeService;
 
 
@@ -32,9 +29,6 @@ public class SystemController extends BaseController{
 	
 	@Autowired
 	private SysPrivilegeService sysPrivilegeService;
-	
-	@Autowired
-	private SysMenuService sysMenuService;
 	
 	/**
 	 * 进入主页
@@ -94,51 +88,6 @@ public class SystemController extends BaseController{
 	public String quitSystem(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		request.getSession().setAttribute(Constants.CURRENT_LOGIN_USER, null);
 		return "login";
-	}
-	
-	/**
-	 * 左侧菜单树的数据
-	 * @param request
-	 * @param response
-	 * @throws IOException
-	 */
-	@RequestMapping("/getSysMenuTree.do")
-	public void getSysMenuTree(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		SysMember user = getCurrentUser(request);
-		if(user == null){
-			logger.error("currentUser is null!");
-			return;
-		}
-		
-		//得到用户的权限url
-		List<String> priList = user.getPriUrls();
-		
-		//得到所有目录树数据
-		List<TreeNodeMode> all = sysMenuService.getMenuTree();
-		
-		//只返回有权限的节点
-		List<TreeNodeMode> result = new ArrayList<TreeNodeMode>();
-		
-		for(TreeNodeMode node : all){
-			if(!node.isLeaf()){
-				List<TreeNodeMode> childs = node.getChildren();
-				List<TreeNodeMode> newChilds = new ArrayList<TreeNodeMode>();
-				for(TreeNodeMode tmp : childs){
-					if(priList.contains(tmp.getHref())){
-						newChilds.add(tmp);
-					}
-				}
-				if(newChilds.size() > 0){
-					node.setChildren(newChilds);
-					result.add(node);
-				}
-			}else{
-				if(priList.contains(node.getHref())){
-					result.add(node);
-				}
-			}
-		}
-		writeResponse(response, result);
 	}
 		
 }
