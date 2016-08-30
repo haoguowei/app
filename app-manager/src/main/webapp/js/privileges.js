@@ -28,9 +28,7 @@ Ext.onReady(function(){
 		columns: [ 
 				{width:1,header:'ID', align:'left',sortable:false, dataIndex:'id'},
 				{width:1,header:'权限名称', align:'left',sortable:false, dataIndex:'name'},
-				{width:1,header:'权限地址', align:'left',sortable:false, dataIndex:'url'},
-				{width:3,header:'权限描述', align:'left',sortable:false, dataIndex:'intro'}
-		]
+				{width:1,header:'权限地址', align:'left',sortable:false, dataIndex:'url'}		]
 	}); 
 	
 	new Ext.Viewport({
