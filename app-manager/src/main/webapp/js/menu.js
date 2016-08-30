@@ -30,15 +30,18 @@ Ext.onReady(function(){
 		columns: [ 
 		        {width:1,header:'ID', align:'left',sortable:false, dataIndex:'id'},
 				{width:3,header:'菜单', align:'center',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
-					if(record.data.parent == 0){
-						return "<span style='color:blue'>##### " + val + " #####<span>";
-					}
-					return val;
+					return record.data.parent == 0?("<span style='color:blue'>##### " + val + " #####<span>"):val;
 				}},
 				{width:2,header:'菜单URL', align:'left',sortable:false, dataIndex:'url'},
 				{width:1,header:'排序', align:'center',sortable:false, dataIndex:'sort'},
 				{width:10,header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					return '';
+					var str = '';
+					if(record.data.parent == 0){
+						
+					}else{
+						
+					}
+					return str;
 				}}
 		]
 	}); 
