@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.result.JsonResultAjax;
 import com.hao.app.pojo.SysMember;
 import com.hao.app.pojo.SysMenu;
 import com.hao.app.service.SysMenuService;
@@ -30,6 +33,13 @@ public class SysMenuController extends BaseController{
 	@RequestMapping("/initMenu.do")
 	public String initMenu(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		return "jsp/menu";
+	}
+	
+	@RequestMapping("/getMenuById.do")
+	public void getMenuById(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int menuId = NumberUtils.toInt(request.getParameter("menuId"));
+		SysMenu menu = sysMenuService.queryByPrimaryKey(menuId);
+		writeResponse(response, menu);
 	}
 	
 	@RequestMapping("/searchMenus.do")
@@ -82,6 +92,26 @@ public class SysMenuController extends BaseController{
 			}
 		}
 		writeResponse(response, result);
+	}
+	
+	@RequestMapping("/saveMenu.do")
+	public void saveMenu(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		SysMenu menu = new SysMenu();
+		menu.setId(NumberUtils.toInt(request.getParameter("menuId")));
+		menu.setName(request.getParameter("menuName"));
+		menu.setParent(NumberUtils.toInt(request.getParameter("menuParentId")));
+		menu.setSort(NumberUtils.toInt(request.getParameter("menuSort")));
+		if(menu.getParent() == 0){
+			menu.setUrl("#");
+		}else{
+			menu.setUrl(request.getParameter("menuUrl"));
+		}
+
+		boolean result = sysMenuService.saveMenu(menu);
+		
+		sysLogsService.writeLog(getCurrentUserName(request), "保存菜单，result : " + result + ";menu：" + menu.toString());
+
+		writeResponse(response, new JsonResultAjax(result));
 	}
 		
 }

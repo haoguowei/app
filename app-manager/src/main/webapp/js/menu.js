@@ -1,19 +1,87 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
 	
+	var menuWindow = new com.custom.Window({
+		width : 460,
+		height : 250,
+		contentEl : 'menuWindow',
+		buttons : [{
+			text : '保存',
+			handler : function(){
+				var url = "saveMenu.do?menuId="+$("hidMenuId").value
+					+"&menuParentId="+$("hidMenuParentId").value
+					+"&menuName="+$("menuName").value
+					+"&menuSort=" + $("menuSort").value
+					+"&menuUrl="+$("menuUrl").value;
+					
+				Ext.Ajax.request( {
+					url : url,
+					success : function(response){
+						var resp = Ext.util.JSON.decode(response.responseText);
+						if(resp.success){
+							alert("操作成功！");
+							menuWindow.hide();
+							searchFunc();
+						}else{
+							alert("操作失败：" + resp.resultTipMsg);
+						}
+					}
+				});
+			}
+		},{
+			text : '关闭',
+			handler : function(){
+				menuWindow.hide();
+			}
+		}]
+	});
+	
 
 	this.searchFunc = function() {
 		gridStore.load();
 	};
+	
+	this.reset = function(){
+		$("hidMenuId").value = 0;
+		$("hidMenuParentId").value = '';
+		$("menuName").value = '';
+		$("menuUrl").value = '';
+		$("menuSort").value = '';
+	};
+	
+	this.setWindowValue = function(obj){
+		reset();
+		$("hidMenuId").value = obj.id;
+		$("hidMenuParentId").value = obj.parent;
+		$("menuName").value = obj.name;
+		$("menuUrl").value = obj.url;
+		$("menuSort").value = obj.sort;
+	};
 
-	this.updateF = function(menuId) {
-		alert(menuId);
+	this.updateF = function(bt,menuId) {
+		Ext.Ajax.request( {
+			url : 'getMenuById.do?menuId=' + menuId,
+			success : function(response){
+				var resp = Ext.util.JSON.decode(response.responseText);
+				setWindowValue(resp);
+				menuWindow.setTitle("编辑菜单:" + resp.id + "-" + resp.name);
+				menuWindow.show(bt);
+			}
+		});
+	};
+	
+	this.addF = function(bt,parentId) {
+		reset();
+		$("hidMenuId").value = 0;
+		$("hidMenuParentId").value = parentId;
+		
+		menuWindow.setTitle("新增菜单");
+		menuWindow.show(bt);
 	};
 	
 	this.toPrivileges = function(menuId) {
 		location.href = "initPrivileges.do?menuId=" + menuId;
 	};
-	
 	
 	//列表数据
 	var gridStore = new Ext.data.JsonStore({
@@ -49,8 +117,8 @@ Ext.onReady(function(){
 			}
 		},
 		columns: [ 
-		        {header:'ID', align:'left',sortable:false, dataIndex:'id'},
-				{header:'菜单', align:'center',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
+		        {header:'ID', align:'center',sortable:false, dataIndex:'id'},
+				{header:'菜单', align:'left',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
 					if(record.data.parent == 0){
 						return '<b>##### '+val+' #####</b>'
 					}
@@ -61,10 +129,10 @@ Ext.onReady(function(){
 				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
 					var str = '';
 					if(record.data.parent == 0){
-						str += genButton("修改","updateF("+val+")");
-						str += genButton("新增子菜单","");
+						str += genButton("修改","updateF(this,"+val+")");
+						str += genButton("新增子菜单","addF(this, "+val+")");
 					}else{
-						str += genButton("修改","updateF("+val+")");
+						str += genButton("修改","updateF(this,"+val+")");
 						str += genButton("菜单权限","toPrivileges("+val+")");
 					}
 					return str;
@@ -86,7 +154,7 @@ Ext.onReady(function(){
 			tbar : [ {
 				text : '新增一级菜单',
 				handler : function(b, e) {
-
+					addF(this, 0);
 				}
 			} ]
 		} ]

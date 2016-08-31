@@ -95,4 +95,16 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return sysMenuMapper.queryByPrimaryKey(menuId);
 	}
 
+	@Override
+	public boolean saveMenu(SysMenu menu) {
+		if(menu.getId() > 0){
+			//修改
+			sysMenuMapper.updateMenu(menu);
+		}else{
+			//新增
+			sysMenuMapper.insertMenu(menu);
+		}
+		return true;
+	}
+
 }

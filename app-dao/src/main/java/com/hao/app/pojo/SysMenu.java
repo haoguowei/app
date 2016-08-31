@@ -55,4 +55,11 @@ public class SysMenu implements Serializable{
     public void setSort(Integer sort) {
         this.sort = sort;
     }
+
+	@Override
+	public String toString() {
+		return "SysMenu [id=" + id + ", parent=" + parent + ", name=" + name + ", url=" + url + ", sort=" + sort + "]";
+	}
+    
+    
 }

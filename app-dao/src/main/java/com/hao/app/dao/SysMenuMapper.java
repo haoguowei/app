@@ -16,5 +16,9 @@ public interface SysMenuMapper {
 	List<SysMenu> queryMenuByParentId(@Param("parentId")int parentId);
 
 	SysMenu queryByPrimaryKey(@Param("menuId")int menuId);
+
+	void updateMenu(SysMenu menu);
+
+	void insertMenu(SysMenu menu);
    
 }

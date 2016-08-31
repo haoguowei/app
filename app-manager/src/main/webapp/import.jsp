@@ -29,6 +29,27 @@
 			 	 font: 宋体;
 			}
 			
+			/* 自定义弹出窗 */
+			.windowDiv{
+				 font-size: 13px;
+			 	 font: 宋体;
+			 	 background-color: white; 
+			 	 height: 1000px;
+			 	 padding: 28px;
+			}
+			.windowDiv table tr{
+				 height: 30px;
+			}
+			.windowDiv table td{
+				min-width: 60px;
+			}
+			.windowDiv table input{
+				padding: 3px;
+				width:300px;
+			}
+			
+			
+			
 			.Mytable{
 				padding:5px;
 				border: 0;
@@ -63,7 +84,7 @@
 			}
 			
 			.Mytext{
-				padding: 5px;
+				padding: 3px;
 				width:250px;
 			}
 			

@@ -28,4 +28,34 @@
     from sys_menu where id = #{menuId,jdbcType=INTEGER}
   </select>
   
+   <insert id="insertMenu" parameterType="com.hao.app.pojo.SysMenu">
+    insert into sys_menu (
+    	parent, name, url, sort)
+    values (
+    	#{parent,jdbcType=INTEGER}, 
+      	#{name,jdbcType=VARCHAR}, 
+      	#{url,jdbcType=VARCHAR}, 
+      	#{sort,jdbcType=INTEGER})
+  </insert>
+  
+  <update id="updateMenu" parameterType="com.hao.app.pojo.SysMenu">
+    update sys_menu
+    <set>
+      <if test="parent != null">
+        parent = #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
 </mapper>

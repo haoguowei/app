@@ -21,4 +21,6 @@ public interface SysMenuService {
 
 	SysMenu queryByPrimaryKey(int menuId);
 
+	boolean saveMenu(SysMenu menu);
+
 }

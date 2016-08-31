@@ -10,10 +10,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>
-</title>
-	<script type="text/javascript" src="<%=syspath%>/js/menu.js"></script>
+<title></title>
+<script type="text/javascript" src="<%=syspath%>/js/menu.js"></script>
 </head>
 <body>
+
+	<div id="menuWindow" class="windowDiv">
+		<input type="hidden" id="hidMenuId" name="hidMenuId" value="">
+		<input type="hidden" id="hidMenuParentId" name="hidMenuParentId" value="">
+		<table>
+			<tbody>
+				<tr>
+					<td>菜单名:</td>
+					<td>
+						<input id="menuName" name="menuName" value="">
+					</td>
+				</tr>
+				<tr>
+					<td>菜单URL:</td>
+					<td>
+						<input id="menuUrl" name="menuUrl" value="">
+					</td>
+				</tr>
+				<tr>
+					<td>排序:</td>
+					<td>
+						<input id="menuSort" name="menuSort" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 </body>
 </html>

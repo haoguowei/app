@@ -61,11 +61,11 @@ CREATE TABLE `sys_menu` (
   `url` varchar(200) DEFAULT '#' COMMENT '地址',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='系统菜单表';
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`id`,`parent`,`name`,`url`,`sort`) values (1,0,'系统管理','#',10),(2,1,'菜单管理','initMenu.do',0),(3,1,'权限管理','initPrivileges.do',1),(4,1,'角色管理','initRole.do',2),(5,1,'用户管理','initMemberManager.do',3),(6,1,'日志管理','initLog.do',10);
+insert  into `sys_menu`(`id`,`parent`,`name`,`url`,`sort`) values (1,0,'系统管理','#',10),(2,1,'菜单管理','initMenu.do',0),(3,1,'角色管理','initRole.do',2),(4,1,'用户管理','initMemberManager.do',3),(5,1,'日志管理','initLog.do',10);
 
 /*Table structure for table `sys_privilege` */
 
@@ -81,7 +81,7 @@ CREATE TABLE `sys_privilege` (
 
 /*Data for the table `sys_privilege` */
 
-insert  into `sys_privilege`(`id`,`menu_id`,`name`,`url`) values (1,2,'菜单管理','initMenu.do'),(2,3,'权限管理','initPrivileges.do'),(3,4,'角色管理','initRole.do'),(4,5,'用户管理','initMemberManager.do'),(5,6,'日志管理','initLog.do');
+insert  into `sys_privilege`(`id`,`menu_id`,`name`,`url`) values (1,2,'菜单管理','initMenu.do'),(2,2,'菜单权限','initPrivileges.do'),(3,3,'角色管理','initRole.do'),(4,4,'用户管理','initMemberManager.do'),(5,5,'日志管理','initLog.do');
 
 /*Table structure for table `sys_role` */
 

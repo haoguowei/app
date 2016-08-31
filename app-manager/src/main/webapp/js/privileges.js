@@ -1,9 +1,7 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
 	var menuId = $("menuId").value;
-	
-	var menuName = $("menuName").value;
-	var title = _isNull(menuName)?'系统所有权限':('《' + menuName + '》的权限');
+	var title = '《' + $("menuName").value + '》的权限';
 
 		
 	this.searchFunc = function() {
@@ -34,9 +32,9 @@ Ext.onReady(function(){
 		border : false,
 		autoHeight:true,
 		columns: [ 
-				{width:1,header:'ID', align:'left',sortable:false, dataIndex:'id'},
+				{width:1,header:'ID', align:'center',sortable:false, dataIndex:'id'},
 				{width:1,header:'权限名称', align:'left',sortable:false, dataIndex:'name'},
-				{width:1,header:'权限地址', align:'left',sortable:false, dataIndex:'url'}
+				{width:1,header:'权限URL', align:'left',sortable:false, dataIndex:'url'}
 				]
 	}); 
 
