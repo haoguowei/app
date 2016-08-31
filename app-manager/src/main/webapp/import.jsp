@@ -68,7 +68,7 @@
 			}
 			
 			.Mybotton{
-				 padding: 5px 10px 5px 10px;
+				 padding: 2px 3px 2px 3px;
 				 margin: 2px 0px 2px 5px;
 			}
 			
