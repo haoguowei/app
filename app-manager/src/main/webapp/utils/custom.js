@@ -93,8 +93,11 @@
 		buttonAlign : 'center',
 		trackMouseOver : true,
 		disableSelection : false,
-		viewConfig : { //自动均分列宽
-			forceFit : true 
+		viewConfig : {
+			forceFit: true, //宽度自适应
+			getRowClass:function(record,rowIndex,rowParams,store){
+				return "row-height"; 
+			}
 		},
 		loadMask : {
 			msg : '正在加载数据，请稍侯...'

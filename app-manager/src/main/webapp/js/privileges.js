@@ -1,23 +1,27 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
-	
-	this.searchFunc=function(){
+
+		
+	this.searchFunc = function() {
 		gridStore.load();
 	};
-	
-	//列表数据
+
+	// 列表数据
 	var gridStore = new Ext.data.JsonStore({
-	    url : 'searchPrivileges.do',
-	    root : 'resultList',
-	    remoteSort: false, 
-	    totalProperty:'total',
-	    fields: [
-	       {name:'id'},
-	       {name:'name'},
-	       {name:'url'},
-	       {name:'intro'}
-        ]
-    });
+		url : 'searchPrivileges.do',
+		root : 'resultList',
+		remoteSort : false,
+		totalProperty : 'total',
+		fields : [ {
+			name : 'id'
+		}, {
+			name : 'name'
+		}, {
+			name : 'url'
+		}, {
+			name : 'intro'
+		} ]
+	});
 	
 	var grid = new com.custom.GridPanel({
 		store : gridStore,
@@ -31,18 +35,20 @@ Ext.onReady(function(){
 				{width:1,header:'权限地址', align:'left',sortable:false, dataIndex:'url'}
 				]
 	}); 
-	
+
+
+		
 	new Ext.Viewport({
 		layout : 'border',
-		items : [{
-			title:'权限管理',
-	        region : 'center',
+		items : [ {
+			title : '权限管理',
+			region : 'center',
 			frame : false,
 			border : true,
 			autoScroll : true,
-			items : [grid]
-		}]
+			items : [ grid ]
+		} ]
 	});
-	
+
 	searchFunc();
 });

@@ -1,32 +1,33 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
-	
-	this.searchFunc=function(){
+
+	this.searchFunc = function() {
 		gridStore.load();
 	};
-	
+
 	var fromStore = new Ext.data.JsonStore({
-	    url : 'searchPrivilegesWithoutRoles.do',
-	    root : 'resultList',
-	    remoteSort: false, 
-	    totalProperty:'total',
-	    fields: [
-	       {name:'id'},
-	       {name:'name'}
-        ]
-    });
-	
+		url : 'searchPrivilegesWithoutRoles.do',
+		root : 'resultList',
+		remoteSort : false,
+		totalProperty : 'total',
+		fields : [ {
+			name : 'id'
+		}, {
+			name : 'name'
+		} ]
+	});
+
 	var toStore = new Ext.data.JsonStore({
 		url : 'searchRolePrivileges.do',
 		root : 'resultList',
-		remoteSort: false, 
-		totalProperty:'total',
-		fields: [
-		         {name:'id'},
-		         {name:'name'}
-		       ]
+		remoteSort : false,
+		totalProperty : 'total',
+		fields : [ {
+			name : 'id'
+		}, {
+			name : 'name'
+		} ]
 	});
-	
 	
 	var isForm = new Ext.form.FormPanel({
         items:[{
@@ -123,8 +124,7 @@ Ext.onReady(function(){
 				{width:1,header:'角色', align:'center',sortable:false, dataIndex:'name'},
 				{width:3,header:'角色描述', align:'left',sortable:false, dataIndex:'intro'},
 				{width:2,header:'操作', align:'center',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					var str = '<input type="button" value="分配权限" class="Mybotton" onclick="assignRolePrivileges('+val+')">';
-					return str;
+					return genButton("分配权限", 'assignRolePrivileges('+val+')');
 				}}
 		]
 	}); 

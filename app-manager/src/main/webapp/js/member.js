@@ -1,42 +1,45 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
-	
-	this.searchFunc=function(){
+
+	this.searchFunc = function() {
 		gridStore.load();
 	};
+
+	this.updateF = function(id) {
+		location.href = "initEditMember.do?id=" + id;
+	};
 	
-	this.updateF=function(id){
-		location.href = "initEditMember.do?id="+id;
+	this.updatePWD = function(id) {
+		location.href = "initEditMemberPWD.do?id=" + id;
 	};
-	this.updatePWD=function(id){
-		location.href = "initEditMemberPWD.do?id="+id;
-	};
-	this.updateValid=function(id){
-		if(confirm("确定要禁用该账号吗？禁用后该账号将不能登录！")){
-			Ext.Ajax.request( {
-				url : 'initEditMemberValid.do?value=1&id='+id,
-				success : function(response){
+	
+	this.updateValid = function(id) {
+		if (confirm("确定要禁用该账号吗？禁用后该账号将不能登录！")) {
+			Ext.Ajax.request({
+				url : 'initEditMemberValid.do?value=1&id=' + id,
+				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
-					if(resp.success){
+					if (resp.success) {
 						alert("该账号已被禁用！");
 						gridStore.reload();
-					}else{
+					} else {
 						alert("操作失败：" + resp.resultTipMsg);
 					}
 				}
 			});
 		}
 	};
-	this.updateValid2=function(id){
-		if(confirm("确定要取消禁用该账号吗？取消后该账号将能登录系统！")){
-			Ext.Ajax.request( {
-				url : 'initEditMemberValid.do?value=0&id='+id,
-				success : function(response){
+	
+	this.updateValidUN = function(id) {
+		if (confirm("确定要取消禁用该账号吗？取消后该账号将能登录系统！")) {
+			Ext.Ajax.request({
+				url : 'initEditMemberValid.do?value=0&id=' + id,
+				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
-					if(resp.success){
+					if (resp.success) {
 						alert("该账号已可用！");
 						gridStore.reload();
-					}else{
+					} else {
 						alert("操作失败：" + resp.resultTipMsg);
 					}
 				}
@@ -82,12 +85,14 @@ Ext.onReady(function(){
 					return val=="0"||val==0 ? '正常' : '<span style="color:red;">禁用</span>';
 				}},
 				{width:3,header:'操作', align:'center',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					var str = '<input type="button" value="修改" class="Mybotton" onclick="updateF('+val+')">';
-					str += '<input type="button" value="改密码" class="Mybotton" onclick="updatePWD('+val+')">';
+					var str = '';
+					str += genButton("修改",'updateF('+val+')');
+					str += genButton("改密码",'updatePWD('+val+')');
+					
 					if(record.data.valid == 0 || record.data.valid == '0'){
-						str += '<input type="button" value="禁用" class="Mybotton" onclick="updateValid('+val+')">';
+						str += genButton("禁用",'updateValid('+val+')');
 					}else{
-						str += '<input type="button" value="取消禁用" class="Mybotton" onclick="updateValid2('+val+')">';
+						str += genButton("取消禁用",'updateValidUN('+val+')');
 					}
 					return str;
 				}}
