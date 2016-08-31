@@ -14,5 +14,7 @@ public interface SysMenuMapper {
 	 * @return
 	 */
 	List<SysMenu> queryMenuByParentId(@Param("parentId")int parentId);
+
+	SysMenu queryByPrimaryKey(@Param("menuId")int menuId);
    
 }

@@ -90,4 +90,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return ls;
 	}
 
+	@Override
+	public SysMenu queryByPrimaryKey(int menuId) {
+		return sysMenuMapper.queryByPrimaryKey(menuId);
+	}
+
 }

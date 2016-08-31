@@ -22,4 +22,10 @@
     order by sort
   </select>
   
+  <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu where id = #{menuId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

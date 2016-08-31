@@ -34,5 +34,12 @@ public interface SysPrivilegeMapper {
 	 * @return
 	 */
 	List<String> queryPrivilegeURLByRoleId(@Param("roleId")Integer roleId);
+
+	/**
+	 * 查询menu下的设置的所有权限
+	 * @param menuId
+	 * @return
+	 */
+	List<SysPrivilege> queryPrivilegeByMenuId(@Param("menuId")Integer menuId);
     
 }

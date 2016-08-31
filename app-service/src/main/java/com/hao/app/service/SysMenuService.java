@@ -19,4 +19,6 @@ public interface SysMenuService {
 	 */
 	List<SysMenu> getMenuList();
 
+	SysMenu queryByPrimaryKey(int menuId);
+
 }

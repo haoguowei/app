@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.JsonResultAjax;
+import com.hao.app.pojo.SysMenu;
 import com.hao.app.pojo.SysPrivilege;
+import com.hao.app.service.SysMenuService;
 import com.hao.app.service.SysPrivilegeService;
 import com.hao.app.service.SysRolePrivilegeService;
 
@@ -34,15 +36,31 @@ public class SysPrivilegeController extends BaseController{
 	
 	@Autowired
 	private SysRolePrivilegeService sysRolePrivilegeService;
+	
+	@Autowired
+	private SysMenuService sysMenuService;
 
 	@RequestMapping("/initPrivileges.do")
 	public String initPrivileges(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int menuId = NumberUtils.toInt(request.getParameter("menuId"));
+		if(menuId > 0){
+			SysMenu menu = sysMenuService.queryByPrimaryKey(menuId);
+			request.setAttribute("menu", menu);
+		}
 		return "jsp/privileges";
 	}
 	
 	@RequestMapping("/searchPrivileges.do")
 	public void searchPrivileges(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		List<SysPrivilege> ls = sysPrivilegeService.queryAllPrivilege();
+		int menuId = NumberUtils.toInt(request.getParameter("menuId"));
+		List<SysPrivilege> ls = null;
+		if(menuId == 0){
+			//系统所有权限
+			ls = sysPrivilegeService.queryAllPrivilege();
+		}else{
+			//菜单下的权限
+			ls = sysPrivilegeService.queryPrivilegeByMenuId(menuId);
+		}
 		
 		JsonResult<SysPrivilege> result = new JsonResult<SysPrivilege>(ls.size(), ls);
 		writeResponse(response, result);

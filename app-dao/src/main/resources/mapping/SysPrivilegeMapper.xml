@@ -28,4 +28,10 @@
     where rp.role_id = ${roleId} 
   </select>
   
+  <select id="queryPrivilegeByMenuId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, menu_id, name, url 
+    from sys_privilege
+    where menu_id = ${menuId} 
+  </select>
+  
 </mapper>

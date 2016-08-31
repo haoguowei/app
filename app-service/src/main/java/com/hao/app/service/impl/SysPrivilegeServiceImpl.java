@@ -95,4 +95,12 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 		return urls;
 	}
 
+	/**
+	 * 查询menu下的设置的所有权限
+	 */
+	@Override
+	public List<SysPrivilege> queryPrivilegeByMenuId(Integer menuId) {
+		return sysPrivilegeMapper.queryPrivilegeByMenuId(menuId);
+	}
+
 }

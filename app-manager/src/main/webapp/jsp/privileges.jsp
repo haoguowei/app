@@ -15,5 +15,7 @@
 	<script type="text/javascript" src="<%=syspath%>/js/privileges.js"></script>
 </head>
 <body>
+<input type="hidden" id="menuName" name="menuName" value="${menu.name }">
+<input type="hidden" id="menuId" name="menuId" value="${menu.id }">
 </body>
 </html>

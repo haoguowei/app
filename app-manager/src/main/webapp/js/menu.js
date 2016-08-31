@@ -6,8 +6,12 @@ Ext.onReady(function(){
 		gridStore.load();
 	};
 
-	this.updateF = function(id) {
-		alert(id);
+	this.updateF = function(menuId) {
+		alert(menuId);
+	};
+	
+	this.toPrivileges = function(menuId) {
+		location.href = "initPrivileges.do?menuId=" + menuId;
 	};
 	
 	
@@ -61,7 +65,7 @@ Ext.onReady(function(){
 						str += genButton("新增子菜单","");
 					}else{
 						str += genButton("修改","updateF("+val+")");
-						str += genButton("菜单权限","");
+						str += genButton("菜单权限","toPrivileges("+val+")");
 					}
 					return str;
 				}}

@@ -41,5 +41,12 @@ public interface SysPrivilegeService {
 	 * @return
 	 */
 	JsonResult<SysPrivilege> queryNoPrivilegesByRoleId(int roleId);
+	
+	/**
+	 * 查询menu下的设置的所有权限
+	 * @param roleId
+	 * @return
+	 */
+	List<SysPrivilege> queryPrivilegeByMenuId(Integer menuId);
 
 }

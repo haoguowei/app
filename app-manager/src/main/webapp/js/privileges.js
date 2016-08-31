@@ -1,5 +1,9 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
+	var menuId = $("menuId").value;
+	
+	var menuName = $("menuName").value;
+	var title = _isNull(menuName)?'系统所有权限':('《' + menuName + '》的权限');
 
 		
 	this.searchFunc = function() {
@@ -8,7 +12,7 @@ Ext.onReady(function(){
 
 	// 列表数据
 	var gridStore = new Ext.data.JsonStore({
-		url : 'searchPrivileges.do',
+		url : 'searchPrivileges.do?menuId=' +( _isNull(menuId) ? 0 : menuId),
 		root : 'resultList',
 		remoteSort : false,
 		totalProperty : 'total',
@@ -41,7 +45,7 @@ Ext.onReady(function(){
 	new Ext.Viewport({
 		layout : 'border',
 		items : [ {
-			title : '权限管理',
+			title : title,
 			region : 'center',
 			frame : false,
 			border : true,
