@@ -94,10 +94,7 @@
 		trackMouseOver : true,
 		disableSelection : false,
 		viewConfig : {
-			forceFit: true, //宽度自适应
-			getRowClass:function(record,rowIndex,rowParams,store){
-				return "row-height"; 
-			}
+			forceFit: true //宽度自适应
 		},
 		loadMask : {
 			msg : '正在加载数据，请稍侯...'

@@ -20,13 +20,7 @@
 			    background-image:url(ext-3.2.1/resources/images/default/grid/row-radio-sprite.gif);
 			}
 			
-			.row-height {
-			   height: 30px;
-			   vertical-align:middle;
-			}
-			
-			.row-color-yellow .row-height{
-			   background-color: #FBF8BF !important;
+			.row-color-yellow{
 			   color:blue; 
 			}
 			

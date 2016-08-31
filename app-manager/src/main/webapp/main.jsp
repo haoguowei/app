@@ -46,7 +46,7 @@
 						id : 'center-ssh',
 						border : true,
 						margins : '1 1 1 7',
-						html : "<iframe src='right.jsp' id='layout_page_right' name='layout_page_right' width=100% height=100% scrolling='no' frameborder='0'></iframe>"
+						html : "<iframe src='' id='layout_page_right' name='layout_page_right' width=100% height=100% scrolling='no' frameborder='0'></iframe>"
 					}]
 		});
 	});

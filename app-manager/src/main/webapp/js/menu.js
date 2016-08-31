@@ -45,16 +45,16 @@ Ext.onReady(function(){
 			}
 		},
 		columns: [ 
-		        {width:1,header:'ID', align:'left',sortable:false, dataIndex:'id'},
-				{width:3,header:'菜单', align:'center',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
+		        {header:'ID', align:'left',sortable:false, dataIndex:'id'},
+				{header:'菜单', align:'center',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
 					if(record.data.parent == 0){
 						return '<b>##### '+val+' #####</b>'
 					}
 					return val;
 				}},
-				{width:3,header:'菜单URL', align:'left',sortable:false, dataIndex:'url'},
-				{width:1,header:'排序', align:'center',sortable:false, dataIndex:'sort'},
-				{width:8,header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
+				{header:'菜单URL', align:'left',sortable:false, dataIndex:'url'},
+				{header:'排序', align:'center',sortable:false, dataIndex:'sort'},
+				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
 					var str = '';
 					if(record.data.parent == 0){
 						str += genButton("修改","updateF("+val+")");
