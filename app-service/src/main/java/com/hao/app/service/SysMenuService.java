@@ -23,4 +23,6 @@ public interface SysMenuService {
 
 	boolean saveMenu(SysMenu menu);
 
+	boolean deleteMenu(int menuId);
+
 }

@@ -57,5 +57,11 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <delete id="deleteMenu" parameterType="java.lang.Integer">
+  	delete from sys_menu 
+  	where id = #{menuId} 
+  	or parent = #{menuId}
+  </delete>
+  
   
 </mapper>

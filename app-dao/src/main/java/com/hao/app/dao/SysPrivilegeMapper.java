@@ -15,13 +15,6 @@ public interface SysPrivilegeMapper {
 	List<SysPrivilege> queryAllPrivilege();
 
 	/**
-	 * 删除角色的所有权限
-	 * @param roleId
-	 * @return
-	 */
-	int deletePrivilegesByRoleId(@Param("roleId")int roleId);
-
-	/**
 	 * 查询角色对应的权限
 	 * @param roleId
 	 * @return
@@ -41,5 +34,11 @@ public interface SysPrivilegeMapper {
 	 * @return
 	 */
 	List<SysPrivilege> queryPrivilegeByMenuId(@Param("menuId")Integer menuId);
+
+	/**
+	 * 删除菜单下的权限
+	 * @param menuId
+	 */
+	void deletePrivilegeByMenuId(@Param("menuId")int menuId);
     
 }

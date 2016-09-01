@@ -88,11 +88,6 @@ Ext.onReady(function(){
 		}
     });
 	
-
-	this.searchFunc = function() {
-		gridStore.load();
-	};
-	
 	this.reset = function(){
 		$("hidMenuId").value = 0;
 		$("hidMenuParentId").value = '';
@@ -109,7 +104,13 @@ Ext.onReady(function(){
 		$("menuUrl").value = obj.url;
 		$("menuSort").value = obj.sort;
 	};
+	
+	//查询
+	this.searchFunc = function() {
+		gridStore.load();
+	};
 
+	//更新
 	this.updateF = function(bt,menuId) {
 		Ext.Ajax.request( {
 			url : 'getMenuById.do?menuId=' + menuId,
@@ -122,6 +123,7 @@ Ext.onReady(function(){
 		});
 	};
 	
+	//新增
 	this.addF = function(bt,parentId) {
 		reset();
 		$("hidMenuId").value = 0;
@@ -131,8 +133,22 @@ Ext.onReady(function(){
 		menuWindow.show(bt);
 	};
 	
+	//删除
 	this.deleteF = function(bt,menuId) {
-		
+		if (confirm("确定要删除该菜单吗？其子菜单及权限也将被删除！")) {
+			Ext.Ajax.request({
+				url : 'deleteMenu.do?menuId=' + menuId,
+				success : function(response) {
+					var resp = Ext.util.JSON.decode(response.responseText);
+					if (resp.success) {
+						alert("操作成功！");
+						searchFunc();
+					} else {
+						alert("操作失败：" + resp.resultTipMsg);
+					}
+				}
+			});
+		}
 	};
 	
 	this.toPrivileges = function(menuId) {
@@ -185,6 +201,7 @@ Ext.onReady(function(){
 				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
 					var str = genButton("修改","updateF(this,"+val+")");
 					str += genButton("删除","deleteF(this,"+val+")");
+					
 					if(record.data.parent == 0){
 						str += genButton("新增子菜单","addF(this, "+val+")");
 					}else{

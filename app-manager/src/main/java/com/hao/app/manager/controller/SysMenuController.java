@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,6 +110,14 @@ public class SysMenuController extends BaseController{
 		
 		sysLogsService.writeLog(getCurrentUserName(request), "保存菜单，result : " + result + ";menu：" + menu.toString());
 
+		writeResponse(response, new JsonResultAjax(result));
+	}
+	
+	@RequestMapping("/deleteMenu.do")
+	public void deleteMenu(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int menuId = NumberUtils.toInt(request.getParameter("menuId"));
+		boolean result = sysMenuService.deleteMenu(menuId);
+		sysLogsService.writeLog(getCurrentUserName(request), "删除菜单，result : " + result + ";menuId：" + menuId);
 		writeResponse(response, new JsonResultAjax(result));
 	}
 		

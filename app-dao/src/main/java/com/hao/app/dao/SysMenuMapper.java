@@ -20,5 +20,7 @@ public interface SysMenuMapper {
 	void updateMenu(SysMenu menu);
 
 	void insertMenu(SysMenu menu);
+
+	void deleteMenu(@Param("menuId")int menuId);
    
 }

@@ -34,4 +34,9 @@
     where menu_id = ${menuId} 
   </select>
   
+  <delete id="deletePrivilegeByMenuId" parameterType="java.lang.Integer">
+  	delete from sys_privilege 
+  	where menu_id = ${menuId} 
+  </delete>
+  
 </mapper>
