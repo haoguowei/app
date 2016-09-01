@@ -4,7 +4,7 @@
   
   <resultMap id="BaseResultMap" type="com.hao.app.pojo.SysPrivilege">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="menuId" jdbcType="INTEGER" property="menu_id" />
+    <result column="menu_id" jdbcType="INTEGER" property="menuId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
@@ -27,6 +27,13 @@
   
   <select id="queryPrivilegeURLByRoleId" parameterType="java.lang.Integer" resultType="java.lang.String">
     select p.url
+    from sys_role_privilege rp
+    left join sys_privilege p on p.id = rp.privilege_id
+    where rp.role_id = ${roleId} 
+  </select>
+  
+  <select id="queryPrivilegeIdByRoleId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select p.id
     from sys_role_privilege rp
     left join sys_privilege p on p.id = rp.privilege_id
     where rp.role_id = ${roleId} 

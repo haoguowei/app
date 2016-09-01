@@ -12,14 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>
 </title>
+	<script type="text/javascript" src="<%=syspath%>/js/window-privileges.js"></script>
 	<script type="text/javascript" src="<%=syspath%>/js/role.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="<%=syspath%>/ext-3.2.1/ux/MultiSelect.css"/>
-	<script type="text/javascript" src="<%=syspath%>/ext-3.2.1/ux/MultiSelect.js"></script>
-    <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/ux/ItemSelector.js"></script>
 </head>
 <body>
 
-<input type="hidden" id="hidRoleId" name="hidRoleId" value="">
+	<input type="hidden" id="hidRoleId" name="hidRoleId" value="">
+	
+	<div id="treeDiv"></div>
 </body>
 </html>

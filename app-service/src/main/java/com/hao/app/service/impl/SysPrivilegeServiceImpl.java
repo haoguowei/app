@@ -1,15 +1,17 @@
 package com.hao.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.dao.SysPrivilegeMapper;
 import com.hao.app.dao.SysRolePrivilegeMapper;
 import com.hao.app.pojo.SysPrivilege;
@@ -33,56 +35,13 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 	}
 
 	/**
-	 * 查询角色对应的权限
-	 */
-	@Override
-	public List<SysPrivilege> queryPrivilegeByRoleId(Integer roleId) {
-		return sysPrivilegeMapper.queryPrivilegeByRoleId(roleId);
-	}
-	
-	/**
 	 * 查询角色对应的权限url
 	 */
 	@Override
 	public List<String> queryPrivilegeURLByRoleId(Integer roleId) {
 		return sysPrivilegeMapper.queryPrivilegeURLByRoleId(roleId);
 	}
-
-	/**
-	 * 查询角色没有的权限
-	 */
-	@Override
-	public JsonResult<SysPrivilege> queryNoPrivilegesByRoleId(int roleId) {
-		List<SysPrivilege> ls = queryNoPrivilegesList(roleId);
-		return new JsonResult<SysPrivilege>(ls.size(), ls);
-	}
 	
-	/**
-	 * 查询角色没有的权限list
-	 * @param roleId
-	 * @return
-	 */
-	public List<SysPrivilege> queryNoPrivilegesList(int roleId) {
-		List<SysPrivilege> all = queryAllPrivilege();
-		List<SysPrivilege> list = queryPrivilegeByRoleId(roleId);
-		if (list == null || list.size() == 0) {
-			return all;
-		}
-
-		List<Integer> ids = new ArrayList<Integer>();
-		for (SysPrivilege sp : list) {
-			ids.add(sp.getId());
-		}
-
-		List<SysPrivilege> resList = new ArrayList<SysPrivilege>();
-		for (SysPrivilege sp : all) {
-			if (!ids.contains(sp.getId())) {
-				resList.add(sp);
-			}
-		}
-		return resList;
-	}
-
 	/**
 	 * 查询所有权限URL
 	 */
@@ -143,6 +102,56 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 		//2.删除权限关系表权限
 		sysRolePrivilegeMapper.deletePrivilegesByPrivilegeId(privilegeId);
 		return true;
+	}
+
+	/**
+	 * 获取每个菜单对应的权限列表
+	 * @return
+	 */
+	@Override
+	public Map<Integer, List<TreeNodeMode>> getMenuPrivilegeMap(int roleId) {
+		Map<Integer, List<TreeNodeMode>> map = new HashMap<Integer, List<TreeNodeMode>>();
+		
+		//获取所有的权限
+		List<SysPrivilege> allPrivilege = sysPrivilegeMapper.queryAllPrivilege();
+		if(allPrivilege == null){
+			return map;
+		}
+		
+		//获取角色已经有的权限Id
+		List<SysPrivilege> rolePriIds = sysPrivilegeMapper.queryPrivilegeIdByRoleId(roleId);
+		
+		for(SysPrivilege p : allPrivilege){
+			Integer menuId = p.getMenuId() * 1000;
+			
+			List<TreeNodeMode> pNodes = null;
+			if(map.containsKey(menuId)){
+				pNodes = map.get(menuId);
+			}else{
+				pNodes = new ArrayList<TreeNodeMode>();
+			}
+			
+			TreeNodeMode node = genNodeByPri(p,rolePriIds);
+			pNodes.add(node);
+			map.put(menuId, pNodes);
+		}
+		
+		return map;
+	}
+	
+	private TreeNodeMode genNodeByPri(SysPrivilege p,List<SysPrivilege> rolePriIds){
+		TreeNodeMode node = new TreeNodeMode();
+		node.setId(p.getId());
+		node.setText(p.getUrl() + "  " + p.getName());
+		node.setParentId(p.getMenuId() * 1000);
+		node.setAttributes(p);
+		node.setLeaf(true);
+		node.setChecked(false);
+		if(rolePriIds != null && rolePriIds.contains(p.getId())){
+			node.setChecked(true);
+		}
+		
+		return node;
 	}
 
 }

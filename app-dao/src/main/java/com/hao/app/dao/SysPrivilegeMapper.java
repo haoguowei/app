@@ -66,5 +66,12 @@ public interface SysPrivilegeMapper {
 	 * @param privilegeId
 	 */
 	void deletePrivilege(@Param("id")int id);
+
+	/**
+	 * 获取角色已经有的权限Id
+	 * @param roleId
+	 * @return
+	 */
+	List<SysPrivilege> queryPrivilegeIdByRoleId(@Param("roleId")int roleId);
     
 }

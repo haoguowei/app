@@ -1,9 +1,10 @@
 package com.hao.app.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.pojo.SysPrivilege;
 
 public interface SysPrivilegeService {
@@ -21,12 +22,6 @@ public interface SysPrivilegeService {
 	 */
 	Set<String> queryAllPrivilegeUrls();
 	
-	/**
-	 * 查询角色对应的权限
-	 * @param roleId
-	 * @return
-	 */
-	List<SysPrivilege> queryPrivilegeByRoleId(Integer roleId);
 
 	/**
 	 * 查询角色对应的权限URL
@@ -35,12 +30,6 @@ public interface SysPrivilegeService {
 	 */
 	List<String> queryPrivilegeURLByRoleId(Integer roleId);
 
-	/**
-	 * 查询角色没有的权限
-	 * @param roleId
-	 * @return
-	 */
-	JsonResult<SysPrivilege> queryNoPrivilegesByRoleId(int roleId);
 	
 	/**
 	 * 查询menu下的设置的所有权限
@@ -71,5 +60,12 @@ public interface SysPrivilegeService {
 	 * @return
 	 */
 	boolean deletePrivilege(int privilegeId);
+
+
+	/**
+	 * 获取每个菜单对应的权限列表
+	 * @return
+	 */
+	Map<Integer, List<TreeNodeMode>> getMenuPrivilegeMap(int roleId);
 
 }
