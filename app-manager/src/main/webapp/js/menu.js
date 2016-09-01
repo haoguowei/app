@@ -8,11 +8,53 @@ Ext.onReady(function(){
 		buttons : [{
 			text : '保存',
 			handler : function(){
-				var url = "saveMenu.do?menuId="+$("hidMenuId").value
-					+"&menuParentId="+$("hidMenuParentId").value
-					+"&menuName="+$("menuName").value
-					+"&menuSort=" + $("menuSort").value
-					+"&menuUrl="+$("menuUrl").value;
+				var menuName = $("menuName").value;
+				var menuUrl = $("menuUrl").value;
+				var menuSort = $("menuSort").value;
+				
+				if (_isNull(menuName)) {
+					alert("请填写菜单名！");
+					$("menuName").focus();
+					return false;
+				}
+				if (!regexVerify('chinese2',menuName)) {
+					alert("菜单名含有非法字符！");
+					$("menuName").focus();
+					return false;
+				}
+				
+				if (_isNull(menuUrl)) {
+					alert("请填写菜单URL！");
+					$("menuUrl").focus();
+					return false;
+				}
+				
+				if($("hidMenuParentId").value != 0){
+					if (menuUrl != null && !regexVerify('letter2',menuUrl)) {
+						alert("菜单URL含有非法字符！");
+						$("menuUrl").focus();
+						return false;
+					}
+				}else{
+					menuUrl = '';
+				}
+				
+				if (_isNull(menuSort)) {
+					alert("请填写菜单排序！");
+					$("menuSort").focus();
+					return false;
+				}
+				if (!regexVerify('num1',menuSort)) {
+					alert("菜单排序只能使用数字！");
+					$("menuSort").focus();
+					return false;
+				}
+				
+				var url = "saveMenu.do?menuId=" + $("hidMenuId").value
+					+"&menuParentId=" + $("hidMenuParentId").value
+					+"&menuName=" + menuName
+					+"&menuSort=" + menuSort
+					+"&menuUrl=" + menuUrl;
 					
 				Ext.Ajax.request( {
 					url : url,
@@ -35,6 +77,16 @@ Ext.onReady(function(){
 			}
 		}]
 	});
+	
+	//编辑一级菜单时，只读
+	menuWindow.on("beforeshow",function(){
+		if($("hidMenuParentId").value == 0){
+			$("menuUrl").value = '#';
+			$("menuUrl").readOnly = true;
+		}else{
+			$("menuUrl").readOnly = false;
+		}
+    });
 	
 
 	this.searchFunc = function() {
@@ -79,6 +131,10 @@ Ext.onReady(function(){
 		menuWindow.show(bt);
 	};
 	
+	this.deleteF = function(bt,menuId) {
+		
+	};
+	
 	this.toPrivileges = function(menuId) {
 		location.href = "initPrivileges.do?menuId=" + menuId;
 	};
@@ -120,19 +176,18 @@ Ext.onReady(function(){
 		        {header:'ID', align:'center',sortable:false, dataIndex:'id'},
 				{header:'菜单', align:'left',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
 					if(record.data.parent == 0){
-						return '<b>##### '+val+' #####</b>'
+						return '<b>=== '+val+' ===</b>'
 					}
 					return val;
 				}},
 				{header:'菜单URL', align:'left',sortable:false, dataIndex:'url'},
 				{header:'排序', align:'center',sortable:false, dataIndex:'sort'},
 				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					var str = '';
+					var str = genButton("修改","updateF(this,"+val+")");
+					str += genButton("删除","deleteF(this,"+val+")");
 					if(record.data.parent == 0){
-						str += genButton("修改","updateF(this,"+val+")");
 						str += genButton("新增子菜单","addF(this, "+val+")");
 					}else{
-						str += genButton("修改","updateF(this,"+val+")");
 						str += genButton("菜单权限","toPrivileges("+val+")");
 					}
 					return str;

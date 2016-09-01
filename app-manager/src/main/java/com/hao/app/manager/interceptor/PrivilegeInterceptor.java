@@ -26,23 +26,23 @@ public class PrivilegeInterceptor implements HandlerInterceptor {
 	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getRequestURI();
-		
 		String path = url.substring(url.lastIndexOf("/")+1, url.lastIndexOf(Constants.URLSUFFIX)) + Constants.URLSUFFIX;
-		logger.info("用户请求URL={}", path);
+		
+		//当前用户
+		SysMember currentUser = (SysMember) request.getSession().getAttribute(Constants.CURRENT_LOGIN_USER);
 		
 		//系统所有权限
 		Set<String> allPrivileges = Constants.allPrivilegeSet;
 		if(allPrivileges.contains(path)){
-			//当前用户的权限
-			SysMember currentUser = (SysMember) request.getSession().getAttribute(Constants.CURRENT_LOGIN_USER);
 			if(currentUser != null && currentUser.getPriUrls() != null && currentUser.getPriUrls().contains(path)){
 				return true;
 			}
 		}else{
-			//只拦截（allPrivileges）系统所有权限中定义的权限
+			//只拦截（allPrivileges）系统权限中定义的权限
 			return true;
 		}
 		
+		logger.error("用户{}操作{}无权限！", currentUser.getName(), path);
 		response.sendRedirect("initNoPrivileges.jsp"); 
 		return false;
 	}
