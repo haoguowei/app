@@ -6,7 +6,7 @@ Ext.onReady(function(){
 	//编辑权限窗口
 	var pWindow = new com.custom.Window({
 		width : 460,
-		height : 250,
+		height : 220,
 		contentEl : 'pWindow',
 		buttons : [{
 			text : '保存',

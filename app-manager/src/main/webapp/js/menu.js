@@ -204,7 +204,7 @@ Ext.onReady(function(){
 						str += genButton("删除菜单及子菜单","deleteF(this,"+val+")");
 						str += genButton("新增子菜单","addF(this, "+val+")");
 					}else{
-						str += genButton("删除菜单","deleteF(this,"+val+")");
+						str += genButton("删除","deleteF(this,"+val+")");
 						str += genButton("菜单权限","toPrivileges("+val+")");
 					}
 					return str;

@@ -3,6 +3,7 @@ package com.hao.app.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,10 @@ public class SysLogsServiceImpl implements SysLogsService{
 	 */
 	@Override
 	public JsonResult<SysLogs> searchLogs(String name, int start, int limit) {
+		if(StringUtils.isBlank(name)){
+			return new JsonResult<SysLogs>(0, null);
+		}
+		
 		SysLogsQueryParam queryParam = new SysLogsQueryParam(start, limit);
 		queryParam.setName(name);
 		

@@ -119,9 +119,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	@Transactional
 	public boolean deleteMenu(int menuId) {
-		//删除当前菜单的
-		deleteMenuById(menuId);
-		
 		//如果有子菜单，则删除子菜单的
 		List<SysMenu> menuList = getMenuByParentId(menuId);
 		if (menuList != null) {
@@ -129,6 +126,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 				deleteMenuById(menu.getId());
 			}
 		}
+		
+		//删除当前菜单的
+		deleteMenuById(menuId);
+		
 		return true;
 	}
 	
