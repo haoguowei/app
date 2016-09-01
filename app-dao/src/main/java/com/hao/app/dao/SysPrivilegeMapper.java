@@ -36,6 +36,12 @@ public interface SysPrivilegeMapper {
 	List<SysPrivilege> queryPrivilegeByMenuId(@Param("menuId")Integer menuId);
 
 	/**
+	 * 删除关联的权限
+	 * @param menuId
+	 */
+	void deleteRolePrivilegeByMenuId(@Param("menuId")int menuId);
+	
+	/**
 	 * 删除菜单下的权限
 	 * @param menuId
 	 */

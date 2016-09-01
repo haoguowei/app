@@ -118,7 +118,10 @@ public class SysMenuServiceImpl implements SysMenuService {
 		//1.删除菜单
 		sysMenuMapper.deleteMenu(menuId);
 		
-		//2.删除菜单下的权限
+		//2.删除菜单关联的权限
+		sysPrivilegeMapper.deleteRolePrivilegeByMenuId(menuId);
+		
+		//3.删除菜单下的权限
 		sysPrivilegeMapper.deletePrivilegeByMenuId(menuId);
 		
 		return true;
