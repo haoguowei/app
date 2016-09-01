@@ -28,7 +28,7 @@
     from sys_menu where id = #{menuId,jdbcType=INTEGER}
   </select>
   
-   <insert id="insertMenu" parameterType="com.hao.app.pojo.SysMenu">
+  <insert id="insertMenu" parameterType="com.hao.app.pojo.SysMenu">
     insert into sys_menu (
     	parent, name, url, sort)
     values (

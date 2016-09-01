@@ -49,4 +49,27 @@ public interface SysPrivilegeService {
 	 */
 	List<SysPrivilege> queryPrivilegeByMenuId(Integer menuId);
 
+	/**
+	 * 根据id获取权限
+	 * @param id
+	 * @return
+	 */
+	SysPrivilege queryByPrimaryKey(int id);
+
+
+	/**
+	 * 保存权限
+	 * @param privilege
+	 * @return
+	 */
+	boolean savePrivilege(SysPrivilege privilege);
+
+
+	/**
+	 * 删除权限
+	 * @param privilegeId
+	 * @return
+	 */
+	boolean deletePrivilege(int privilegeId);
+
 }

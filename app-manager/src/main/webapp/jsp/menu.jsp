@@ -14,7 +14,8 @@
 <script type="text/javascript" src="<%=syspath%>/js/menu.js"></script>
 </head>
 <body>
-
+	
+	<!-- 编辑窗 -->
 	<div id="menuWindow" class="windowDiv">
 		<input type="hidden" id="hidMenuId" name="hidMenuId" value="">
 		<input type="hidden" id="hidMenuParentId" name="hidMenuParentId" value="">

@@ -35,16 +35,36 @@ public interface SysPrivilegeMapper {
 	 */
 	List<SysPrivilege> queryPrivilegeByMenuId(@Param("menuId")Integer menuId);
 
-	/**
-	 * 删除关联的权限
-	 * @param menuId
-	 */
-	void deleteRolePrivilegeByMenuId(@Param("menuId")int menuId);
 	
 	/**
 	 * 删除菜单下的权限
 	 * @param menuId
 	 */
 	void deletePrivilegeByMenuId(@Param("menuId")int menuId);
+
+	/**
+	 * 根据id获取权限
+	 * @param id
+	 * @return
+	 */
+	SysPrivilege queryByPrimaryKey(@Param("id")int id);
+
+	/**
+	 * 修改
+	 * @param privilege
+	 */
+	void updatePrivilege(SysPrivilege privilege);
+
+	/**
+	 * 新增
+	 * @param privilege
+	 */
+	void insertPrivilege(SysPrivilege privilege);
+
+	/**
+	 * 删除
+	 * @param privilegeId
+	 */
+	void deletePrivilege(@Param("id")int id);
     
 }

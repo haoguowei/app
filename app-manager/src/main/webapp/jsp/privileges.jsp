@@ -15,7 +15,30 @@
 	<script type="text/javascript" src="<%=syspath%>/js/privileges.js"></script>
 </head>
 <body>
-<input type="hidden" id="menuName" name="menuName" value="${menu.name }">
-<input type="hidden" id="menuId" name="menuId" value="${menu.id }">
+	<!-- 所属菜单信息 -->
+	<input type="hidden" id="menuName" name="menuName" value="${menu.name }">
+	<input type="hidden" id="menuId" name="menuId" value="${menu.id }">
+	
+	
+	<!-- 编辑窗 -->
+	<div id="pWindow" class="windowDiv">
+		<input type="hidden" id="hidPriId" name="hidPriId" value="">
+		<table>
+			<tbody>
+				<tr>
+					<td>权限名:</td>
+					<td>
+						<input id="pName" name="pName" value="">
+					</td>
+				</tr>
+				<tr>
+					<td>权限URL:</td>
+					<td>
+						<input id="pUrl" name="pUrl" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.dao.SysMenuMapper;
 import com.hao.app.dao.SysPrivilegeMapper;
+import com.hao.app.dao.SysRolePrivilegeMapper;
 import com.hao.app.pojo.SysMenu;
 import com.hao.app.service.SysMenuService;
 
@@ -21,6 +22,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 	
 	@Autowired
 	private SysPrivilegeMapper sysPrivilegeMapper;
+	
+	@Autowired
+	private SysRolePrivilegeMapper sysRolePrivilegeMapper;
 
 	/**
 	 * 查找菜单树
@@ -115,11 +119,25 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Override
 	@Transactional
 	public boolean deleteMenu(int menuId) {
-		//1.删除菜单
+		//删除当前菜单的
+		deleteMenuById(menuId);
+		
+		//如果有子菜单，则删除子菜单的
+		List<SysMenu> menuList = getMenuByParentId(menuId);
+		if (menuList != null) {
+			for (SysMenu menu : menuList) {
+				deleteMenuById(menu.getId());
+			}
+		}
+		return true;
+	}
+	
+	public boolean deleteMenuById(int menuId) {
+		//1.删除菜单及子菜单
 		sysMenuMapper.deleteMenu(menuId);
 		
 		//2.删除菜单关联的权限
-		sysPrivilegeMapper.deleteRolePrivilegeByMenuId(menuId);
+		sysRolePrivilegeMapper.deleteRolePrivilegeByMenuId(menuId);
 		
 		//3.删除菜单下的权限
 		sysPrivilegeMapper.deletePrivilegeByMenuId(menuId);

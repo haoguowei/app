@@ -49,4 +49,10 @@ public class SysPrivilege implements Serializable {
         this.url = url == null ? null : url.trim();
     }
 
+	@Override
+	public String toString() {
+		return "SysPrivilege [id=" + id + ", menuId=" + menuId + ", name=" + name + ", url=" + url + "]";
+	}
+
+    
 }

@@ -13,6 +13,10 @@
     select id, menu_id, name, url from sys_privilege
   </select>
   
+  <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, menu_id, name, url from sys_privilege where id = ${id} 
+  </select>
+  
   <select id="queryPrivilegeByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select p.id, p.menu_id, p.name, p.url
     from sys_role_privilege rp
@@ -34,13 +38,39 @@
     where menu_id = ${menuId} 
   </select>
   
-  <delete id="deleteRolePrivilegeByMenuId" parameterType="java.lang.Integer">
-  	DELETE FROM sys_role_privilege WHERE privilege_id IN (SELECT id FROM  sys_privilege WHERE menu_id = ${menuId})
-  </delete>
-  
   <delete id="deletePrivilegeByMenuId" parameterType="java.lang.Integer">
   	delete from sys_privilege where menu_id = ${menuId} 
   </delete>
+  
+   <update id="updatePrivilege" parameterType="com.hao.app.pojo.SysPrivilege">
+    update sys_privilege
+    <set>
+      <if test="menuId != null">
+        menu_id = #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertPrivilege" parameterType="com.hao.app.pojo.SysPrivilege">
+    insert into sys_privilege (
+    	menu_id, name, url)
+    values (
+    	#{menuId,jdbcType=INTEGER}, 
+      	#{name,jdbcType=VARCHAR}, 
+      	#{url,jdbcType=VARCHAR})
+  </insert>
+  
+  <delete id="deletePrivilege" parameterType="java.lang.Integer">
+  	delete from sys_privilege where id = #{id} 
+  </delete>
+  
   
 
   

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hao.app.dao.SysRolePrivilegeMapper">
-  
-  <delete id="deletePrivilegesByRoleId" parameterType="java.lang.Integer">
-    delete from sys_role_privilege where role_id = #{roleId}
-  </delete>
-  
+    
   <insert id="insert" parameterType="com.hao.app.pojo.SysRolePrivilege">
     insert into sys_role_privilege (role_id, privilege_id)
     values (
@@ -13,5 +9,17 @@
 	    #{privilegeId,jdbcType=INTEGER}
     )
   </insert>
+  
+  <delete id="deletePrivilegesByRoleId" parameterType="java.lang.Integer">
+    delete from sys_role_privilege where role_id = #{roleId}
+  </delete>
+
+  <delete id="deleteRolePrivilegeByMenuId" parameterType="java.lang.Integer">
+  	DELETE FROM sys_role_privilege WHERE privilege_id IN (SELECT id FROM  sys_privilege WHERE menu_id = ${menuId})
+  </delete>
+  
+  <delete id="deletePrivilegesByPrivilegeId" parameterType="java.lang.Integer">
+  	DELETE FROM sys_role_privilege WHERE privilege_id = #{privilegeId}
+  </delete>
   
 </mapper>

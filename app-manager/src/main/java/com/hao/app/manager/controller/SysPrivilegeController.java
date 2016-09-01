@@ -39,6 +39,7 @@ public class SysPrivilegeController extends BaseController{
 	
 	@Autowired
 	private SysMenuService sysMenuService;
+	
 
 	@RequestMapping("/initPrivileges.do")
 	public String initPrivileges(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -89,6 +90,36 @@ public class SysPrivilegeController extends BaseController{
 		boolean result = sysRolePrivilegeService.saveRolePrivileges(role, priIds);
 		sysLogsService.writeLog(getCurrentUserName(request),"设置角色权限，角色："+role+";权限："+priIds);
 		
+		writeResponse(response, new JsonResultAjax(result));
+	}
+	
+	@RequestMapping("/getPrivilegeById.do")
+	public void getPrivilegeById(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int privilegeId = NumberUtils.toInt(request.getParameter("privilegeId"));
+		SysPrivilege privilege = sysPrivilegeService.queryByPrimaryKey(privilegeId);
+		writeResponse(response, privilege);
+	}
+	
+	@RequestMapping("/savePrivilege.do")
+	public void savePrivilege(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		SysPrivilege privilege = new SysPrivilege();
+		privilege.setId(NumberUtils.toInt(request.getParameter("pId")));
+		privilege.setMenuId(NumberUtils.toInt(request.getParameter("menuId")));
+		privilege.setName(request.getParameter("pName"));
+		privilege.setUrl(request.getParameter("pUrl"));
+		
+		boolean result = sysPrivilegeService.savePrivilege(privilege);
+		
+		sysLogsService.writeLog(getCurrentUserName(request), "保存权限记录，result : " + result + ";privilege：" + privilege.toString());
+
+		writeResponse(response, new JsonResultAjax(result));
+	}
+	
+	@RequestMapping("/deletePrivilege.do")
+	public void deletePrivilege(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int privilegeId = NumberUtils.toInt(request.getParameter("privilegeId"));
+		boolean result = sysPrivilegeService.deletePrivilege(privilegeId);
+		sysLogsService.writeLog(getCurrentUserName(request), "删除权限记录，result : " + result + ";privilegeId：" + privilegeId);
 		writeResponse(response, new JsonResultAjax(result));
 	}
 
