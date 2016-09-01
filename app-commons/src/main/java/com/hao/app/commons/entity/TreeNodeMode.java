@@ -26,6 +26,8 @@ public class TreeNodeMode{
 
 	private Object 	attributes; //存储对象
 	
+	private Boolean expanded = true;//是否展开
+	
 	private List<TreeNodeMode> children; //子节点
 
 	public int getId() {
@@ -104,14 +106,25 @@ public class TreeNodeMode{
 		this.parentId = parentId;
 	}
 
+	public Boolean getExpanded() {
+		return expanded;
+	}
+
+	public void setExpanded(Boolean expanded) {
+		this.expanded = expanded;
+	}
+
+	public Boolean getChecked() {
+		return checked;
+	}
+
 	@Override
 	public String toString() {
-		return "TreeNodeMode [id=" + id + ", parentId=" + parentId + ", text="
-				+ text + ", href=" + href + ", leaf=" + leaf + ", hrefTarget="
-				+ hrefTarget + ", checked=" + checked + ", attributes="
-				+ attributes + ", children=" + children + "]";
+		return "TreeNodeMode [id=" + id + ", parentId=" + parentId + ", text=" + text + ", href=" + href + ", leaf="
+				+ leaf + ", hrefTarget=" + hrefTarget + ", checked=" + checked + ", attributes=" + attributes
+				+ ", expanded=" + expanded + ", children=" + children + "]";
 	}
-	
+
 	
 	
 }

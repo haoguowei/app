@@ -134,7 +134,7 @@ public class SysPrivilegeController extends BaseController{
 	private void setNodePrivilege(TreeNodeMode node, Map<Integer,List<TreeNodeMode>> menuPrivilegeMap){
 		node.setId(node.getId() * 1000); //防止与权限node的id冲突
 		node.setParentId(node.getParentId() * 1000); //防止与权限node的id冲突
-		node.setChecked(false);
+		node.setChecked(null);
 		node.setHref(null);
 		node.setHrefTarget(null);
 		node.setLeaf(false);
