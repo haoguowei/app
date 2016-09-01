@@ -34,8 +34,8 @@
 		       {name:'description'}
 	        ],
 	        baseParams : {
-	        		limit : 50,
-	        		name :''
+        		limit : 50,
+        		name :''
 			}
 	    });
 		
@@ -47,11 +47,11 @@
 			autoHeight:true,
 			columns: [ 
 					{width:1,header:'ID', align:'center',sortable:false, dataIndex:'id'},
-					{width:1.5,header:'操作人', align:'left',sortable:false, dataIndex:'operator'},
-					{width:1.5,header:'操作时间', align:'center',sortable:false, dataIndex:'operatorTime',renderer:function(val){
+					{width:1,header:'操作人', align:'left',sortable:false, dataIndex:'operator'},
+					{width:2,header:'操作时间', align:'center',sortable:false, dataIndex:'operatorTime',renderer:function(val){
 						return Ext.util.Format.date(val,'Y-m-d H:i:s');
 					}},
-					{width:6,header:'描述', align:'left',sortable:false, dataIndex:'description',renderer:function(val){
+					{width:10,header:'描述', align:'left',sortable:false, dataIndex:'description',renderer:function(val){
 						return '<span title = "'+val+'">'+Ext.util.Format.ellipsis(val, 85)+'</span>';
 					}}
 			]
