@@ -200,11 +200,11 @@ Ext.onReady(function(){
 				{header:'排序', align:'center',sortable:false, dataIndex:'sort'},
 				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
 					var str = genButton("修改","updateF(this,"+val+")");
-					str += genButton("删除","deleteF(this,"+val+")");
-					
 					if(record.data.parent == 0){
+						str += genButton("删除菜单及子菜单","deleteF(this,"+val+")");
 						str += genButton("新增子菜单","addF(this, "+val+")");
 					}else{
+						str += genButton("删除菜单","deleteF(this,"+val+")");
 						str += genButton("菜单权限","toPrivileges("+val+")");
 					}
 					return str;
