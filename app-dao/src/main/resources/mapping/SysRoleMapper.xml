@@ -29,7 +29,7 @@
     update sys_role 
     set 
     name = #{name,jdbcType=VARCHAR},
-    intro = #{intro,jdbcType=VARCHAR},
+    intro = #{intro,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
