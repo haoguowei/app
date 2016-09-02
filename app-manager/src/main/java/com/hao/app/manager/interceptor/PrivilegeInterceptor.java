@@ -1,5 +1,6 @@
 package com.hao.app.manager.interceptor;
 
+import java.io.PrintWriter;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.Constants;
+import com.hao.app.commons.entity.result.JsonResultAjax;
 import com.hao.app.pojo.SysMember;
 
 /**
@@ -43,8 +46,21 @@ public class PrivilegeInterceptor implements HandlerInterceptor {
 		}
 		
 		logger.error("用户{}操作{}无权限！", currentUser.getName(), path);
-		response.sendRedirect("initNoPrivileges.jsp"); 
-		return false;
+		if (!(request.getHeader("accept").contains("application/json") 
+				|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").contains("XMLHttpRequest") ))) {
+			response.sendRedirect("initNoPrivileges.jsp"); 
+			return false;
+		}else{
+			//json错误请求处理
+			JsonResultAjax result = new JsonResultAjax(false, "无操作权限");
+			
+			String json = new Gson().toJson(result);
+			PrintWriter pw = response.getWriter();
+			pw.write(json);
+			pw.flush();
+			
+			return false;
+		}
 	}
 
 	@Override
