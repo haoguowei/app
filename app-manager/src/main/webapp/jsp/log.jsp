@@ -95,7 +95,7 @@
 			<table class="Mytable">
 				<tr>
 					<td class="Myfont">
-						操作人：
+						关键词：
 						<input type="text" name="name" id="name">
 						<input type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
 					</td>
