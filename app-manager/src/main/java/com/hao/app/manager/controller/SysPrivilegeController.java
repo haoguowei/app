@@ -113,40 +113,40 @@ public class SysPrivilegeController extends BaseController{
 		int roleId = NumberUtils.toInt(request.getParameter("roleId"));
 		
 		//得到所有目录树数据
-		List<TreeNodeMode> allNodes = sysMenuService.getMenuTree();
+		List<TreeNodeMode> menuNodes = sysMenuService.getMenuTree();
 		
 		//获取每个菜单对应的权限列表
 		Map<Integer,List<TreeNodeMode>> menuPrivilegeMap = sysPrivilegeService.getMenuPrivilegeMap(roleId);
 		
 		//在目录树下，挂载权限列表节点
-		for(TreeNodeMode node : allNodes){
-			if(node.isLeaf()){
-				setNodePrivilege(node, menuPrivilegeMap);
+		for(TreeNodeMode menuNode : menuNodes){
+			if(menuNode.isLeaf()){
+				setNodePrivilege(menuNode, menuPrivilegeMap);
 			}else{
-				List<TreeNodeMode> childs = node.getChildren();
+				List<TreeNodeMode> childs = menuNode.getChildren();
 				for(TreeNodeMode tmpNode : childs){
 					setNodePrivilege(tmpNode, menuPrivilegeMap);
 				}
 			}
 		}
 		
-		writeResponse(response, allNodes);
+		writeResponse(response, menuNodes);
 	}
 	
 	//为节点设置权限
-	private void setNodePrivilege(TreeNodeMode node, Map<Integer,List<TreeNodeMode>> menuPrivilegeMap){
+	private void setNodePrivilege(TreeNodeMode menuNode, Map<Integer,List<TreeNodeMode>> menuPrivilegeMap){
 		//根据menuid获取对应的权限列表
-		List<TreeNodeMode> priList = menuPrivilegeMap.get(node.getId());
+		List<TreeNodeMode> priList = menuPrivilegeMap.get(menuNode.getId());
 		
-		node.setId(node.getId() * 1000); //防止与权限node的id冲突
-		node.setParentId(node.getParentId() * 1000); //防止与权限node的id冲突
-		node.setChildren(priList);
+		menuNode.setId(menuNode.getId() * 1000); //防止与权限node的id冲突
+		menuNode.setParentId(menuNode.getParentId() * 1000); //防止与权限node的id冲突
+		menuNode.setChildren(priList);
 		
-		node.setChecked(null);
-		node.setHref(null);
-		node.setHrefTarget(null);
-		node.setLeaf(false);
-		node.setExpanded(true);
+		menuNode.setChecked(null);
+		menuNode.setHref(null);
+		menuNode.setHrefTarget(null);
+		menuNode.setLeaf(false);
+		menuNode.setExpanded(true);
 	}
 	
 }
