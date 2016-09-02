@@ -109,6 +109,7 @@ public class SysPrivilegeController extends BaseController{
 	 */
 	@RequestMapping("/getPrivilegeTree.do")
 	public void getAllPrivilegeTree(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		//角色id
 		int roleId = NumberUtils.toInt(request.getParameter("roleId"));
 		
 		//得到所有目录树数据
@@ -117,6 +118,7 @@ public class SysPrivilegeController extends BaseController{
 		//获取每个菜单对应的权限列表
 		Map<Integer,List<TreeNodeMode>> menuPrivilegeMap = sysPrivilegeService.getMenuPrivilegeMap(roleId);
 		
+		//在目录树下，挂载权限列表节点
 		for(TreeNodeMode node : allNodes){
 			if(node.isLeaf()){
 				setNodePrivilege(node, menuPrivilegeMap);
@@ -127,21 +129,24 @@ public class SysPrivilegeController extends BaseController{
 				}
 			}
 		}
+		
 		writeResponse(response, allNodes);
 	}
 	
 	//为节点设置权限
 	private void setNodePrivilege(TreeNodeMode node, Map<Integer,List<TreeNodeMode>> menuPrivilegeMap){
+		//根据menuid获取对应的权限列表
+		List<TreeNodeMode> priList = menuPrivilegeMap.get(node.getId());
+		
 		node.setId(node.getId() * 1000); //防止与权限node的id冲突
 		node.setParentId(node.getParentId() * 1000); //防止与权限node的id冲突
+		node.setChildren(priList);
+		
 		node.setChecked(null);
 		node.setHref(null);
 		node.setHrefTarget(null);
 		node.setLeaf(false);
-		
-		if(menuPrivilegeMap != null && menuPrivilegeMap.containsKey(node.getId())){
-			node.setChildren(menuPrivilegeMap.get(node.getId()));
-		}
+		node.setExpanded(true);
 	}
 	
 }

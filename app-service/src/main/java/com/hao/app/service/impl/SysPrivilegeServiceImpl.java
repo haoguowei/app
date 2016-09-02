@@ -106,7 +106,6 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 
 	/**
 	 * 获取每个菜单对应的权限列表
-	 * @return
 	 */
 	@Override
 	public Map<Integer, List<TreeNodeMode>> getMenuPrivilegeMap(int roleId) {
@@ -119,38 +118,24 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 		}
 		
 		//获取角色已经有的权限Id
-		List<SysPrivilege> rolePriIds = sysPrivilegeMapper.queryPrivilegeIdByRoleId(roleId);
-		
+		List<Integer> rolePriIds = sysPrivilegeMapper.queryPrivilegeIdByRoleId(roleId);
 		for(SysPrivilege p : allPrivilege){
-			Integer menuId = p.getMenuId() * 1000;
-			
-			List<TreeNodeMode> pNodes = null;
-			if(map.containsKey(menuId)){
-				pNodes = map.get(menuId);
-			}else{
-				pNodes = new ArrayList<TreeNodeMode>();
-			}
-			
-			TreeNodeMode node = genNodeByPri(p,rolePriIds);
-			pNodes.add(node);
+			Integer menuId = p.getMenuId();
+			List<TreeNodeMode> pNodes = map.containsKey(menuId) ? map.get(menuId) : new ArrayList<TreeNodeMode>();
+			pNodes.add(genNode(p,rolePriIds));
 			map.put(menuId, pNodes);
 		}
-		
 		return map;
 	}
 	
-	private TreeNodeMode genNodeByPri(SysPrivilege p,List<SysPrivilege> rolePriIds){
+	private TreeNodeMode genNode(SysPrivilege p, List<Integer> rolePriIds){
 		TreeNodeMode node = new TreeNodeMode();
 		node.setId(p.getId());
 		node.setText(p.getUrl() + "  " + p.getName());
-		node.setParentId(p.getMenuId() * 1000);
+		node.setParentId(p.getMenuId() * 1000);//防止与权限node的id冲突
 		node.setAttributes(p);
 		node.setLeaf(true);
-		node.setChecked(false);
-		if(rolePriIds != null && rolePriIds.contains(p.getId())){
-			node.setChecked(true);
-		}
-		
+		node.setChecked(rolePriIds != null && rolePriIds.contains(p.getId()));
 		return node;
 	}
 

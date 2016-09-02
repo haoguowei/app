@@ -72,6 +72,6 @@ public interface SysPrivilegeMapper {
 	 * @param roleId
 	 * @return
 	 */
-	List<SysPrivilege> queryPrivilegeIdByRoleId(@Param("roleId")int roleId);
+	List<Integer> queryPrivilegeIdByRoleId(@Param("roleId")int roleId);
     
 }

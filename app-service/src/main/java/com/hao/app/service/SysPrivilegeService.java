@@ -64,6 +64,7 @@ public interface SysPrivilegeService {
 
 	/**
 	 * 获取每个菜单对应的权限列表
+	 * @param roleId 
 	 * @return
 	 */
 	Map<Integer, List<TreeNodeMode>> getMenuPrivilegeMap(int roleId);
