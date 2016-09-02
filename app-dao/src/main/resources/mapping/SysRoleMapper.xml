@@ -18,4 +18,30 @@
     from sys_role
   </select>
   
+  <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = ${id} 
+  </select>
+  
+  <update id="updateRole" parameterType="com.hao.app.pojo.SysRole">
+    update sys_role 
+    set 
+    name = #{name,jdbcType=VARCHAR},
+    intro = #{intro,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertRole" parameterType="com.hao.app.pojo.SysRole">
+    insert into sys_role (name, intro)
+    values (
+      	#{name,jdbcType=VARCHAR}, 
+      	#{intro,jdbcType=VARCHAR})
+  </insert>
+  
+  <delete id="deleteRole" parameterType="java.lang.Integer">
+  	delete from sys_role where id = #{id} 
+  </delete>
+  
 </mapper>

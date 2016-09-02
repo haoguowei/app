@@ -49,7 +49,7 @@
   	delete from sys_privilege where menu_id = ${menuId} 
   </delete>
   
-   <update id="updatePrivilege" parameterType="com.hao.app.pojo.SysPrivilege">
+  <update id="updatePrivilege" parameterType="com.hao.app.pojo.SysPrivilege">
     update sys_privilege
     <set>
       <if test="menuId != null">

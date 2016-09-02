@@ -1,12 +1,109 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
+	
+	//编辑窗口
+	var pWindow = new com.custom.Window({
+		width : 460,
+		height : 220,
+		contentEl : 'pWindow',
+		buttons : [{
+			text : '保存',
+			handler : function(){
+				var rName = $("rName").value;
+				var rIntro = $("rIntro").value;
+				
+				if (_isNull(rName)) {
+					alert("请填写角色名！");
+					$("rName").focus();
+					return false;
+				}
+				if (!regexVerify('chinese2',rName)) {
+					alert("角色名含有非法字符！");
+					$("rName").focus();
+					return false;
+				}
+				
+				var url = "saveRole.do?rId=" + $("hidRoleIdEdit").value
+					+"&rName=" + rName
+					+"&rIntro=" + rIntro;
+					
+				Ext.Ajax.request( {
+					url : url,
+					success : function(response){
+						var resp = Ext.util.JSON.decode(response.responseText);
+						if(resp.success){
+							alert("操作成功！");
+							pWindow.hide();
+							searchFunc();
+						}else{
+							alert("操作失败：" + resp.resultTipMsg);
+						}
+					}
+				});
+			}
+		},{
+			text : '关闭',
+			handler : function(){
+				pWindow.hide();
+			}
+		}]
+	});
+	
+	this.reset = function(){
+		$("hidRoleIdEdit").value = 0;
+		$("rName").value = '';
+		$("rIntro").value = '';
+	};
+	
+	//新增
+	this.addF = function(bt) {
+		reset();
+		pWindow.setTitle("新增角色");
+		pWindow.show(bt);
+	};
+	
+	//更新
+	this.updateF = function(bt,roleId) {
+		Ext.Ajax.request( {
+			url : 'getRoleById.do?roleId=' + roleId,
+			success : function(response){
+				var resp = Ext.util.JSON.decode(response.responseText);
+				reset();
+				
+				$("hidRoleIdEdit").value = resp.id;
+				$("rName").value = resp.name;
+				$("rIntro").value = resp.intro;
+				
+				pWindow.setTitle("编辑角色:" + resp.id + "-" + resp.name);
+				pWindow.show(bt);
+			}
+		});
+	};
+	
+	//删除
+	this.deleteF = function(bt, roleId) {
+		if (confirm("确定要删除该角色吗？")) {
+			Ext.Ajax.request({
+				url : 'deleteRole.do?roleId=' + roleId,
+				success : function(response) {
+					var resp = Ext.util.JSON.decode(response.responseText);
+					if (resp.success) {
+						alert("操作成功！");
+						searchFunc();
+					} else {
+						alert("操作失败：" + resp.resultTipMsg);
+					}
+				}
+			});
+		}
+	};
 
 	//查询
 	this.searchFunc = function() {
 		gridStore.load();
 	};
 	
-	//定义窗口
+	//定义分配权限窗口
 	var win = new WindowPrivileges("treeDiv", function(priIds){
 		if (_isNull($("hidRoleId").value)) {
 			alert("获取不到当前角色！");
@@ -61,7 +158,10 @@ Ext.onReady(function(){
 				{width:1,header:'角色', align:'center',sortable:false, dataIndex:'name'},
 				{width:3,header:'角色描述', align:'left',sortable:false, dataIndex:'intro'},
 				{width:2,header:'操作', align:'center',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					return genButton("分配权限", 'setRolePrivileges(this,'+val+')');
+					var str = genButton("修改","updateF(this,"+val+")");
+					str += genButton("删除","deleteF(this,"+val+")");
+					str += genButton("分配权限", 'setRolePrivileges(this,'+val+')');
+					return str;
 				}}
 		]
 	}); 
@@ -74,7 +174,13 @@ Ext.onReady(function(){
 			frame : false,
 			border : true,
 			autoScroll : true,
-			items : [grid]
+			items : [grid],
+			tbar : [ {
+				text : '新增角色',
+				handler : function(b, e) {
+					addF(this);
+				}
+			} ]
 		}]
 	});
 	

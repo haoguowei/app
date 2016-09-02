@@ -40,6 +40,34 @@ public class SysRoleController extends BaseController{
 		return "jsp/role";
 	}
 	
+	@RequestMapping("/getRoleById.do")
+	public void getRoleById(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int roleId = NumberUtils.toInt(request.getParameter("roleId"));
+		SysRole role = sysRoleService.queryByPrimaryKey(roleId);
+		writeResponse(response, role);
+	}
+	
+	@RequestMapping("/deleteRole.do")
+	public void deleteRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int roleId = NumberUtils.toInt(request.getParameter("roleId"));
+		boolean result = sysRoleService.deleteRole(roleId);
+		sysLogsService.writeLog(getCurrentUserName(request), "删除角色，result : " + result + ";roleId：" + roleId);
+		writeResponse(response, new JsonResultAjax(result));
+	}
+	
+	@RequestMapping("/saveRole.do")
+	public void saveRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		SysRole role = new SysRole();
+		role.setId(NumberUtils.toInt(request.getParameter("rId")));
+		role.setName(request.getParameter("rName"));
+		role.setIntro(request.getParameter("rIntro"));
+		
+		boolean result = sysRoleService.saveRole(role);
+		
+		sysLogsService.writeLog(getCurrentUserName(request), "保存角色，result : " + result + ";role：" + role.toString());
+		writeResponse(response, new JsonResultAjax(result));
+	}
+	
 	@RequestMapping("/searchRoles.do")
 	public void searchRoles(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		List<SysRole> ls = sysRoleService.queryAllRoles();

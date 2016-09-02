@@ -37,4 +37,11 @@ public class SysRole implements Serializable {
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
     }
+
+	@Override
+	public String toString() {
+		return "SysRole [id=" + id + ", name=" + name + ", intro=" + intro + "]";
+	}
+    
+    
 }

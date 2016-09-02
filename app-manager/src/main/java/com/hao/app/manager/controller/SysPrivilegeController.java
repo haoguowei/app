@@ -84,6 +84,7 @@ public class SysPrivilegeController extends BaseController{
 		sysLogsService.writeLog(getCurrentUserName(request), "删除权限记录，result : " + result + ";privilegeId：" + privilegeId);
 		writeResponse(response, new JsonResultAjax(result));
 	}
+	
 	/**
 	 * 获取权限树的数据
 	 * @param request

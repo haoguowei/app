@@ -20,7 +20,7 @@
 			<div id="right-side" class="inner-login" style="margin-left: 120px;">
 				<div style="margin: 23px 0px 23px 2px; height: 40px; line-height: 40px; overflow: hidden;">
 					<img src="imgs/logo-small.jpg" style="max-width: 40px" /> 
-					<span style="font-size: 19px;"><strong>北京邮电大学国际汉语培训中心</strong></span>
+					<span style="font-size: 19px;"><strong>中启企业客户资源管理系统</strong></span>
 				</div>
 				<div class="u-name" style="text-align: left">
 					<input name="loginName" type="text" id="loginName" tabindex="1" class="username" placeholder="用户名">

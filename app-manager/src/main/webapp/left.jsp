@@ -22,7 +22,7 @@
 			height: document.documentElement.clientHeight,
 			root : {
 				id : 0,
-				text : 'APP信息管理',
+				text : '中启企业客户资源管理系统',
 				href : '#',
 				hrefTarget:'layout_page_right',
 				leaf : false,

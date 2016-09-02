@@ -19,6 +19,28 @@
 
 	<input type="hidden" id="hidRoleId" name="hidRoleId" value="">
 	
+	<!-- 权限树 -->
 	<div id="treeDiv"></div>
+	
+	<!-- 编辑窗 -->
+	<div id="pWindow" class="windowDiv">
+		<input type="hidden" id="hidRoleIdEdit" name="hidRoleIdEdit" value="">
+		<table>
+			<tbody>
+				<tr>
+					<td>角色名:</td>
+					<td>
+						<input id="rName" name="rName" value="">
+					</td>
+				</tr>
+				<tr>
+					<td>角色描述:</td>
+					<td>
+						<input id="rIntro" name="rIntro" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

@@ -8,4 +8,10 @@ public interface SysRoleService {
 
 	List<SysRole> queryAllRoles();
 
+	SysRole queryByPrimaryKey(int roleId);
+
+	boolean deleteRole(int roleId);
+
+	boolean saveRole(SysRole role);
+
 }

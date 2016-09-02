@@ -77,7 +77,7 @@ Ext.onReady(function(){
 	};
 	
 	//新增
-	this.addF = function(bt, privilegeId) {
+	this.addF = function(bt) {
 		reset();
 		pWindow.setTitle("新增权限");
 		pWindow.show(bt);
