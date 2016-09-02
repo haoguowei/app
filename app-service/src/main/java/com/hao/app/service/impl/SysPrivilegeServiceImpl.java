@@ -120,7 +120,7 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 		//获取角色已经有的权限Id
 		List<Integer> rolePriIds = sysPrivilegeMapper.queryPrivilegeIdByRoleId(roleId);
 		for(SysPrivilege pri : allPrivilege){
-			Integer menuId = pri.getMenuId();
+			Integer menuId = pri.getMenuId() * 1000;
 			List<TreeNodeMode> priNodes = map.containsKey(menuId) ? map.get(menuId) : new ArrayList<TreeNodeMode>();
 			priNodes.add(genPriNode(pri,rolePriIds));
 			map.put(menuId, priNodes);

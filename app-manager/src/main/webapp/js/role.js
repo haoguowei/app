@@ -7,10 +7,32 @@ Ext.onReady(function(){
 	};
 	
 	//定义窗口
-	var win = new WindowPrivileges("treeDiv");
+	var win = new WindowPrivileges("treeDiv", function(priIds){
+		if (_isNull($("hidRoleId").value)) {
+			alert("获取不到当前角色！");
+			return false;
+		}
+		
+		//保存角色权限
+		var url = "saveRolePrivileges.do?roleId=" + $("hidRoleId").value + "&priIds=" + priIds;
+		Ext.Ajax.request( {
+			url : url,
+			success : function(response){
+				var resp = Ext.util.JSON.decode(response.responseText);
+				if(resp.success){
+					alert("操作成功！");
+					win.hide();
+				}else{
+					alert("操作失败：" + resp.resultTipMsg);
+				}
+			}
+		});
+	});
 	
 	//分配权限
 	this.setRolePrivileges = function(bt,roleId) {
+		$("hidRoleId").value = roleId;
+		win.loadTree(roleId);
 		win.show(bt);
 	};
 	

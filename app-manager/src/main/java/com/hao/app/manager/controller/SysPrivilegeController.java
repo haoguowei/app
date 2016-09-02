@@ -21,7 +21,6 @@ import com.hao.app.pojo.SysMenu;
 import com.hao.app.pojo.SysPrivilege;
 import com.hao.app.service.SysMenuService;
 import com.hao.app.service.SysPrivilegeService;
-import com.hao.app.service.SysRolePrivilegeService;
 
 /**
  * 权限管理
@@ -35,9 +34,6 @@ public class SysPrivilegeController extends BaseController{
 	
 	@Autowired
 	private SysPrivilegeService sysPrivilegeService;
-	
-	@Autowired
-	private SysRolePrivilegeService sysRolePrivilegeService;
 	
 	@Autowired
 	private SysMenuService sysMenuService;
@@ -57,19 +53,6 @@ public class SysPrivilegeController extends BaseController{
 		List<SysPrivilege> ls = sysPrivilegeService.queryPrivilegeByMenuId(menuId);
 		JsonResult<SysPrivilege> result = new JsonResult<SysPrivilege>(ls.size(), ls);
 		writeResponse(response, result);
-	}
-	
-	@RequestMapping("/saveRolePrivileges.do")
-	public void saveRolePrivileges(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
-		
-		int role = NumberUtils.toInt(request.getParameter("role"));
-		String priIds = request.getParameter("priIds");
-		
-		boolean result = sysRolePrivilegeService.saveRolePrivileges(role, priIds);
-		sysLogsService.writeLog(getCurrentUserName(request),"设置角色权限，角色："+role+";权限："+priIds);
-		
-		writeResponse(response, new JsonResultAjax(result));
 	}
 	
 	@RequestMapping("/getPrivilegeById.do")
@@ -120,12 +103,16 @@ public class SysPrivilegeController extends BaseController{
 		
 		//在目录树下，挂载权限列表节点
 		for(TreeNodeMode menuNode : menuNodes){
+			//设置权限节点
+			setMenuNode(menuNode);
+			
 			if(menuNode.isLeaf()){
-				setNodePrivilege(menuNode, menuPrivilegeMap);
+				menuNode.setChildren(menuPrivilegeMap.get(menuNode.getId()));
 			}else{
 				List<TreeNodeMode> childs = menuNode.getChildren();
-				for(TreeNodeMode tmpNode : childs){
-					setNodePrivilege(tmpNode, menuPrivilegeMap);
+				for(TreeNodeMode leafNode : childs){
+					setMenuNode(leafNode);
+					leafNode.setChildren(menuPrivilegeMap.get(leafNode.getId()));
 				}
 			}
 		}
@@ -134,14 +121,10 @@ public class SysPrivilegeController extends BaseController{
 	}
 	
 	//为节点设置权限
-	private void setNodePrivilege(TreeNodeMode menuNode, Map<Integer,List<TreeNodeMode>> menuPrivilegeMap){
-		//根据menuid获取对应的权限列表
-		List<TreeNodeMode> priList = menuPrivilegeMap.get(menuNode.getId());
-		
+	private void setMenuNode(TreeNodeMode menuNode){
 		menuNode.setId(menuNode.getId() * 1000); //防止与权限node的id冲突
 		menuNode.setParentId(menuNode.getParentId() * 1000); //防止与权限node的id冲突
-		menuNode.setChildren(priList);
-		
+
 		menuNode.setChecked(null);
 		menuNode.setHref(null);
 		menuNode.setHrefTarget(null);

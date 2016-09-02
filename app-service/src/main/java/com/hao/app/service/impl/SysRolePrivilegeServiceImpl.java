@@ -18,10 +18,10 @@ public class SysRolePrivilegeServiceImpl implements SysRolePrivilegeService {
 
 	@Override
 	@Transactional
-	public Boolean saveRolePrivileges(int role, String priIds) {
-		if(role > 0){
+	public Boolean saveRolePrivileges(int roleId, String priIds) {
+		if(roleId > 0){
 			//1.删除该角色所有权限
-			deletePrivilegesByRoleId(role);
+			sysRolePrivilegeMapper.deletePrivilegesByRoleId(roleId);
 			
 			//2.添加新权限
 			if(StringUtils.isNotBlank(priIds)){
@@ -30,9 +30,8 @@ public class SysRolePrivilegeServiceImpl implements SysRolePrivilegeService {
 					int p = NumberUtils.toInt(tmp);
 					if(p > 0){
 						SysRolePrivilege rp = new SysRolePrivilege();
-						rp.setRoleId(role);
+						rp.setRoleId(roleId);
 						rp.setPrivilegeId(p);
-						
 						sysRolePrivilegeMapper.insert(rp);
 					}
 				}
@@ -40,14 +39,6 @@ public class SysRolePrivilegeServiceImpl implements SysRolePrivilegeService {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * 删除角色的所有权限
-	 */
-	@Override
-	public int deletePrivilegesByRoleId(int roleId) {
-		return sysRolePrivilegeMapper.deletePrivilegesByRoleId(roleId);
 	}
 
 }

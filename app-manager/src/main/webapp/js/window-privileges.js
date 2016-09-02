@@ -1,9 +1,10 @@
 /**
  * 选择角色权限窗
  * @param treeDiv tree的div
+ * @param callback 回调保存
  * @returns
  */
-WindowPrivileges = function(treeDiv){
+WindowPrivileges = function(treeDiv, callback){
 	
 	var self = this;
 	
@@ -15,22 +16,46 @@ WindowPrivileges = function(treeDiv){
 		el :  treeDiv,
 		width : WIDTH,
 		height: HEIGHT,
-		root : {
+		root : new Ext.tree.AsyncTreeNode({
 			id : 0,
 			text : '系统权限',
 			leaf : false,
 			checked : null
-		},
+		}),
 		loader : new Ext.tree.TreeLoader( {
-			dataUrl : "getPrivilegeTree.do?roleId=" + 1
+			dataUrl : "getPrivilegeTree.do",
+			baseParams : {  
+				roleId : ''  
+			}  
 		})
 	});
 	
-	this.loadTree = function(){
-		//根节点展开
-		self.tree.getRootNode().expand();
-		//页面渲染
-		self.tree.render();
+	//加载树
+	this.loadTree = function(roleId) {
+		var loader = self.tree.getLoader();
+		
+		loader.on('beforeload', function(loader, node) {
+			loader.baseParams.roleId = roleId;
+		}, loader);
+		
+		loader.load(self.tree.root);
+	};
+	
+
+	//得到选择的权限节点id
+	this.getSelectedNodes = function() {
+		var nodes = self.tree.getChecked();
+		if (nodes == null || nodes.length == 0) {
+			return null;
+		}
+
+		var ids = new Array();
+		for (var i = 0; i < nodes.length; i++) {
+			if(nodes[i].isLeaf()){
+				ids.push(nodes[i].id);
+			}
+		}
+		return ids;
 	};
 	
 	WindowPrivileges.superclass.constructor.call(this, {
@@ -42,7 +67,7 @@ WindowPrivileges = function(treeDiv){
 		buttons : [{
 			text : '保存',
 			handler : function(){
-				
+				callback(self.getSelectedNodes());
 			}
 		},{
 			text : '关闭',
@@ -53,7 +78,7 @@ WindowPrivileges = function(treeDiv){
 	});
 	
 	this.on('beforeshow',function(){
-		self.loadTree();
+		
 	});
 	
 };
