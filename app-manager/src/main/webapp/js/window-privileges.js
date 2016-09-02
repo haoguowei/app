@@ -40,6 +40,8 @@ WindowPrivileges = function(treeDiv, callback){
 			loader.load(self.tree.root, function(){
 				self.tree.getRootNode().expand();
 			});
+		}else{
+			self.tree.getRootNode().expand();
 		}
 	};
 
@@ -79,7 +81,6 @@ WindowPrivileges = function(treeDiv, callback){
 	});
 	
 	this.on('beforeshow',function(){
-		self.tree.getRootNode().expand();
 	});
 	
 };
