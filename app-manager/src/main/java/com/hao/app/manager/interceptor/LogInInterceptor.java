@@ -1,5 +1,7 @@
 package com.hao.app.manager.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.Constants;
+import com.hao.app.commons.entity.result.JsonResultAjax;
 import com.hao.app.pojo.SysMember;
 
 /**
@@ -29,8 +33,22 @@ public class LogInInterceptor implements HandlerInterceptor {
 		}
 		
 		logger.error("Not Login!");
-		response.sendRedirect("login.jsp"); 
-		return false;
+		
+		if (!(request.getHeader("accept").contains("application/json") 
+				|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").contains("XMLHttpRequest") ))) {
+			response.sendRedirect("login.jsp"); 
+			return false;
+		}else{
+			//json错误请求处理
+			JsonResultAjax result = new JsonResultAjax(false, "请先登录！");
+			
+			String json = new Gson().toJson(result);
+			PrintWriter pw = response.getWriter();
+			pw.write(json);
+			pw.flush();
+			
+			return false;
+		}
 	}
 
 	@Override
