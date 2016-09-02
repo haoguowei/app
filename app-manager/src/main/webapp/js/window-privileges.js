@@ -23,24 +23,18 @@ WindowPrivileges = function(treeDiv, callback){
 			checked : null
 		}),
 		loader : new Ext.tree.TreeLoader( {
-			dataUrl : "getPrivilegeTree.do",
-			baseParams : {  
-				roleId : ''  
-			}  
+			dataUrl : "#"
 		})
 	});
 	
 	//加载树
 	this.loadTree = function(roleId) {
 		var loader = self.tree.getLoader();
-		
-		loader.on('beforeload', function(loader, node) {
-			loader.baseParams.roleId = roleId;
-		}, loader);
-		
-		loader.load(self.tree.root);
+		loader.dataUrl = "getPrivilegeTree.do?roleId=" + roleId;
+		loader.load(self.tree.root, function(){
+			self.tree.getRootNode().expand();
+		});
 	};
-	
 
 	//得到选择的权限节点id
 	this.getSelectedNodes = function() {
@@ -78,7 +72,6 @@ WindowPrivileges = function(treeDiv, callback){
 	});
 	
 	this.on('beforeshow',function(){
-		
 	});
 	
 };
