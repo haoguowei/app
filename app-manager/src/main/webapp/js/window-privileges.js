@@ -30,10 +30,17 @@ WindowPrivileges = function(treeDiv, callback){
 	//加载树
 	this.loadTree = function(roleId) {
 		var loader = self.tree.getLoader();
-		loader.dataUrl = "getPrivilegeTree.do?roleId=" + roleId;
-		loader.load(self.tree.root, function(){
-			self.tree.getRootNode().expand();
+		
+		loader.on('beforeload',function(node){
+			loader.dataUrl = "getPrivilegeTree.do?roleId=" + roleId;
 		});
+		
+		//如果已经加载过了，需要重新加载，如果是第一次加载，则渲染tree的时候自动加载，此次补在重复加载
+		if(self.tree.getRootNode().childNodes.length > 0){
+			loader.load(self.tree.root, function(){
+				self.tree.getRootNode().expand();
+			});
+		}
 	};
 
 	//得到选择的权限节点id
@@ -72,6 +79,7 @@ WindowPrivileges = function(treeDiv, callback){
 	});
 	
 	this.on('beforeshow',function(){
+		self.tree.getRootNode().expand();
 	});
 	
 };
