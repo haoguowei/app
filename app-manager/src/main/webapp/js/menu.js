@@ -1,6 +1,19 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
 	
+	//-----------------权限相关 start-----------
+	var urlSaveMenu = "saveMenu.do";
+	var urlDelMenu = "deleteMenu.do";
+	var urlInitPrivileges = "initPrivileges.do";
+	
+	///////////  是否有权限  ///////////
+	var isPRISaveMenu = isHavePRI(urlSaveMenu);//新增编辑菜单功能
+	var isPRIDelMenu = isHavePRI(urlDelMenu); //删除菜单功能
+	var isPRIInitPrivileges = isHavePRI(urlInitPrivileges); //访问菜单的权限页
+	
+	//-----------------权限相关 end-----------
+	
+	
 	var menuWindow = new com.custom.Window({
 		width : 460,
 		height : 250,
@@ -50,7 +63,7 @@ Ext.onReady(function(){
 					return false;
 				}
 				
-				var url = "saveMenu.do?menuId=" + $("hidMenuId").value
+				var url = urlSaveMenu + "?menuId=" + $("hidMenuId").value
 					+"&menuParentId=" + $("hidMenuParentId").value
 					+"&menuName=" + menuName
 					+"&menuSort=" + menuSort
@@ -137,7 +150,7 @@ Ext.onReady(function(){
 	this.deleteF = function(bt,menuId) {
 		if (confirm("确定要删除该菜单吗？其子菜单及权限也将被删除！")) {
 			Ext.Ajax.request({
-				url : 'deleteMenu.do?menuId=' + menuId,
+				url : urlDelMenu + '?menuId=' + menuId,
 				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
 					if (resp.success) {
@@ -152,7 +165,7 @@ Ext.onReady(function(){
 	};
 	
 	this.toPrivileges = function(menuId) {
-		location.href = "initPrivileges.do?menuId=" + menuId;
+		location.href = urlInitPrivileges + "?menuId=" + menuId;
 	};
 	
 	//列表数据
@@ -199,13 +212,24 @@ Ext.onReady(function(){
 				{header:'菜单URL', align:'left',sortable:false, dataIndex:'url'},
 				{header:'排序', align:'center',sortable:false, dataIndex:'sort'},
 				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					var str = genButton("修改","updateF(this,"+val+")");
+					var str = '';
+					if(isPRISaveMenu){//权限
+						str += genButton("修改","updateF(this,"+val+")");
+					}
 					if(record.data.parent == 0){
-						str += genButton("删除菜单及子菜单","deleteF(this,"+val+")");
-						str += genButton("新增子菜单","addF(this, "+val+")");
+						if(isPRIDelMenu){//权限
+							str += genButton("删除菜单及子菜单","deleteF(this,"+val+")");
+						}
+						if(isPRISaveMenu){//权限
+							str += genButton("新增子菜单","addF(this, "+val+")");
+						}
 					}else{
-						str += genButton("删除","deleteF(this,"+val+")");
-						str += genButton("菜单权限","toPrivileges("+val+")");
+						if(isPRIDelMenu){//权限
+							str += genButton("删除","deleteF(this,"+val+")");
+						}
+						if(isPRIInitPrivileges){//权限
+							str += genButton("菜单权限","toPrivileges("+val+")");
+						}
 					}
 					return str;
 				}}
@@ -225,12 +249,17 @@ Ext.onReady(function(){
 			items : [ grid ],
 			tbar : [ {
 				text : '新增一级菜单',
+				id : 'bt_add',
 				handler : function(b, e) {
 					addF(this, 0);
 				}
 			} ]
 		} ]
 	});
+	
+	if(!isPRISaveMenu){//权限
+		Ext.getCmp("bt_add").hide();  
+	}
 	
 	searchFunc();
 });

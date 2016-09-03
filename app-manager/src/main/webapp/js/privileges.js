@@ -1,7 +1,19 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
+	
 	var menuId = $("menuId").value;
 	var title = '《' + $("menuName").value + '》的权限';
+	
+	//-----------------权限相关 start-----------
+	var urlSavePrivilege = "savePrivilege.do";
+	var urlDelPrivilege = "deletePrivilege.do";
+	
+	//是否有权限
+	var isPRISavePrivilege = isHavePRI(urlSavePrivilege);//编辑菜单下的权限
+	var isPRIDelPrivilege = isHavePRI(urlDelPrivilege); //删除菜单下的权限
+
+	//-----------------权限相关 end-----------
+	
 	
 	//编辑权限窗口
 	var pWindow = new com.custom.Window({
@@ -38,7 +50,7 @@ Ext.onReady(function(){
 				}
 				
 				
-				var url = "savePrivilege.do?pId=" + $("hidPriId").value
+				var url = urlSavePrivilege + "?pId=" + $("hidPriId").value
 					+"&menuId=" + menuId
 					+"&pName=" + pName
 					+"&pUrl=" + pUrl;
@@ -105,7 +117,7 @@ Ext.onReady(function(){
 	this.deleteF = function(bt, privilegeId) {
 		if (confirm("确定要删除该权限吗？")) {
 			Ext.Ajax.request({
-				url : 'deletePrivilege.do?privilegeId=' + privilegeId,
+				url : urlDelPrivilege + '?privilegeId=' + privilegeId,
 				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
 					if (resp.success) {
@@ -145,8 +157,13 @@ Ext.onReady(function(){
 				{header:'权限名称', align:'left',sortable:false, dataIndex:'name'},
 				{header:'权限URL', align:'left',sortable:false, dataIndex:'url'},
 				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					var str = genButton("修改","updateF(this,"+val+")");
-					str += genButton("删除","deleteF(this,"+val+")");
+					var str = '';
+					if(isPRISavePrivilege){ //权限
+						str += genButton("修改","updateF(this,"+val+")");
+					}
+					if(isPRIDelPrivilege){ //权限
+						str += genButton("删除","deleteF(this,"+val+")");
+					}
 					return str;
 				}}
 				]
@@ -165,12 +182,17 @@ Ext.onReady(function(){
 			items : [ grid ],
 			tbar : [ {
 				text : '新增权限',
+				id:'bt_add',
 				handler : function(b, e) {
 					addF(this);
 				}
 			} ]
 		} ]
 	});
+	
+	if(!isPRISavePrivilege){//权限
+		Ext.getCmp("bt_add").hide();  
+	}
 
 	searchFunc();
 });

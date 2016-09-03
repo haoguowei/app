@@ -69,11 +69,6 @@
 			<!-- app相关jar包 -->
 			<dependency>
 				<groupId>com.hao.app</groupId>
-				<artifactId>app-pojo</artifactId>
-				<version>${version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.hao.app</groupId>
 				<artifactId>app-commons</artifactId>
 				<version>${version}</version>
 			</dependency>

@@ -48,8 +48,6 @@
 				width:300px;
 			}
 			
-			
-			
 			.Mytable{
 				padding:5px;
 				border: 0;
@@ -115,14 +113,41 @@
 		
 		<script type="text/javascript">
 			var syspath = '<%=syspath%>';
-			var IMAGEURL = '${IMAGEURL}'; //图片服务器地址
 			var PAGESIZE = 20;
-		
+			
+			//图片服务器地址
+			var IMAGEURL = '${IMAGEURL}';
+			
+			//当前用户对权限
+			var PRIS = '${CurrentLoginUser.priUrls}';
+			
+			//判断是否有操作权限
+			function isHavePRI(url) {
+				if (_isNull(PRIS)) {
+					return false;
+				}
+				PRIS = PRIS.replace('[', '').replace(']', '');
+				return contains(PRIS.split(','), url);
+			}
+
+			//数组是否包含元素
+			function contains(arr, obj) {
+				if (arr == null) {
+					return false;
+				}
+				var i = arr.length;
+				while (i--) {
+					if (arr[i].trim() == obj.trim()) {
+						return true;
+					}
+				}
+				return false;
+			}
+
 			//生成按钮
-			function genButton(value,func){
+			function genButton(value, func) {
 				return '<input type="button" value="'+value+'" class="Mybotton" onclick="'+func+'">';
 			}
-		
 		</script>
 	</head>
 </html>
