@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -32,7 +33,11 @@ public class AppHandlerExceptionResolver implements HandlerExceptionResolver {
 			}
 			else{
 				//json错误请求处理
-				JsonResultAjax result = new JsonResultAjax(false, ex.getMessage());
+				String msg = ex.getMessage();
+				if(StringUtils.isBlank(msg) || msg.length() > 30){
+					msg = "抱歉，系统出错了！";
+				}
+				JsonResultAjax result = new JsonResultAjax(false, msg);
 				
 				String json = new Gson().toJson(result);
 				PrintWriter pw = response.getWriter();

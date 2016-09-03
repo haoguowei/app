@@ -45,14 +45,14 @@ public class PrivilegeInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		
-		logger.error("用户{}执行{}无操作权限！", currentUser.getName(), path);
+		logger.error("用户{}执行{}权限不足！", currentUser.getName(), path);
 		if (!(request.getHeader("accept").contains("application/json") 
 				|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").contains("XMLHttpRequest") ))) {
 			response.sendRedirect("initNoPrivileges.jsp"); 
 			return false;
 		}else{
 			//json错误请求处理
-			JsonResultAjax result = new JsonResultAjax(false, "无操作权限！");
+			JsonResultAjax result = new JsonResultAjax(false, "权限不足！");
 			
 			String json = new Gson().toJson(result);
 			PrintWriter pw = response.getWriter();

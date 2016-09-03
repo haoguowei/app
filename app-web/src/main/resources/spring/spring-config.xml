@@ -17,9 +17,6 @@
 
 	<context:component-scan base-package="com.hao.app" />
 
-	<!-- Unified exception handling -->
-	<bean class="com.hao.app.handler.AppHandlerExceptionResolver" />
-
 	<!-- support @Autowired -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 	
