@@ -21,7 +21,7 @@
 								+'<img src="imgs/logo-small.jpg" style="max-width:50px;max-height:30px;">'
 							+'</td>'
 							+'<td>'
-								+'中启企业客户资源管理系统'
+								+'APP管理系统'
 							+'</td>'
 							+'<td align="right">'
 								+'<img src="imgs/person.ico" style="margin-right:5px;"/>'

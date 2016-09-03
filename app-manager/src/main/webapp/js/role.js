@@ -1,5 +1,18 @@
 Ext.onReady(function(){
+	
 	Ext.QuickTips.init();
+	
+	//-----------------权限相关 start-----------
+	var urlSaveRole = "saveRole.do";
+	var urlDelRole = "deleteRole.do";
+	var urlSaveRolePrivileges = "saveRolePrivileges.do";
+	
+	//是否有权限
+	var isPRISaveRole = isHavePRI(urlSaveRole);//编辑角色信息的权限
+	var isPRIDelRole = isHavePRI(urlDelRole); //删除角色的权限
+	var isPRISaveRolePrivileges = isHavePRI(urlSaveRolePrivileges); //角色分配权限的权限
+
+	//-----------------权限相关 end-----------
 	
 	//编辑窗口
 	var pWindow = new com.custom.Window({
@@ -23,7 +36,7 @@ Ext.onReady(function(){
 					return false;
 				}
 				
-				var url = "saveRole.do?rId=" + $("hidRoleIdEdit").value
+				var url = urlSaveRole + "?rId=" + $("hidRoleIdEdit").value
 					+"&rName=" + rName
 					+"&rIntro=" + rIntro;
 					
@@ -84,7 +97,7 @@ Ext.onReady(function(){
 	this.deleteF = function(bt, roleId) {
 		if (confirm("确定要删除该角色吗？")) {
 			Ext.Ajax.request({
-				url : 'deleteRole.do?roleId=' + roleId,
+				url : urlDelRole + '?roleId=' + roleId,
 				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
 					if (resp.success) {
@@ -111,7 +124,7 @@ Ext.onReady(function(){
 		}
 		
 		//保存角色权限
-		var url = "saveRolePrivileges.do?roleId=" + $("hidRoleId").value + "&priIds=" + priIds;
+		var url = urlSaveRolePrivileges + "?roleId=" + $("hidRoleId").value + "&priIds=" + priIds;
 		Ext.Ajax.request( {
 			url : url,
 			success : function(response){
@@ -158,9 +171,16 @@ Ext.onReady(function(){
 				{width:1,header:'角色', align:'center',sortable:false, dataIndex:'name'},
 				{width:3,header:'角色描述', align:'left',sortable:false, dataIndex:'intro'},
 				{width:2,header:'操作', align:'center',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
-					var str = genButton("修改","updateF(this,"+val+")");
-					str += genButton("删除","deleteF(this,"+val+")");
-					str += genButton("分配权限", 'setRolePrivileges(this,'+val+')');
+					var str = '';
+					if(isPRISaveRole){ //权限
+						str += genButton("修改","updateF(this,"+val+")");
+					}
+					if(isPRIDelRole){ //权限
+						str += genButton("删除","deleteF(this,"+val+")");
+					}
+					if(isPRISaveRolePrivileges){ //权限
+						str += genButton("分配权限", 'setRolePrivileges(this,'+val+')');
+					}
 					return str;
 				}}
 		]
@@ -177,12 +197,17 @@ Ext.onReady(function(){
 			items : [grid],
 			tbar : [ {
 				text : '新增角色',
+				id:'bt_add',
 				handler : function(b, e) {
 					addF(this);
 				}
 			} ]
 		}]
 	});
+	
+	if(!isPRISaveRole){//权限
+		Ext.getCmp("bt_add").hide();  
+	}
 	
 	searchFunc();
 });

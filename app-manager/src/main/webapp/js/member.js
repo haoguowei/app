@@ -1,6 +1,17 @@
 Ext.onReady(function(){
+	
 	Ext.QuickTips.init();
 
+	//-----------------权限相关 start-----------
+	var urlEditMemberValid = "initEditMemberValid.do";
+	
+	//是否有权限
+	var isPRISaveMember = isHavePRI("saveMember.do");//新增编辑用户
+	var isPRISaveMemberPwd = isHavePRI("saveMemberPwd.do");//修改用户密码
+	var isPRIEditMemberValid = isHavePRI(urlEditMemberValid);//启用／禁用用户
+	
+	//-----------------权限相关 end-----------
+	
 	this.searchFunc = function() {
 		gridStore.load();
 	};
@@ -16,7 +27,7 @@ Ext.onReady(function(){
 	this.updateValid = function(id) {
 		if (confirm("确定要禁用该账号吗？禁用后该账号将不能登录！")) {
 			Ext.Ajax.request({
-				url : 'initEditMemberValid.do?value=1&id=' + id,
+				url : urlEditMemberValid + '?value=1&id=' + id,
 				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
 					if (resp.success) {
@@ -33,7 +44,7 @@ Ext.onReady(function(){
 	this.updateValidUN = function(id) {
 		if (confirm("确定要取消禁用该账号吗？取消后该账号将能登录系统！")) {
 			Ext.Ajax.request({
-				url : 'initEditMemberValid.do?value=0&id=' + id,
+				url : urlEditMemberValid + '?value=0&id=' + id,
 				success : function(response) {
 					var resp = Ext.util.JSON.decode(response.responseText);
 					if (resp.success) {
@@ -59,7 +70,7 @@ Ext.onReady(function(){
 	       {name:'role'},
 	       {name:'valid'},
 	       {name:'showName'},
-	       {name:'roleId'},
+	       {name:'roleName'},
 	       {name:'phone'},
 	       {name:'email'}
         ],
@@ -86,13 +97,20 @@ Ext.onReady(function(){
 				}},
 				{width:3,header:'操作', align:'center',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
 					var str = '';
-					str += genButton("修改",'updateF('+val+')');
-					str += genButton("改密码",'updatePWD('+val+')');
+					if(isPRISaveMember){//权限
+						str += genButton("修改",'updateF('+val+')');
+					}
 					
-					if(record.data.valid == 0 || record.data.valid == '0'){
-						str += genButton("禁用",'updateValid('+val+')');
-					}else{
-						str += genButton("取消禁用",'updateValidUN('+val+')');
+					if(isPRISaveMemberPwd){//权限
+						str += genButton("改密码",'updatePWD('+val+')');
+					}
+					
+					if(isPRIEditMemberValid){ //权限
+						if(record.data.valid == 0 || record.data.valid == '0'){
+							str += genButton("禁用",'updateValid('+val+')');
+						}else{
+							str += genButton("取消禁用",'updateValidUN('+val+')');
+						}
 					}
 					return str;
 				}}
@@ -110,6 +128,7 @@ Ext.onReady(function(){
 			items : [grid],
 			tbar : [{
 						text : '新增',
+						id:'bt_add',
 						handler : function(b,e){
 							location.href = "initEditMember.do";
 						}
@@ -122,6 +141,10 @@ Ext.onReady(function(){
 			        })]
 		}]
 	});
+	
+	if(!isPRISaveMember){//权限
+		Ext.getCmp("bt_add").hide();  
+	}
 	
 	searchFunc();
 });
