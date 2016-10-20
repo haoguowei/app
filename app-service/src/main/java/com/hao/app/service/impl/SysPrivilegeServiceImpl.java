@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hao.app.commons.entity.Constants;
 import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.dao.SysPrivilegeMapper;
 import com.hao.app.dao.SysRolePrivilegeMapper;
@@ -26,6 +25,25 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 	
 	@Autowired
 	private SysRolePrivilegeMapper sysRolePrivilegeMapper;
+	
+	//系统启动时加载的所有权限,用于权限验证
+	private Set<String> allPrivilegeSet;
+	
+	/**
+	 * 加载所有系统权限
+	 * 
+	 * @author yanwei
+	 */
+	@Override
+	public Set<String> reLoadAllPrivilegeSet(){
+		this.allPrivilegeSet = queryAllPrivilegeUrls();
+		return this.allPrivilegeSet;
+	}
+	
+	@Override
+	public Set<String> getAllPrivilegeSet(){
+		return this.allPrivilegeSet;
+	}
 	
 	/**
 	 * 查询所有权限
@@ -77,13 +95,6 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 	}
 	
 	/**
-	 * 重现加载系统权限
-	 */
-	public void reloadAllPrivilegeSet(){
-		Constants.allPrivilegeSet = queryAllPrivilegeUrls();
-	}
-
-	/**
 	 * 保存权限
 	 */
 	@Override
@@ -95,7 +106,7 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 			//新增
 			sysPrivilegeMapper.insertPrivilege(privilege);
 		}
-		reloadAllPrivilegeSet();
+		reLoadAllPrivilegeSet();
 		return true;
 	}
 
@@ -111,9 +122,10 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 		//2.删除权限关系表权限
 		sysRolePrivilegeMapper.deletePrivilegesByPrivilegeId(privilegeId);
 		
-		reloadAllPrivilegeSet();
+		reLoadAllPrivilegeSet();
 		return true;
 	}
+	
 
 	/**
 	 * 获取每个菜单对应的权限列表

@@ -10,6 +10,20 @@ import com.hao.app.pojo.SysPrivilege;
 public interface SysPrivilegeService {
 	
 	/**
+	 * 加载所有系统权限
+	 * 
+	 * @author yanwei
+	 */
+	Set<String> reLoadAllPrivilegeSet();
+	
+	/**
+	 * 加载所有系统权限
+	 * 
+	 * @author yanwei
+	 */
+	Set<String> getAllPrivilegeSet();
+	
+	/**
 	 * 查询所有权限
 	 * @return
 	 */
