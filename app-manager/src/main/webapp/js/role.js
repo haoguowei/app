@@ -22,21 +22,21 @@ Ext.onReady(function(){
 		buttons : [{
 			text : '保存',
 			handler : function(){
-				var rName = $("rName").value;
-				var rIntro = $("rIntro").value;
+				var rName = document.getElementById("rName").value;
+				var rIntro = document.getElementById("rIntro").value;
 				
 				if (_isNull(rName)) {
 					alert("请填写角色名！");
-					$("rName").focus();
+					document.getElementById("rName").focus();
 					return false;
 				}
 				if (!regexVerify('chinese2',rName)) {
 					alert("角色名含有非法字符！");
-					$("rName").focus();
+					document.getElementById("rName").focus();
 					return false;
 				}
 				
-				var url = urlSaveRole + "?rId=" + $("hidRoleIdEdit").value
+				var url = urlSaveRole + "?rId=" + document.getElementById("hidRoleIdEdit").value
 					+"&rName=" + rName
 					+"&rIntro=" + rIntro;
 					
@@ -63,9 +63,9 @@ Ext.onReady(function(){
 	});
 	
 	this.reset = function(){
-		$("hidRoleIdEdit").value = 0;
-		$("rName").value = '';
-		$("rIntro").value = '';
+		document.getElementById("hidRoleIdEdit").value = 0;
+		document.getElementById("rName").value = '';
+		document.getElementById("rIntro").value = '';
 	};
 	
 	//新增
@@ -83,9 +83,9 @@ Ext.onReady(function(){
 				var resp = Ext.util.JSON.decode(response.responseText);
 				reset();
 				
-				$("hidRoleIdEdit").value = resp.id;
-				$("rName").value = resp.name;
-				$("rIntro").value = resp.intro;
+				document.getElementById("hidRoleIdEdit").value = resp.id;
+				document.getElementById("rName").value = resp.name;
+				document.getElementById("rIntro").value = resp.intro;
 				
 				pWindow.setTitle("编辑角色:" + resp.id + "-" + resp.name);
 				pWindow.show(bt);
@@ -118,13 +118,13 @@ Ext.onReady(function(){
 	
 	//定义分配权限窗口
 	var win = new WindowPrivileges("treeDiv", function(priIds){
-		if (_isNull($("hidRoleId").value)) {
+		if (_isNull(document.getElementById("hidRoleId").value)) {
 			alert("获取不到当前角色！");
 			return false;
 		}
 		
 		//保存角色权限
-		var url = urlSaveRolePrivileges + "?roleId=" + $("hidRoleId").value + "&priIds=" + priIds;
+		var url = urlSaveRolePrivileges + "?roleId=" + document.getElementById("hidRoleId").value + "&priIds=" + priIds;
 		Ext.Ajax.request( {
 			url : url,
 			success : function(response){
@@ -141,7 +141,7 @@ Ext.onReady(function(){
 	
 	//分配权限
 	this.setRolePrivileges = function(bt,roleId) {
-		$("hidRoleId").value = roleId;
+		document.getElementById("hidRoleId").value = roleId;
 		win.loadTree(roleId);
 		win.show(bt);
 	};

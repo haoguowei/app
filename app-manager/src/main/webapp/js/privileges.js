@@ -1,8 +1,8 @@
 Ext.onReady(function(){
 	Ext.QuickTips.init();
 	
-	var menuId = $("menuId").value;
-	var title = '《' + $("menuName").value + '》的权限';
+	var menuId = document.getElementById("menuId").value;
+	var title = '《' + document.getElementById("menuName").value + '》的权限';
 	
 	//-----------------权限相关 start-----------
 	var urlSavePrivilege = "savePrivilege.do";
@@ -23,34 +23,34 @@ Ext.onReady(function(){
 		buttons : [{
 			text : '保存',
 			handler : function(){
-				var pName = $("pName").value;
-				var pUrl = $("pUrl").value;
+				var pName = document.getElementById("pName").value;
+				var pUrl = document.getElementById("pUrl").value;
 				
 				if (_isNull(pName)) {
 					alert("请填写权限名！");
-					$("pName").focus();
+					document.getElementById("pName").focus();
 					return false;
 				}
 				if (!regexVerify('chinese2',pName)) {
 					alert("权限名含有非法字符！");
-					$("pName").focus();
+					document.getElementById("pName").focus();
 					return false;
 				}
 				
 				if (_isNull(pUrl)) {
 					alert("请填写权限URL！");
-					$("pUrl").focus();
+					document.getElementById("pUrl").focus();
 					return false;
 				}
 				
 				if (!regexVerify('letter2',pUrl)) {
 					alert("权限URL含有非法字符！");
-					$("pUrl").focus();
+					document.getElementById("pUrl").focus();
 					return false;
 				}
 				
 				
-				var url = urlSavePrivilege + "?pId=" + $("hidPriId").value
+				var url = urlSavePrivilege + "?pId=" + document.getElementById("hidPriId").value
 					+"&menuId=" + menuId
 					+"&pName=" + pName
 					+"&pUrl=" + pUrl;
@@ -78,9 +78,9 @@ Ext.onReady(function(){
 	});
 
 	this.reset = function(){
-		$("hidPriId").value = 0;
-		$("pName").value = '';
-		$("pUrl").value = '';
+		document.getElementById("hidPriId").value = 0;
+		document.getElementById("pName").value = '';
+		document.getElementById("pUrl").value = '';
 	};
 		
 	//查询
@@ -103,9 +103,9 @@ Ext.onReady(function(){
 				var resp = Ext.util.JSON.decode(response.responseText);
 				reset();
 				
-				$("hidPriId").value = resp.id;
-				$("pName").value = resp.name;
-				$("pUrl").value = resp.url;
+				document.getElementById("hidPriId").value = resp.id;
+				document.getElementById("pName").value = resp.name;
+				document.getElementById("pUrl").value = resp.url;
 				
 				pWindow.setTitle("编辑权限:" + resp.id + "-" + resp.name);
 				pWindow.show(bt);

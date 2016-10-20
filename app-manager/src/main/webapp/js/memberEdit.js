@@ -3,34 +3,34 @@ Ext.onReady(function(){
 	
 
 	this.save = function() {
-		if (_isNull($("name").value)) {
+		if (_isNull(document.getElementById("name").value)) {
 			alert("请填写登录名！");
-			$("name").focus();
+			document.getElementById("name").focus();
 			return false;
 		}
-		if (_isNull($("showName").value)) {
+		if (_isNull(document.getElementById("showName").value)) {
 			alert("请填写显示名！");
-			$("showName").focus();
+			document.getElementById("showName").focus();
 			return false;
 		}
-		if ($("roleId").value == 0) {
+		if (document.getElementById("roleId").value == 0) {
 			alert("请选择角色！");
 			return false;
 		}
-		if (_isNull($("hideId").value) || $("hideId").value == 0) {
-			if (_isNull($("pwd").value)) {
+		if (_isNull(document.getElementById("hideId").value) || document.getElementById("hideId").value == 0) {
+			if (_isNull(document.getElementById("pwd").value)) {
 				alert("请填写登录密码！");
-				$("pwd").focus();
+				document.getElementById("pwd").focus();
 				return false;
 			}
-			if (_isNull($("pwd2").value)) {
+			if (_isNull(document.getElementById("pwd2").value)) {
 				alert("请再次填写登录密码！");
-				$("pwd2").focus();
+				document.getElementById("pwd2").focus();
 				return false;
 			}
-			if ($("pwd").value != $("pwd2").value) {
+			if (document.getElementById("pwd").value != document.getElementById("pwd2").value) {
 				alert("两次输入的密码不一致，请重新填写！");
-				$("pwd2").focus();
+				document.getElementById("pwd2").focus();
 				return false;
 			}
 		}

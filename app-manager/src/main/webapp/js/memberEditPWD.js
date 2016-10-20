@@ -2,24 +2,24 @@ Ext.onReady(function(){
 	Ext.QuickTips.init();
 	
 	this.save = function() {
-		if (_isNull($("oldpwd").value)) {
+		if (_isNull(document.getElementById("oldpwd").value)) {
 			alert("请填写旧密码！");
-			$("oldpwd").focus();
+			document.getElementById("oldpwd").focus();
 			return false;
 		}
-		if (_isNull($("pwd").value)) {
+		if (_isNull(document.getElementById("pwd").value)) {
 			alert("请填写新密码！");
-			$("pwd").focus();
+			document.getElementById("pwd").focus();
 			return false;
 		}
-		if (_isNull($("pwd2").value)) {
+		if (_isNull(document.getElementById("pwd2").value)) {
 			alert("请再次填写新密码！");
-			$("pwd2").focus();
+			document.getElementById("pwd2").focus();
 			return false;
 		}
-		if ($("pwd").value != $("pwd2").value) {
+		if (document.getElementById("pwd").value != document.getElementById("pwd2").value) {
 			alert("两次输入的新密码不一致，请重新填写！");
-			$("pwd2").focus();
+			document.getElementById("pwd2").focus();
 			return false;
 		}
 	};
@@ -28,7 +28,7 @@ Ext.onReady(function(){
 	new Ext.Viewport({
 		layout : 'fit',
 		items : [ {
-			title : '修改用户' + $("hideName").value + '密码',
+			title : '修改用户' + document.getElementById("hideName").value + '密码',
 			bodyStyle : 'padding:5px',
 			border : false,
 			frame : false,

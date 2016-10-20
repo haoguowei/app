@@ -17,7 +17,7 @@
 		Ext.QuickTips.init();
 		
 		this.searchFunc=function(){
-			gridStore.setBaseParam("name", $("name").value);
+			gridStore.setBaseParam("name", document.getElementById("name").value);
 			gridStore.load();
 		};
 		

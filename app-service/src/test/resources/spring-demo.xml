@@ -19,5 +19,5 @@
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-	<app:demo id="demo" age="89" name="哈哈"/>
+	<app:demo id="demo" age="89" name="xx"/>
 </beans>

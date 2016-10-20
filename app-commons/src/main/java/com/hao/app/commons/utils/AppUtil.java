@@ -1,6 +1,9 @@
 package com.hao.app.commons.utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Random;
 
@@ -70,4 +73,34 @@ public class AppUtil {
 		}
 		return sbr.toString();
 	}
+	
+	/**
+	 * 异常转字符串
+	 * 
+	 * @author haoguowei
+	 * @param e
+	 * @return
+	 */
+	public static String exceptionToString(Exception e) {  
+		StringWriter sw = null;
+		PrintWriter pw = null;
+        try {  
+            sw = new StringWriter(); 
+            pw = new PrintWriter(sw);  
+            e.printStackTrace(pw);  
+            return sw.toString();  
+        } catch (Exception e2) {  
+            return e.toString();  
+        } finally {
+        	if(sw != null){
+        		try {
+					sw.close();
+				} catch (IOException e1) {
+				}
+        	}
+        	if(pw != null){
+        		pw.close();
+        	}
+		}
+    }  
 }

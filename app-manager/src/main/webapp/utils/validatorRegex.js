@@ -98,3 +98,37 @@ function isDateTime(str){
 	var d= new Date(r[1], r[3]-1,r[4],r[5],r[6],r[7]); 
 	return (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]&&d.getHours()==r[5]&&d.getMinutes()==r[6]&&d.getSeconds()==r[7]);
 }
+
+/**
+ * 判断是否是正整数
+ * @param val
+ * @returns {Boolean}
+ */
+function _IntegerZ(val) {
+	if (/^\+?\d+$/.test(val))
+		return true;
+	return false;
+}
+
+/**
+ * 判断是否是整数
+ * @param val
+ * @returns {Boolean}
+ */
+function _Integer(val) {
+	if (/^[-+]?[\d]+$/.test(val))
+		return true;
+	return false;
+}
+
+/**
+ * 判断日期格式
+ * @param val
+ * @returns {Boolean}
+ */
+function _datetimeFmt(val) {
+	var regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/;
+	if (regex.test(val))
+		return true;
+	return false;
+}

@@ -21,31 +21,31 @@ Ext.onReady(function(){
 		buttons : [{
 			text : '保存',
 			handler : function(){
-				var menuName = $("menuName").value;
-				var menuUrl = $("menuUrl").value;
-				var menuSort = $("menuSort").value;
+				var menuName = document.getElementById("menuName").value;
+				var menuUrl = document.getElementById("menuUrl").value;
+				var menuSort = document.getElementById("menuSort").value;
 				
 				if (_isNull(menuName)) {
 					alert("请填写菜单名！");
-					$("menuName").focus();
+					document.getElementById("menuName").focus();
 					return false;
 				}
 				if (!regexVerify('chinese2',menuName)) {
 					alert("菜单名含有非法字符！");
-					$("menuName").focus();
+					document.getElementById("menuName").focus();
 					return false;
 				}
 				
 				if (_isNull(menuUrl)) {
 					alert("请填写菜单URL！");
-					$("menuUrl").focus();
+					document.getElementById("menuUrl").focus();
 					return false;
 				}
 				
-				if($("hidMenuParentId").value != 0){
+				if(document.getElementById("hidMenuParentId").value != 0){
 					if (menuUrl != null && !regexVerify('letter2',menuUrl)) {
 						alert("菜单URL含有非法字符！");
-						$("menuUrl").focus();
+						document.getElementById("menuUrl").focus();
 						return false;
 					}
 				}else{
@@ -54,17 +54,17 @@ Ext.onReady(function(){
 				
 				if (_isNull(menuSort)) {
 					alert("请填写菜单排序！");
-					$("menuSort").focus();
+					document.getElementById("menuSort").focus();
 					return false;
 				}
 				if (!regexVerify('num1',menuSort)) {
 					alert("菜单排序只能使用数字！");
-					$("menuSort").focus();
+					document.getElementById("menuSort").focus();
 					return false;
 				}
 				
-				var url = urlSaveMenu + "?menuId=" + $("hidMenuId").value
-					+"&menuParentId=" + $("hidMenuParentId").value
+				var url = urlSaveMenu + "?menuId=" + document.getElementById("hidMenuId").value
+					+"&menuParentId=" + document.getElementById("hidMenuParentId").value
 					+"&menuName=" + menuName
 					+"&menuSort=" + menuSort
 					+"&menuUrl=" + menuUrl;
@@ -93,29 +93,29 @@ Ext.onReady(function(){
 	
 	//编辑一级菜单时，只读
 	menuWindow.on("beforeshow",function(){
-		if($("hidMenuParentId").value == 0){
-			$("menuUrl").value = '#';
-			$("menuUrl").readOnly = true;
+		if(document.getElementById("hidMenuParentId").value == 0){
+			document.getElementById("menuUrl").value = '#';
+			document.getElementById("menuUrl").readOnly = true;
 		}else{
-			$("menuUrl").readOnly = false;
+			document.getElementById("menuUrl").readOnly = false;
 		}
     });
 	
 	this.reset = function(){
-		$("hidMenuId").value = 0;
-		$("hidMenuParentId").value = '';
-		$("menuName").value = '';
-		$("menuUrl").value = '';
-		$("menuSort").value = '';
+		document.getElementById("hidMenuId").value = 0;
+		document.getElementById("hidMenuParentId").value = '';
+		document.getElementById("menuName").value = '';
+		document.getElementById("menuUrl").value = '';
+		document.getElementById("menuSort").value = '';
 	};
 	
 	this.setWindowValue = function(obj){
 		reset();
-		$("hidMenuId").value = obj.id;
-		$("hidMenuParentId").value = obj.parent;
-		$("menuName").value = obj.name;
-		$("menuUrl").value = obj.url;
-		$("menuSort").value = obj.sort;
+		document.getElementById("hidMenuId").value = obj.id;
+		document.getElementById("hidMenuParentId").value = obj.parent;
+		document.getElementById("menuName").value = obj.name;
+		document.getElementById("menuUrl").value = obj.url;
+		document.getElementById("menuSort").value = obj.sort;
 	};
 	
 	//查询
@@ -139,8 +139,8 @@ Ext.onReady(function(){
 	//新增
 	this.addF = function(bt,parentId) {
 		reset();
-		$("hidMenuId").value = 0;
-		$("hidMenuParentId").value = parentId;
+		document.getElementById("hidMenuId").value = 0;
+		document.getElementById("hidMenuParentId").value = parentId;
 		
 		menuWindow.setTitle("新增菜单");
 		menuWindow.show(bt);
