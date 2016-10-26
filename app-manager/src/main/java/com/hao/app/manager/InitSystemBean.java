@@ -33,11 +33,8 @@ public class InitSystemBean implements InitializingBean, ServletContextAware {
 		Set<String> allPrivileges = sysPrivilegeService.reLoadAllPrivilegeSet();
 		logger.info("加载系统所有权限={}", allPrivileges);
 
-		Constants.IMG_URL = PropertiesUtil.getValue("conf.img.url");
-		Constants.IMG_PATH = PropertiesUtil.getValue("conf.img.path");
-
 		// 设置页面用的全局常量
-		servletContext.setAttribute("IMAGEURL", Constants.IMG_URL);
+		servletContext.setAttribute("IMAGEURL", PropertiesUtil.getValue(Constants.CONFIG_KEY_UPFILE_URL));
 		servletContext.setAttribute("WebUtil", new WebUtils());
 	}
 

@@ -10,10 +10,10 @@ import java.util.Properties;
  * @since 1.0.0
  */
 public class PropertiesUtil {
-	
+
 	private static Properties properties;
-	
-	static{
+
+	static {
 		try {
 			properties = new Properties();
 			properties.load(PropertiesUtil.class.getClassLoader().getResourceAsStream("/config.properties"));
@@ -22,13 +22,13 @@ public class PropertiesUtil {
 			e.printStackTrace();
 		}
 	}
-	
-	public static Properties getInstance(){
+
+	public static Properties getInstance() {
 		return properties;
 	}
-	
-	public static String getValue(String key){
+
+	public static String getValue(String key) {
 		return properties.getProperty(key);
 	}
-	
+
 }

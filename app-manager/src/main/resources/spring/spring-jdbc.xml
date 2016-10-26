@@ -15,16 +15,17 @@
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+	<!-- 数据源配置 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="initialSize" value="${jdbc.initialSize}"></property>
-		<property name="maxActive" value="${jdbc.maxActive}"></property>
-		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
-		<property name="minIdle" value="${jdbc.minIdle}"></property>
-		<property name="maxWait" value="${jdbc.maxWait}"></property>
+		<property name="driverClassName" value="${conf.jdbc.driver}" />
+		<property name="url" value="${conf.jdbc.url}" />
+		<property name="username" value="${conf.jdbc.username}" />
+		<property name="password" value="${conf.jdbc.password}" />
+		<property name="initialSize" value="${conf.jdbc.initialSize}"></property>
+		<property name="maxActive" value="${conf.jdbc.maxActive}"></property>
+		<property name="maxIdle" value="${conf.jdbc.maxIdle}"></property>
+		<property name="minIdle" value="${conf.jdbc.minIdle}"></property>
+		<property name="maxWait" value="${conf.jdbc.maxWait}"></property>
 	</bean>
 
 	<!-- spring + MyBatis -->
