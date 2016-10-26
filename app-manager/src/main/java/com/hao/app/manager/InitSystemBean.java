@@ -21,29 +21,28 @@ import com.hao.app.service.SysPrivilegeService;
  * @author yanwei
  * @since 1.0.0
  */
-public class InitSystemBean implements InitializingBean, ServletContextAware{
-	
+public class InitSystemBean implements InitializingBean, ServletContextAware {
+
 	private final Logger logger = LoggerFactory.getLogger(InitSystemBean.class);
-	
+
 	@Autowired
 	private SysPrivilegeService sysPrivilegeService;
-	
 
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		Set<String> allPrivileges = sysPrivilegeService.reLoadAllPrivilegeSet();
 		logger.info("加载系统所有权限={}", allPrivileges);
-		
+
 		Constants.IMG_URL = PropertiesUtil.getValue("conf.img.url");
 		Constants.IMG_PATH = PropertiesUtil.getValue("conf.img.path");
-		
-		//设置页面用的全局常量
+
+		// 设置页面用的全局常量
 		servletContext.setAttribute("IMAGEURL", Constants.IMG_URL);
 		servletContext.setAttribute("WebUtil", new WebUtils());
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		
+
 	}
 }
