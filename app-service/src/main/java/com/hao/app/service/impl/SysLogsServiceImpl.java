@@ -30,12 +30,11 @@ public class SysLogsServiceImpl implements SysLogsService{
 	 */
 	@Override
 	public JsonResult<SysLogs> searchLogs(String name, int start, int limit) {
-		if(StringUtils.isBlank(name)){
-			return new JsonResult<SysLogs>(0, null);
-		}
-		
 		SysLogsQueryParam queryParam = new SysLogsQueryParam(start, limit);
-		queryParam.setName(name);
+		
+		if(StringUtils.isNotBlank(name)){
+			queryParam.setName(name);
+		}
 		
 		int count = sysLogsMapper.queryLogsCount(queryParam);
 		List<SysLogs> list = sysLogsMapper.queryLogsPageList(queryParam);

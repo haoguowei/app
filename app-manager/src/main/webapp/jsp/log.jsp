@@ -51,8 +51,9 @@
 					{width:2,header:'操作时间', align:'center',sortable:false, dataIndex:'operatorTime',renderer:function(val){
 						return Ext.util.Format.date(val,'Y-m-d H:i:s');
 					}},
-					{width:10,header:'描述', align:'left',sortable:false, dataIndex:'description',renderer:function(val){
-						return '<span title = "'+val+'">'+Ext.util.Format.ellipsis(val, 85)+'</span>';
+					{width:10,header:'描述', align:'left',sortable:false, dataIndex:'description',renderer:function(val, meta){
+						meta.attr = 'style="white-space:normal;"';
+						return "<div class='columnCSS'>"+val+"</div>";
 					}}
 			]
 		}); 

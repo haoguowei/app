@@ -15,9 +15,18 @@
 			    -khtml-user-select: text! important;  
 			    -webkit-user-select: text! important;  
 			} 
+			
 			/* grid单选radio样式 */ 		
 			.x-grid-radio-custom .x-grid3-row-checker, .x-grid-radio-custom .x-grid3-hd-checker {
 			    background-image:url(ext-3.2.1/resources/images/default/grid/row-radio-sprite.gif);
+			}
+			
+			/* grid 列中样式 */ 		
+			.columnCSS{
+				  table-layout:fixed;
+				  word-wrap:break-word;
+				  word-break:break-all;
+				  padding: 3px 2px 3px 2px;
 			}
 			
 			.row-color-yellow{
