@@ -30,7 +30,7 @@ Ext.onReady(function(){
 					document.getElementById("menuName").focus();
 					return false;
 				}
-				if (!regexVerify('chinese',menuName)) {
+				if (!_regInput(menuName)) {
 					alert("菜单名含有非法字符！");
 					document.getElementById("menuName").focus();
 					return false;

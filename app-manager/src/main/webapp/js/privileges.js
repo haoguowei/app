@@ -31,7 +31,7 @@ Ext.onReady(function(){
 					document.getElementById("pName").focus();
 					return false;
 				}
-				if (!regexVerify('chinese',pName)) {
+				if (!_regInput(pName)) {
 					alert("权限名含有非法字符！");
 					document.getElementById("pName").focus();
 					return false;

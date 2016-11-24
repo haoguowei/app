@@ -104,9 +104,7 @@ function isDateTime(str){
  * @returns {Boolean}
  */
 function _IntegerZ(val) {
-	if (/^\+?\d+$/.test(val))
-		return true;
-	return false;
+	return (/^\+?\d+$/.test(val))
 }
 
 /**
@@ -115,9 +113,7 @@ function _IntegerZ(val) {
  * @returns {Boolean}
  */
 function _Integer(val) {
-	if (/^[-+]?[\d]+$/.test(val))
-		return true;
-	return false;
+	return (/^[-+]?[\d]+$/.test(val))
 }
 
 /**
@@ -127,7 +123,15 @@ function _Integer(val) {
  */
 function _datetimeFmt(val) {
 	var regex = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/;
-	if (regex.test(val))
-		return true;
-	return false;
+	return regex.test(val);
+}
+
+/**
+ * 只能是中文，英文，数字
+ * @param val
+ * @returns {Boolean}
+ */
+function _regInput(val) {
+	var regex = /^(\w|[\u4E00-\u9FA5])*$/;
+	return regex.test(val);
 }
