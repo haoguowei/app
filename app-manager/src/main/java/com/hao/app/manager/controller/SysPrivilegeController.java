@@ -108,12 +108,32 @@ public class SysPrivilegeController extends BaseController{
 			setMenuNode(menuNode);
 			
 			if(menuNode.isLeaf()){
-				menuNode.setChildren(menuPrivilegeMap.get(menuNode.getId()));
+				List<TreeNodeMode> tmp = menuPrivilegeMap.get(menuNode.getId());
+				if(tmp != null && tmp.size() > 0){
+					menuNode.setChildren(tmp);
+				}else{
+					//无内容，则不展开
+					menuNode.setLeaf(true);
+					menuNode.setExpanded(false);
+				}
 			}else{
 				List<TreeNodeMode> childs = menuNode.getChildren();
-				for(TreeNodeMode leafNode : childs){
-					setMenuNode(leafNode);
-					leafNode.setChildren(menuPrivilegeMap.get(leafNode.getId()));
+				if(childs != null && childs.size() > 0){
+					for(TreeNodeMode leafNode : childs){
+						setMenuNode(leafNode);
+						List<TreeNodeMode> tmp = menuPrivilegeMap.get(leafNode.getId());
+						if(tmp != null && tmp.size() > 0){
+							leafNode.setChildren(tmp);
+						}else{
+							//无内容，则不展开
+							leafNode.setLeaf(true);
+							leafNode.setExpanded(false);
+						}
+					}
+				}else{
+					//无内容，则不展开
+					menuNode.setLeaf(true);
+					menuNode.setExpanded(false);
 				}
 			}
 		}
@@ -130,7 +150,7 @@ public class SysPrivilegeController extends BaseController{
 		menuNode.setHref(null);
 		menuNode.setHrefTarget(null);
 		menuNode.setLeaf(false);
-		menuNode.setExpanded(true);
+		menuNode.setExpanded(true); //展开
 	}
 	
 }

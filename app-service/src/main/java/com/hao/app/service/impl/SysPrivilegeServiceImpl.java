@@ -158,6 +158,7 @@ public class SysPrivilegeServiceImpl implements SysPrivilegeService {
 		priNode.setParentId(pri.getMenuId() * 1000);//防止与权限node的id冲突
 		priNode.setAttributes(pri);
 		priNode.setLeaf(true);
+		priNode.setExpanded(false);
 		priNode.setChecked(rolePriIds != null && rolePriIds.contains(pri.getId()));
 		return priNode;
 	}
