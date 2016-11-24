@@ -10,4 +10,9 @@ public class DemoServiceJob extends AbstractJobService {
 		System.out.println("===================");
 	}
 
+	@Override
+	public String jobName() {
+		return "DemoServiceJob";
+	}
+
 }

@@ -15,14 +15,16 @@ public abstract class AbstractJobService implements JobService {
 
 	private final Logger logger = LoggerFactory.getLogger(AbstractJobService.class);
 
+	public abstract String jobName();
+
 	public abstract void work();
 
 	@Override
 	public void execute() {
-		logger.info("定时任务执行开始!");
+		logger.info("定时任务【{}】执行开始!", jobName());
 		long start = System.currentTimeMillis();
 		work();
-		logger.info("定时任务执行结束,共耗时{}ms!", (System.currentTimeMillis() - start));
+		logger.info("定时任务【{}】执行结束,共耗时{}ms!", jobName(), (System.currentTimeMillis() - start));
 	}
 
 }
