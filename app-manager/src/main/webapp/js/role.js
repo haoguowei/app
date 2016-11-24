@@ -30,7 +30,7 @@ Ext.onReady(function(){
 					document.getElementById("rName").focus();
 					return false;
 				}
-				if (!regexVerify('chinese2',rName)) {
+				if (!regexVerify('chinese',rName)) {
 					alert("角色名含有非法字符！");
 					document.getElementById("rName").focus();
 					return false;
