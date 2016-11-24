@@ -15,18 +15,18 @@
 				region : 'north',
 				height:40,
 				width:600,
-				html:'<table style="width:100%;margin:auto;">'
+				html:'<table style="width:100%;margin:auto;color:#15428b;">'
 						+'<tr>'
 							+'<td style="width:40px">'
 								+'<img src="imgs/logo-small.jpg" style="max-width:50px;max-height:30px;">'
 							+'</td>'
 							+'<td>'
-								+'APP管理系统'
+								+'<b>APP管理系统</b>'
 							+'</td>'
 							+'<td align="right">'
 								+'<img src="imgs/person.ico" style="margin-right:5px;"/>'
-								+'<span style="font-size:12px;color: blue;">欢迎登录，${CurrentLoginUser.showName}(${CurrentLoginUser.name})</span>'
-								+'<a href="quitSystem.do" style="text-decoration: none;font-size:13px;color: red;margin:0 30px 0 30px;">注销</a>'
+								+'<span style="font-size:12px;"><b>欢迎登录，${CurrentLoginUser.showName}(${CurrentLoginUser.name})</b></span>'
+								+'<a href="quitSystem.do" title="退出系统" style="text-decoration: none;font-size:12px;color: red;margin:0 30px 0 30px;"><b>退出</b> </a>'
 							+'</td>'
 						+'</tr>'
 					+'</table>'
