@@ -15,6 +15,8 @@ public class SysMember implements Serializable{
 	private Integer id;
 
     private String name; //登录名
+    
+    private String imgs; //头像
 
     private int valid; //有效，1禁用
 
@@ -125,12 +127,26 @@ public class SysMember implements Serializable{
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
     }
+    
+    
+
+	public String getImgs() {
+		return imgs;
+	}
+
+	public void setImgs(String imgs) {
+		this.imgs = imgs;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@Override
 	public String toString() {
-		return "SysMember [id=" + id + ", name=" + name + ", valid=" + valid + ", pwd=" + pwd + ", showName=" + showName
-				+ ", roleId=" + roleId + ", phone=" + phone + ", email=" + email + ", priUrls=" + priUrls
-				+ ", roleName=" + roleName + ", roleIntor=" + roleIntor + "]";
+		return "SysMember [id=" + id + ", name=" + name + ", imgs=" + imgs + ", valid=" + valid + ", pwd=" + pwd
+				+ ", showName=" + showName + ", roleId=" + roleId + ", phone=" + phone + ", email=" + email
+				+ ", priUrls=" + priUrls + ", roleName=" + roleName + ", roleIntor=" + roleIntor + "]";
 	}
 
     

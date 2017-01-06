@@ -128,6 +128,24 @@ public class SysMemberController extends BaseController {
 		
 		return "WEB-INF/error/fail";
 	}
+	
+	@RequestMapping("/saveMemberImgs.do")
+	public String saveMemberImgs(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = NumberUtils.toInt(request.getParameter("hideId"));
+		String imgs = request.getParameter("imgs");
+		
+		try {
+			if(id > 0 && StringUtils.isNotBlank(imgs)){
+				sysMemeberService.updateMemberImgs(id, imgs);
+				sysLogsService.writeLog(getCurrentUserName(request), "修改用户头像:id=" + id + ",imgs=" + imgs);
+				return successResult(request, "用户管理", "initMemberManager.do");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "WEB-INF/error/fail";
+	}
 
 	@RequestMapping("/initEditMemberValid.do")
 	public void initEditMemberValid(HttpServletRequest request, HttpServletResponse response) throws IOException {

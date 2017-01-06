@@ -8,6 +8,7 @@ Ext.onReady(function(){
 	//是否有权限
 	var isPRISaveMember = isHavePRI("saveMember.do");//新增编辑用户
 	var isPRISaveMemberPwd = isHavePRI("saveMemberPwd.do");//修改用户密码
+	var isPRISaveMemberImgs = isHavePRI("saveMemberImgs.do");//修改头像
 	var isPRIEditMemberValid = isHavePRI(urlEditMemberValid);//启用／禁用用户
 	
 	//-----------------权限相关 end-----------
@@ -22,6 +23,10 @@ Ext.onReady(function(){
 	
 	this.updatePWD = function(id) {
 		location.href = "initEditMemberPWD.do?id=" + id;
+	};
+	
+	this.updateImgs = function(id) {
+		
 	};
 	
 	this.updateValid = function(id) {
@@ -67,6 +72,7 @@ Ext.onReady(function(){
 	    fields: [
 	       {name:'id'},
 	       {name:'name'},
+	       {name:'imgs'},
 	       {name:'role'},
 	       {name:'valid'},
 	       {name:'showName'},
@@ -87,6 +93,7 @@ Ext.onReady(function(){
 		autoHeight:true,
 		columns: [ 
 				{width:1,header:'ID', align:'center',sortable:false, dataIndex:'id'},
+				{width:1,header:'头像', align:'left',sortable:false, dataIndex:'imgs'},
 				{width:1,header:'登录名', align:'left',sortable:false, dataIndex:'name'},
 				{width:1,header:'显示名', align:'left',sortable:false, dataIndex:'showName'},
 				{width:2,header:'所属角色', align:'left',sortable:false, dataIndex:'roleName'},
@@ -105,6 +112,10 @@ Ext.onReady(function(){
 						str += genButton("改密码",'updatePWD('+val+')');
 					}
 					
+					if(isPRISaveMemberImgs){//权限
+						str += genButton("上传头像",'updateImgs('+val+')');
+					}
+					
 					if(isPRIEditMemberValid){ //权限
 						if(record.data.valid == 0 || record.data.valid == '0'){
 							str += genButton("禁用",'updateValid('+val+')');
@@ -112,6 +123,9 @@ Ext.onReady(function(){
 							str += genButton("取消禁用",'updateValidUN('+val+')');
 						}
 					}
+					
+					
+					
 					return str;
 				}}
 		]

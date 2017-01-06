@@ -51,4 +51,12 @@ public interface SysMemeberService {
 	 * @return
 	 */
 	boolean updateMemberValid(int id,int value);
+
+	/**
+	 * 更新头像
+	 * @param id
+	 * @param imgs
+	 * @return
+	 */
+	int updateMemberImgs(int id, String imgs);
 }

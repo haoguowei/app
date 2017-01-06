@@ -30,9 +30,11 @@ public class SysUploadServiceImpl implements SysUploadService {
 
 		if (!verifyFileType(file)) {
 			msg = "请上传“" + FILETYPE + "”格式的文件！";
-		} else if (!verifyFileSize(file)) {
+		} 
+		else if (!verifyFileSize(file)) {
 			msg = "上传的文件太大！";
-		} else {
+		} 
+		else {
 			data = writeToDisk(file);
 			if (StringUtils.isBlank(data)) {
 				msg = "文件上传失败！";

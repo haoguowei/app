@@ -23,4 +23,6 @@ public interface SysMemberMapper {
 
 	void updateMemberValid(@Param("id")int id, @Param("valid")int valid);
 
+	int updateMemberImgs(@Param("id")int id,@Param("imgs") String imgs);
+
 }

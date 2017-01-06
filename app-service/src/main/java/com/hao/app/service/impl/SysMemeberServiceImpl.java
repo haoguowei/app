@@ -61,4 +61,9 @@ public class SysMemeberServiceImpl implements SysMemeberService {
 		return true;
 	}
 
+	@Override
+	public int updateMemberImgs(int id, String imgs) {
+		return sysMemberMapper.updateMemberImgs(id, imgs);
+	}
+
 }
