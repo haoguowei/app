@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ServletContextAware;
 
 import com.hao.app.commons.entity.Constants;
+import com.hao.app.commons.utils.PropertiesUtils;
 import com.hao.app.commons.utils.WebUtils;
 import com.hao.app.service.SysPrivilegeService;
 
@@ -31,12 +32,9 @@ public class InitSystemBean implements InitializingBean, ServletContextAware {
 	public void setServletContext(ServletContext servletContext) {
 		Set<String> allPrivileges = sysPrivilegeService.reLoadAllPrivilegeSet();
 		logger.info("加载系统所有权限:{}", allPrivileges);
-		
-		WebUtils.IMAGEURL = CustomPropertyConfigurer.getProperty(Constants.CONFIG_KEY_UPFILE_URL);
-		WebUtils.IMAGEPATH = CustomPropertyConfigurer.getProperty(Constants.CONFIG_KEY_UPFILE_PATH);
 
 		// 设置页面用的全局常量
-		servletContext.setAttribute("IMAGEURL", WebUtils.IMAGEURL);
+		servletContext.setAttribute("IMAGEURL", PropertiesUtils.getProperty(Constants.CONFIG_KEY_UPFILE_URL));
 		servletContext.setAttribute("WebUtils", new WebUtils());
 	}
 

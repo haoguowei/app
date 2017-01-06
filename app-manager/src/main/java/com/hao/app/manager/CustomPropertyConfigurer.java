@@ -6,6 +6,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
+import com.hao.app.commons.utils.PropertiesUtils;
+
 /**
  * 自定义获取配置文件
  * 
@@ -14,15 +16,10 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  */
 public class CustomPropertyConfigurer extends PropertyPlaceholderConfigurer {
 
-	private static Properties sroperties;
-
 	@Override
 	protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props)throws BeansException {
 		super.processProperties(beanFactoryToProcess, props);
-		sroperties = props;
+		PropertiesUtils.setProperties(props);
 	}
 
-	public static String getProperty(String key) {
-		return sroperties.getProperty(key);
-	}
 }

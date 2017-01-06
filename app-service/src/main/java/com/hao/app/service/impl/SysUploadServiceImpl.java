@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
+import com.hao.app.commons.entity.Constants;
+import com.hao.app.commons.utils.PropertiesUtils;
 import com.hao.app.commons.utils.Utils;
-import com.hao.app.commons.utils.WebUtils;
 import com.hao.app.service.SysUploadService;
 
 @Service
@@ -62,16 +63,18 @@ public class SysUploadServiceImpl implements SysUploadService {
 		String filePath = Utils.getRandomPath(2, 64);
 		String fileName = file.getOriginalFilename();
 		fileName = System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));
+		
+		String basePath = PropertiesUtils.getProperty(Constants.CONFIG_KEY_UPFILE_PATH);
 
 		logger.info("====================================");
 		logger.info("文件类型：" + file.getContentType());
 		logger.info("文件大小：" + file.getSize());
-		logger.info("文件路径：" + WebUtils.IMAGEPATH + filePath);
+		logger.info("文件路径：" + basePath + filePath);
 		logger.info("文件名称：" + fileName);
 		logger.info("====================================");
 
 		try {
-			file.transferTo(Utils.genDestFile(WebUtils.IMAGEPATH + filePath, fileName));
+			file.transferTo(Utils.genDestFile(basePath + filePath, fileName));
 			return filePath + fileName;
 		} catch (Exception e) {
 			e.printStackTrace();

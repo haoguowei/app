@@ -31,7 +31,6 @@ public class LogInInterceptor implements HandlerInterceptor {
 		if(currentUser != null && StringUtils.isNotBlank(currentUser.getName())){
 			return true;
 		}
-		
 		logger.error("Not Login!");
 		
 		if (!(request.getHeader("accept").contains("application/json") 
@@ -41,7 +40,6 @@ public class LogInInterceptor implements HandlerInterceptor {
 		}else{
 			//json错误请求处理
 			JsonResultAjax result = new JsonResultAjax(false, "请先登录！");
-			
 			String json = new Gson().toJson(result);
 			PrintWriter pw = response.getWriter();
 			pw.write(json);
