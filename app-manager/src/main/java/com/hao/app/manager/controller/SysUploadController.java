@@ -43,6 +43,7 @@ public class SysUploadController extends BaseController {
 	public void fileUpload(@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JsonObject jsonObject = sysUploadService.writeFileToDisk(file);
+		logger.info("文件上传结果：{}", jsonObject);
 		response.getWriter().write(jsonObject.toString());
 	}
 

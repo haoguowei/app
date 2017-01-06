@@ -1,6 +1,8 @@
 Ext.onReady(function(){
 	
 	Ext.QuickTips.init();
+	
+	var uploadId = 0;
 
 	//-----------------权限相关 start-----------
 	var urlEditMemberValid = "initEditMemberValid.do";
@@ -26,8 +28,23 @@ Ext.onReady(function(){
 	};
 	
 	this.updateImgs = function(id) {
-		
+		uploadId = id;
+		pic.show();
 	};
+	
+	var pic = new FileUpLoadWindow(function(fp, response){
+		if(response.result.success){
+			var path = response.result.data;
+			if(_isNull(path)){
+				alert("文件上传失败！");
+			}else{
+				location.href = 'saveMemberImgs.do?imgs='+path+'&id=' + uploadId;
+			}
+		}else{
+			alert(response.result.msg);
+		}
+		pic.hide();
+	});
 	
 	this.updateValid = function(id) {
 		if (confirm("确定要禁用该账号吗？禁用后该账号将不能登录！")) {
@@ -93,7 +110,12 @@ Ext.onReady(function(){
 		autoHeight:true,
 		columns: [ 
 				{width:1,header:'ID', align:'center',sortable:false, dataIndex:'id'},
-				{width:1,header:'头像', align:'left',sortable:false, dataIndex:'imgs'},
+				{width:1,header:'头像', align:'left',sortable:false, dataIndex:'imgs',renderer:function(val){
+					if(val == null || val == ''){
+						return '';
+					}
+					return '<img src="' + (IMAGEURL + val) + '" style="max-width: 133px;max-height:103px;">';
+				}},
 				{width:1,header:'登录名', align:'left',sortable:false, dataIndex:'name'},
 				{width:1,header:'显示名', align:'left',sortable:false, dataIndex:'showName'},
 				{width:2,header:'所属角色', align:'left',sortable:false, dataIndex:'roleName'},

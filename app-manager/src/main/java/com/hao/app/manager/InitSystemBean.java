@@ -31,9 +31,12 @@ public class InitSystemBean implements InitializingBean, ServletContextAware {
 	public void setServletContext(ServletContext servletContext) {
 		Set<String> allPrivileges = sysPrivilegeService.reLoadAllPrivilegeSet();
 		logger.info("加载系统所有权限:{}", allPrivileges);
+		
+		WebUtils.IMAGEURL = CustomPropertyConfigurer.getProperty(Constants.CONFIG_KEY_UPFILE_URL);
+		WebUtils.IMAGEPATH = CustomPropertyConfigurer.getProperty(Constants.CONFIG_KEY_UPFILE_PATH);
 
 		// 设置页面用的全局常量
-		servletContext.setAttribute("IMAGEURL", CustomPropertyConfigurer.getProperty(Constants.CONFIG_KEY_UPFILE_URL));
+		servletContext.setAttribute("IMAGEURL", WebUtils.IMAGEURL);
 		servletContext.setAttribute("WebUtils", new WebUtils());
 	}
 

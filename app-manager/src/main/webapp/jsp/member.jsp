@@ -12,6 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>
 </title>
+	<!-- 上传图片 -->
+	<link rel="stylesheet" type="text/css" href="<%=syspath%>/utils/upload/FileUploadField.css" />
+	<script type="text/javascript" src="<%=syspath%>/utils/upload/FileUploadField.js"></script>
+	<script type="text/javascript" src="<%=syspath%>/utils/upload/FileUpLoadWindow.js"></script>
+	
+	<script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
+	
 	<script type="text/javascript" src="<%=syspath%>/js/member.js"></script>
 </head>
 <body>

@@ -22,7 +22,7 @@ public class CustomPropertyConfigurer extends PropertyPlaceholderConfigurer {
 		sroperties = props;
 	}
 
-	public static Object getProperty(String key) {
+	public static String getProperty(String key) {
 		return sroperties.getProperty(key);
 	}
 }

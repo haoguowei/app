@@ -131,7 +131,7 @@ public class SysMemberController extends BaseController {
 	
 	@RequestMapping("/saveMemberImgs.do")
 	public String saveMemberImgs(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int id = NumberUtils.toInt(request.getParameter("hideId"));
+		int id = NumberUtils.toInt(request.getParameter("id"));
 		String imgs = request.getParameter("imgs");
 		
 		try {
