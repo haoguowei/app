@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Random;
 
@@ -14,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class Utils {
-	
+
 	/**
 	 * 生成随机路径
 	 * 
@@ -30,7 +31,7 @@ public class Utils {
 		}
 		return bd.toString();
 	}
-	
+
 	/**
 	 * 创建文件夹，返回目标文件
 	 * 
@@ -48,13 +49,15 @@ public class Utils {
 		}
 		return new File(path + name);
 	}
-	
+
 	/**
 	 * 集合转成字符串
 	 * 
 	 * @param <T>
-	 * @param Col 集合
-	 * @param Separator 分隔符
+	 * @param Col
+	 *            集合
+	 * @param Separator
+	 *            分隔符
 	 * @return
 	 */
 	public static <T> String collectionStrToStr(Collection<T> col, String Separator) {
@@ -73,7 +76,7 @@ public class Utils {
 		}
 		return sbr.toString();
 	}
-	
+
 	/**
 	 * 异常转字符串
 	 * 
@@ -81,26 +84,41 @@ public class Utils {
 	 * @param e
 	 * @return
 	 */
-	public static String exceptionToString(Exception e) {  
+	public static String exceptionToString(Exception e) {
 		StringWriter sw = null;
 		PrintWriter pw = null;
-        try {  
-            sw = new StringWriter(); 
-            pw = new PrintWriter(sw);  
-            e.printStackTrace(pw);  
-            return sw.toString();  
-        } catch (Exception e2) {  
-            return e.toString();  
-        } finally {
-        	if(sw != null){
-        		try {
+		try {
+			sw = new StringWriter();
+			pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			return sw.toString();
+		} catch (Exception e2) {
+			return e.toString();
+		} finally {
+			if (sw != null) {
+				try {
 					sw.close();
 				} catch (IOException e1) {
 				}
-        	}
-        	if(pw != null){
-        		pw.close();
-        	}
+			}
+			if (pw != null) {
+				pw.close();
+			}
 		}
-    }  
+	}
+
+	/**
+	 * 中文转码
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String transcodingStr(String str) {
+		try {
+			return new String(str.getBytes("GB2312"), "ISO8859-1");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		return str;
+	}
 }

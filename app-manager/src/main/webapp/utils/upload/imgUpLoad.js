@@ -18,9 +18,9 @@
 			items : [ {
 				xtype : 'fileuploadfield',
 				id : 'form-file',
-				emptyText : '选择图片...',
-				fieldLabel : '选择图片',
-				name : 'photo',
+				emptyText : '选择文件...',
+				fieldLabel : '选择文件',
+				name : 'file',
 				buttonText : '浏览...'
 			} ],
 			buttons : [ {
@@ -29,7 +29,7 @@
 					var fileForm = self.uploadForm.getForm();
 					if (fileForm.isValid()) {
 						fileForm.submit({
-							url : 'pictureUpload.do',
+							url : 'fileUpload.do',
 							waitMsg : '正在上传，请等待...',
 							success : function(fp, action) {
 								callback(fp,action);
@@ -53,7 +53,7 @@
 			} ]
 		});
 		ImgUpLoadWindow.superclass.constructor.call(this, {
-			title : '上传图片',
+			title : '上传文件',
 			width : 400,
 			height : 150,
 			items : [self.uploadForm]

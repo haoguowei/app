@@ -46,7 +46,7 @@ public class BaseController {
 	 * @param request
 	 * @return
 	 */
-	public String getSrcPath(HttpServletRequest request){
+	public String getRealpath(HttpServletRequest request){
 		return request.getServletContext().getRealPath("");
 	}
 	

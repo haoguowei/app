@@ -35,7 +35,7 @@ public class InitSystemBean implements InitializingBean, ServletContextAware {
 
 		// 设置页面用的全局常量
 		servletContext.setAttribute("IMAGEURL", PropertiesUtil.getValue(Constants.CONFIG_KEY_UPFILE_URL));
-		servletContext.setAttribute("WebUtil", new WebUtils());
+		servletContext.setAttribute("WebUtils", new WebUtils());
 	}
 
 	@Override
