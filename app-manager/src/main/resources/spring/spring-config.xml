@@ -16,8 +16,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- 将多个配置文件读取到容器中，交给Spring管理 -->
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean class="com.hao.app.manager.CustomPropertyConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:config.properties</value>
