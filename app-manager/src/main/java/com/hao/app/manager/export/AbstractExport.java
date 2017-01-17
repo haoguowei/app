@@ -59,7 +59,7 @@ public abstract class AbstractExport {
 
 			String fileName = writeExcel(request, wb, sheet);
 			fileName = Utils.transcodingStr(fileName) + ".xls";
-			
+
 			response.setContentType("application/vnd.ms-excel");
 			response.setHeader("Content-disposition", "attachment;filename=" + fileName);
 			logger.info("导出Excel,modelFile={},fileName={}", modelFile, fileName);

@@ -65,8 +65,8 @@ public class SysMemberController extends BaseController {
 
 	@RequestMapping("/searchMembers.do")
 	public void searchMembers(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int start = NumberUtils.toInt(request.getParameter("start"));
-		int limit = NumberUtils.toInt(request.getParameter("limit"), Page.LIMIT);
+		int start = NumberUtils.toInt(request.getParameter(START));
+		int limit = NumberUtils.toInt(request.getParameter(LIMIT), Page.LIMIT);
 
 		JsonResult<SysMember> result = sysMemeberService.queryMemberPageList(start, limit);
 		writeResponse(response, result);

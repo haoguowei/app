@@ -21,21 +21,21 @@ import com.hao.app.pojo.SysLogs;
  */
 @Controller
 @RequestMapping
-public class SysLogsController extends BaseController{
-	
+public class SysLogsController extends BaseController {
+
 	@RequestMapping("/initLog.do")
 	public String initLog(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		return "jsp/log";
 	}
-	
+
 	@RequestMapping("/searchLogs.do")
 	public void searchLogs(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String name = request.getParameter("name");
-		int start = NumberUtils.toInt(request.getParameter("start"));
-		int limit = NumberUtils.toInt(request.getParameter("limit"), Page.LIMIT);
-		
-		JsonResult<SysLogs> result = sysLogsService.searchLogs(name,start,limit);
+		int start = NumberUtils.toInt(request.getParameter(START));
+		int limit = NumberUtils.toInt(request.getParameter(LIMIT), Page.LIMIT);
+
+		JsonResult<SysLogs> result = sysLogsService.searchLogs(name, start, limit);
 		writeResponse(response, result);
 	}
-	
+
 }

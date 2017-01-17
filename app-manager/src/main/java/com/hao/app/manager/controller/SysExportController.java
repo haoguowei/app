@@ -5,8 +5,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +21,8 @@ import com.hao.app.manager.export.ExportDemo;
 @RequestMapping
 public class SysExportController extends BaseController {
 
-	private Logger logger = LoggerFactory.getLogger(SysExportController.class);
-
 	@Autowired
 	private ExportDemo exportDemo;
-
-	// 模板文件夹名称
-	private static final String modelDir = "exportModel";
 
 	/**
 	 * 获取模板文件全路径地址
@@ -39,7 +32,7 @@ public class SysExportController extends BaseController {
 	 * @return
 	 */
 	private String getModelFilePath(HttpServletRequest request, String fileName) {
-		return getRealpath(request) + "/" + modelDir + "/" + fileName;
+		return getRealpath(request) + "/" + MODELDIR + "/" + fileName;
 	}
 
 	@RequestMapping("/exportDemo.do")

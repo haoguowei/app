@@ -38,6 +38,8 @@ public class SysPrivilegeController extends BaseController{
 	@Autowired
 	private SysMenuService sysMenuService;
 	
+	private int xId = 1000;
+	
 
 	@RequestMapping("/initPrivileges.do")
 	public String initPrivileges(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -143,8 +145,8 @@ public class SysPrivilegeController extends BaseController{
 	
 	//为节点设置权限
 	private void setMenuNode(TreeNodeMode menuNode){
-		menuNode.setId(menuNode.getId() * 1000); //防止与权限node的id冲突
-		menuNode.setParentId(menuNode.getParentId() * 1000); //防止与权限node的id冲突
+		menuNode.setId(menuNode.getId() * xId); //防止与权限node的id冲突
+		menuNode.setParentId(menuNode.getParentId() * xId); //防止与权限node的id冲突
 
 		menuNode.setChecked(null);
 		menuNode.setHref(null);
