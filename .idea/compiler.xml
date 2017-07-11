@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="app-commons" />
+        <module name="app-dao" />
+        <module name="app-manager" />
+        <module name="app-rpc-api" />
+        <module name="app-rpc-server" />
+        <module name="app-service" />
+        <module name="app-web" />
+        <module name="app-worker" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="app" target="1.7" />
+      <module name="app-commons" target="1.7" />
+      <module name="app-dao" target="1.7" />
+      <module name="app-manager" target="1.7" />
+      <module name="app-rpc-api" target="1.7" />
+      <module name="app-rpc-server" target="1.7" />
+      <module name="app-service" target="1.7" />
+      <module name="app-web" target="1.7" />
+      <module name="app-worker" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
