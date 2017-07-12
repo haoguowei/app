@@ -136,23 +136,6 @@
 				<version>1.9.13</version>
 			</dependency>
 
-			<!-- Dubbo -->
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>dubbo</artifactId>
-				<version>${dubbo.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>netty</artifactId>
-						<groupId>org.jboss.netty</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>spring</artifactId>
-						<groupId>org.springframework</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
 			<!-- zookeeper -->
 			<dependency>
 				<groupId>org.apache.zookeeper</groupId>
