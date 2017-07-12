@@ -32,17 +32,11 @@
 		<module>app-commons</module>
 		<module>app-dao</module>
 		<module>app-service</module>
-		<module>app-rpc-api</module>
 
-		<!-- rpc server -->
-		<module>app-rpc-server</module>
 
 		<!-- web app -->
-		<module>app-web</module>
 		<module>app-manager</module>
 
-		<!-- application -->
-		<module>app-worker</module>
 	</modules>
 
 	<!-- 所有子项目都包含 -->
