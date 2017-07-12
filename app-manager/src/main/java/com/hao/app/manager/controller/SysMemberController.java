@@ -1,19 +1,5 @@
 package com.hao.app.manager.controller;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.hao.app.commons.entity.Page;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.JsonResultAjax;
@@ -23,12 +9,20 @@ import com.hao.app.pojo.SysMember;
 import com.hao.app.pojo.SysRole;
 import com.hao.app.service.SysMemeberService;
 import com.hao.app.service.SysRoleService;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class SysMemberController extends BaseController {
 	
-	private Logger logger = LoggerFactory.getLogger(SysMemberController.class);
-
 	@Autowired
 	private SysMemeberService sysMemeberService;
 
