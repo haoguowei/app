@@ -9,11 +9,7 @@
         <module name="app-commons" />
         <module name="app-dao" />
         <module name="app-manager" />
-        <module name="app-rpc-api" />
-        <module name="app-rpc-server" />
         <module name="app-service" />
-        <module name="app-web" />
-        <module name="app-worker" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

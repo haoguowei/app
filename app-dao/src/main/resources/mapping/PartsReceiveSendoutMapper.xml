@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hao.app.dao.PartsReceiveSendoutMapper" >
+
+  <resultMap id="BaseResultMap" type="com.hao.app.pojo.PartsReceiveSendout" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="pro_no" property="proNo" jdbcType="VARCHAR" />
+    <result column="parts_no" property="partsNo" jdbcType="VARCHAR" />
+    <result column="handling_man" property="handlingMan" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="DOUBLE" />
+    <result column="process_man" property="processMan" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, contract_no, pro_no, parts_no, handling_man, date, TYPE, num, process_man, times, 
+    remark, user_name, user_id, create_time, update_time
+  </sql>
+
+  <insert id="insert" parameterType="com.hao.app.pojo.PartsReceiveSendout" >
+    insert into tb_parts_receive_sendout
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contractNo != null" >
+        contract_no,
+      </if>
+      <if test="proNo != null" >
+        pro_no,
+      </if>
+      <if test="partsNo != null" >
+        parts_no,
+      </if>
+      <if test="handlingMan != null" >
+        handling_man,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="processMan != null" >
+        process_man,
+      </if>
+      <if test="times != null" >
+        times,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null" >
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsNo != null" >
+        #{partsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="handlingMan != null" >
+        #{handlingMan,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="processMan != null" >
+        #{processMan,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

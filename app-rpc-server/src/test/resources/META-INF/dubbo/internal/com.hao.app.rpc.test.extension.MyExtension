@@ -1,3 +1,0 @@
-default=com.hao.app.rpc.test.extension.DefaultMyExtensionImpl
-demo=com.hao.app.rpc.test.extension.DemoMyExtensionImpl
-adaptive=com.hao.app.rpc.test.extension.MyExtensionAdaptive

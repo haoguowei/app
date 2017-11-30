@@ -1,2 +1,0 @@
-myWrapper=com.hao.app.rpc.test.wrap.MyServiceWrapper
-myservice=com.hao.app.rpc.test.wrap.DefaultMyServiceImpl
