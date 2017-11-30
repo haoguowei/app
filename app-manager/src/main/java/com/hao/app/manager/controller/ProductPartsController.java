@@ -1,5 +1,8 @@
 package com.hao.app.manager.controller;
 
+import com.hao.app.service.ProductPartsService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,5 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class ProductPartsController extends BaseController{
+
+    @Autowired
+    private ProductPartsService productPartsService;
 
 }
