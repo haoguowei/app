@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.app.dao.YYCostDOMapper">
+
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.YYCostDO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="enter_date" jdbcType="DATE" property="enterDate"/>
+        <result column="license" jdbcType="VARCHAR" property="license"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="start_mileage" jdbcType="INTEGER" property="startMileage"/>
+        <result column="end_mileage" jdbcType="INTEGER" property="endMileage"/>
+        <result column="workload" jdbcType="INTEGER" property="workload"/>
+        <result column="fuel" jdbcType="INTEGER" property="fuel"/>
+        <result column="fuel_amount" jdbcType="DECIMAL" property="fuelAmount"/>
+        <result column="baoyang_amount" jdbcType="DECIMAL" property="baoyangAmount"/>
+        <result column="fix_amount" jdbcType="DECIMAL" property="fixAmount"/>
+        <result column="fix_factory" jdbcType="VARCHAR" property="fixFactory"/>
+        <result column="shigu_times" jdbcType="INTEGER" property="shiguTimes"/>
+        <result column="shigu_amount" jdbcType="DECIMAL" property="shiguAmount"/>
+        <result column="shigu_out_amount" jdbcType="DECIMAL" property="shiguOutAmount"/>
+        <result column="baoxian_amount" jdbcType="DECIMAL" property="baoxianAmount"/>
+        <result column="year_check_amount" jdbcType="DECIMAL" property="yearCheckAmount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="creater" jdbcType="VARCHAR" property="creater"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, enter_date, license, status, projects, start_mileage, end_mileage, workload,
+        fuel, fuel_amount, baoyang_amount, fix_amount, fix_factory, shigu_times, shigu_amount,
+        shigu_out_amount, baoxian_amount, year_check_amount, remark, creater, create_time,
+        update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from yy_cost
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from yy_cost
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.hao.app.pojo.YYCostDO">
+        insert into yy_cost (id, enter_date, license,
+        status, projects, start_mileage,
+        end_mileage, workload, fuel,
+        fuel_amount, baoyang_amount, fix_amount,
+        fix_factory, shigu_times, shigu_amount,
+        shigu_out_amount, baoxian_amount, year_check_amount,
+        remark, creater, create_time,
+        update_time)
+        values (#{id,jdbcType=INTEGER}, #{enterDate,jdbcType=DATE}, #{license,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER}, #{projects,jdbcType=INTEGER}, #{startMileage,jdbcType=INTEGER},
+        #{endMileage,jdbcType=INTEGER}, #{workload,jdbcType=INTEGER}, #{fuel,jdbcType=INTEGER},
+        #{fuelAmount,jdbcType=DECIMAL}, #{baoyangAmount,jdbcType=DECIMAL}, #{fixAmount,jdbcType=DECIMAL},
+        #{fixFactory,jdbcType=VARCHAR}, #{shiguTimes,jdbcType=INTEGER}, #{shiguAmount,jdbcType=DECIMAL},
+        #{shiguOutAmount,jdbcType=DECIMAL}, #{baoxianAmount,jdbcType=DECIMAL}, #{yearCheckAmount,jdbcType=DECIMAL},
+        #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hao.app.pojo.YYCostDO">
+        insert into yy_cost
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="enterDate != null">
+                enter_date,
+            </if>
+            <if test="license != null">
+                license,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="projects != null">
+                projects,
+            </if>
+            <if test="startMileage != null">
+                start_mileage,
+            </if>
+            <if test="endMileage != null">
+                end_mileage,
+            </if>
+            <if test="workload != null">
+                workload,
+            </if>
+            <if test="fuel != null">
+                fuel,
+            </if>
+            <if test="fuelAmount != null">
+                fuel_amount,
+            </if>
+            <if test="baoyangAmount != null">
+                baoyang_amount,
+            </if>
+            <if test="fixAmount != null">
+                fix_amount,
+            </if>
+            <if test="fixFactory != null">
+                fix_factory,
+            </if>
+            <if test="shiguTimes != null">
+                shigu_times,
+            </if>
+            <if test="shiguAmount != null">
+                shigu_amount,
+            </if>
+            <if test="shiguOutAmount != null">
+                shigu_out_amount,
+            </if>
+            <if test="baoxianAmount != null">
+                baoxian_amount,
+            </if>
+            <if test="yearCheckAmount != null">
+                year_check_amount,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="enterDate != null">
+                #{enterDate,jdbcType=DATE},
+            </if>
+            <if test="license != null">
+                #{license,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="projects != null">
+                #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="startMileage != null">
+                #{startMileage,jdbcType=INTEGER},
+            </if>
+            <if test="endMileage != null">
+                #{endMileage,jdbcType=INTEGER},
+            </if>
+            <if test="workload != null">
+                #{workload,jdbcType=INTEGER},
+            </if>
+            <if test="fuel != null">
+                #{fuel,jdbcType=INTEGER},
+            </if>
+            <if test="fuelAmount != null">
+                #{fuelAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="baoyangAmount != null">
+                #{baoyangAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="fixAmount != null">
+                #{fixAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="fixFactory != null">
+                #{fixFactory,jdbcType=VARCHAR},
+            </if>
+            <if test="shiguTimes != null">
+                #{shiguTimes,jdbcType=INTEGER},
+            </if>
+            <if test="shiguAmount != null">
+                #{shiguAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="shiguOutAmount != null">
+                #{shiguOutAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="baoxianAmount != null">
+                #{baoxianAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="yearCheckAmount != null">
+                #{yearCheckAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hao.app.pojo.YYCostDO">
+        update yy_cost
+        <set>
+            <if test="enterDate != null">
+                enter_date = #{enterDate,jdbcType=DATE},
+            </if>
+            <if test="license != null">
+                license = #{license,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="projects != null">
+                projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="startMileage != null">
+                start_mileage = #{startMileage,jdbcType=INTEGER},
+            </if>
+            <if test="endMileage != null">
+                end_mileage = #{endMileage,jdbcType=INTEGER},
+            </if>
+            <if test="workload != null">
+                workload = #{workload,jdbcType=INTEGER},
+            </if>
+            <if test="fuel != null">
+                fuel = #{fuel,jdbcType=INTEGER},
+            </if>
+            <if test="fuelAmount != null">
+                fuel_amount = #{fuelAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="baoyangAmount != null">
+                baoyang_amount = #{baoyangAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="fixAmount != null">
+                fix_amount = #{fixAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="fixFactory != null">
+                fix_factory = #{fixFactory,jdbcType=VARCHAR},
+            </if>
+            <if test="shiguTimes != null">
+                shigu_times = #{shiguTimes,jdbcType=INTEGER},
+            </if>
+            <if test="shiguAmount != null">
+                shigu_amount = #{shiguAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="shiguOutAmount != null">
+                shigu_out_amount = #{shiguOutAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="baoxianAmount != null">
+                baoxian_amount = #{baoxianAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="yearCheckAmount != null">
+                year_check_amount = #{yearCheckAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hao.app.pojo.YYCostDO">
+        update yy_cost
+        set enter_date = #{enterDate,jdbcType=DATE},
+        license = #{license,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER},
+        projects = #{projects,jdbcType=INTEGER},
+        start_mileage = #{startMileage,jdbcType=INTEGER},
+        end_mileage = #{endMileage,jdbcType=INTEGER},
+        workload = #{workload,jdbcType=INTEGER},
+        fuel = #{fuel,jdbcType=INTEGER},
+        fuel_amount = #{fuelAmount,jdbcType=DECIMAL},
+        baoyang_amount = #{baoyangAmount,jdbcType=DECIMAL},
+        fix_amount = #{fixAmount,jdbcType=DECIMAL},
+        fix_factory = #{fixFactory,jdbcType=VARCHAR},
+        shigu_times = #{shiguTimes,jdbcType=INTEGER},
+        shigu_amount = #{shiguAmount,jdbcType=DECIMAL},
+        shigu_out_amount = #{shiguOutAmount,jdbcType=DECIMAL},
+        baoxian_amount = #{baoxianAmount,jdbcType=DECIMAL},
+        year_check_amount = #{yearCheckAmount,jdbcType=DECIMAL},
+        remark = #{remark,jdbcType=VARCHAR},
+        creater = #{creater,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

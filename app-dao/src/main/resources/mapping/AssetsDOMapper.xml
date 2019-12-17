@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.app.dao.AssetsDOMapper">
+
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.AssetsDO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="number" jdbcType="VARCHAR" property="number"/>
+        <result column="license" jdbcType="VARCHAR" property="license"/>
+        <result column="brand" jdbcType="VARCHAR" property="brand"/>
+        <result column="car_type" jdbcType="VARCHAR" property="carType"/>
+        <result column="buy_time" jdbcType="DATE" property="buyTime"/>
+        <result column="in_out" jdbcType="VARCHAR" property="inOut"/>
+        <result column="quantity" jdbcType="INTEGER" property="quantity"/>
+        <result column="quo_quantity" jdbcType="INTEGER" property="quoQuantity"/>
+        <result column="owner" jdbcType="INTEGER" property="owner"/>
+        <result column="storage_location" jdbcType="VARCHAR" property="storageLocation"/>
+        <result column="engine_number" jdbcType="VARCHAR" property="engineNumber"/>
+        <result column="engine_number_type" jdbcType="INTEGER" property="engineNumberType"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="staging" jdbcType="INTEGER" property="staging"/>
+        <result column="pur_tax" jdbcType="DECIMAL" property="purTax"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="creater" jdbcType="VARCHAR" property="creater"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, type, name, number, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
+        owner, storage_location, engine_number, engine_number_type, price, staging, pur_tax,
+        remark, creater, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from assets
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from assets
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.hao.app.pojo.AssetsDO">
+        insert into assets (id, type, name,
+        number, license, brand,
+        car_type, buy_time, in_out,
+        quantity, quo_quantity, owner,
+        storage_location, engine_number, engine_number_type,
+        price, staging, pur_tax,
+        remark, creater, create_time,
+        update_time)
+        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{number,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},
+        #{carType,jdbcType=VARCHAR}, #{buyTime,jdbcType=DATE}, #{inOut,jdbcType=VARCHAR},
+        #{quantity,jdbcType=INTEGER}, #{quoQuantity,jdbcType=INTEGER}, #{owner,jdbcType=INTEGER},
+        #{storageLocation,jdbcType=VARCHAR}, #{engineNumber,jdbcType=VARCHAR}, #{engineNumberType,jdbcType=INTEGER},
+        #{price,jdbcType=DECIMAL}, #{staging,jdbcType=INTEGER}, #{purTax,jdbcType=DECIMAL},
+        #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hao.app.pojo.AssetsDO">
+        insert into assets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="license != null">
+                license,
+            </if>
+            <if test="brand != null">
+                brand,
+            </if>
+            <if test="carType != null">
+                car_type,
+            </if>
+            <if test="buyTime != null">
+                buy_time,
+            </if>
+            <if test="inOut != null">
+                in_out,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="quoQuantity != null">
+                quo_quantity,
+            </if>
+            <if test="owner != null">
+                owner,
+            </if>
+            <if test="storageLocation != null">
+                storage_location,
+            </if>
+            <if test="engineNumber != null">
+                engine_number,
+            </if>
+            <if test="engineNumberType != null">
+                engine_number_type,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="staging != null">
+                staging,
+            </if>
+            <if test="purTax != null">
+                pur_tax,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="license != null">
+                #{license,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null">
+                #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null">
+                #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="buyTime != null">
+                #{buyTime,jdbcType=DATE},
+            </if>
+            <if test="inOut != null">
+                #{inOut,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="quoQuantity != null">
+                #{quoQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="owner != null">
+                #{owner,jdbcType=INTEGER},
+            </if>
+            <if test="storageLocation != null">
+                #{storageLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="engineNumber != null">
+                #{engineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="engineNumberType != null">
+                #{engineNumberType,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="staging != null">
+                #{staging,jdbcType=INTEGER},
+            </if>
+            <if test="purTax != null">
+                #{purTax,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hao.app.pojo.AssetsDO">
+        update assets
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="license != null">
+                license = #{license,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null">
+                brand = #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="buyTime != null">
+                buy_time = #{buyTime,jdbcType=DATE},
+            </if>
+            <if test="inOut != null">
+                in_out = #{inOut,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="quoQuantity != null">
+                quo_quantity = #{quoQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="owner != null">
+                owner = #{owner,jdbcType=INTEGER},
+            </if>
+            <if test="storageLocation != null">
+                storage_location = #{storageLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="engineNumber != null">
+                engine_number = #{engineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="engineNumberType != null">
+                engine_number_type = #{engineNumberType,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="staging != null">
+                staging = #{staging,jdbcType=INTEGER},
+            </if>
+            <if test="purTax != null">
+                pur_tax = #{purTax,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hao.app.pojo.AssetsDO">
+        update assets
+        set type = #{type,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        number = #{number,jdbcType=VARCHAR},
+        license = #{license,jdbcType=VARCHAR},
+        brand = #{brand,jdbcType=VARCHAR},
+        car_type = #{carType,jdbcType=VARCHAR},
+        buy_time = #{buyTime,jdbcType=DATE},
+        in_out = #{inOut,jdbcType=VARCHAR},
+        quantity = #{quantity,jdbcType=INTEGER},
+        quo_quantity = #{quoQuantity,jdbcType=INTEGER},
+        owner = #{owner,jdbcType=INTEGER},
+        storage_location = #{storageLocation,jdbcType=VARCHAR},
+        engine_number = #{engineNumber,jdbcType=VARCHAR},
+        engine_number_type = #{engineNumberType,jdbcType=INTEGER},
+        price = #{price,jdbcType=DECIMAL},
+        staging = #{staging,jdbcType=INTEGER},
+        pur_tax = #{purTax,jdbcType=DECIMAL},
+        remark = #{remark,jdbcType=VARCHAR},
+        creater = #{creater,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
