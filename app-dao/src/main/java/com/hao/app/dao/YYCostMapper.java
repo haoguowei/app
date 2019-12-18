@@ -3,7 +3,7 @@ package com.hao.app.dao;
 
 import com.hao.app.pojo.YYCostDO;
 
-public interface YYCostDOMapper {
+public interface YYCostMapper {
 
     int deleteByPrimaryKey(Integer id);
 

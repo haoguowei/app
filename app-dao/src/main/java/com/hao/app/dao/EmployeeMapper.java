@@ -3,7 +3,7 @@ package com.hao.app.dao;
 
 import com.hao.app.pojo.EmployeeDO;
 
-public interface EmployeeDOMapper {
+public interface EmployeeMapper {
 
     int deleteByPrimaryKey(Integer id);
 

@@ -1,12 +1,14 @@
 package com.hao.app.manager.controller;
 
 import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.service.ProjectsService;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,6 +18,8 @@ public class ProjectsController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(ProjectsController.class);
 
+    @Resource
+    private ProjectsService projectsService;
 
     @RequestMapping("/initProjects.do")
     public String initProjects(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -2,7 +2,7 @@ package com.hao.app.dao;
 
 import com.hao.app.pojo.FinanceDO;
 
-public interface FinanceDOMapper {
+public interface FinanceMapper {
 
     int deleteByPrimaryKey(Integer id);
 

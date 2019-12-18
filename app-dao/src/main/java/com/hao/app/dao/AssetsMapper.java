@@ -3,7 +3,7 @@ package com.hao.app.dao;
 
 import com.hao.app.pojo.AssetsDO;
 
-public interface AssetsDOMapper {
+public interface AssetsMapper {
 
     int deleteByPrimaryKey(Integer id);
 
