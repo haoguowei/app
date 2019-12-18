@@ -9,11 +9,8 @@ import java.util.Date;
 
 @Data
 @ToString
-public class ProjectsDO implements Serializable {
-
+public class AreaDO implements Serializable {
     private Integer id;
-
-    private Integer areaId;
 
     private String name;
 
@@ -24,4 +21,5 @@ public class ProjectsDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
 }
