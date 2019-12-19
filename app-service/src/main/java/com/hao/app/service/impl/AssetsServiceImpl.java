@@ -8,7 +8,6 @@ import com.hao.app.service.AssetsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class AssetsServiceImpl implements AssetsService {
@@ -16,5 +15,24 @@ public class AssetsServiceImpl implements AssetsService {
     @Resource
     private AssetsMapper assetsMapper;
 
-    
+
+    @Override
+    public JsonResult<AssetsDO> searchAssets() {
+        return null;
+    }
+
+    @Override
+    public AssetsDO getById(int id) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum insert(AssetsDO assets) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum update(AssetsDO assets) {
+        return null;
+    }
 }

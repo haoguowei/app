@@ -1,9 +1,6 @@
 package com.hao.app.manager.controller;
 
-import com.hao.app.commons.entity.result.JsonResult;
-import com.hao.app.commons.enums.ResultCodeEnum;
-
-import org.apache.commons.lang.math.NumberUtils;
+import com.hao.app.service.YYCostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 
 @Controller
@@ -33,17 +29,17 @@ public class YYCostController extends BaseController {
 
     @RequestMapping("/searchYYCost.do")
     public void searchYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
+
     }
 
     @RequestMapping("/initYYCostEdit.do")
     public String initYYCostEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
+
         return "jsp/cost/initYYCostEdit";
     }
 
     @RequestMapping("/saveYYCost.do")
     public String saveYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+        return successResult(request, "区域管理", "initArea.do");
     }
 }

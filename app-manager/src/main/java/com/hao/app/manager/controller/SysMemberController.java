@@ -1,19 +1,5 @@
 package com.hao.app.manager.controller;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.hao.app.commons.entity.Page;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.JsonResultAjax;
@@ -23,10 +9,22 @@ import com.hao.app.pojo.SysMember;
 import com.hao.app.pojo.SysRole;
 import com.hao.app.service.SysMemeberService;
 import com.hao.app.service.SysRoleService;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class SysMemberController extends BaseController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(SysMemberController.class);
 
 	@Autowired
@@ -85,7 +83,7 @@ public class SysMemberController extends BaseController {
 		member.setRoleId(NumberUtils.toInt(request.getParameter("roleId")));
 
 		String pwd = request.getParameter("pwd");
-		if(StringUtils.isNotBlank(pwd)){
+		if (StringUtils.isNotBlank(pwd)) {
 			member.setPwd(Md5Util.genMD5Str(pwd));
 		}
 
@@ -95,7 +93,7 @@ public class SysMemberController extends BaseController {
 		} else {
 			resultCode = sysMemeberService.updateMember(member);
 		}
-		
+
 		if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
 			sysLogsService.writeLog(getCurrentUserName(request), "新增或修改系统用户:" + member.toString());
 			return successResult(request, "用户管理", "initMemberManager.do");
@@ -109,7 +107,7 @@ public class SysMemberController extends BaseController {
 		int id = NumberUtils.toInt(request.getParameter("hideId"));
 		String oldpwd = request.getParameter("oldpwd");
 		String pwd = request.getParameter("pwd");
-		
+
 		SysMember member = sysMemeberService.queryByPrimaryKey(id);
 
 		String oldpwdMd5 = Md5Util.genMD5Str(oldpwd);
@@ -118,24 +116,24 @@ public class SysMemberController extends BaseController {
 		if (member != null && !member.getPwd().equals(oldpwdMd5)) {
 			return failResult(request, ResultCodeEnum.FAIL_OLDPWD);
 		}
-		
+
 		if (member != null && member.getPwd().equals(oldpwdMd5)) {
 			member.setPwd(pwdMd5);
 			sysMemeberService.updateMember(member);
 			sysLogsService.writeLog(getCurrentUserName(request), "修改用户密码:" + member.toString());
 			return successResult(request, "用户管理", "initMemberManager.do");
 		}
-		
+
 		return "WEB-INF/error/fail";
 	}
-	
+
 	@RequestMapping("/saveMemberImgs.do")
 	public String saveMemberImgs(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = NumberUtils.toInt(request.getParameter("id"));
 		String imgs = request.getParameter("imgs");
-		
+
 		try {
-			if(id > 0 && StringUtils.isNotBlank(imgs)){
+			if (id > 0 && StringUtils.isNotBlank(imgs)) {
 				sysMemeberService.updateMemberImgs(id, imgs);
 				sysLogsService.writeLog(getCurrentUserName(request), "修改用户头像:id=" + id + ",imgs=" + imgs);
 				return successResult(request, "用户管理", "initMemberManager.do");
@@ -143,7 +141,7 @@ public class SysMemberController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "WEB-INF/error/fail";
 	}
 
@@ -151,7 +149,7 @@ public class SysMemberController extends BaseController {
 	public void initEditMemberValid(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = NumberUtils.toInt(request.getParameter("id"));
 		int valid = NumberUtils.toInt(request.getParameter("value"));
-		
+
 		boolean result = sysMemeberService.updateMemberValid(id, valid);
 		writeResponse(response, new JsonResultAjax(result));
 	}

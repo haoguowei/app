@@ -8,7 +8,6 @@ import com.hao.app.service.FinanceService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class FinanceServiceImpl implements FinanceService {
@@ -16,5 +15,24 @@ public class FinanceServiceImpl implements FinanceService {
     @Resource
     private FinanceMapper financeMapper;
 
-    
+
+    @Override
+    public JsonResult<FinanceDO> searchFinance() {
+        return null;
+    }
+
+    @Override
+    public FinanceDO getById(int id) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum insert(FinanceDO finance) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum update(FinanceDO finance) {
+        return null;
+    }
 }

@@ -8,7 +8,6 @@ import com.hao.app.service.YYCostService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class YYCostServiceImpl implements YYCostService {
@@ -16,5 +15,24 @@ public class YYCostServiceImpl implements YYCostService {
     @Resource
     private YYCostMapper yYCostMapper;
 
-    
+
+    @Override
+    public JsonResult<YYCostDO> searchYYCost() {
+        return null;
+    }
+
+    @Override
+    public YYCostDO getById(int id) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum insert(YYCostDO cost) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum update(YYCostDO cost) {
+        return null;
+    }
 }

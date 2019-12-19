@@ -1,9 +1,6 @@
 package com.hao.app.manager.controller;
 
-import com.hao.app.commons.entity.result.JsonResult;
-import com.hao.app.commons.enums.ResultCodeEnum;
-
-import org.apache.commons.lang.math.NumberUtils;
+import com.hao.app.service.FinanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 
 @Controller
@@ -33,17 +29,17 @@ public class FinanceController extends BaseController {
 
     @RequestMapping("/searchFinance.do")
     public void searchFinance(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
+
     }
 
     @RequestMapping("/initFinanceEdit.do")
     public String initFinanceEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       
+
         return "jsp/finance/initFinanceEdit";
     }
 
     @RequestMapping("/saveFinance.do")
     public String saveFinance(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+        return successResult(request, "区域管理", "initArea.do");
     }
 }

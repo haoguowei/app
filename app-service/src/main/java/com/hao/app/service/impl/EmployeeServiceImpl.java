@@ -8,7 +8,6 @@ import com.hao.app.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -16,5 +15,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     private EmployeeMapper employeeMapper;
 
-    
+
+    @Override
+    public JsonResult<EmployeeDO> searchEmployee() {
+        return null;
+    }
+
+    @Override
+    public EmployeeDO getById(int id) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum insert(EmployeeDO employee) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum update(EmployeeDO employee) {
+        return null;
+    }
 }
