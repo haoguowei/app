@@ -5,15 +5,9 @@ import com.hao.app.pojo.EmployeeDO;
 
 public interface EmployeeMapper {
 
-    int deleteByPrimaryKey(Integer id);
-
     int insert(EmployeeDO record);
-
-    int insertSelective(EmployeeDO record);
 
     EmployeeDO selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(EmployeeDO record);
-
-    int updateByPrimaryKey(EmployeeDO record);
+    int update(EmployeeDO record);
 }
