@@ -22,7 +22,7 @@ public class FinanceController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(FinanceController.class);
 
     @Resource
-    private FinanceService FinanceService;
+    private FinanceService financeService;
 
 
     @RequestMapping("/initFinance.do")
