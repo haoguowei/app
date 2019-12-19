@@ -25,7 +25,7 @@
 							+'</td>'
 							+'<td align="right">'
 								+'<img src="imgs/person.ico" style="margin-right:8px;"/>'
-								+'欢迎登录，${CurrentLoginUser.showName}(${CurrentLoginUser.name})'
+								+'${CurrentLoginUser.showName}(${CurrentLoginUser.name})'
 								+'<a href="quitSystem.do" title="退出系统" style="text-decoration: none;color: red;margin:0 30px 0 30px;"><b>退出</b> </a>'
 							+'</td>'
 						+'</tr>'
