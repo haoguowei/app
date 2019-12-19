@@ -14,5 +14,5 @@ public interface ProjectsMapper {
 
     int update(ProjectsDO record);
 
-    List<ProjectsDO> searchProjects(@Param("areaId") int areaId);
+    List<ProjectsDO> searchProjects(@Param("areaId") Integer areaId);
 }

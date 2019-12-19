@@ -31,7 +31,7 @@
         				<select id="areaId" name="areaId">
         					<option value="0">请选择...
         					<c:forEach items="${areaList }" var="area">
-        						<option <c:if test="${area.id == member.areaId }">selected="selected"</c:if>  value="${area.id}">${area.name}
+        						<option <c:if test="${area.id == itemObj.areaId }">selected="selected"</c:if>  value="${area.id}">${area.name}
         					</c:forEach>
         				</select>
         			</td>

@@ -38,8 +38,7 @@ public class ProjectsController extends BaseController {
 
     @RequestMapping("/searchProjects.do")
     public void searchArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int areaId = NumberUtils.toInt(request.getParameter("areaId"));
-        JsonResult<ProjectsDO> result = projectsService.search(areaId);
+        JsonResult<ProjectsDO> result = projectsService.search(null);
         writeResponse(response, result);
     }
 

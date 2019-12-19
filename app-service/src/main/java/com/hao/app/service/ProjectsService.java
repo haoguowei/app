@@ -12,5 +12,5 @@ public interface ProjectsService {
 
     ProjectsDO getById(int id);
 
-    JsonResult<ProjectsDO> search(int areaId);
+    JsonResult<ProjectsDO> search(Integer areaId);
 }

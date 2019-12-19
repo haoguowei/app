@@ -42,7 +42,7 @@ public class ProjectsServiceImpl implements ProjectsService {
     }
 
     @Override
-    public JsonResult<ProjectsDO> search(int areaId) {
+    public JsonResult<ProjectsDO> search(Integer areaId) {
         List<ProjectsDO> list = projectsMapper.searchProjects(areaId);
         return new JsonResult<>(list == null ? 0 : list.size(), list);
     }
