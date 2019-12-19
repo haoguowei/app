@@ -26,45 +26,23 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+    
     <sql id="Base_Column_List">
         id, type, name, number, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
         owner, storage_location, engine_number, engine_number_type, price, staging, pur_tax,
         remark, creater, create_time, update_time
     </sql>
+    
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from assets
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from assets
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
+    
     <insert id="insert" parameterType="com.hao.app.pojo.AssetsDO">
-        insert into assets (id, type, name,
-        number, license, brand,
-        car_type, buy_time, in_out,
-        quantity, quo_quantity, owner,
-        storage_location, engine_number, engine_number_type,
-        price, staging, pur_tax,
-        remark, creater, create_time,
-        update_time)
-        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-        #{number,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},
-        #{carType,jdbcType=VARCHAR}, #{buyTime,jdbcType=DATE}, #{inOut,jdbcType=VARCHAR},
-        #{quantity,jdbcType=INTEGER}, #{quoQuantity,jdbcType=INTEGER}, #{owner,jdbcType=INTEGER},
-        #{storageLocation,jdbcType=VARCHAR}, #{engineNumber,jdbcType=VARCHAR}, #{engineNumberType,jdbcType=INTEGER},
-        #{price,jdbcType=DECIMAL}, #{staging,jdbcType=INTEGER}, #{purTax,jdbcType=DECIMAL},
-        #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-        #{updateTime,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.hao.app.pojo.AssetsDO">
         insert into assets
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="type != null">
                 type,
             </if>
@@ -130,9 +108,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
             <if test="type != null">
                 #{type,jdbcType=INTEGER},
             </if>
@@ -198,7 +173,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.hao.app.pojo.AssetsDO">
+    <update id="update" parameterType="com.hao.app.pojo.AssetsDO">
         update assets
         <set>
             <if test="type != null">
@@ -265,31 +240,6 @@
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hao.app.pojo.AssetsDO">
-        update assets
-        set type = #{type,jdbcType=INTEGER},
-        name = #{name,jdbcType=VARCHAR},
-        number = #{number,jdbcType=VARCHAR},
-        license = #{license,jdbcType=VARCHAR},
-        brand = #{brand,jdbcType=VARCHAR},
-        car_type = #{carType,jdbcType=VARCHAR},
-        buy_time = #{buyTime,jdbcType=DATE},
-        in_out = #{inOut,jdbcType=VARCHAR},
-        quantity = #{quantity,jdbcType=INTEGER},
-        quo_quantity = #{quoQuantity,jdbcType=INTEGER},
-        owner = #{owner,jdbcType=INTEGER},
-        storage_location = #{storageLocation,jdbcType=VARCHAR},
-        engine_number = #{engineNumber,jdbcType=VARCHAR},
-        engine_number_type = #{engineNumberType,jdbcType=INTEGER},
-        price = #{price,jdbcType=DECIMAL},
-        staging = #{staging,jdbcType=INTEGER},
-        pur_tax = #{purTax,jdbcType=DECIMAL},
-        remark = #{remark,jdbcType=VARCHAR},
-        creater = #{creater,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>
