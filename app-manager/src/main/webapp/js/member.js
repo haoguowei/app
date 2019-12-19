@@ -147,9 +147,6 @@ Ext.onReady(function(){
 							str += genButton("取消禁用",'updateValidUN('+val+')');
 						}
 					}
-					
-					
-					
 					return str;
 				}}
 		]

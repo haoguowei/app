@@ -21,7 +21,7 @@
 								+'<img src="imgs/logo-small.jpg" style="max-width:50px;max-height:30px;">'
 							+'</td>'
 							+'<td>'
-								+'<b>APP管理系统</b>'
+								+'<b>天津领军环保科技有限公司</b>'
 							+'</td>'
 							+'<td align="right">'
 								+'<img src="imgs/person.ico" style="margin-right:8px;"/>'
