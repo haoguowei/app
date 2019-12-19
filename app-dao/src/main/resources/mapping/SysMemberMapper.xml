@@ -21,13 +21,13 @@
   </resultMap>
  
   <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, imgs, valid, pwd, show_name, role_id, phone, email
+      select id, name, imgs, valid, pwd, show_name, role_id, phone, email,projects_id,area_id
     from sys_member
     where id = #{id,jdbcType=INTEGER}
   </select>
   
   <select id="queryMemberByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select id, name, imgs, valid, pwd, show_name, role_id, phone, email
+      select id, name, imgs, valid, pwd, show_name, role_id, phone, email,projects_id,area_id
     from sys_member
     where name = #{name,jdbcType=VARCHAR}
     limit 1
