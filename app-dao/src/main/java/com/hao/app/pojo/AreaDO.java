@@ -10,6 +10,7 @@ import java.util.Date;
 @Data
 @ToString
 public class AreaDO implements Serializable {
+
     private Integer id;
 
     private String name;
