@@ -6,6 +6,7 @@
     <id column="id" jdbcType="INTEGER" property="id"/>
     <result column="area_id" jdbcType="INTEGER" property="areaId"/>
     <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
     <result column="remark" jdbcType="VARCHAR" property="remark"/>
     <result column="creater" jdbcType="VARCHAR" property="creater"/>
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
@@ -24,10 +25,14 @@
   </select>
 
   <select id="searchProjects" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select p.name as area_name,
     <include refid="Base_Column_List"/>
-    from projects
-    where area_id = #{areaId,jdbcType=INTEGER}
+    from projects p
+    left join area a on a.id = p.area_id
+    where 1
+    <if test="areaId != null">
+      and p.area_id = #{areaId,jdbcType=INTEGER}
+    </if>
   </select>
 
   <insert id="insertSelective" parameterType="com.hao.app.pojo.ProjectsDO">

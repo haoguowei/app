@@ -17,6 +17,8 @@ public class ProjectsDO implements Serializable {
 
     private String name;
 
+    private String areaName;
+
     private String remark;
 
     private String creater;

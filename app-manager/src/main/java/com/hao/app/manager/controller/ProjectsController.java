@@ -10,14 +10,12 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,21 +52,8 @@ public class ProjectsController extends BaseController {
 
         JsonResult<AreaDO> result = areaService.searchAreas();
         List<AreaDO> areaList = result.getResultList();
-        int currentAreaId = getCurrentArea(request);
-        if (currentAreaId > 0) {
-            if (!CollectionUtils.isEmpty(areaList)) {
-                List<AreaDO> tmpList = new ArrayList<>();
-                for (AreaDO tmp : areaList) {
-                    if (tmp.getId().equals(currentAreaId)) {
-                        tmpList.add(tmp);
-                    }
-                }
-                request.setAttribute("areaList", tmpList);
-            }
+        request.setAttribute("areaList", areaList);
 
-        } else {
-            request.setAttribute("areaList", areaList);
-        }
         return "jsp/projects/initProjectsEdit";
     }
 
