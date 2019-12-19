@@ -23,16 +23,26 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public FinanceDO getById(int id) {
-        return null;
+        return financeMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public ResultCodeEnum insert(FinanceDO finance) {
-        return null;
+        int res = financeMapper.update(finance);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 
     @Override
     public ResultCodeEnum update(FinanceDO finance) {
-        return null;
+        int res = financeMapper.update(finance);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 }

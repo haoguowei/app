@@ -23,16 +23,26 @@ public class YYCostServiceImpl implements YYCostService {
 
     @Override
     public YYCostDO getById(int id) {
-        return null;
+        return yYCostMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public ResultCodeEnum insert(YYCostDO cost) {
-        return null;
+        int res = yYCostMapper.update(cost);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 
     @Override
     public ResultCodeEnum update(YYCostDO cost) {
-        return null;
+        int res = yYCostMapper.update(cost);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 }

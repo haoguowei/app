@@ -23,16 +23,26 @@ public class AssetsServiceImpl implements AssetsService {
 
     @Override
     public AssetsDO getById(int id) {
-        return null;
+        return assetsMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public ResultCodeEnum insert(AssetsDO assets) {
-        return null;
+        int res = assetsMapper.insert(assets);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 
     @Override
     public ResultCodeEnum update(AssetsDO assets) {
-        return null;
+        int res = assetsMapper.update(assets);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 }

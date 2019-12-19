@@ -23,16 +23,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDO getById(int id) {
-        return null;
+        return employeeMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public ResultCodeEnum insert(EmployeeDO employee) {
-        return null;
+        int res = employeeMapper.update(employee);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 
     @Override
     public ResultCodeEnum update(EmployeeDO employee) {
-        return null;
+        int res = employeeMapper.update(employee);
+        if (res > 0) {
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 }
