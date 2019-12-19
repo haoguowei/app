@@ -20,15 +20,6 @@ CREATE TABLE `projects` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='项目';
 
-CREATE TABLE `area` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
-  `remark` varchar(500) NOT NULL DEFAULT '' COMMENT '备注',
-  `creater` varchar(200) NOT NULL DEFAULT '' COMMENT '创建人',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='区域';
 
 CREATE TABLE `finance` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
