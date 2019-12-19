@@ -46,6 +46,9 @@ public class SysMember implements Serializable{
     private String roleName;
     //角色描述
     private String roleIntor;
+
+
+    private String projectsName;
     
     
 }

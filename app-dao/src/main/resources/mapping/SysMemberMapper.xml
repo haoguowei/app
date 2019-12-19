@@ -5,6 +5,7 @@
   <resultMap id="BaseResultMap" type="com.hao.app.pojo.SysMember">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="projectsName" jdbcType="VARCHAR" property="projectsName"/>
     <result column="imgs" jdbcType="VARCHAR" property="imgs" />
     <result column="valid" jdbcType="INTEGER" property="valid" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
@@ -56,9 +57,10 @@
   <select id="queryMembersPageList" parameterType="com.hao.app.commons.entity.param.QueryParam" resultMap="BaseResultMap">
     select
       m.id, m.name, m.imgs, m.valid, m.pwd, m.show_name, m.role_id, m.projects_id, m.phone, m.email,
-    	r.name as roleName,r.intro as roleIntor
+    r.name as roleName,r.intro as roleIntor, p.name as projectsName
     from sys_member m
     left join sys_role r on r.id = m.role_id
+    left join projects p on p.id = m.projects_id
    	order by m.valid
    	limit ${pageStart},${pageLimit}
   </select>
