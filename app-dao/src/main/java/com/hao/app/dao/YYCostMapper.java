@@ -9,11 +9,7 @@ public interface YYCostMapper {
 
     int insert(YYCostDO record);
 
-    int insertSelective(YYCostDO record);
-
     YYCostDO selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(YYCostDO record);
-
-    int updateByPrimaryKey(YYCostDO record);
+    int update(YYCostDO record);
 }
