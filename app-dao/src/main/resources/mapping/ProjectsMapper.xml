@@ -25,8 +25,7 @@
   </select>
 
   <select id="searchProjects" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select p.name as area_name,
-    <include refid="Base_Column_List"/>
+      select a.name as area_name,p.id, p.area_id, p.name, p.remark, p.creater, p.create_time, p.update_time
     from projects p
     left join area a on a.id = p.area_id
     where 1
@@ -35,7 +34,7 @@
     </if>
   </select>
 
-  <insert id="insertSelective" parameterType="com.hao.app.pojo.ProjectsDO">
+    <insert id="insert" parameterType="com.hao.app.pojo.ProjectsDO">
     insert into projects
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="areaId != null">
