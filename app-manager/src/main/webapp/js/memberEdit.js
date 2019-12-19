@@ -17,6 +17,10 @@ Ext.onReady(function(){
 			alert("请选择角色！");
 			return false;
 		}
+		if (document.getElementById("projectsId").value == 0) {
+            alert("请选择所属项目！");
+            return false;
+        }
 		if (_isNull(document.getElementById("hideId").value) || document.getElementById("hideId").value == 0) {
 			if (_isNull(document.getElementById("pwd").value)) {
 				alert("请填写登录密码！");

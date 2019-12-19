@@ -5,8 +5,10 @@ import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.JsonResultAjax;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.commons.utils.Md5Util;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.pojo.SysMember;
 import com.hao.app.pojo.SysRole;
+import com.hao.app.service.ProjectsService;
 import com.hao.app.service.SysMemeberService;
 import com.hao.app.service.SysRoleService;
 import org.apache.commons.lang.StringUtils;
@@ -33,6 +35,9 @@ public class SysMemberController extends BaseController {
 	@Autowired
 	private SysRoleService sysRoleService;
 
+	@Autowired
+	private ProjectsService projectsService;
+
 	@RequestMapping("/initMemberManager.do")
 	public String initMemberManager(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		return "jsp/member";
@@ -47,6 +52,9 @@ public class SysMemberController extends BaseController {
 
 		request.setAttribute("roles", roleList);
 		request.setAttribute("member", member);
+
+		List<ProjectsDO> result = projectsService.search(null).getResultList();
+		request.setAttribute("projectsList", result);
 
 		return "jsp/memberEdit";
 	}
@@ -81,6 +89,7 @@ public class SysMemberController extends BaseController {
 		member.setPhone(request.getParameter("phone"));
 		member.setEmail(request.getParameter("email"));
 		member.setRoleId(NumberUtils.toInt(request.getParameter("roleId")));
+		member.setProjectsId(NumberUtils.toInt(request.getParameter("projectsId")));
 
 		String pwd = request.getParameter("pwd");
 		if (StringUtils.isNotBlank(pwd)) {

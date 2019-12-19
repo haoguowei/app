@@ -42,6 +42,17 @@
 			</td>
 		</tr>
 		<tr>
+            <td>所属项目:<span style="color: red">*</span></td>
+            <td>
+                <select id="projectsId" name="projectsId">
+                    <option value="0">请选择...
+                    <c:forEach items="${projectsList }" var="its">
+                        <option <c:if test="${its.id == member.projectsId }">selected="selected"</c:if>  value="${its.id}">${its.name}
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+		<tr>
 			<td>电话:</td>
 			<td>
 				<input type="text"  class="Mytext" name="phone" id="phone" value="${member.phone }">

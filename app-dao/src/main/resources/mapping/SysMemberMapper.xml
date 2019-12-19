@@ -21,13 +21,13 @@
   </resultMap>
  
   <select id="queryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-      select id, name, imgs, valid, pwd, show_name, role_id, phone, email,projects_id,area_id
+      select id, name, imgs, valid, pwd, show_name, role_id, projects_id, phone, email,projects_id,area_id
     from sys_member
     where id = #{id,jdbcType=INTEGER}
   </select>
   
   <select id="queryMemberByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-      select id, name, imgs, valid, pwd, show_name, role_id, phone, email,projects_id,area_id
+      select id, name, imgs, valid, pwd, show_name, role_id, projects_id, phone, email,projects_id,area_id
     from sys_member
     where name = #{name,jdbcType=VARCHAR}
     limit 1
@@ -35,14 +35,15 @@
   
   <insert id="insert" parameterType="com.hao.app.pojo.SysMember">
     insert into sys_member (
-    	name, valid, pwd, show_name, role_id, phone, email)
+      name, valid, pwd, show_name, role_id, projects_id, phone, email)
     values (
     	#{name,jdbcType=VARCHAR}, 
     	#{valid,jdbcType=INTEGER}, 
       	#{pwd,jdbcType=VARCHAR}, 
       	#{showName,jdbcType=VARCHAR}, 
-      	#{roleId,jdbcType=INTEGER}, 
-      	#{phone,jdbcType=VARCHAR}, 
+      	#{roleId,jdbcType=INTEGER},
+      #{projectsId,jdbcType=INTEGER},
+      #{phone,jdbcType=VARCHAR},
       	#{email,jdbcType=VARCHAR})
   </insert>
   
@@ -53,8 +54,8 @@
   
  
   <select id="queryMembersPageList" parameterType="com.hao.app.commons.entity.param.QueryParam" resultMap="BaseResultMap">
-    select 
-    	m.id, m.name, m.imgs, m.valid, m.pwd, m.show_name, m.role_id, m.phone, m.email,
+    select
+      m.id, m.name, m.imgs, m.valid, m.pwd, m.show_name, m.role_id, m.projects_id, m.phone, m.email,
     	r.name as roleName,r.intro as roleIntor
     from sys_member m
     left join sys_role r on r.id = m.role_id
@@ -80,6 +81,9 @@
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=INTEGER},
       </if>
+        <if test="projectsId != null">
+            projects_id = #{projectsId,jdbcType=INTEGER},
+        </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
