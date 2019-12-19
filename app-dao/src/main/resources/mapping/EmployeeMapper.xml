@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hao.app.dao.EmployeeMapper">
+    
     <resultMap id="BaseResultMap" type="com.hao.app.pojo.EmployeeDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
@@ -27,47 +28,23 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+    
     <sql id="Base_Column_List">
         id, status, name, phone, id_card, projects, job_type, gender, ethnic, age, birth_date,
         entry_date, leave_date, edu_type, hukou_type, huji_address, address, emergency_contact,
         emergency_contact_phone, safe_type, remark, creater, create_time, update_time
     </sql>
+    
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from employee
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from employee
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
+    
     <insert id="insert" parameterType="com.hao.app.pojo.EmployeeDO">
-        insert into employee (id, status, name,
-        phone, id_card, projects,
-        job_type, gender, ethnic,
-        age, birth_date, entry_date,
-        leave_date, edu_type, hukou_type,
-        huji_address, address, emergency_contact,
-        emergency_contact_phone, safe_type, remark,
-        creater, create_time, update_time
-        )
-        values (#{id,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-        #{phone,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{projects,jdbcType=INTEGER},
-        #{jobType,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, #{ethnic,jdbcType=INTEGER},
-        #{age,jdbcType=INTEGER}, #{birthDate,jdbcType=DATE}, #{entryDate,jdbcType=DATE},
-        #{leaveDate,jdbcType=DATE}, #{eduType,jdbcType=INTEGER}, #{hukouType,jdbcType=INTEGER},
-        #{hujiAddress,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{emergencyContact,jdbcType=VARCHAR},
-        #{emergencyContactPhone,jdbcType=VARCHAR}, #{safeType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
-        #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="com.hao.app.pojo.EmployeeDO">
         insert into employee
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="status != null">
                 status,
             </if>
@@ -139,9 +116,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
             </if>
@@ -213,7 +187,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.hao.app.pojo.EmployeeDO">
+    
+    <update id="update" parameterType="com.hao.app.pojo.EmployeeDO">
         update employee
         <set>
             <if test="status != null">
@@ -286,33 +261,6 @@
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hao.app.pojo.EmployeeDO">
-        update employee
-        set status = #{status,jdbcType=INTEGER},
-        name = #{name,jdbcType=VARCHAR},
-        phone = #{phone,jdbcType=VARCHAR},
-        id_card = #{idCard,jdbcType=VARCHAR},
-        projects = #{projects,jdbcType=INTEGER},
-        job_type = #{jobType,jdbcType=INTEGER},
-        gender = #{gender,jdbcType=INTEGER},
-        ethnic = #{ethnic,jdbcType=INTEGER},
-        age = #{age,jdbcType=INTEGER},
-        birth_date = #{birthDate,jdbcType=DATE},
-        entry_date = #{entryDate,jdbcType=DATE},
-        leave_date = #{leaveDate,jdbcType=DATE},
-        edu_type = #{eduType,jdbcType=INTEGER},
-        hukou_type = #{hukouType,jdbcType=INTEGER},
-        huji_address = #{hujiAddress,jdbcType=VARCHAR},
-        address = #{address,jdbcType=VARCHAR},
-        emergency_contact = #{emergencyContact,jdbcType=VARCHAR},
-        emergency_contact_phone = #{emergencyContactPhone,jdbcType=VARCHAR},
-        safe_type = #{safeType,jdbcType=VARCHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        creater = #{creater,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>
