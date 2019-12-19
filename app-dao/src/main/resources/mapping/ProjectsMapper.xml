@@ -15,6 +15,7 @@
   <sql id="Base_Column_List">
     id, area_id, name, remark, creater, create_time, update_time
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -22,25 +23,16 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from projects
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+  <select id="searchProjects" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from projects
+    where area_id = #{areaId,jdbcType=INTEGER}
+  </select>
 
-  <insert id="insert" parameterType="com.hao.app.pojo.ProjectsDO">
-    insert into projects (id, area_id, name,
-    remark, creater, create_time,
-    update_time)
-    values (#{id,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-    #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-    #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
   <insert id="insertSelective" parameterType="com.hao.app.pojo.ProjectsDO">
     insert into projects
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="areaId != null">
         area_id,
       </if>
@@ -61,9 +53,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="areaId != null">
         #{areaId,jdbcType=INTEGER},
       </if>
@@ -84,7 +73,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hao.app.pojo.ProjectsDO">
+
+
+  <update id="update" parameterType="com.hao.app.pojo.ProjectsDO">
     update projects
     <set>
       <if test="areaId != null">
@@ -108,14 +99,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hao.app.pojo.ProjectsDO">
-    update projects
-    set area_id = #{areaId,jdbcType=INTEGER},
-    name = #{name,jdbcType=VARCHAR},
-    remark = #{remark,jdbcType=VARCHAR},
-    creater = #{creater,jdbcType=VARCHAR},
-    create_time = #{createTime,jdbcType=TIMESTAMP},
-    update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

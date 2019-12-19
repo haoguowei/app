@@ -55,14 +55,13 @@ public class AreaController extends BaseController {
         area.setName(request.getParameter("name"));
         area.setRemark(request.getParameter("remark"));
 
-        area.setCreater(getCurrentUserName(request));
-        area.setCreateTime(new Date());
-        area.setUpdateTime(new Date());
-
         ResultCodeEnum resultCode;
         if (id == 0) {
+            area.setCreater(getCurrentUserName(request));
+            area.setCreateTime(new Date());
             resultCode = areaService.insert(area);
         } else {
+            area.setUpdateTime(new Date());
             resultCode = areaService.update(area);
         }
 

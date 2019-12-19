@@ -2,18 +2,17 @@ package com.hao.app.dao;
 
 
 import com.hao.app.pojo.ProjectsDO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ProjectsMapper {
 
-    int deleteByPrimaryKey(Integer id);
-
     int insert(ProjectsDO record);
-
-    int insertSelective(ProjectsDO record);
 
     ProjectsDO selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(ProjectsDO record);
+    int update(ProjectsDO record);
 
-    int updateByPrimaryKey(ProjectsDO record);
+    List<ProjectsDO> searchProjects(@Param("areaId") int areaId);
 }

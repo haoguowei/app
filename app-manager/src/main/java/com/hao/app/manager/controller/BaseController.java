@@ -1,18 +1,16 @@
 package com.hao.app.manager.controller;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.google.gson.Gson;
 import com.hao.app.commons.entity.Constants;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.SysMember;
 import com.hao.app.service.SysLogsService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 
@@ -47,6 +45,13 @@ public class BaseController {
 		return user == null ? "" : user.getName();
 	}
 
+    //-1表示所有区域；
+    public int getCurrentArea(HttpServletRequest request) {
+        SysMember user = getCurrentUser(request);
+        //TODO
+        return 1;
+    }
+
 	/**
 	 *
 	 * 得到登录用户
@@ -72,7 +77,7 @@ public class BaseController {
 	 * 输出提示
 	 * 
 	 * @param request
-	 * @param msg
+     * @param resultCode
 	 */
 	public String failResult(HttpServletRequest request, ResultCodeEnum resultCode) {
 		if (resultCode != null) {
