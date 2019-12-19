@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
-<script type="text/javascript" src="<%=syspath%>/js/projectsEdit.js"></script>
+<script type="text/javascript" src="<%=syspath%>/js/employeeEdit.js"></script>
 </head>
 <body>
 <div id="div_panel_id">
