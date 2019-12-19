@@ -94,6 +94,7 @@ Ext.onReady(function(){
 	       {name:'valid'},
 	       {name:'showName'},
 	       {name:'roleName'},
+	       {name:'projectsName'},
 	       {name:'phone'},
 	       {name:'email'}
         ],
@@ -119,6 +120,7 @@ Ext.onReady(function(){
 				{width:1,header:'登录名', align:'left',sortable:false, dataIndex:'name'},
 				{width:1,header:'显示名', align:'left',sortable:false, dataIndex:'showName'},
 				{width:2,header:'所属角色', align:'left',sortable:false, dataIndex:'roleName'},
+				{width:2,header:'所属项目', align:'left',sortable:false, dataIndex:'projectsName'},
 				{width:1,header:'电话', align:'left',sortable:false, dataIndex:'phone'},
 				{width:1.5,header:'邮箱', align:'left',sortable:false, dataIndex:'email'},
 				{width:1,header:'状态', align:'left',sortable:false, dataIndex:'valid',renderer:function(val){
