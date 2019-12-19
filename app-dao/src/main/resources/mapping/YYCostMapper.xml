@@ -26,46 +26,30 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+    
     <sql id="Base_Column_List">
         id, enter_date, license, status, projects, start_mileage, end_mileage, workload,
         fuel, fuel_amount, baoyang_amount, fix_amount, fix_factory, shigu_times, shigu_amount,
         shigu_out_amount, baoxian_amount, year_check_amount, remark, creater, create_time,
         update_time
     </sql>
+    
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from yy_cost
         where id = #{id,jdbcType=INTEGER}
     </select>
+    
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from yy_cost
         where id = #{id,jdbcType=INTEGER}
     </delete>
+    
+    
     <insert id="insert" parameterType="com.hao.app.pojo.YYCostDO">
-        insert into yy_cost (id, enter_date, license,
-        status, projects, start_mileage,
-        end_mileage, workload, fuel,
-        fuel_amount, baoyang_amount, fix_amount,
-        fix_factory, shigu_times, shigu_amount,
-        shigu_out_amount, baoxian_amount, year_check_amount,
-        remark, creater, create_time,
-        update_time)
-        values (#{id,jdbcType=INTEGER}, #{enterDate,jdbcType=DATE}, #{license,jdbcType=VARCHAR},
-        #{status,jdbcType=INTEGER}, #{projects,jdbcType=INTEGER}, #{startMileage,jdbcType=INTEGER},
-        #{endMileage,jdbcType=INTEGER}, #{workload,jdbcType=INTEGER}, #{fuel,jdbcType=INTEGER},
-        #{fuelAmount,jdbcType=DECIMAL}, #{baoyangAmount,jdbcType=DECIMAL}, #{fixAmount,jdbcType=DECIMAL},
-        #{fixFactory,jdbcType=VARCHAR}, #{shiguTimes,jdbcType=INTEGER}, #{shiguAmount,jdbcType=DECIMAL},
-        #{shiguOutAmount,jdbcType=DECIMAL}, #{baoxianAmount,jdbcType=DECIMAL}, #{yearCheckAmount,jdbcType=DECIMAL},
-        #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-        #{updateTime,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.hao.app.pojo.YYCostDO">
         insert into yy_cost
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="enterDate != null">
                 enter_date,
             </if>
@@ -131,9 +115,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
             <if test="enterDate != null">
                 #{enterDate,jdbcType=DATE},
             </if>
@@ -199,7 +180,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.hao.app.pojo.YYCostDO">
+    
+    <update id="update" parameterType="com.hao.app.pojo.YYCostDO">
         update yy_cost
         <set>
             <if test="enterDate != null">
@@ -266,31 +248,6 @@
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hao.app.pojo.YYCostDO">
-        update yy_cost
-        set enter_date = #{enterDate,jdbcType=DATE},
-        license = #{license,jdbcType=VARCHAR},
-        status = #{status,jdbcType=INTEGER},
-        projects = #{projects,jdbcType=INTEGER},
-        start_mileage = #{startMileage,jdbcType=INTEGER},
-        end_mileage = #{endMileage,jdbcType=INTEGER},
-        workload = #{workload,jdbcType=INTEGER},
-        fuel = #{fuel,jdbcType=INTEGER},
-        fuel_amount = #{fuelAmount,jdbcType=DECIMAL},
-        baoyang_amount = #{baoyangAmount,jdbcType=DECIMAL},
-        fix_amount = #{fixAmount,jdbcType=DECIMAL},
-        fix_factory = #{fixFactory,jdbcType=VARCHAR},
-        shigu_times = #{shiguTimes,jdbcType=INTEGER},
-        shigu_amount = #{shiguAmount,jdbcType=DECIMAL},
-        shigu_out_amount = #{shiguOutAmount,jdbcType=DECIMAL},
-        baoxian_amount = #{baoxianAmount,jdbcType=DECIMAL},
-        year_check_amount = #{yearCheckAmount,jdbcType=DECIMAL},
-        remark = #{remark,jdbcType=VARCHAR},
-        creater = #{creater,jdbcType=VARCHAR},
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>
