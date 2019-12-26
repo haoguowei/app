@@ -40,10 +40,17 @@ public class BaseController {
     }
 
     //-1表示所有区域；
-    public int getCurrentArea(HttpServletRequest request) {
+    public Integer getCurrentArea(HttpServletRequest request) {
         SysMember user = getCurrentUser(request);
         //TODO
         return 1;
+    }
+
+    //-1表示所有项目；
+    public Integer getCurrentProjects(HttpServletRequest request) {
+        SysMember user = getCurrentUser(request);
+        //TODO
+        return 2;
     }
 
     /**

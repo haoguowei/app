@@ -40,11 +40,20 @@ public class EmployeeController extends BaseController {
         String leaveDateStart = request.getParameter("leaveDateStart");
         String leaveDateEnd = request.getParameter("leaveDateEnd");
 
+        Integer projectsId = getCurrentProjects(request);
+
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
+
         EmployeeQueryParam param = new EmployeeQueryParam(start, limit);
+        param.setProjectsId(projectsId);
         param.setName(name);
+        param.setIdCard(idCard);
+        param.setEntryDateStart(entryDateStart);
+        param.setEntryDateEnd(entryDateEnd);
+        param.setLeaveDateStart(leaveDateStart);
+        param.setLeaveDateEnd(leaveDateEnd);
 
         JsonResult<EmployeeDO> result = employeeService.searchEmployee(param);
         writeResponse(response, result);
