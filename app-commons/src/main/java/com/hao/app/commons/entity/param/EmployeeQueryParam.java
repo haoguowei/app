@@ -15,6 +15,9 @@ import java.io.Serializable;
 public class EmployeeQueryParam extends QueryParam implements Serializable {
 
 	private static final long serialVersionUID = 4737617179006429526L;
+
+	private Integer projectsId;
+
 	private String name;
 	private String idCard;
 
