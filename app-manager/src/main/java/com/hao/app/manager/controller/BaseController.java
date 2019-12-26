@@ -86,6 +86,11 @@ public class BaseController {
         return "WEB-INF/error/fail";
     }
 
+    public String failResult(HttpServletRequest request, String errMsg) {
+        request.setAttribute("msg", errMsg);
+        return "WEB-INF/error/fail";
+    }
+
     /**
      * 成功后返回提示
      *

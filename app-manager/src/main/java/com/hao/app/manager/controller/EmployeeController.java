@@ -4,7 +4,10 @@ import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.EmployeeDO;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.EmployeeService;
+import com.hao.app.service.ProjectsService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +30,9 @@ public class EmployeeController extends BaseController {
 
     @Resource
     private EmployeeService employeeService;
+
+    @Resource
+    private ProjectsService projectsService;
 
 
     @RequestMapping("/initEmployee.do")
@@ -75,14 +81,35 @@ public class EmployeeController extends BaseController {
     public String saveEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         int id = NumberUtils.toInt(request.getParameter("hideId"), 0);
 
+        int projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
+        if (projectId <= 0) {
+            return failResult(request, "参数错误：所属项目");
+        }
+        ProjectsDO projectsDO = projectsService.getById(projectId);
+        if (projectsDO == null) {
+            return failResult(request, "参数错误：所属项目");
+        }
+
+        String name = request.getParameter("name");
+        if (StringUtils.isBlank(name)) {
+            return failResult(request, "姓名为必填项");
+        }
+
+        String idCard = request.getParameter("idCard");
+        if (StringUtils.isBlank(idCard)) {
+            return failResult(request, "身份证号为必填项");
+        }
+
         EmployeeDO item = new EmployeeDO();
         item.setId(id);
-        item.setName(request.getParameter("name"));
+        item.setName(name);
         item.setGender(NumberUtils.toInt(request.getParameter("gender"), 0)); //gender
         item.setPhone(request.getParameter("phone")); //phone
-        item.setIdCard(request.getParameter("idCard")); //idCard
+        item.setIdCard(idCard); //idCard
 
-        item.setProjects(NumberUtils.toInt(request.getParameter("projects"), 0)); //projects
+        item.setProjects(projectId); //projects
+        item.setProjectsName(projectsDO.getName());
+
         item.setJobType(NumberUtils.toInt(request.getParameter("jobType"), 0)); //jobType
         item.setEthnic(NumberUtils.toInt(request.getParameter("ethnic"), 0)); //ethnic
 
