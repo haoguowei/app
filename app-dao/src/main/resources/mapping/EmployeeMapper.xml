@@ -28,20 +28,44 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-    
+
     <sql id="Base_Column_List">
         id, status, name, phone, id_card, projects, job_type, gender, ethnic, age, birth_date,
         entry_date, leave_date, edu_type, hukou_type, huji_address, address, emergency_contact,
         emergency_contact_phone, safe_type, remark, creater, create_time, update_time
     </sql>
-    
+
+
+    <select id="count" parameterType="com.hao.app.commons.entity.param.EmployeeQueryParam"
+            resultType="java.lang.Integer">
+        select count(1)
+        from employee
+        <include refid="searchSQL"/>
+    </select>
+
+    <select id="search" parameterType="com.hao.app.commons.entity.param.EmployeeQueryParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        <include refid="searchSQL"/>
+        order by name
+        limit ${pageStart},${pageLimit}
+    </select>
+
+    <sql id="searchSQL">
+        where 1
+        <if test="name != null">
+            and name like CONCAT('%',#{name},'%')
+        </if>
+    </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from employee
         where id = #{id,jdbcType=INTEGER}
     </select>
-    
+
     <insert id="insert" parameterType="com.hao.app.pojo.EmployeeDO">
         insert into employee
         <trim prefix="(" suffix=")" suffixOverrides=",">

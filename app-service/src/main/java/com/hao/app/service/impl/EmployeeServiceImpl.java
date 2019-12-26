@@ -1,5 +1,6 @@
 package com.hao.app.service.impl;
 
+import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.EmployeeMapper;
@@ -8,6 +9,7 @@ import com.hao.app.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -17,8 +19,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public JsonResult<EmployeeDO> searchEmployee() {
-        return null;
+    public JsonResult<EmployeeDO> searchEmployee(EmployeeQueryParam param) {
+        int count = employeeMapper.count(param);
+        List<EmployeeDO> list = null;
+        if (count > 0) {
+            list = employeeMapper.search(param);
+        }
+        return new JsonResult<>(list == null ? 0 : list.size(), list);
     }
 
     @Override

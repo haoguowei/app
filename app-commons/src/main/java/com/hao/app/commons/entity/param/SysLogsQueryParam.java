@@ -1,5 +1,8 @@
 package com.hao.app.commons.entity.param;
 
+import lombok.Data;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author haoguowei
  *
  */
+@Data
+@ToString
 public class SysLogsQueryParam extends QueryParam implements Serializable{
 
 	private static final long serialVersionUID = 4737617179006429526L;
@@ -18,17 +23,5 @@ public class SysLogsQueryParam extends QueryParam implements Serializable{
 
 	private String name;
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return "SysLogsQueryParam [name=" + name + ", getPageStart()=" + getPageStart() + ", getPageLimit()=" + getPageLimit() + "]";
-	}
 	
 }
