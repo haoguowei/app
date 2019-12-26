@@ -53,8 +53,26 @@ Ext.onReady(function () {
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 2, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
             {width: 2, header: '职位', align: 'left', sortable: false, dataIndex: 'jobType'},
-            {width: 2, header: '入职时间', align: 'left', sortable: false, dataIndex: 'entryDate'},
-            {width: 2, header: '离职时间', align: 'left', sortable: false, dataIndex: 'leaveDate'},
+            {
+                width: 2,
+                header: '入职时间',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'entryDate',
+                renderer: function (val, cell, record) {
+                    return new Date(val).format("Y-m-d");
+                }
+            },
+            {
+                width: 2,
+                header: '离职时间',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'leaveDate',
+                renderer: function (val, cell, record) {
+                    return new Date(val).format("Y-m-d");
+                }
+            },
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
