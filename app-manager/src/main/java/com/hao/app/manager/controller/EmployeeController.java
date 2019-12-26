@@ -34,6 +34,11 @@ public class EmployeeController extends BaseController {
     @RequestMapping("/searchEmployee.do")
     public void searchEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
+        String idCard = request.getParameter("idCard");
+        String entryDateStart = request.getParameter("entryDateStart");
+        String entryDateEnd = request.getParameter("entryDateEnd");
+        String leaveDateStart = request.getParameter("leaveDateStart");
+        String leaveDateEnd = request.getParameter("leaveDateEnd");
 
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);

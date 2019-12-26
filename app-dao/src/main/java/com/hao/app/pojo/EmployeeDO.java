@@ -16,6 +16,8 @@ public class EmployeeDO implements Serializable {
 
     private String name;
 
+    private String projectsName;
+
     private String phone;
 
     private String idCard;

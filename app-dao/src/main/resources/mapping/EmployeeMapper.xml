@@ -9,6 +9,7 @@
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
         <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
         <result column="job_type" jdbcType="INTEGER" property="jobType"/>
         <result column="gender" jdbcType="INTEGER" property="gender"/>
         <result column="ethnic" jdbcType="INTEGER" property="ethnic"/>
@@ -30,7 +31,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, status, name, phone, id_card, projects, job_type, gender, ethnic, age, birth_date,
+        id, status, name, phone, id_card, projects, projects_name, job_type, gender, ethnic, age, birth_date,
         entry_date, leave_date, edu_type, hukou_type, huji_address, address, emergency_contact,
         emergency_contact_phone, safe_type, remark, creater, create_time, update_time
     </sql>
@@ -57,6 +58,25 @@
         <if test="name != null">
             and name like CONCAT('%',#{name},'%')
         </if>
+
+        <if test="idCard != null">
+            and id_card = #{idCard}
+        </if>
+
+        <if test="entryDateStart != null">
+            <![CDATA[ and entry_date >= #{entryDateStart} ]]>
+        </if>
+        <if test="entryDateEnd != null">
+            <![CDATA[ and entry_date <= #{entryDateEnd} ]]>
+        </if>
+
+        <if test="leaveDateStart != null">
+            <![CDATA[ and leave_date >= #{leaveDateStart} ]]>
+        </if>
+        <if test="leaveDateEnd != null">
+            <![CDATA[ and leave_date <= #{leaveDateEnd} ]]>
+        </if>
+
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
