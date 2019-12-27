@@ -92,7 +92,7 @@ Ext.onReady(function () {
             region: 'north',
             title: '资产信息',
             border: false,
-            height: 70,
+            height: 80,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {
