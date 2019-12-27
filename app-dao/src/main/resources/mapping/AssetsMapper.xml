@@ -6,6 +6,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
         <result column="number" jdbcType="VARCHAR" property="number"/>
         <result column="license" jdbcType="VARCHAR" property="license"/>
         <result column="brand" jdbcType="VARCHAR" property="brand"/>
@@ -13,6 +14,7 @@
         <result column="buy_time" jdbcType="DATE" property="buyTime"/>
         <result column="in_out" jdbcType="VARCHAR" property="inOut"/>
         <result column="quantity" jdbcType="INTEGER" property="quantity"/>
+        <result column="projects" jdbcType="INTEGER" property="projects"/>
         <result column="quo_quantity" jdbcType="INTEGER" property="quoQuantity"/>
         <result column="owner" jdbcType="INTEGER" property="owner"/>
         <result column="storage_location" jdbcType="VARCHAR" property="storageLocation"/>
@@ -26,20 +28,55 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-    
+
     <sql id="Base_Column_List">
-        id, type, name, number, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
+        id, type, name, number, projects, projects_name, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
         owner, storage_location, engine_number, engine_number_type, price, staging, pur_tax,
         remark, creater, create_time, update_time
     </sql>
-    
+
+    <select id="count" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam" resultType="java.lang.Integer">
+        select count(1)
+        from assets
+        <include refid="searchSQL"/>
+    </select>
+
+    <select id="search" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from assets
+        <include refid="searchSQL"/>
+        order by name
+        limit ${pageStart},${pageLimit}
+    </select>
+
+    <sql id="searchSQL">
+        <where>
+            <if test="projectsId != null and projectsId > 0">
+                and projects = ${projectsId}
+            </if>
+
+            <if test="type != null and type > 0">
+                and type = ${type}
+            </if>
+
+            <if test="name != null">
+                and name like CONCAT('%',#{name},'%')
+            </if>
+
+            <if test="number != null">
+                and number = #{number}
+            </if>
+        </where>
+    </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from assets
         where id = #{id,jdbcType=INTEGER}
     </select>
-    
+
     <insert id="insert" parameterType="com.hao.app.pojo.AssetsDO">
         insert into assets
         <trim prefix="(" suffix=")" suffixOverrides=",">

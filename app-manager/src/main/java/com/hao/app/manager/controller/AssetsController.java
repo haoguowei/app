@@ -1,6 +1,11 @@
 package com.hao.app.manager.controller;
 
+import com.hao.app.commons.entity.param.AssetsQueryParam;
+import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.pojo.AssetsDO;
 import com.hao.app.service.AssetsService;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -28,12 +33,39 @@ public class AssetsController extends BaseController {
 
     @RequestMapping("/searchAssets.do")
     public void searchAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer projectsId = getCurrentProjects(request);
 
+        int start = NumberUtils.toInt(request.getParameter("start"));
+        int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
+
+        String name = request.getParameter("name");
+        String number = request.getParameter("number");
+        int type = NumberUtils.toInt(request.getParameter("type"));
+
+        AssetsQueryParam param = new AssetsQueryParam(start, limit);
+        param.setProjectsId(projectsId);
+        if (type > -1) {
+            param.setType(type);
+        }
+
+        if (StringUtils.isNotBlank(name)) {
+            param.setName(name);
+        }
+
+        if (StringUtils.isNotBlank(number)) {
+            param.setNumber(number);
+        }
+
+        JsonResult<AssetsDO> result = assetsService.searchAssets(param);
+        writeResponse(response, result);
     }
 
     @RequestMapping("/initAssetsEdit.do")
     public String initAssetsEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("id"));
 
+        AssetsDO assetsDO = assetsService.getById(id);
+        request.setAttribute("itemObj", assetsDO);
         return "jsp/assets/initAssetsEdit";
     }
 

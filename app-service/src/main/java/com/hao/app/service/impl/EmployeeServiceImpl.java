@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public JsonResult<EmployeeDO> searchEmployee(EmployeeQueryParam param) {
         int count = employeeMapper.count(param);
         List<EmployeeDO> list = employeeMapper.search(param);
-        return new JsonResult<>(list == null ? 0 : list.size(), list);
+        return new JsonResult<>(count, list);
     }
 
     @Override

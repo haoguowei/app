@@ -1,5 +1,6 @@
 package com.hao.app.service.impl;
 
+import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.AssetsMapper;
@@ -8,6 +9,7 @@ import com.hao.app.service.AssetsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class AssetsServiceImpl implements AssetsService {
@@ -17,8 +19,10 @@ public class AssetsServiceImpl implements AssetsService {
 
 
     @Override
-    public JsonResult<AssetsDO> searchAssets() {
-        return null;
+    public JsonResult<AssetsDO> searchAssets(AssetsQueryParam param) {
+        int count = assetsMapper.count(param);
+        List<AssetsDO> list = assetsMapper.search(param);
+        return new JsonResult<>(count, list);
     }
 
     @Override
