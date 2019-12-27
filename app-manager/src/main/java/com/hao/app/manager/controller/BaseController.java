@@ -3,19 +3,27 @@ package com.hao.app.manager.controller;
 import com.google.gson.Gson;
 import com.hao.app.commons.entity.Constants;
 import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.pojo.SysMember;
+import com.hao.app.service.ProjectsService;
 import com.hao.app.service.SysLogsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author haoguowei
  */
 public class BaseController {
+
+    @Resource
+    private ProjectsService projectsService;
 
     // 获取页面分页参数start
     protected static final String START = "start";
@@ -40,12 +48,26 @@ public class BaseController {
     }
 
     //-1表示所有项目；
-    public Integer getCurrentProjects(HttpServletRequest request) {
+    public Integer getCurrentProjectsId(HttpServletRequest request) {
         SysMember user = getCurrentUser(request);
         if (user == null) {
             return null;
         }
         return user.getProjectsId();
+    }
+
+    public List<ProjectsDO> getProjectsList(HttpServletRequest request) {
+        Integer pid = getCurrentProjectsId(request);
+        if (pid == null || pid.equals(0)) {
+            return null;
+        }
+
+        if (pid.equals(-1)) {
+            return projectsService.search(null).getResultList();
+        }
+
+        ProjectsDO projectsDO = projectsService.getById(pid);
+        return Arrays.asList(projectsDO);
     }
 
     /**

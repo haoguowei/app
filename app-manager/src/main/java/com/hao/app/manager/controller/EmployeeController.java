@@ -7,6 +7,7 @@ import com.hao.app.pojo.EmployeeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.EmployeeService;
 import com.hao.app.service.ProjectsService;
+import com.hao.app.utils.Dicts;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -50,13 +51,16 @@ public class EmployeeController extends BaseController {
         String leaveDateStart = request.getParameter("leaveDateStart");
         String leaveDateEnd = request.getParameter("leaveDateEnd");
 
-        Integer projectsId = getCurrentProjects(request);
+        Integer projectsId = getCurrentProjectsId(request);
 
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
         EmployeeQueryParam param = new EmployeeQueryParam(start, limit);
-        param.setProjectsId(projectsId);
+        if (projectsId > 0) {
+            param.setProjectsId(projectsId);
+        }
+
         if (StringUtils.isNotBlank(name)) {
             param.setName(name);
         }
@@ -87,6 +91,13 @@ public class EmployeeController extends BaseController {
         int id = NumberUtils.toInt(request.getParameter("id"));
         EmployeeDO itemObj = employeeService.getById(id);
         request.setAttribute("itemObj", itemObj);
+
+        request.setAttribute("projectsList", getProjectsList(request));
+        request.setAttribute("jobTypeMap", Dicts.employeeJobTypeMap);
+        request.setAttribute("minzuMap", Dicts.minzuMap);
+        request.setAttribute("xueliMap", Dicts.xueliMap);
+        request.setAttribute("hukouTypeMap", Dicts.hukouTypeMap);
+
         return "jsp/employee/initEmployeeEdit";
     }
 

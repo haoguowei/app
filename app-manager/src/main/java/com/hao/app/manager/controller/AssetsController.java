@@ -1,11 +1,12 @@
 package com.hao.app.manager.controller;
 
 import com.hao.app.commons.entity.param.AssetsQueryParam;
+import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.pojo.AssetsDO;
-import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.AssetsService;
-import com.hao.app.service.ProjectsService;
+import com.hao.app.service.EmployeeService;
+import com.hao.app.utils.Dicts;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -17,8 +18,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class AssetsController extends BaseController {
@@ -29,8 +30,7 @@ public class AssetsController extends BaseController {
     private AssetsService assetsService;
 
     @Resource
-    private ProjectsService projectsService;
-
+    private EmployeeService employeeService;
 
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -40,7 +40,7 @@ public class AssetsController extends BaseController {
 
     @RequestMapping("/searchAssets.do")
     public void searchAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Integer projectsId = getCurrentProjects(request);
+        Integer projectsId = getCurrentProjectsId(request);
 
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
@@ -50,7 +50,10 @@ public class AssetsController extends BaseController {
         int type = NumberUtils.toInt(request.getParameter("type"));
 
         AssetsQueryParam param = new AssetsQueryParam(start, limit);
-        param.setProjectsId(projectsId);
+        if (projectsId > 0) {
+            param.setProjectsId(projectsId);
+        }
+
         if (type > -1) {
             param.setType(type);
         }
@@ -74,12 +77,16 @@ public class AssetsController extends BaseController {
         AssetsDO assetsDO = assetsService.getById(id);
         request.setAttribute("itemObj", assetsDO);
 
-        Integer projectsId = getCurrentProjects(request);
-        ProjectsDO projectsDO = projectsService.getById(projectsId);
-        List<ProjectsDO> projectsList = new ArrayList<>();
-        projectsList.add(projectsDO);
+        request.setAttribute("projectsList", getProjectsList(request));
+        request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
 
-        request.setAttribute("projectsList", projectsList);
+        //责任人
+        EmployeeQueryParam employeeQuery = new EmployeeQueryParam();
+        employeeQuery.setProjectsId(getCurrentProjectsId(request));
+        Set<Integer> set = new HashSet<>();
+        set.add(1); //经理
+        employeeQuery.setJobTypes(set);
+        request.setAttribute("ownerList", employeeService.searchEmployee(employeeQuery).getResultList());
 
         return "jsp/assets/initAssetsEdit";
     }

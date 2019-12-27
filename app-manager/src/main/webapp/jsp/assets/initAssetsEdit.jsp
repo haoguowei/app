@@ -26,18 +26,22 @@
                     <select id="projects" name="projects">
                         <option value="0">请选择...
                             <c:forEach items="${projectsList }" var="itm">
-                        <option <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>  value="${itm.id}">${itm.name}
+                        <option
+                                <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>
+                                value="${itm.id}">${itm.name}
                             </c:forEach>
                     </select>
                 </td>
-            </tr>
+           </tr>
             <tr>
                 <td>资产类型:<span style="color: red">*</span></td>
                 <td>
                     <select id="type" name="type">
                         <option value="0">请选择...
-                            <c:forEach items="${assetsList }" var="assets">
-                        <option <c:if test="${assets.id == itemObj.type }">selected="selected"</c:if>  value="${assets.id}">${assets.name}
+                            <c:forEach items="${assetsTypeMap }" var="itm">
+                        <option
+                                <c:if test="${itm.key == itemObj.type }">selected="selected"</c:if>
+                                value="${itm.key}">${itm.value}
                             </c:forEach>
                     </select>
                 </td>
@@ -46,7 +50,7 @@
             <tr>
                 <td width="100px">资产名称:<span style="color: red">*</span></td>
                 <td>
-                    <input type="text"  class="Mytext" name="name" id="name" value="${itemObj.name }">
+                    <input type="text" class="Mytext" name="name" id="name" value="${itemObj.name }">
                 </td>
             </tr>
             <tr>

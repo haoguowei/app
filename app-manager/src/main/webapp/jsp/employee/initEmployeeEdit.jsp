@@ -24,57 +24,57 @@ pageEncoding="UTF-8"%>
     <tr>
         <td width="100px">姓名:<span style="color: red">*</span></td>
         <td>
-            <input type="text"  class="Mytext" name="name" id="name" value="${itemObj.name }">
+            <input type="text" class="Mytext" name="name" id="name" value="${itemObj.name }">
         </td>
     </tr>
-    
+
     <tr>
         <td class="Myfont">
             性别：<span style="color: red">*</span>
         </td>
         <td class="Myfont">
-            <input type="radio" name="gender" value="0" id="gender0" <c:if test="${itemObj.gender == 0 }">checked="checked"</c:if>>男
-            &nbsp;&nbsp;
-            <input type="radio" name="gender" value="1" id="gender1" <c:if test="${itemObj.gender == 1 }">checked="checked"</c:if>>女
+            <input type="radio" name="gender" value="0" id="gender0"
+                   <c:if test="${empty itemObj.gender || itemObj.gender == 0 }">checked="checked"</c:if>>男
+            <input type="radio" name="gender" value="1" id="gender1"
+                   <c:if test="${itemObj.gender == 1 }">checked="checked"</c:if>>女
         </td>
     </tr>
     <tr>
         <td width="100px">手机号:<span style="color: red">*</span></td>
         <td>
-            <input type="text"  class="Mytext" name="phone" id="phone" value="${itemObj.phone }">
+            <input type="text" class="Mytext" name="phone" id="phone" value="${itemObj.phone }">
         </td>
     </tr>
 
     <tr>
         <td width="100px">身份证号:<span style="color: red">*</span></td>
         <td>
-            <input type="text"  class="Mytext" name="idCard" id="idCard" value="${itemObj.idCard }">
+            <input type="text" class="Mytext" name="idCard" id="idCard" value="${itemObj.idCard }">
         </td>
     </tr>
     <tr>
-                <td>所属项目:<span style="color: red">*</span></td>
-                <td>
-                    <select id="projects" name="projects">
-                        <option value="0">请选择...
-                            <c:forEach items="${projectsList }" var="itm">
-                        <option <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>  value="${itm.id}">${itm.name}
-                            </c:forEach>
-                    </select>
-                </td>
-            </tr>
+        <td>所属项目:<span style="color: red">*</span></td>
+        <td>
+            <select id="projects" name="projects">
+                <option value="0">请选择...
+                    <c:forEach items="${projectsList }" var="itm">
+                <option
+                        <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>
+                        value="${itm.id}">${itm.name}
+                    </c:forEach>
+            </select>
+        </td>
+    </tr>
     <tr>
         <td>职位:<span style="color: red">*</span></td>
         <td>
             <select id="jobType" name="jobType">
                 <option value="0">请选择...
-                <option <c:if test="${1 == itemObj.jobType }">selected="selected"</c:if>  value="1">经理
-                <option <c:if test="${2 == itemObj.jobType }">selected="selected"</c:if>  value="2">主管
-                <option <c:if test="${3 == itemObj.jobType }">selected="selected"</c:if>  value="3">文员
-                <option <c:if test="${4 == itemObj.jobType }">selected="selected"</c:if>  value="4">助理
-                <option <c:if test="${5 == itemObj.jobType }">selected="selected"</c:if>  value="5">队长
-                <option <c:if test="${6 == itemObj.jobType }">selected="selected"</c:if>  value="6">司机
-                <option <c:if test="${7 == itemObj.jobType }">selected="selected"</c:if>  value="7">装卸工
-                <option <c:if test="${8 == itemObj.jobType }">selected="selected"</c:if>  value="8">保洁员
+                    <c:forEach items="${jobTypeMap }" var="itm">
+                <option
+                        <c:if test="${itm.key == itemObj.jobType }">selected="selected"</c:if>
+                        value="${itm.key}">${itm.value}
+                    </c:forEach>
             </select>
         </td>
     </tr>
@@ -82,10 +82,17 @@ pageEncoding="UTF-8"%>
     <tr>
         <td width="100px">民族:<span style="color: red">*</span></td>
         <td>
-            <input type="text"  class="Mytext" name="ethnic" id="ethnic" value="${itemObj.ethnic }">
+            <select id="ethnic" name="ethnic">
+                <option value="0">请选择...
+                    <c:forEach items="${minzuMap }" var="itm">
+                <option
+                        <c:if test="${itm.key == itemObj.ethnic }">selected="selected"</c:if>
+                        value="${itm.key}">${itm.value}
+                    </c:forEach>
+            </select>
         </td>
     </tr>
-    
+
     <tr>
         <td class="Myfont">
             出生日期：<span style="color: red">*</span>
@@ -119,11 +126,11 @@ pageEncoding="UTF-8"%>
         <td>
             <select id="eduType" name="eduType">
                 <option value="0">请选择...
-                <option <c:if test="${1 == itemObj.eduType }">selected="selected"</c:if>  value="1">小学
-                <option <c:if test="${2 == itemObj.eduType }">selected="selected"</c:if>  value="2">初中
-                <option <c:if test="${3 == itemObj.eduType }">selected="selected"</c:if>  value="3">高中
-                <option <c:if test="${4 == itemObj.eduType }">selected="selected"</c:if>  value="4">大学
-               
+                    <c:forEach items="${xueliMap }" var="itm">
+                <option
+                        <c:if test="${itm.key == itemObj.eduType }">selected="selected"</c:if>
+                        value="${itm.key}">${itm.value}
+                    </c:forEach>
             </select>
         </td>
     </tr>
@@ -134,9 +141,12 @@ pageEncoding="UTF-8"%>
         <td>
             <select id="hukouType" name="hukouType">
                 <option value="0">请选择...
-                <option <c:if test="${1 == itemObj.hukouType }">selected="selected"</c:if>  value="1">农村
-                <option <c:if test="${2 == itemObj.hukouType }">selected="selected"</c:if>  value="2">城镇
-               
+                    <c:forEach items="${hukouTypeMap }" var="itm">
+                <option
+                        <c:if test="${itm.key == itemObj.hukouType }">selected="selected"</c:if>
+                        value="${itm.key}">${itm.value}
+                    </c:forEach>
+
             </select>
         </td>
     </tr>
@@ -144,7 +154,7 @@ pageEncoding="UTF-8"%>
     <tr>
         <td>户籍地址</td>
         <td>
-            <input type="text"  class="Mytext" name="hujiAddress" id="hujiAddress" value="${itemObj.hujiAddress }">
+            <input type="text" class="Mytext" name="hujiAddress" id="hujiAddress" value="${itemObj.hujiAddress }">
         </td>
     </tr>
     <tr>
