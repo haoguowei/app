@@ -21,10 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public JsonResult<EmployeeDO> searchEmployee(EmployeeQueryParam param) {
         int count = employeeMapper.count(param);
-        List<EmployeeDO> list = null;
-        if (count > 0) {
-            list = employeeMapper.search(param);
-        }
+        List<EmployeeDO> list = employeeMapper.search(param);
         return new JsonResult<>(list == null ? 0 : list.size(), list);
     }
 

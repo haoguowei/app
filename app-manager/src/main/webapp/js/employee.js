@@ -21,7 +21,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
         gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
 
-        gridStore.load();
+        gridStore.reload();
     };
 
     this.updateF = function (id) {
@@ -135,6 +135,7 @@ Ext.onReady(function () {
                 }
             }, '->',
                 new Ext.PagingToolbar({
+                    pageSize: PAGESIZE,
                     store: gridStore,
                     style: {'border': 0},
                     displayInfo: true

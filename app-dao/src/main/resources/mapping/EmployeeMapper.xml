@@ -54,33 +54,33 @@
     </select>
 
     <sql id="searchSQL">
-        where 1
-        <if test="projectsId != null and projectsId > 0">
-            and projects = ${projectsId}
-        </if>
+        <where>
+            <if test="projectsId != null and projectsId > 0">
+                and projects = ${projectsId}
+            </if>
 
-        <if test="name != null">
-            and name like CONCAT('%',#{name},'%')
-        </if>
+            <if test="name != null">
+                and name like CONCAT('%',#{name},'%')
+            </if>
 
-        <if test="idCard != null">
-            and id_card = #{idCard}
-        </if>
+            <if test="idCard != null">
+                and id_card = #{idCard}
+            </if>
 
-        <if test="entryDateStart != null">
-            <![CDATA[ and entry_date >= #{entryDateStart} ]]>
-        </if>
-        <if test="entryDateEnd != null">
-            <![CDATA[ and entry_date <= #{entryDateEnd} ]]>
-        </if>
+            <if test="entryDateStart != null">
+                <![CDATA[ and entry_date >= #{entryDateStart} ]]>
+            </if>
+            <if test="entryDateEnd != null">
+                <![CDATA[ and entry_date <= #{entryDateEnd} ]]>
+            </if>
 
-        <if test="leaveDateStart != null">
-            <![CDATA[ and leave_date >= #{leaveDateStart} ]]>
-        </if>
-        <if test="leaveDateEnd != null">
-            <![CDATA[ and leave_date <= #{leaveDateEnd} ]]>
-        </if>
-
+            <if test="leaveDateStart != null">
+                <![CDATA[ and leave_date >= #{leaveDateStart} ]]>
+            </if>
+            <if test="leaveDateEnd != null">
+                <![CDATA[ and leave_date <= #{leaveDateEnd} ]]>
+            </if>
+        </where>
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
