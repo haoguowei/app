@@ -155,7 +155,11 @@
 
 			//生成按钮
 			function genButton(value, func) {
-				return '<input type="button" value="'+value+'" class="Mybotton" onclick="'+func+'">';
+				return '<input type="button" value="' + value + '" class="Mybotton" onclick="' + func + '">';
+			}
+
+			function getById(id) {
+				return document.getElementById(id).value;
 			}
 		</script>
 	</head>

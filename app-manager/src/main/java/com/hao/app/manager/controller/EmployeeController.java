@@ -55,15 +55,28 @@ public class EmployeeController extends BaseController {
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
-
         EmployeeQueryParam param = new EmployeeQueryParam(start, limit);
         param.setProjectsId(projectsId);
-        param.setName(name);
-        param.setIdCard(idCard);
-        param.setEntryDateStart(entryDateStart);
-        param.setEntryDateEnd(entryDateEnd);
-        param.setLeaveDateStart(leaveDateStart);
-        param.setLeaveDateEnd(leaveDateEnd);
+        if (StringUtils.isNotBlank(name)) {
+            param.setName(name);
+        }
+        if (StringUtils.isNotBlank(idCard)) {
+            param.setIdCard(idCard);
+        }
+
+        if (StringUtils.isNotBlank(entryDateStart)) {
+            param.setEntryDateStart(entryDateStart);
+        }
+        if (StringUtils.isNotBlank(entryDateEnd)) {
+            param.setEntryDateEnd(entryDateEnd);
+        }
+
+        if (StringUtils.isNotBlank(leaveDateStart)) {
+            param.setLeaveDateStart(leaveDateStart);
+        }
+        if (StringUtils.isNotBlank(leaveDateEnd)) {
+            param.setLeaveDateEnd(leaveDateEnd);
+        }
 
         JsonResult<EmployeeDO> result = employeeService.searchEmployee(param);
         writeResponse(response, result);

@@ -14,6 +14,13 @@ Ext.onReady(function () {
     //-----------------权限相关 end-----------
 
     this.searchFunc = function () {
+        gridStore.setBaseParam("name", getById("name"));
+        gridStore.setBaseParam("idCard", getById("idCard"));
+        gridStore.setBaseParam("entryDateStart", getById("entryDateStart"));
+        gridStore.setBaseParam("entryDateEnd", getById("entryDateEnd"));
+        gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
+        gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
+
         gridStore.load();
     };
 
@@ -39,7 +46,16 @@ Ext.onReady(function () {
             {name: 'jobType'},
             {name: 'idCard'},
             {name: 'remark'}
-        ]
+        ],
+        baseParams: {
+            limit: PAGESIZE,
+            name: '',
+            entryDateStart: '',
+            entryDateEnd: '',
+            leaveDateStart: '',
+            leaveDateEnd: '',
+            idCard: ''
+        }
     });
 
     var grid = new com.custom.GridPanel({
@@ -94,7 +110,18 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'border',
         items: [{
+            region: 'north',
             title: '员工管理',
+            border: false,
+            height: 170,
+            keys: {
+                key: Ext.EventObject.ENTER,
+                fn: function (btn, e) {
+                    searchFunc();
+                }
+            },
+            contentEl: 'search_div_id'
+        }, {
             region: 'center',
             frame: false,
             border: true,

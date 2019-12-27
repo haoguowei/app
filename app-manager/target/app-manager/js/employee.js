@@ -1,4 +1,4 @@
-Ext.onReady(function(){
+Ext.onReady(function () {
 
     Ext.QuickTips.init();
 
@@ -13,67 +13,130 @@ Ext.onReady(function(){
 
     //-----------------权限相关 end-----------
 
-    this.searchFunc = function() {
+    this.searchFunc = function () {
+        gridStore.setBaseParam("name", getById("name"));
+        gridStore.setBaseParam("idCard", getById("idCard"));
+        gridStore.setBaseParam("entryDateStart", getById("entryDateStart"));
+        gridStore.setBaseParam("entryDateEnd", getById("entryDateEnd"));
+        gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
+        gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
+
         gridStore.load();
     };
 
-    this.updateF = function(id) {
+    this.updateF = function (id) {
         location.href = "initEmployeeEdit.do?id=" + id;
     };
 
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
-        url : 'searchEmployee.do',
-        root : 'resultList',
+        url: 'searchEmployee.do',
+        root: 'resultList',
         remoteSort: false,
-        totalProperty:'total',
+        totalProperty: 'total',
         fields: [
-            {name:'id'},
-            {name:'name'},
-            {name:'remark'}
-        ]
+            {name: 'id'},
+            {name: 'name'},
+            {name: 'status'},
+            {name: 'projectsName'},
+            {name: 'entryDate'},
+            {name: 'leaveDate'},
+            {name: 'phone'},
+            {name: 'jobType'},
+            {name: 'idCard'},
+            {name: 'remark'}
+        ],
+        baseParams : {
+            limit : PAGESIZE,
+            name :'',
+            entryDateStart :'',
+            entryDateEnd :'',
+            leaveDateStart :'',
+            leaveDateEnd :'',
+            idCard :''
+        }
     });
 
     var grid = new com.custom.GridPanel({
-        store : gridStore,
-        region : 'center',
-        frame : false,
-        border : false,
-        autoHeight:true,
+        store: gridStore,
+        region: 'center',
+        frame: false,
+        border: false,
+        autoHeight: true,
         columns: [
-            {width:1,header:'ID', align:'center',sortable:false, dataIndex:'id'},
-            {width:2,header:'区域名称', align:'left',sortable:false, dataIndex:'name'},
-            {width:3,header:'备注', align:'left',sortable:false, dataIndex:'remark'},
-            {width:2,header:'操作', align:'center',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
+            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
+            {width: 2, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
+            {width: 2, header: '职位', align: 'left', sortable: false, dataIndex: 'jobType'},
+            {
+                width: 2,
+                header: '入职时间',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'entryDate',
+                renderer: function (val, cell, record) {
+                    return new Date(val).format("Y-m-d");
+                }
+            },
+            {
+                width: 2,
+                header: '离职时间',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'leaveDate',
+                renderer: function (val, cell, record) {
+                    return new Date(val).format("Y-m-d");
+                }
+            },
+            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {
+                width: 2,
+                header: '操作',
+                align: 'center',
+                sortable: false,
+                dataIndex: 'id',
+                renderer: function (val, cell, record) {
                     var str = '';
-                    if(urlEditValid){//权限
-                        str += genButton("修改",'updateF('+val+')');
+                    if (urlEditValid) {//权限
+                        str += genButton("修改", 'updateF(' + val + ')');
                     }
                     return str;
-                }}
+                }
+            }
         ]
     });
 
     new Ext.Viewport({
-        layout : 'border',
-        items : [{
-            title:'区域管理',
-            region : 'center',
-            frame : false,
-            border : true,
-            autoScroll : true,
-            items : [grid],
-            tbar : [{
-                text : '新增区域',
-                id:'bt_add',
-                handler : function(b,e){
-                    location.href = "initAreaEdit.do";
+        layout: 'border',
+        items: [{
+            region : 'north',
+            title: '员工管理',
+            border : false,
+            height : 170,
+            keys : {
+                key : Ext.EventObject.ENTER,
+                fn : function(btn,e){
+                    searchFunc();
                 }
-            },'->',
+            },
+            contentEl : 'search_div_id'
+        },{
+            region: 'center',
+            frame: false,
+            border: true,
+            autoScroll: true,
+            items: [grid],
+            tbar: [{
+                text: '新增员工',
+                id: 'bt_add',
+                handler: function (b, e) {
+                    location.href = "initEmployeeEdit.do";
+                }
+            }, '->',
                 new Ext.PagingToolbar({
                     store: gridStore,
-                    style : {'border' : 0},
+                    style: {'border': 0},
                     displayInfo: true
                 })]
         }]

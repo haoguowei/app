@@ -56,7 +56,7 @@
     <sql id="searchSQL">
         where 1
         <if test="projectsId != null and projectsId > 0">
-            and projects = #{projectsId}
+            and projects = ${projectsId}
         </if>
 
         <if test="name != null">
