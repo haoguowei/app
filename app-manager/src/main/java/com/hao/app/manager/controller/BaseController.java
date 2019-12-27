@@ -39,18 +39,13 @@ public class BaseController {
         return user == null ? "" : user.getName();
     }
 
-    //-1表示所有区域；
-    public Integer getCurrentArea(HttpServletRequest request) {
-        SysMember user = getCurrentUser(request);
-        //TODO
-        return 1;
-    }
-
     //-1表示所有项目；
     public Integer getCurrentProjects(HttpServletRequest request) {
         SysMember user = getCurrentUser(request);
-        //TODO
-        return 2;
+        if (user == null) {
+            return null;
+        }
+        return user.getProjectsId();
     }
 
     /**
