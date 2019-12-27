@@ -3,7 +3,9 @@ package com.hao.app.manager.controller;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.pojo.AssetsDO;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.AssetsService;
+import com.hao.app.service.ProjectsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -15,6 +17,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AssetsController extends BaseController {
@@ -23,6 +27,9 @@ public class AssetsController extends BaseController {
 
     @Resource
     private AssetsService assetsService;
+
+    @Resource
+    private ProjectsService projectsService;
 
 
     @RequestMapping("/initAssets.do")
@@ -66,11 +73,19 @@ public class AssetsController extends BaseController {
 
         AssetsDO assetsDO = assetsService.getById(id);
         request.setAttribute("itemObj", assetsDO);
+
+        Integer projectsId = getCurrentProjects(request);
+        ProjectsDO projectsDO = projectsService.getById(projectsId);
+        List<ProjectsDO> projectsList = new ArrayList<>();
+        projectsList.add(projectsDO);
+
+        request.setAttribute("projectsList", projectsList);
+
         return "jsp/assets/initAssetsEdit";
     }
 
     @RequestMapping("/saveAssets.do")
     public String saveAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        return successResult(request, "区域管理", "initArea.do");
+        return successResult(request, "资产信息", "initAssets.do");
     }
 }

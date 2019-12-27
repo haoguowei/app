@@ -16,10 +16,8 @@
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form1" action="saveProjects.do" method="post" onsubmit="return save()">
+    <form name="form" action="saveAssets.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
-             
-             
 
         <table class="Mytable">
            <tr>
