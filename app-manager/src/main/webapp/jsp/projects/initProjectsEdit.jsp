@@ -29,27 +29,30 @@
         			<td>所属区域:<span style="color: red">*</span></td>
         			<td>
         				<select id="areaId" name="areaId">
-        					<option value="0">请选择...
-        					<c:forEach items="${areaList }" var="area">
-        						<option <c:if test="${area.id == itemObj.areaId }">selected="selected"</c:if>  value="${area.id}">${area.name}
-        					</c:forEach>
-        				</select>
-        			</td>
-        		</tr>
-		<tr>
-			<td>备注</td>
-			<td>
-				<input type="text"  class="Mytext" name="remark" id="remark" value="${itemObj.remark }">
-			</td>
-		</tr>
+                            <option value="0">请选择...
+                                <c:forEach items="${areaList }" var="area">
+                            <option
+                                    <c:if test="${area.id == itemObj.areaId }">selected="selected"</c:if>
+                                    value="${area.id}">${area.name}
+                                </c:forEach>
+                        </select>
+                    </td>
+        </tr>
+        <tr>
+            <td>备注</td>
+            <td>
+                <input type="text" style="width: 600px" class="Mytext" name="remark" id="remark"
+                       value="${itemObj.remark }">
+            </td>
+        </tr>
 
-		<tr>
-			<td>&nbsp;</td>
-			<td colspan="2">
-				<input type="submit" value="确定" class="Mybotton">
-				<input type="button" value="取消" class="Mybotton" onclick="_back()">
-			</td>
-		</tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td colspan="2">
+                <input type="submit" value="确定" class="Mybotton">
+                <input type="button" value="取消" class="Mybotton" onclick="_back()">
+            </td>
+        </tr>
 	</table>
 </form>
 </div>

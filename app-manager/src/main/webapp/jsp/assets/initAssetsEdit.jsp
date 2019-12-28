@@ -99,7 +99,7 @@
             <tr>
                 <td width="100px">规格型号:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="carType" id="carType" value="${itemObj.carType }">
+                    <input type="text" class="Mytext" name="carType" id="carType" value="${itemObj.carType }">
                 </td>
             </tr>
 
@@ -107,14 +107,15 @@
             <tr>
                 <td width="100px">转入/借用:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="inOut" id="inOut" value="${itemObj.inOut }">
+                    <input type="text" style="width: 600px" class="Mytext" name="inOut" id="inOut"
+                           value="${itemObj.inOut }">
                 </td>
             </tr>
 
             <tr>
                 <td width="100px">数量:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="quantity" id="quantity" value="${itemObj.quantity }">
+                    <input type="text" class="Mytext" name="quantity" id="quantity" value="${itemObj.quantity }">
                 </td>
             </tr>
             <tr>

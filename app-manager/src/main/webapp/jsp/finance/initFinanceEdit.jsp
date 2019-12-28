@@ -62,7 +62,9 @@
                     <select id="month" name="month">
                         <option value="0">请选择...
                             <c:forEach items="${monthList }" var="month">
-                        <option <c:if test="${month == itemObj.month }">selected="selected"</c:if>  value="${month}">${month}
+                        <option
+                                <c:if test="${month == itemObj.month }">selected="selected"</c:if>
+                                value="${month}">${month}
                             </c:forEach>
                     </select>
                 </td>
@@ -71,7 +73,8 @@
             <tr>
                 <td>备注</td>
                 <td>
-                    <input type="text"  class="Mytext" name="remark" id="remark" value="${itemObj.remark }">
+                    <input type="text" style="width: 600px" class="Mytext" name="remark" id="remark"
+                           value="${itemObj.remark }">
                 </td>
             </tr>
 

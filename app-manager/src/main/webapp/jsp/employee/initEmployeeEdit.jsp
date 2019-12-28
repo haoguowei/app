@@ -187,25 +187,26 @@ pageEncoding="UTF-8"%>
     <tr>
         <td>保险类型</td>
         <td>
-            <input type="text"  class="Mytext" name="safeType" id="safeType" value="${itemObj.safeType }">
+            <input type="text" class="Mytext" name="safeType" id="safeType" value="${itemObj.safeType }">
         </td>
     </tr>
 
-    
-    <tr>
-        <td>备注</td>
-        <td>
-            <input type="text"  class="Mytext" name="remark" id="remark" value="${itemObj.remark }">
-        </td>
-    </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-        <td colspan="2">
-            <input type="submit" value="确定" class="Mybotton">
-            <input type="button" value="取消" class="Mybotton" onclick="_back()">
-        </td>
-    </tr>
+            <tr>
+                <td>备注</td>
+                <td>
+                    <input type="text" style="width: 600px" class="Mytext" name="remark" id="remark"
+                           value="${itemObj.remark }">
+                </td>
+            </tr>
+
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">
+                    <input type="submit" value="确定" class="Mybotton">
+                    <input type="button" value="取消" class="Mybotton" onclick="_back()">
+                </td>
+            </tr>
 </table>
 </form>
 </div>

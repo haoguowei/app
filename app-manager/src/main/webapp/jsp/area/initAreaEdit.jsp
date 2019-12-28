@@ -22,13 +22,14 @@
 		<tr>
 			<td width="100px">区域名称:<span style="color: red">*</span></td>
 			<td>
-				<input type="text"  class="Mytext" name="name" id="name" value="${areaDO.name }">
+				<input type="text" class="Mytext" name="name" id="name" value="${areaDO.name }">
 			</td>
 		</tr>
 		<tr>
 			<td>备注</td>
 			<td>
-				<input type="text"  class="Mytext" name="remark" id="remark" value="${areaDO.remark }">
+				<input type="text" style="width: 600px" class="Mytext" name="remark" id="remark"
+					   value="${areaDO.remark }">
 			</td>
 		</tr>
 

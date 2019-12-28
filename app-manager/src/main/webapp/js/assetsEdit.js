@@ -62,12 +62,12 @@ Ext.onReady(function () {
             document.getElementById("staging").focus();
             return false;
         }
-        if (!regexVerify('decmal4', getById("quoQuantity"))) {
+        if (!regexVerify('tingke', getById("price"))) {
             alert("单价请填写正确的金额！");
-            document.getElementById("quoQuantity").focus();
+            document.getElementById("price").focus();
             return false;
         }
-        if (!regexVerify('decmal4', getById("purTax"))) {
+        if (!regexVerify('tingke', getById("purTax"))) {
             alert("购置税请填写正确的金额！");
             document.getElementById("purTax").focus();
             return false;
