@@ -37,6 +37,7 @@ Ext.onReady(function () {
             {name: 'name'},
             {name: 'number'},
             {name: 'type'},
+            {name: 'typeStr'},
             {name: 'buyTime'}
         ],
         baseParams: {
@@ -57,7 +58,7 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
-            {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'type'},
+            {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'typeStr'},
             {
                 width: 2,
                 header: '采购时间',

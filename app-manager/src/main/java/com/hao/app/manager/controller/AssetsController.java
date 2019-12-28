@@ -34,6 +34,7 @@ public class AssetsController extends BaseController {
 
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
         return "jsp/assets/initAssets";
     }
 

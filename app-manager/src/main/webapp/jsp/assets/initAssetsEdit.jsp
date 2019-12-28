@@ -18,9 +18,10 @@
 <div id="div_panel_id">
     <form name="form" action="saveAssets.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
+        <input type="hidden" id="hideBuyTimeDiv" name="hideBuyTimeDiv" value="${itemObj.buyTime }">
 
         <table class="Mytable">
-           <tr>
+            <tr>
                 <td>所属项目:<span style="color: red">*</span></td>
                 <td>
                     <select id="projects" name="projects">
@@ -54,9 +55,9 @@
                 </td>
             </tr>
             <tr>
-                <td width="100px">资产编号:</td>
+                <td width="100px">资产编号:<span style="color: red">*</span></td>
                 <td>
-                    <input type="text"  class="Mytext" name="number" id="number" value="${itemObj.number }">
+                    <input type="text" class="Mytext" name="number" id="number" value="${itemObj.number }">
                 </td>
             </tr>
             <tr>
@@ -77,10 +78,20 @@
                     </select>
                 </td>
             </tr>
+
+            <tr>
+                <td class="Myfont">
+                    采购时间:<span style="color: red">*</span>
+                </td>
+                <td class="Myfont">
+                    <div id="buyTimeDiv"></div>
+                </td>
+            </tr>
+
             <tr>
                 <td width="100px">品牌:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="brand" id="brand" value="${itemObj.brand }">
+                    <input type="text" class="Mytext" name="brand" id="brand" value="${itemObj.brand }">
                 </td>
             </tr>
 
@@ -90,14 +101,7 @@
                     <input type="text"  class="Mytext" name="carType" id="carType" value="${itemObj.carType }">
                 </td>
             </tr>
-            <tr>
-                <td class="Myfont">
-                    采购时间:<span style="color: red">*</span>
-                </td>
-                <td class="Myfont">
-                    <div id="buyTimeDiv"></div>
-                </td>
-            </tr>
+
 
             <tr>
                 <td width="100px">转入/借用:</td>

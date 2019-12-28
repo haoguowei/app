@@ -30,7 +30,12 @@
                 资产编号：
                 <input style="margin-right: 20px;width: 200px;" type="text" name="number" id="number">
                 资产类型：
-                <input style="margin-right: 20px;width: 200px;" type="text" name="type" id="type">
+                <select id="type" name="type">
+                    <option value="0">请选择...
+                        <c:forEach items="${assetsTypeMap }" var="itm">
+                    <option value="${itm.key}">${itm.value}
+                        </c:forEach>
+                </select>
 
                 <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
             </td>

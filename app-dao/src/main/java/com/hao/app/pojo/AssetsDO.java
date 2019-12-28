@@ -1,5 +1,6 @@
 package com.hao.app.pojo;
 
+import com.hao.app.commons.entity.Dicts;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,6 +17,7 @@ public class AssetsDO implements Serializable {
     private Integer projects;
 
     private Integer type;
+    private String typeStr;
 
     private String name;
 
@@ -58,4 +60,9 @@ public class AssetsDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    public void setType(Integer type) {
+        this.typeStr = Dicts.assetsTypeMap.get(type);
+        this.type = type;
+    }
 }
