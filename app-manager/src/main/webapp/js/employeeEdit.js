@@ -2,21 +2,21 @@
 Ext.onReady(function () {
     Ext.QuickTips.init();
 
-    var birthDateDiv = new Ext.form.DateField({
+    var birthDateDiv = new com.custom.DateField({
         renderTo: 'birthDateDiv',
         format: 'Y-m-d',
         name: 'birthDate',
         value: getById('hideBirthDateDiv'),
         id: 'birthDate'
     });
-    var hideEntryDateDiv = new Ext.form.DateField({
+    var hideEntryDateDiv = new com.custom.DateField({
         renderTo: 'entryDateDiv',
         format: 'Y-m-d',
         name: 'entryDate',
         value: getById('hideEntryDateDiv'),
         id: 'entryDate'
     });
-    var hideLeaveDateDiv = new Ext.form.DateField({
+    var hideLeaveDateDiv = new com.custom.DateField({
         renderTo: 'leaveDateDiv',
         format: 'Y-m-d',
         name: 'leaveDate',

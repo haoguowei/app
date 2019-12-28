@@ -13,6 +13,36 @@ Ext.onReady(function () {
 
     //-----------------权限相关 end-----------
 
+    var entryDateStartDIV = new com.custom.DateField({
+        renderTo: 'entryDateStartDIV',
+        format: 'Y-m-d',
+        name: 'entryDateStart',
+        value: '',
+        id: 'entryDateStart'
+    });
+    var entryDateEndDIV = new com.custom.DateField({
+        renderTo: 'entryDateEndDIV',
+        format: 'Y-m-d',
+        name: 'entryDateEnd',
+        value: '',
+        id: 'entryDateEnd'
+    });
+
+    var leaveDateStartDIV = new com.custom.DateField({
+        renderTo: 'leaveDateStartDIV',
+        format: 'Y-m-d',
+        name: 'leaveDateStart',
+        value: '',
+        id: 'leaveDateStart'
+    });
+    var leaveDateEndDIV = new com.custom.DateField({
+        renderTo: 'leaveDateEndDIV',
+        format: 'Y-m-d',
+        name: 'leaveDateEnd',
+        value: '',
+        id: 'leaveDateEnd'
+    });
+
     this.searchFunc = function () {
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("idCard", getById("idCard"));
