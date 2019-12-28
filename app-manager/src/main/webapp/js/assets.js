@@ -36,7 +36,11 @@ Ext.onReady(function () {
             {name: 'id'},
             {name: 'name'},
             {name: 'number'},
+            {name: 'projectsName'},
+            {name: 'quantity'},
+            {name: 'quoQuantity'},
             {name: 'type'},
+            {name: 'owner'},
             {name: 'typeStr'},
             {name: 'buyTime'}
         ],
@@ -59,6 +63,8 @@ Ext.onReady(function () {
             {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
             {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'typeStr'},
+            {width: 2, header: '数量', align: 'right', sortable: false, dataIndex: 'quantity'},
+            {width: 2, header: '现况数量', align: 'right', sortable: false, dataIndex: 'quoQuantity'},
             {
                 width: 2,
                 header: '采购时间',
@@ -69,7 +75,7 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            // {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '操作',

@@ -46,6 +46,32 @@ Ext.onReady(function () {
             document.getElementById("buyTime").focus();
             return false;
         }
+
+        if (!regexVerify('num1', getById("quantity"))) {
+            alert("数量请填写正确的数字！");
+            document.getElementById("quantity").focus();
+            return false;
+        }
+        if (!regexVerify('num1', getById("quoQuantity"))) {
+            alert("现况数量请填写正确的数字！");
+            document.getElementById("quoQuantity").focus();
+            return false;
+        }
+        if (!regexVerify('num1', getById("staging"))) {
+            alert("分期月数请填写正确的数字！");
+            document.getElementById("staging").focus();
+            return false;
+        }
+        if (!regexVerify('decmal4', getById("quoQuantity"))) {
+            alert("单价请填写正确的金额！");
+            document.getElementById("quoQuantity").focus();
+            return false;
+        }
+        if (!regexVerify('decmal4', getById("purTax"))) {
+            alert("购置税请填写正确的金额！");
+            document.getElementById("purTax").focus();
+            return false;
+        }
     };
 
     new Ext.Viewport({

@@ -14,10 +14,16 @@ public class Dicts {
     public static Map<Integer, String> employeeJobTypeMap = new LinkedHashMap<>();
 
     public static Map<Integer, String> assetsTypeMap = new LinkedHashMap<>();
+    public static Map<Integer, String> engineNumberTypeMap = new LinkedHashMap<>();
 
     public static Map<Integer, String> costStatusMap = new LinkedHashMap<>();
 
     static {
+        engineNumberTypeMap.put(1, "小型车");
+        engineNumberTypeMap.put(2, "大型车");
+        engineNumberTypeMap.put(3, "低速车");
+        engineNumberTypeMap.put(4, "其他");
+
         hukouTypeMap.put(1, "农村");
         hukouTypeMap.put(2, "城镇");
 

@@ -18,7 +18,8 @@
 <div id="div_panel_id">
     <form name="form" action="saveAssets.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
-        <input type="hidden" id="hideBuyTimeDiv" name="hideBuyTimeDiv" value="${itemObj.buyTime }">
+        <input type="hidden" id="hideBuyTimeDiv" name="hideBuyTimeDiv"
+               value="<fmt:formatDate value="${itemObj.buyTime }" pattern="yyyy-MM-dd" />">
 
         <table class="Mytable">
             <tr>
@@ -132,20 +133,28 @@
             <tr>
                 <td width="100px">发动机号:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="engineNumber" id="engineNumber" value="${itemObj.engineNumber }">
+                    <input type="text" class="Mytext" name="engineNumber" id="engineNumber"
+                           value="${itemObj.engineNumber }">
                 </td>
             </tr>
             <tr>
                 <td width="100px">发动机号牌种类:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="engineNumberType" id="engineNumberType" value="${itemObj.engineNumberType }">
+                    <select id="engineNumberType" name="engineNumberType">
+                        <option value="0">请选择...
+                            <c:forEach items="${engineNumberTypeMap }" var="itm">
+                        <option
+                                <c:if test="${itm.key == itemObj.engineNumberType }">selected="selected"</c:if>
+                                value="${itm.key}">${itm.value}
+                            </c:forEach>
+                    </select>
                 </td>
             </tr>
 
             <tr>
-                <td width="100px">单价:</td>
+                <td width="100px">单价（元）:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="price" id="price" value="${itemObj.price }">
+                    <input type="text" class="Mytext" name="price" id="price" value="${itemObj.price }">
                 </td>
             </tr>
 
@@ -156,9 +165,9 @@
                 </td>
             </tr>
             <tr>
-                <td width="100px">购置税:</td>
+                <td width="100px">购置税（元）:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="purTax" id="purTax" value="${itemObj.purTax }">
+                    <input type="text" class="Mytext" name="purTax" id="purTax" value="${itemObj.purTax }">
                 </td>
             </tr>
 

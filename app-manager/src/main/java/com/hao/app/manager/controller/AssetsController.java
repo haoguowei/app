@@ -90,6 +90,7 @@ public class AssetsController extends BaseController {
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
+        request.setAttribute("engineNumberTypeMap", Dicts.engineNumberTypeMap);
 
         //责任人
         EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
