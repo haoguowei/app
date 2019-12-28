@@ -28,7 +28,7 @@ public class YYCostServiceImpl implements YYCostService {
 
     @Override
     public ResultCodeEnum insert(YYCostDO cost) {
-        int res = yYCostMapper.update(cost);
+        int res = yYCostMapper.insert(cost);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;
         } else {

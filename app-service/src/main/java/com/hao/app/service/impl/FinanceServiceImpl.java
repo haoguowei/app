@@ -37,7 +37,7 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public ResultCodeEnum insert(FinanceDO finance) {
-        int res = financeMapper.update(finance);
+        int res = financeMapper.insert(finance);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;
         } else {

@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ResultCodeEnum insert(EmployeeDO employee) {
-        int res = employeeMapper.update(employee);
+        int res = employeeMapper.insert(employee);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;
         } else {

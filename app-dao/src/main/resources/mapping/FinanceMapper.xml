@@ -117,9 +117,6 @@
             <if test="upDay != null">
                 up_day = #{upDay,jdbcType=DATE},
             </if>
-            <if test="month != null">
-                tb_month = #{month,jdbcType=INTEGER},
-            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
