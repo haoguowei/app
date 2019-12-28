@@ -16,59 +16,50 @@
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form1" action="saveProjects.do" method="post" onsubmit="return save()">
+    <form name="form" action="saveFinance.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
+        <input type="hidden" id="hideUpDay" name="hideUpDay"
+               value="<fmt:formatDate value="${itemObj.upDay }" pattern="yyyy-MM-dd" />">
 
         <table class="Mytable">
-           <tr>
+            <tr>
                 <td>所属项目:<span style="color: red">*</span></td>
                 <td>
                     <select id="projects" name="projects">
                         <option value="0">请选择...
                             <c:forEach items="${projectsList }" var="itm">
-                        <option <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>  value="${itm.id}">${itm.name}
+                        <option
+                                <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>
+                                value="${itm.id}">${itm.name}
                             </c:forEach>
                     </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="Myfont">
+                    清单时间：<span style="color: red">*</span>
+                </td>
+                <td class="Myfont">
+                    <div id="upDayDIV"></div>
                 </td>
             </tr>
 
             <tr>
                 <td width="100px">收入金额:<span style="color: red">*</span></td>
                 <td>
-                    <input type="text"  class="Mytext" name="incomeAmount" id="incomeAmount" value="${itemObj.incomeAmount }">
+                    <input type="text" class="Mytext" name="incomeAmount" id="incomeAmount"
+                           value="${itemObj.incomeAmount }">
                 </td>
             </tr>
             <tr>
                 <td width="100px">支出金额:<span style="color: red">*</span></td>
                 <td>
-                    <input type="text"  class="Mytext" name="payoutAmount" id="payoutAmount" value="${itemObj.payoutAmount }">
+                    <input type="text" class="Mytext" name="payoutAmount" id="payoutAmount"
+                           value="${itemObj.payoutAmount }">
                 </td>
             </tr>
 
-            <tr>
-                <td>年份:<span style="color: red">*</span></td>
-                <td>
-                    <select id="year" name="year">
-                        <option value="0">请选择...
-                            <c:forEach items="${yearList }" var="year">
-                        <option <c:if test="${year == itemObj.year }">selected="selected"</c:if>  value="${year}">${year}
-                            </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>月份:<span style="color: red">*</span></td>
-                <td>
-                    <select id="month" name="month">
-                        <option value="0">请选择...
-                            <c:forEach items="${monthList }" var="month">
-                        <option
-                                <c:if test="${month == itemObj.month }">selected="selected"</c:if>
-                                value="${month}">${month}
-                            </c:forEach>
-                    </select>
-                </td>
-            </tr>
 
             <tr>
                 <td>备注</td>
