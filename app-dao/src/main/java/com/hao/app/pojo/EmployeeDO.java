@@ -26,6 +26,7 @@ public class EmployeeDO implements Serializable {
     private Integer projects;
 
     private Integer jobType;
+
     private String jobTypeStr;
 
     private Integer gender;
@@ -63,11 +64,14 @@ public class EmployeeDO implements Serializable {
 
     private Date updateTime;
 
-    public String getJobTypeStr() {
-        return Dicts.employeeJobTypeMap.get(this.jobType);
+    public void setJobType(Integer jobType) {
+        this.jobTypeStr = Dicts.employeeJobTypeMap.get(jobType);
+        this.jobType = jobType;
     }
 
-    public String getGenderStr() {
-        return Dicts.genderMap.get(this.gender);
+    public void setGender(Integer gender) {
+        this.genderStr = Dicts.genderMap.get(gender);
+        this.gender = gender;
     }
+
 }
