@@ -38,6 +38,10 @@ public class FinanceServiceImpl implements FinanceService {
 
     @Override
     public ResultCodeEnum update(FinanceDO finance) {
+        FinanceDO old = financeMapper.selectByPrimaryKey(finance.getId());
+        if (old == null) {
+            return ResultCodeEnum.FAIL_ITEM;
+        }
         int res = financeMapper.update(finance);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;

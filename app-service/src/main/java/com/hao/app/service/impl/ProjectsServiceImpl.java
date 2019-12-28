@@ -28,6 +28,10 @@ public class ProjectsServiceImpl implements ProjectsService {
 
     @Override
     public ResultCodeEnum update(ProjectsDO obj) {
+        ProjectsDO old = projectsMapper.selectByPrimaryKey(obj.getId());
+        if (old == null) {
+            return ResultCodeEnum.FAIL_ITEM;
+        }
         int res = projectsMapper.update(obj);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;

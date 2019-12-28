@@ -39,6 +39,10 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public ResultCodeEnum update(AreaDO area) {
+        AreaDO old = areaMapper.selectByPrimaryKey(area.getId());
+        if (old == null) {
+            return ResultCodeEnum.FAIL_ITEM;
+        }
         int res = areaMapper.update(area);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;

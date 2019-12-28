@@ -14,6 +14,7 @@ public enum ResultCodeEnum {
 	FAIL_REGISTERED(4001, "用户已被注册，请选用其他登录名！"),
 	FAIL_OLDPWD(4002, "旧密码验证失败！"),
 	FAIL_PARAM(4003, "参数错误！"),
+	FAIL_ITEM(4004, "找不到要修改的记录！"),
 
 	NOTFOUND(404, "NOT FOUND");
 

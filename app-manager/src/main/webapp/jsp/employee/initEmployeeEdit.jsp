@@ -19,9 +19,12 @@ pageEncoding="UTF-8"%>
 <div id="div_panel_id">
     <form name="form" action="saveEmployee.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
-        <input type="hidden" id="hideBirthDateDiv" name="hideBirthDateDiv" value="${itemObj.birthDate }">
-        <input type="hidden" id="hideEntryDateDiv" name="hideEntryDateDiv" value="${itemObj.entryDate }">
-        <input type="hidden" id="hideLeaveDateDiv" name="hideLeaveDateDiv" value="${itemObj.leaveDate }">
+        <input type="hidden" id="hideBirthDateDiv" name="hideBirthDateDiv"
+               value="<fmt:formatDate value="${itemObj.birthDate }" pattern="yyyy-MM-dd" />">
+        <input type="hidden" id="hideEntryDateDiv" name="hideEntryDateDiv"
+               value="<fmt:formatDate value="${itemObj.entryDate }" pattern="yyyy-MM-dd" />">
+        <input type="hidden" id="hideLeaveDateDiv" name="hideLeaveDateDiv"
+               value="<fmt:formatDate value="${itemObj.leaveDate }" pattern="yyyy-MM-dd" />">
 
         <table class="Mytable">
             <tr>

@@ -107,11 +107,11 @@ public class EmployeeController extends BaseController {
 
         int projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
         if (projectId <= 0) {
-            return failResult(request, "参数错误：所属项目");
+            return failResult(request, "请选择所属项目");
         }
         ProjectsDO projectsDO = projectsService.getById(projectId);
         if (projectsDO == null) {
-            return failResult(request, "参数错误：所属项目");
+            return failResult(request, "请选择所属项目");
         }
 
         String name = request.getParameter("name");
@@ -138,13 +138,18 @@ public class EmployeeController extends BaseController {
         item.setEthnic(NumberUtils.toInt(request.getParameter("ethnic"), 0)); //ethnic
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
         String birthDate = request.getParameter("birthDate");
         String entryDate = request.getParameter("entryDate");
         String leaveDate = request.getParameter("leaveDate");
-        item.setBirthDate(format.parse(birthDate)); //birthDateDiv
-        item.setEntryDate(format.parse(entryDate)); //entryDateDiv
-        item.setLeaveDate(format.parse(leaveDate)); //leaveDateDiv
+        if (StringUtils.isNotBlank(birthDate)) {
+            item.setBirthDate(format.parse(birthDate)); //birthDateDiv
+        }
+        if (StringUtils.isNotBlank(entryDate)) {
+            item.setEntryDate(format.parse(entryDate)); //entryDateDiv
+        }
+        if (StringUtils.isNotBlank(leaveDate)) {
+            item.setLeaveDate(format.parse(leaveDate)); //leaveDateDiv
+        }
 
         item.setEduType(NumberUtils.toInt(request.getParameter("eduType"), 0)); //eduType
         item.setHukouType(NumberUtils.toInt(request.getParameter("hukouType"), 0)); //hukouType

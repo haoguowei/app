@@ -38,6 +38,10 @@ public class YYCostServiceImpl implements YYCostService {
 
     @Override
     public ResultCodeEnum update(YYCostDO cost) {
+        YYCostDO old = yYCostMapper.selectByPrimaryKey(cost.getId());
+        if (old == null) {
+            return ResultCodeEnum.FAIL_ITEM;
+        }
         int res = yYCostMapper.update(cost);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;

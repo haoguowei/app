@@ -42,6 +42,10 @@ public class AssetsServiceImpl implements AssetsService {
 
     @Override
     public ResultCodeEnum update(AssetsDO assets) {
+        AssetsDO old = assetsMapper.selectByPrimaryKey(assets.getId());
+        if (old == null) {
+            return ResultCodeEnum.FAIL_ITEM;
+        }
         int res = assetsMapper.update(assets);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;
