@@ -134,7 +134,7 @@
                 #{projects,jdbcType=INTEGER},
             </if>
             <if test="projectsName != null">
-                #{projects_name,jdbcType=VARCHAR},
+                #{projectsName,jdbcType=VARCHAR},
             </if>
             <if test="startMileage != null">
                 #{startMileage,jdbcType=INTEGER},
