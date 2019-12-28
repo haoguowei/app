@@ -11,24 +11,27 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
-<script type="text/javascript" src="<%=syspath%>/js/employeeEdit.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <script type="text/javascript" src="<%=syspath%>/js/employeeEdit.js"></script>
 </head>
 <body>
 <div id="div_panel_id">
     <form name="form" action="saveEmployee.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
+        <input type="hidden" id="hideBirthDateDiv" name="hideBirthDateDiv" value="${itemObj.birthDate }">
+        <input type="hidden" id="hideEntryDateDiv" name="hideEntryDateDiv" value="${itemObj.entryDate }">
+        <input type="hidden" id="hideLeaveDateDiv" name="hideLeaveDateDiv" value="${itemObj.leaveDate }">
 
-<table class="Mytable">
-    <tr>
-        <td width="100px">姓名:<span style="color: red">*</span></td>
-        <td>
-            <input type="text" class="Mytext" name="name" id="name" value="${itemObj.name }">
-        </td>
-    </tr>
+        <table class="Mytable">
+            <tr>
+                <td width="100px">姓名:<span style="color: red">*</span></td>
+                <td>
+                    <input type="text" class="Mytext" name="name" id="name" value="${itemObj.name }">
+                </td>
+            </tr>
 
-    <tr>
+            <tr>
         <td class="Myfont">
             性别：<span style="color: red">*</span>
         </td>
@@ -79,12 +82,12 @@ pageEncoding="UTF-8"%>
         </td>
     </tr>
 
-    <tr>
-        <td width="100px">民族:<span style="color: red">*</span></td>
-        <td>
-            <select id="ethnic" name="ethnic">
-                <option value="0">请选择...
-                    <c:forEach items="${minzuMap }" var="itm">
+            <tr>
+                <td width="100px">民族:</td>
+                <td>
+                    <select id="ethnic" name="ethnic">
+                        <option value="0">请选择...
+                            <c:forEach items="${minzuMap }" var="itm">
                 <option
                         <c:if test="${itm.key == itemObj.ethnic }">selected="selected"</c:if>
                         value="${itm.key}">${itm.value}
@@ -114,7 +117,7 @@ pageEncoding="UTF-8"%>
 
     <tr>
         <td class="Myfont">
-            离职日期：<span style="color: red">*</span>
+            离职日期：
         </td>
         <td class="Myfont">
             <div id="leaveDateDiv"></div>
