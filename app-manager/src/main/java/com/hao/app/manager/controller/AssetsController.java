@@ -4,9 +4,12 @@ import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.AssetsDO;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.AssetsService;
 import com.hao.app.service.EmployeeService;
+import com.hao.app.service.ProjectsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -18,6 +21,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +38,9 @@ public class AssetsController extends BaseController {
 
     @Resource
     private EmployeeService employeeService;
+
+    @Resource
+    private ProjectsService projectsService;
 
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -93,7 +103,97 @@ public class AssetsController extends BaseController {
     }
 
     @RequestMapping("/saveAssets.do")
-    public String saveAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        return successResult(request, "资产信息", "initAssets.do");
+    public String saveAssets(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+        int id = NumberUtils.toInt(request.getParameter("hideId"), 0);
+
+        int projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
+        if (projectId <= 0) {
+            return failResult(request, "请选择所属项目");
+        }
+        ProjectsDO projectsDO = projectsService.getById(projectId);
+        if (projectsDO == null) {
+            return failResult(request, "请选择所属项目");
+        }
+
+        int type = NumberUtils.toInt(request.getParameter("type"), 0);
+        int owner = NumberUtils.toInt(request.getParameter("owner"), 0);
+        int quantity = NumberUtils.toInt(request.getParameter("quantity"), 0);
+        int quoQuantity = NumberUtils.toInt(request.getParameter("quoQuantity"), 0);
+        int engineNumberType = NumberUtils.toInt(request.getParameter("engineNumberType"), 0);
+        int staging = NumberUtils.toInt(request.getParameter("staging"), 0);
+
+        String license = request.getParameter("license");
+        String brand = request.getParameter("brand");
+        String carType = request.getParameter("carType");
+        String inOut = request.getParameter("inOut");
+        String storageLocation = request.getParameter("storageLocation");
+        String engineNumber = request.getParameter("engineNumber");
+        String price = request.getParameter("price");
+        String purTax = request.getParameter("purTax");
+
+        String name = request.getParameter("name");
+        if (StringUtils.isBlank(name)) {
+            return failResult(request, "资产名称为必填项");
+        }
+
+        String number = request.getParameter("number");
+        if (StringUtils.isBlank(number)) {
+            return failResult(request, "资产编号为必填项");
+        }
+
+        AssetsDO item = new AssetsDO();
+        item.setId(id);
+        item.setName(name);
+
+        item.setProjects(projectsDO.getId());
+        item.setProjectsName(projectsDO.getName());
+        item.setType(type);
+
+        item.setNumber(number);
+        item.setLicense(license);
+        item.setBrand(brand);
+        item.setCarType(carType);
+
+        item.setInOut(inOut);
+        item.setQuantity(quantity);
+        item.setQuoQuantity(quoQuantity);
+        item.setOwner(owner);
+        item.setStorageLocation(storageLocation);
+
+        item.setEngineNumber(engineNumber);
+        item.setEngineNumberType(engineNumberType);
+
+        item.setStaging(staging);
+        if (StringUtils.isNotBlank(price)) {
+            item.setPrice(new BigDecimal(price));
+        }
+        if (StringUtils.isNotBlank(purTax)) {
+            item.setPurTax(new BigDecimal(purTax));
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String buyTime = request.getParameter("buyTime");
+        if (StringUtils.isNotBlank(buyTime)) {
+            item.setBuyTime(format.parse(buyTime));
+        }
+
+        item.setRemark(request.getParameter("remark"));
+
+        ResultCodeEnum resultCode;
+        if (id == 0) {
+            item.setCreater(getCurrentUserName(request));
+            item.setCreateTime(new Date());
+            resultCode = assetsService.insert(item);
+        } else {
+            item.setUpdateTime(new Date());
+            resultCode = assetsService.update(item);
+        }
+
+        if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
+            sysLogsService.writeLog(item.getCreater(), "新增或修改资产信息:" + item.toString());
+            return successResult(request, "资产信息", "initAssets.do");
+        } else {
+            return failResult(request, resultCode);
+        }
     }
 }
