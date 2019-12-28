@@ -1,4 +1,4 @@
-package com.hao.app.utils;
+package com.hao.app.commons.entity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

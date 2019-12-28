@@ -1,12 +1,12 @@
 package com.hao.app.manager.controller;
 
+import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.pojo.AssetsDO;
 import com.hao.app.service.AssetsService;
 import com.hao.app.service.EmployeeService;
-import com.hao.app.utils.Dicts;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;

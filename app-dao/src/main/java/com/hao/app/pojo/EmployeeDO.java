@@ -1,5 +1,6 @@
 package com.hao.app.pojo;
 
+import com.hao.app.commons.entity.Dicts;
 import lombok.Data;
 import lombok.ToString;
 
@@ -25,8 +26,10 @@ public class EmployeeDO implements Serializable {
     private Integer projects;
 
     private Integer jobType;
+    private String jobTypeStr;
 
     private Integer gender;
+    private String genderStr;
 
     private Integer ethnic;
 
@@ -60,4 +63,11 @@ public class EmployeeDO implements Serializable {
 
     private Date updateTime;
 
+    public String getJobTypeStr() {
+        return Dicts.employeeJobTypeMap.get(this.jobType);
+    }
+
+    public String getGenderStr() {
+        return Dicts.genderMap.get(this.gender);
+    }
 }

@@ -45,6 +45,8 @@ Ext.onReady(function () {
             {name: 'phone'},
             {name: 'jobType'},
             {name: 'idCard'},
+            {name: 'jobTypeStr'},
+            {name: 'genderStr'},
             {name: 'remark'}
         ],
         baseParams: {
@@ -67,8 +69,9 @@ Ext.onReady(function () {
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
+            {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
             {width: 2, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
-            {width: 2, header: '职位', align: 'left', sortable: false, dataIndex: 'jobType'},
+            {width: 2, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
             {
                 width: 2,
                 header: '入职时间',
@@ -113,7 +116,7 @@ Ext.onReady(function () {
             region: 'north',
             title: '员工管理',
             border: false,
-            height: 170,
+            height: 165,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {
