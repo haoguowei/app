@@ -118,6 +118,9 @@
             <if test="projects != null">
                 projects,
             </if>
+            <if test="projectsName != null">
+                projects_name,
+            </if>
             <if test="jobType != null">
                 job_type,
             </if>
@@ -188,6 +191,9 @@
             </if>
             <if test="projects != null">
                 #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                #{projectsName,jdbcType=VARCHAR},
             </if>
             <if test="jobType != null">
                 #{jobType,jdbcType=INTEGER},
@@ -263,6 +269,9 @@
             </if>
             <if test="projects != null">
                 projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                projects_name = #{projectsName,jdbcType=INTEGER},
             </if>
             <if test="jobType != null">
                 job_type = #{jobType,jdbcType=INTEGER},

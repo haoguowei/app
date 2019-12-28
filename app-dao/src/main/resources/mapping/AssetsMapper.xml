@@ -6,7 +6,6 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
         <result column="number" jdbcType="VARCHAR" property="number"/>
         <result column="license" jdbcType="VARCHAR" property="license"/>
         <result column="brand" jdbcType="VARCHAR" property="brand"/>
@@ -15,6 +14,7 @@
         <result column="in_out" jdbcType="VARCHAR" property="inOut"/>
         <result column="quantity" jdbcType="INTEGER" property="quantity"/>
         <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
         <result column="quo_quantity" jdbcType="INTEGER" property="quoQuantity"/>
         <result column="owner" jdbcType="INTEGER" property="owner"/>
         <result column="storage_location" jdbcType="VARCHAR" property="storageLocation"/>
@@ -83,6 +83,12 @@
             <if test="type != null">
                 type,
             </if>
+            <if test="projects != null">
+                projects,
+            </if>
+            <if test="projectsName != null">
+                projects_name,
+            </if>
             <if test="name != null">
                 name,
             </if>
@@ -147,6 +153,12 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="type != null">
                 #{type,jdbcType=INTEGER},
+            </if>
+            <if test="projects != null">
+                #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                #{projectsName,jdbcType=VARCHAR},
             </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
@@ -263,6 +275,12 @@
             </if>
             <if test="purTax != null">
                 pur_tax = #{purTax,jdbcType=DECIMAL},
+            </if>
+            <if test="projects != null">
+                projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                projects_name = #{projectsName,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},

@@ -25,6 +25,10 @@ Ext.onReady(function () {
         location.href = "initAssetsEdit.do?id=" + id;
     };
 
+    this.viewF = function (id) {
+        // location.href = "initAssetsEdit.do?view=1&id=" + id;
+    };
+
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
@@ -75,7 +79,7 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '操作',
@@ -84,9 +88,11 @@ Ext.onReady(function () {
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
                     var str = '';
+                    // str += genButton("查看", 'viewF(' + val + ')');
                     if (urlEditValid) {//权限
                         str += genButton("修改", 'updateF(' + val + ')');
                     }
+
                     return str;
                 }
             }
@@ -113,13 +119,21 @@ Ext.onReady(function () {
             border: true,
             autoScroll: true,
             items: [grid],
-            tbar: [{
-                text: '录入资产',
-                id: 'bt_add',
-                handler: function (b, e) {
-                    location.href = "initAssetsEdit.do";
-                }
-            }, '->',
+            tbar: [
+                {
+                    text: '录入资产',
+                    id: 'bt_add',
+                    handler: function (b, e) {
+                        location.href = "initAssetsEdit.do";
+                    }
+                }, '-', {
+                    text: '导出资产',
+                    id: 'bt_exp',
+                    handler: function (b, e) {
+                        alert("该功能正在开发中...");
+                    }
+                },
+                '->',
                 new Ext.PagingToolbar({
                     pageSize: PAGESIZE,
                     store: gridStore,

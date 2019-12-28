@@ -18,9 +18,15 @@ public class YYCostDO implements Serializable {
 
     private String license;
 
+    private Integer employeeId;
+
+    private String employeeName;
+
     private Integer status;
 
     private Integer projects;
+
+    private String projectsName;
 
     private Integer startMileage;
 

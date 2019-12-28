@@ -14,6 +14,10 @@ public class FinanceDO implements Serializable {
 
     private Integer id;
 
+    private Integer projects;
+
+    private String projectsName;
+
     private BigDecimal incomeAmount;
 
     private BigDecimal payoutAmount;

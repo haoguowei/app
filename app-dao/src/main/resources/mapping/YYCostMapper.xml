@@ -6,8 +6,11 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="enter_date" jdbcType="DATE" property="enterDate"/>
         <result column="license" jdbcType="VARCHAR" property="license"/>
+        <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
+        <result column="employee_name" jdbcType="VARCHAR" property="employeeName"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
         <result column="start_mileage" jdbcType="INTEGER" property="startMileage"/>
         <result column="end_mileage" jdbcType="INTEGER" property="endMileage"/>
         <result column="workload" jdbcType="INTEGER" property="workload"/>
@@ -28,7 +31,7 @@
     </resultMap>
     
     <sql id="Base_Column_List">
-        id, enter_date, license, status, projects, start_mileage, end_mileage, workload,
+        id, enter_date, license, employee_id, employee_name, status, projects, projects_name, start_mileage, end_mileage, workload,
         fuel, fuel_amount, baoyang_amount, fix_amount, fix_factory, shigu_times, shigu_amount,
         shigu_out_amount, baoxian_amount, year_check_amount, remark, creater, create_time,
         update_time
@@ -61,6 +64,9 @@
             </if>
             <if test="projects != null">
                 projects,
+            </if>
+            <if test="projectsName != null">
+                projects_name,
             </if>
             <if test="startMileage != null">
                 start_mileage,
@@ -126,6 +132,9 @@
             </if>
             <if test="projects != null">
                 #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                #{projects_name,jdbcType=VARCHAR},
             </if>
             <if test="startMileage != null">
                 #{startMileage,jdbcType=INTEGER},
@@ -195,6 +204,9 @@
             </if>
             <if test="projects != null">
                 projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                projects_name = #{projectsName,jdbcType=VARCHAR},
             </if>
             <if test="startMileage != null">
                 start_mileage = #{startMileage,jdbcType=INTEGER},

@@ -6,16 +6,18 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="income_amount" jdbcType="DECIMAL" property="incomeAmount"/>
         <result column="payout_amount" jdbcType="DECIMAL" property="payoutAmount"/>
-        <result column="year" jdbcType="INTEGER" property="year"/>
-        <result column="month" jdbcType="INTEGER" property="month"/>
+        <result column="tb_year" jdbcType="INTEGER" property="year"/>
+        <result column="tb_month" jdbcType="INTEGER" property="month"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
     </resultMap>
     
     <sql id="Base_Column_List">
-        id, income_amount, payout_amount, year, month, remark, creater, create_time, update_time
+        id, income_amount, projects, projects_name, payout_amount, tb_year, tb_month, remark, creater, create_time, update_time
     </sql>
     
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -35,10 +37,10 @@
                 payout_amount,
             </if>
             <if test="year != null">
-                year,
+                tb_year,
             </if>
             <if test="month != null">
-                month,
+                tb_month,
             </if>
             <if test="remark != null">
                 remark,
@@ -51,6 +53,12 @@
             </if>
             <if test="updateTime != null">
                 update_time,
+            </if>
+            <if test="projects != null">
+                projects,
+            </if>
+            <if test="projectsName != null">
+                projects_name,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -78,6 +86,12 @@
             <if test="updateTime != null">
                 #{updateTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="projects != null">
+                #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                #{projects_name,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     
@@ -91,10 +105,10 @@
                 payout_amount = #{payoutAmount,jdbcType=DECIMAL},
             </if>
             <if test="year != null">
-                year = #{year,jdbcType=INTEGER},
+                tb_year = #{year,jdbcType=INTEGER},
             </if>
             <if test="month != null">
-                month = #{month,jdbcType=INTEGER},
+                tb_month = #{month,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -107,6 +121,12 @@
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="projects != null">
+                projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                projects_name = #{projectsName,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
