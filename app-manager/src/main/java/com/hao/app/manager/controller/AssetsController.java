@@ -81,7 +81,7 @@ public class AssetsController extends BaseController {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
 
         //责任人
-        EmployeeQueryParam employeeQuery = new EmployeeQueryParam();
+        EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
         employeeQuery.setProjectsId(getCurrentProjectsId(request));
         Set<Integer> set = new HashSet<>();
         set.add(1); //经理
