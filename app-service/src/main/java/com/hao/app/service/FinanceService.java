@@ -6,7 +6,7 @@ import com.hao.app.pojo.FinanceDO;
 
 public interface FinanceService {
 
-    JsonResult<FinanceDO> searchFinance();
+    JsonResult<FinanceDO> searchFinance(Integer projectsId, String fromDay, String endDay);
 
     FinanceDO getById(int id);
 

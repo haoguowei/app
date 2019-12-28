@@ -5,9 +5,11 @@ import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.FinanceMapper;
 import com.hao.app.pojo.FinanceDO;
 import com.hao.app.service.FinanceService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class FinanceServiceImpl implements FinanceService {
@@ -17,8 +19,15 @@ public class FinanceServiceImpl implements FinanceService {
 
 
     @Override
-    public JsonResult<FinanceDO> searchFinance() {
-        return null;
+    public JsonResult<FinanceDO> searchFinance(Integer projectsId, String fromDay, String endDay) {
+        if (StringUtils.isNotBlank(fromDay)) {
+            fromDay = fromDay + "-01";
+        }
+        if (StringUtils.isNotBlank(endDay)) {
+            endDay = endDay + "-01";
+        }
+        List<FinanceDO> list = financeMapper.search(projectsId, fromDay, endDay);
+        return new JsonResult<>(list == null ? 0 : list.size(), list);
     }
 
     @Override

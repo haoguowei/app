@@ -22,9 +22,9 @@ public class FinanceDO implements Serializable {
 
     private BigDecimal payoutAmount;
 
-    private Integer year;
+    private BigDecimal profit;
 
-    private Integer month;
+    private Date upDay;
 
     private String remark;
 
@@ -34,4 +34,7 @@ public class FinanceDO implements Serializable {
 
     private Date updateTime;
 
+    public void setProfit() {
+        this.profit = incomeAmount.subtract(payoutAmount);
+    }
 }
