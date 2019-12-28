@@ -6,6 +6,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="income_amount" jdbcType="DECIMAL" property="incomeAmount"/>
         <result column="payout_amount" jdbcType="DECIMAL" property="payoutAmount"/>
+        <result column="profit" jdbcType="DECIMAL" property="profit"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
         <result column="up_day" jdbcType="DATE" property="upDay"/>
@@ -16,7 +17,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, income_amount, projects, projects_name, payout_amount, up_day, remark, creater, create_time, update_time
+        id, income_amount, projects, projects_name, payout_amount, profit, up_day, remark, creater, create_time, update_time
     </sql>
 
     <select id="search" resultMap="BaseResultMap">
@@ -52,6 +53,9 @@
             <if test="payoutAmount != null">
                 payout_amount,
             </if>
+            <if test="profit != null">
+                profit,
+            </if>
             <if test="upDay != null">
                 up_day,
             </if>
@@ -81,6 +85,9 @@
             <if test="payoutAmount != null">
                 #{payoutAmount,jdbcType=DECIMAL},
             </if>
+            <if test="profit != null">
+                #{profit,jdbcType=DECIMAL},
+            </if>
             <if test="upDay != null">
                 #{upDay,jdbcType=DATE},
             </if>
@@ -100,7 +107,7 @@
                 #{projects,jdbcType=INTEGER},
             </if>
             <if test="projectsName != null">
-                #{projects_name,jdbcType=VARCHAR},
+                #{projectsName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -113,6 +120,9 @@
             </if>
             <if test="payoutAmount != null">
                 payout_amount = #{payoutAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="profit != null">
+                profit = #{profit,jdbcType=DECIMAL},
             </if>
             <if test="upDay != null">
                 up_day = #{upDay,jdbcType=DATE},

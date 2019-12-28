@@ -100,12 +100,18 @@ public class FinanceController extends BaseController {
         String incomeAmount = request.getParameter("incomeAmount");
         if (StringUtils.isNotBlank(incomeAmount)) {
             item.setIncomeAmount(new BigDecimal(incomeAmount));
+        } else {
+            item.setIncomeAmount(BigDecimal.valueOf(0));
         }
 
         String payoutAmount = request.getParameter("payoutAmount");
         if (StringUtils.isNotBlank(payoutAmount)) {
             item.setPayoutAmount(new BigDecimal(payoutAmount));
+        } else {
+            item.setPayoutAmount(BigDecimal.valueOf(0));
         }
+
+        item.setProfit(item.getIncomeAmount().subtract(item.getPayoutAmount()));
 
         ResultCodeEnum resultCode;
         if (id == 0) {

@@ -34,7 +34,4 @@ public class FinanceDO implements Serializable {
 
     private Date updateTime;
 
-    public void setProfit() {
-        this.profit = incomeAmount.subtract(payoutAmount);
-    }
 }
