@@ -25,6 +25,8 @@ public class AssetsDO implements Serializable {
 
     private String number;
 
+    private String license;
+
     private String brand;
 
     private String carType;
