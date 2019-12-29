@@ -46,7 +46,7 @@
         <include refid="Base_Column_List"/>
         from assets
         <include refid="searchSQL"/>
-        order by name
+        order by id desc
         limit ${pageStart},${pageLimit}
     </select>
 

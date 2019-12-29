@@ -45,9 +45,16 @@
                 </td>
             </tr>
             <tr>
-                <td width="150px">牌照号:</td>
+                <td>选择资产:<span style="color: red">*</span></td>
                 <td>
-                    <input type="text" class="Mytext" name="license" id="license" value="${itemObj.license }">
+                    <select id="assetId" name="assetId">
+                        <option value="0">请选择...
+                            <c:forEach items="${assetsList }" var="itm">
+                        <option
+                                <c:if test="${itm.id == itemObj.assetId }">selected="selected"</c:if>
+                                value="${itm.id}">资产：${itm.name} - 编号：${itm.number} - 牌照号：${itm.license}
+                            </c:forEach>
+                    </select>
                 </td>
             </tr>
 

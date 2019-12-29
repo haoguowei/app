@@ -1,8 +1,11 @@
 package com.hao.app.manager.controller;
 
+import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.pojo.AssetsDO;
 import com.hao.app.pojo.YYCostDO;
+import com.hao.app.service.AssetsService;
 import com.hao.app.service.YYCostService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -15,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -25,6 +29,8 @@ public class YYCostController extends BaseController {
     @Resource
     private YYCostService yYCostService;
 
+    @Resource
+    private AssetsService assetsService;
 
     @RequestMapping("/initYYCost.do")
     public String initYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -69,6 +75,15 @@ public class YYCostController extends BaseController {
         int id = NumberUtils.toInt(request.getParameter("id"));
         YYCostDO itemObj = yYCostService.getById(id);
         request.setAttribute("itemObj", itemObj);
+
+        //选择资产
+        AssetsQueryParam param = new AssetsQueryParam(0, 100);
+        int projectsId = getCurrentProjectsId(request);
+        if (projectsId > 0) {
+            param.setProjectsId(projectsId);
+        }
+        List<AssetsDO> assetsList = assetsService.searchAssets(param).getResultList();
+        request.setAttribute("assetsList", assetsList);
 
         request.setAttribute("projectsList", getProjectsList(request));
 

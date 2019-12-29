@@ -5,7 +5,7 @@
     <resultMap id="BaseResultMap" type="com.hao.app.pojo.YYCostDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="enter_date" jdbcType="DATE" property="enterDate"/>
-        <result column="license" jdbcType="VARCHAR" property="license"/>
+        <result column="asset_id" jdbcType="VARCHAR" property="assetId"/>
         <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
         <result column="employee_name" jdbcType="VARCHAR" property="employeeName"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
@@ -31,7 +31,7 @@
     </resultMap>
     
     <sql id="Base_Column_List">
-        id, enter_date, license, employee_id, employee_name, status, projects, projects_name, start_mileage, end_mileage, workload,
+        id, enter_date, asset_id, employee_id, employee_name, status, projects, projects_name, start_mileage, end_mileage, workload,
         fuel, fuel_amount, baoyang_amount, fix_amount, fix_factory, shigu_times, shigu_amount,
         shigu_out_amount, baoxian_amount, year_check_amount, remark, creater, create_time,
         update_time
@@ -56,8 +56,8 @@
             <if test="enterDate != null">
                 enter_date,
             </if>
-            <if test="license != null">
-                license,
+            <if test="assetId != null">
+                asset_id,
             </if>
             <if test="status != null">
                 status,
@@ -124,8 +124,8 @@
             <if test="enterDate != null">
                 #{enterDate,jdbcType=DATE},
             </if>
-            <if test="license != null">
-                #{license,jdbcType=VARCHAR},
+            <if test="assetId != null">
+                #{assetId,jdbcType=INTEGER},
             </if>
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
@@ -196,8 +196,8 @@
             <if test="enterDate != null">
                 enter_date = #{enterDate,jdbcType=DATE},
             </if>
-            <if test="license != null">
-                license = #{license,jdbcType=VARCHAR},
+            <if test="assetId != null">
+                asset_id = #{assetId,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 status = #{status,jdbcType=INTEGER},
@@ -276,7 +276,7 @@
         <include refid="Base_Column_List"/>
         from yy_cost
         <include refid="searchSQL"/>
-        order by enter_date
+        order by id desc
         limit ${pageStart},${pageLimit}
     </select>
 

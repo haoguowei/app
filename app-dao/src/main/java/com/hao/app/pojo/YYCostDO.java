@@ -16,7 +16,7 @@ public class YYCostDO implements Serializable {
 
     private Date enterDate;
 
-    private String license;
+    private Integer assetId;
 
     private Integer employeeId;
 

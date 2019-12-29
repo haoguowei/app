@@ -49,7 +49,7 @@
         <include refid="Base_Column_List"/>
         from employee
         <include refid="searchSQL"/>
-        order by status, name
+        order by status asc, id desc
         limit ${pageStart},${pageLimit}
     </select>
 

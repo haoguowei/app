@@ -32,6 +32,7 @@
     <if test="areaId != null">
       and p.area_id = #{areaId,jdbcType=INTEGER}
     </if>
+    order by p.name
   </select>
 
     <insert id="insert" parameterType="com.hao.app.pojo.ProjectsDO">
