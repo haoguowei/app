@@ -17,7 +17,7 @@
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form1" action="saveProjects.do" method="post" onsubmit="return save()">
+    <form name="form1" action="saveYYCost.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
         <input type="hidden" id="hideEnterDateDiv" name="hideEnterDateDiv"
                value="<fmt:formatDate value="${itemObj.enterDate }" pattern="yyyy-MM-dd" />">
@@ -45,14 +45,14 @@
                 </td>
             </tr>
             <tr>
-                <td>选择资产:<span style="color: red">*</span></td>
+                <td>消费资产:<span style="color: red">*</span></td>
                 <td>
                     <select id="assetId" name="assetId">
                         <option value="0">请选择...
                             <c:forEach items="${assetsList }" var="itm">
                         <option
                                 <c:if test="${itm.id == itemObj.assetId }">selected="selected"</c:if>
-                                value="${itm.id}">资产：${itm.name} - 编号：${itm.number} - 牌照号：${itm.license}
+                                value="${itm.id}">${itm.name} （资产编号：${itm.number} ，牌照号：${itm.license}）
                             </c:forEach>
                     </select>
                 </td>

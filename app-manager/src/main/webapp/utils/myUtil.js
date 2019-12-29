@@ -105,22 +105,26 @@ function _getRadioValueJS(RadioName) {
  * 判断是否为空
  */
 function _isNull(val) {
-	if (val == null || val == 'undefined' || val == 'null' || val == '') {
-		return true;
-	} else {
-		return false;
-	}
+    if (val == null || val == 'undefined' || val == 'null' || val == '') {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+function _isNotNull(val) {
+    return !_isNull(val);
 };
 
 /**
  * 日期格式化并tip显示
  */
-var _showFmtDate = function(value) {
-	if (value == null) {
-		value = "";
-	}
-	value = Ext.util.Format.date(value, 'Y-m-d H:i:s');
-	return '<span style="display:table;width:100%;" qtip="' + value + '">'
+var _showFmtDate = function (value) {
+    if (value == null) {
+        value = "";
+    }
+    value = Ext.util.Format.date(value, 'Y-m-d H:i:s');
+    return '<span style="display:table;width:100%;" qtip="' + value + '">'
 			+ value + '</span>';
 };
 
