@@ -95,7 +95,7 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
-                    if (val == '合计') {
+                    if (val == null || val == '') {
                         return '';
                     }
 
@@ -117,7 +117,7 @@ Ext.onReady(function () {
             region: 'north',
             title: '资产信息',
             border: false,
-            height: 150,
+            height: 120,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {

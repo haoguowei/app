@@ -28,6 +28,7 @@ public class YYCostController extends BaseController {
 
     @RequestMapping("/initYYCost.do")
     public String initYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/cost/initYYCost";
     }
 
