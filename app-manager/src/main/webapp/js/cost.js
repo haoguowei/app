@@ -58,6 +58,7 @@ Ext.onReady(function () {
             {name: 'employeeName'}
         ],
         baseParams: {
+            limit: PAGESIZE,
             projectsId: '',
             enterDateStart: '',
             enterDateEnd: '',
@@ -147,6 +148,7 @@ Ext.onReady(function () {
                 },
                 '->',
                 new Ext.PagingToolbar({
+                    pageSize: PAGESIZE,
                     store: gridStore,
                     style: {'border': 0},
                     displayInfo: true

@@ -277,6 +277,7 @@
         from yy_cost
         <include refid="searchSQL"/>
         order by enter_date
+        limit ${pageStart},${pageLimit}
     </select>
 
     <sql id="searchSQL">

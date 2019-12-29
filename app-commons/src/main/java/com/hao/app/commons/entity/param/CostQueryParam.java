@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class CostQueryParam implements Serializable {
+public class CostQueryParam extends QueryParam implements Serializable {
 
 	private static final long serialVersionUID = 4737617179006429526L;
 
@@ -21,9 +21,9 @@ public class CostQueryParam implements Serializable {
 	private String enterDateStart;
 	private String enterDateEnd;
 
-//	public CostQueryParam(int pageStart, int pageLimit) {
-//		super(pageStart, pageLimit);
-//	}
+	public CostQueryParam(int pageStart, int pageLimit) {
+		super(pageStart, pageLimit);
+	}
 
 
 }
