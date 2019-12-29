@@ -72,7 +72,7 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'idStr'},
-            {width: 1, header: '收入金额(元)', align: 'left', sortable: false, dataIndex: 'incomeAmount'},
+            {width: 2, header: '收入金额(元)', align: 'left', sortable: false, dataIndex: 'incomeAmount'},
             {width: 2, header: '支出金额(元)', align: 'left', sortable: false, dataIndex: 'payoutAmount'},
             {width: 2, header: '收益(元)', align: 'left', sortable: false, dataIndex: 'profit'},
             {
