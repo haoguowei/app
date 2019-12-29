@@ -1,6 +1,11 @@
 package com.hao.app.manager.controller;
 
+import com.hao.app.commons.entity.param.CostQueryParam;
+import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.pojo.YYCostDO;
 import com.hao.app.service.YYCostService;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,6 +34,28 @@ public class YYCostController extends BaseController {
 
     @RequestMapping("/searchYYCost.do")
     public void searchYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
+        String name = request.getParameter("name");
+        String enterDateStart = request.getParameter("enterDateStart");
+        String enterDateEnd = request.getParameter("enterDateEnd");
+
+        CostQueryParam param = new CostQueryParam();
+        if (projectsId > 0) {
+            param.setProjectsId(projectsId);
+        }
+        if (StringUtils.isNotBlank(name)) {
+            param.setName(name);
+        }
+        if (StringUtils.isNotBlank(enterDateStart)) {
+            param.setEnterDateStart(enterDateStart);
+        }
+        if (StringUtils.isNotBlank(enterDateEnd)) {
+            param.setEnterDateEnd(enterDateEnd);
+        }
+
+        JsonResult<YYCostDO> result = yYCostService.searchYYCost(param);
+        writeResponse(response, result);
+
 
     }
 

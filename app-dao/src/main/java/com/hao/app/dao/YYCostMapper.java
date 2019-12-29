@@ -1,7 +1,10 @@
 package com.hao.app.dao;
 
 
+import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.pojo.YYCostDO;
+
+import java.util.List;
 
 public interface YYCostMapper {
 
@@ -12,4 +15,8 @@ public interface YYCostMapper {
     YYCostDO selectByPrimaryKey(Integer id);
 
     int update(YYCostDO record);
+
+    int count(CostQueryParam param);
+
+    List<YYCostDO> search(CostQueryParam param);
 }

@@ -12,10 +12,26 @@ Ext.onReady(function () {
     var isPRISaveMember = isHavePRI("saveYYCost.do");//新增编辑用户
 
     //-----------------权限相关 end-----------
+    var entryDateStartDIV = new com.custom.DateField({
+        renderTo: 'entryDateStartDIV',
+        format: 'Y-m-d',
+        name: 'enterDateStart',
+        value: '',
+        id: 'enterDateStart'
+    });
+    var entryDateEndDIV = new com.custom.DateField({
+        renderTo: 'entryDateEndDIV',
+        format: 'Y-m-d',
+        name: 'enterDateEnd',
+        value: '',
+        id: 'enterDateEnd'
+    });
 
     this.searchFunc = function () {
-        gridStore.setBaseParam("status", getById("status"));
-        gridStore.setBaseParam("enterDate", getById("enterDate"));
+        gridStore.setBaseParam("projectsId", getById("status"));
+        gridStore.setBaseParam("name", getById("name"));
+        gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
+        gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
         gridStore.reload();
     };
 
@@ -36,20 +52,16 @@ Ext.onReady(function () {
         totalProperty: 'total',
         fields: [
             {name: 'id'},
+            {name: 'idStr'},
             {name: 'enterDate'},
-            {name: 'number'},
             {name: 'projectsName'},
-            {name: 'quantity'},
-            {name: 'quoQuantity'},
-            {name: 'type'},
-            {name: 'owner'},
-            {name: 'typeStr'},
-            {name: 'buyTime'}
+            {name: 'employeeName'}
         ],
         baseParams: {
-            limit: PAGESIZE,
-            enterDate: '',
-            status: ''
+            projectsId: '',
+            enterDateStart: '',
+            enterDateEnd: '',
+            name: ''
         }
     });
 
@@ -60,23 +72,19 @@ Ext.onReady(function () {
         border: false,
         autoHeight: true,
         columns: [
-            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
-            {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
-            {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
-            {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'typeStr'},
-            {width: 2, header: '数量', align: 'right', sortable: false, dataIndex: 'quantity'},
-            {width: 2, header: '现况数量', align: 'right', sortable: false, dataIndex: 'quoQuantity'},
+            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'idStr'},
+            {width: 2, header: '员工', align: 'left', sortable: false, dataIndex: 'employeeName'},
+            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
-                header: '采购时间',
+                header: '录入时间',
                 align: 'left',
                 sortable: false,
-                dataIndex: 'buyTime',
+                dataIndex: 'enterDate',
                 renderer: function (val, cell, record) {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '操作',
@@ -121,7 +129,7 @@ Ext.onReady(function () {
                     text: '录入资产',
                     id: 'bt_add',
                     handler: function (b, e) {
-                        location.href = "initAssetsEdit.do";
+                        location.href = "initYYCostEdit.do";
                     }
                 }, '-', {
                     text: '导出资产',
@@ -132,7 +140,6 @@ Ext.onReady(function () {
                 },
                 '->',
                 new Ext.PagingToolbar({
-                    pageSize: PAGESIZE,
                     store: gridStore,
                     style: {'border': 0},
                     displayInfo: true

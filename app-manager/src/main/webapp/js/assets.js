@@ -38,6 +38,7 @@ Ext.onReady(function () {
         totalProperty: 'total',
         fields: [
             {name: 'id'},
+            {name: 'idStr'},
             {name: 'name'},
             {name: 'number'},
             {name: 'projectsName'},
@@ -63,7 +64,7 @@ Ext.onReady(function () {
         border: false,
         autoHeight: true,
         columns: [
-            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'idStr'},
             {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
             {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'typeStr'},

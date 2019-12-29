@@ -13,6 +13,7 @@ import java.util.Date;
 public class AssetsDO implements Serializable {
 
     private Integer id;
+    private String idStr;
 
     private Integer projects;
 

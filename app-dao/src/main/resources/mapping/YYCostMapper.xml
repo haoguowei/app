@@ -262,4 +262,37 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <select id="count" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
+            resultType="java.lang.Integer">
+        select count(1)
+        from yy_cost
+        <include refid="searchSQL"/>
+    </select>
+
+    <select id="search" parameterType="com.hao.app.commons.entity.param.CostQueryParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from yy_cost
+        <include refid="searchSQL"/>
+        order by enter_date
+    </select>
+
+    <sql id="searchSQL">
+        <where>
+            <if test="projectsId != null and projectsId > 0">
+                and projects = ${projectsId}
+            </if>
+            <if test="name != null">
+                and employee_name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="enterDateStart != null">
+                <![CDATA[ and enter_date >= #{enterDateStart} ]]>
+            </if>
+            <if test="enterDateEnd != null">
+                <![CDATA[ and enter_date <= #{enterDateEnd} ]]>
+            </if>
+        </where>
+    </sql>
 </mapper>

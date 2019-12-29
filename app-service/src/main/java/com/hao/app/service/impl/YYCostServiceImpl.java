@@ -1,5 +1,6 @@
 package com.hao.app.service.impl;
 
+import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.YYCostMapper;
@@ -8,6 +9,7 @@ import com.hao.app.service.YYCostService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class YYCostServiceImpl implements YYCostService {
@@ -15,10 +17,20 @@ public class YYCostServiceImpl implements YYCostService {
     @Resource
     private YYCostMapper yYCostMapper;
 
-
     @Override
-    public JsonResult<YYCostDO> searchYYCost() {
-        return null;
+    public JsonResult<YYCostDO> searchYYCost(CostQueryParam param) {
+        int count = yYCostMapper.count(param);
+        List<YYCostDO> list = yYCostMapper.search(param);
+
+        if (list != null) {
+            list.forEach(v -> {
+                v.setIdStr(String.valueOf(v.getId()));
+            });
+            YYCostDO last = new YYCostDO();
+            last.setIdStr("合计");
+            list.add(last);
+        }
+        return new JsonResult<>(count, list);
     }
 
     @Override
