@@ -117,7 +117,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '资产信息',
+            title: '消费汇总',
             border: false,
             height: 120,
             keys: {
