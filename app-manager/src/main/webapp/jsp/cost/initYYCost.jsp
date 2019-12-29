@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<%=syspath%>/utils/upload/FileUpLoadWindow.js"></script>
 
     <script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
-    <script type="text/javascript" src="<%=syspath%>/js/employee.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/js/cost.js"></script>
 </head>
 <body>
 <div id="search_div_id">
