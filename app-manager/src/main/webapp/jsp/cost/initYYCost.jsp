@@ -33,8 +33,13 @@
                         </c:forEach>
                 </select>
 
-                员工姓名：
-                <input style="margin-right: 20px;" type="text" name="name" id="name">
+                消费司机：
+                <select id="name" name="name">
+                    <option value="0">请选择...
+                        <c:forEach items="${employeeList }" var="itm">
+                    <option value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
             </td>
         <tr>
             <td class="Myfont">

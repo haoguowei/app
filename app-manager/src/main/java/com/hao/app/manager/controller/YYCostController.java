@@ -52,6 +52,9 @@ public class YYCostController extends BaseController {
     @RequestMapping("/initYYCost.do")
     public String initYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
+
+        //选择司机
+        request.setAttribute("employeeList", getEmployeeList(getCurrentProjectsId(request)));
         return "jsp/cost/initYYCost";
     }
 
@@ -87,6 +90,16 @@ public class YYCostController extends BaseController {
 
     }
 
+    private List<EmployeeDO> getEmployeeList(Integer projectsId) {
+        //选择司机
+        EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
+        employeeQuery.setProjectsId(projectsId);
+        Set<Integer> set = new HashSet<>();
+        set.add(6); //司机
+        employeeQuery.setJobTypes(set);
+        return employeeService.searchEmployee(employeeQuery).getResultList();
+    }
+
     @RequestMapping("/initYYCostEdit.do")
     public String initYYCostEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("id"));
@@ -94,12 +107,7 @@ public class YYCostController extends BaseController {
         request.setAttribute("itemObj", itemObj);
 
         //选择司机
-        EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
-        employeeQuery.setProjectsId(getCurrentProjectsId(request));
-        Set<Integer> set = new HashSet<>();
-        set.add(6); //司机
-        employeeQuery.setJobTypes(set);
-        request.setAttribute("employeeList", employeeService.searchEmployee(employeeQuery).getResultList());
+        request.setAttribute("employeeList", getEmployeeList(getCurrentProjectsId(request)));
 
         //选择资产
         AssetsQueryParam param = new AssetsQueryParam(0, 100);
