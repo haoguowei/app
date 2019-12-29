@@ -62,4 +62,6 @@ public class YYCostDO implements Serializable {
 
     private Date updateTime;
 
+    private String assetsInfo;
+
 }

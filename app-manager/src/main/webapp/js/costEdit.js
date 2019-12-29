@@ -16,6 +16,7 @@ Ext.onReady(function () {
             document.getElementById("projects").focus();
             return false;
         }
+
         if (_isNull(getById("enterDate"))) {
             alert("请填写消费日期！");
             document.getElementById("enterDate").focus();
@@ -24,6 +25,11 @@ Ext.onReady(function () {
         if (!isDate(getById("enterDate"))) {
             alert("消费日期格式错误！");
             document.getElementById("enterDate").focus();
+            return false;
+        }
+        if (_isNull(getById("employeeId")) || getById("employeeId") == 0) {
+            alert("请选择消费司机！");
+            document.getElementById("employeeId").focus();
             return false;
         }
         if (_isNull(getById("assetId")) || getById("assetId") == 0) {

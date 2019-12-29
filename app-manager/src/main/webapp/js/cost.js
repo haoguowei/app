@@ -54,6 +54,7 @@ Ext.onReady(function () {
             {name: 'id'},
             {name: 'enterDate'},
             {name: 'projectsName'},
+            {name: 'assetsInfo'},
             {name: 'employeeName'}
         ],
         baseParams: {
@@ -73,11 +74,11 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
-            {width: 2, header: '员工', align: 'left', sortable: false, dataIndex: 'employeeName'},
-            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 2, header: '消费司机', align: 'left', sortable: false, dataIndex: 'employeeName'},
+            {width: 3, header: '消费资产', align: 'left', sortable: false, dataIndex: 'assetsInfo'},
             {
                 width: 2,
-                header: '录入时间',
+                header: '消费日期',
                 align: 'left',
                 sortable: false,
                 dataIndex: 'enterDate',
@@ -88,6 +89,7 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
+            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '操作',
@@ -133,7 +135,7 @@ Ext.onReady(function () {
             items: [grid],
             tbar: [
                 {
-                    text: '录入消费',
+                    text: '录入消费信息',
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initYYCostEdit.do";

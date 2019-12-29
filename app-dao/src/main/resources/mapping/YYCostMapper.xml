@@ -59,6 +59,12 @@
             <if test="assetId != null">
                 asset_id,
             </if>
+            <if test="employeeId != null">
+                employee_id,
+            </if>
+            <if test="employeeName != null">
+                employee_name,
+            </if>
             <if test="status != null">
                 status,
             </if>
@@ -126,6 +132,12 @@
             </if>
             <if test="assetId != null">
                 #{assetId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeId != null">
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="employeeName != null">
+                #{employeeName,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
@@ -197,8 +209,15 @@
                 enter_date = #{enterDate,jdbcType=DATE},
             </if>
             <if test="assetId != null">
-                asset_id = #{assetId,jdbcType=VARCHAR},
+                asset_id = #{assetId,jdbcType=INTEGER},
             </if>
+            <if test="employeeId != null">
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="assetId != null">
+                employee_name = #{employeeName,jdbcType=VARCHAR},
+            </if>
+
             <if test="status != null">
                 status = #{status,jdbcType=INTEGER},
             </if>

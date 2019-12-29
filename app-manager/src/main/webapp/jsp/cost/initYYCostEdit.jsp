@@ -45,6 +45,19 @@
                 </td>
             </tr>
             <tr>
+                <td>消费司机:<span style="color: red">*</span></td>
+                <td>
+                    <select id="employeeId" name="employeeId">
+                        <option value="0">请选择...
+                            <c:forEach items="${employeeList }" var="itm">
+                        <option
+                                <c:if test="${itm.id == itemObj.employeeId }">selected="selected"</c:if>
+                                value="${itm.id}">${itm.name}
+                            </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>消费资产:<span style="color: red">*</span></td>
                 <td>
                     <select id="assetId" name="assetId">

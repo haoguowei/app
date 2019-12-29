@@ -2,12 +2,15 @@ package com.hao.app.manager.controller;
 
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.CostQueryParam;
+import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.AssetsDO;
+import com.hao.app.pojo.EmployeeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.pojo.YYCostDO;
 import com.hao.app.service.AssetsService;
+import com.hao.app.service.EmployeeService;
 import com.hao.app.service.ProjectsService;
 import com.hao.app.service.YYCostService;
 import org.apache.commons.lang.StringUtils;
@@ -25,7 +28,9 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -41,6 +46,8 @@ public class YYCostController extends BaseController {
 
     @Resource
     private ProjectsService projectsService;
+    @Resource
+    private EmployeeService employeeService;
 
     @RequestMapping("/initYYCost.do")
     public String initYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -86,8 +93,17 @@ public class YYCostController extends BaseController {
         YYCostDO itemObj = yYCostService.getById(id);
         request.setAttribute("itemObj", itemObj);
 
+        //选择司机
+        EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
+        employeeQuery.setProjectsId(getCurrentProjectsId(request));
+        Set<Integer> set = new HashSet<>();
+        set.add(6); //司机
+        employeeQuery.setJobTypes(set);
+        request.setAttribute("employeeList", employeeService.searchEmployee(employeeQuery).getResultList());
+
         //选择资产
         AssetsQueryParam param = new AssetsQueryParam(0, 100);
+        param.setType(1); //车辆
         int projectsId = getCurrentProjectsId(request);
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
@@ -118,9 +134,20 @@ public class YYCostController extends BaseController {
             return failResult(request, "请选择消费资产");
         }
 
+        int employeeId = NumberUtils.toInt(request.getParameter("employeeId"), 0);
+        EmployeeDO employeeDO = employeeService.getById(employeeId);
+        if (employeeDO == null) {
+            return failResult(request, "请选择消费司机");
+        }
+
         YYCostDO item = new YYCostDO();
         item.setId(id);
         item.setRemark(request.getParameter("remark"));
+        item.setProjects(projectsDO.getId());
+        item.setProjectsName(projectsDO.getName());
+        item.setAssetId(assetId);
+        item.setEmployeeId(employeeDO.getId());
+        item.setEmployeeName(employeeDO.getName());
 
         int startMileage = NumberUtils.toInt(request.getParameter("startMileage"), 0);
         int endMileage = NumberUtils.toInt(request.getParameter("endMileage"), 0);
