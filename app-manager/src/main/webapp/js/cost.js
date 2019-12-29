@@ -52,7 +52,6 @@ Ext.onReady(function () {
         totalProperty: 'total',
         fields: [
             {name: 'id'},
-            {name: 'idStr'},
             {name: 'enterDate'},
             {name: 'projectsName'},
             {name: 'employeeName'}
@@ -73,7 +72,7 @@ Ext.onReady(function () {
         border: false,
         autoHeight: true,
         columns: [
-            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'idStr'},
+            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '员工', align: 'left', sortable: false, dataIndex: 'employeeName'},
             {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {

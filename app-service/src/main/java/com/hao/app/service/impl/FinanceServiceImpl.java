@@ -1,5 +1,6 @@
 package com.hao.app.service.impl;
 
+import com.hao.app.commons.entity.param.FinanceQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.FinanceMapper;
@@ -9,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,36 +20,17 @@ public class FinanceServiceImpl implements FinanceService {
 
 
     @Override
-    public JsonResult<FinanceDO> searchFinance(Integer projectsId, String fromDay, String endDay) {
-        if (StringUtils.isNotBlank(fromDay)) {
-            fromDay = fromDay + "-01";
+    public JsonResult<FinanceDO> searchFinance(FinanceQueryParam param) {
+        if (StringUtils.isNotBlank(param.getFromDay())) {
+            param.setFromDay(param.getFromDay() + "-01");
         }
-        if (StringUtils.isNotBlank(endDay)) {
-            endDay = endDay + "-01";
-        }
-        List<FinanceDO> list = financeMapper.search(projectsId, fromDay, endDay);
-
-        if (list != null) {
-            BigDecimal a = BigDecimal.valueOf(0);
-            BigDecimal b = BigDecimal.valueOf(0);
-            BigDecimal c = BigDecimal.valueOf(0);
-
-            for (FinanceDO v : list) {
-                v.setIdStr(String.valueOf(v.getId()));
-                a = a.add(v.getIncomeAmount() == null ? BigDecimal.valueOf(0) : v.getIncomeAmount());
-                b = b.add(v.getPayoutAmount() == null ? BigDecimal.valueOf(0) : v.getPayoutAmount());
-                c = c.add(v.getProfit() == null ? BigDecimal.valueOf(0) : v.getProfit());
-            }
-
-            FinanceDO last = new FinanceDO();
-            last.setIdStr("合计");
-            last.setIncomeAmount(a);
-            last.setPayoutAmount(b);
-            last.setProfit(c);
-            list.add(last);
+        if (StringUtils.isNotBlank(param.getEndDay())) {
+            param.setEndDay(param.getEndDay() + "-01");
         }
 
-        return new JsonResult<>(list == null ? 0 : list.size(), list);
+        int count = financeMapper.count(param);
+        List<FinanceDO> list = financeMapper.search(param);
+        return new JsonResult<>(count, list);
     }
 
     @Override

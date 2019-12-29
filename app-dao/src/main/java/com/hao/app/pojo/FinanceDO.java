@@ -13,7 +13,6 @@ import java.util.Date;
 public class FinanceDO implements Serializable {
 
     private Integer id;
-    private String idStr;
 
     private Integer projects;
 

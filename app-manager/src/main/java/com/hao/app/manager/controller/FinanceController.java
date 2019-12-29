@@ -1,5 +1,6 @@
 package com.hao.app.manager.controller;
 
+import com.hao.app.commons.entity.param.FinanceQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.FinanceDO;
@@ -54,9 +55,19 @@ public class FinanceController extends BaseController {
         if (projectsId == null || projectsId <= 0) {
             projectsId = null;
         }
+        int start = NumberUtils.toInt(request.getParameter("start"));
+        int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
+
         String fromDay = request.getParameter("fromDay");
         String endDay = request.getParameter("endDay");
-        JsonResult<FinanceDO> result = financeService.searchFinance(projectsId, fromDay, endDay);
+
+        FinanceQueryParam param = new FinanceQueryParam(start, limit);
+        param.setProjectsId(projectsId);
+        param.setFromDay(fromDay);
+        param.setEndDay(endDay);
+
+
+        JsonResult<FinanceDO> result = financeService.searchFinance(param);
         writeResponse(response, result);
     }
 

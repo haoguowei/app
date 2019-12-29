@@ -13,7 +13,6 @@ import java.util.Date;
 public class YYCostDO implements Serializable {
 
     private Integer id;
-    private String idStr;
 
     private Date enterDate;
 

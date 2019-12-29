@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class AssetsServiceImpl implements AssetsService {
@@ -23,24 +22,6 @@ public class AssetsServiceImpl implements AssetsService {
     public JsonResult<AssetsDO> searchAssets(AssetsQueryParam param) {
         int count = assetsMapper.count(param);
         List<AssetsDO> list = assetsMapper.search(param);
-
-        if (list != null) {
-
-            AtomicInteger qTotal = new AtomicInteger();
-            AtomicInteger qqTotal = new AtomicInteger();
-
-            for (AssetsDO v : list) {
-                v.setIdStr(String.valueOf(v.getId()));
-                qTotal.addAndGet(v.getQuantity());
-                qqTotal.addAndGet(v.getQuoQuantity());
-            }
-
-            AssetsDO last = new AssetsDO();
-            last.setIdStr("合计");
-            last.setQuantity(qTotal.get());
-            last.setQuoQuantity(qqTotal.get());
-            list.add(last);
-        }
         return new JsonResult<>(count, list);
     }
 

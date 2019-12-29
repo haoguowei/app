@@ -20,10 +20,24 @@
         id, income_amount, projects, projects_name, payout_amount, profit, up_day, remark, creater, create_time, update_time
     </sql>
 
-    <select id="search" resultMap="BaseResultMap">
+    <select id="search" parameterType="com.hao.app.commons.entity.param.FinanceQueryParam" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from finance
+        <include refid="searchSQL"/>
+        order by id desc
+        limit ${pageStart},${pageLimit}
+    </select>
+
+
+    <select id="count" parameterType="com.hao.app.commons.entity.param.FinanceQueryParam"
+            resultType="java.lang.Integer">
+        select count(1)
+        from finance
+        <include refid="searchSQL"/>
+    </select>
+
+    <sql id="searchSQL">
         <where>
             <if test="projectsId != null and projectsId > 0">
                 and projects = ${projectsId}
@@ -35,8 +49,7 @@
                 <![CDATA[ and up_day <= #{endDay} ]]>
             </if>
         </where>
-        order by id desc
-    </select>
+    </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select

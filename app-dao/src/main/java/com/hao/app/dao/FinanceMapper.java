@@ -1,7 +1,7 @@
 package com.hao.app.dao;
 
+import com.hao.app.commons.entity.param.FinanceQueryParam;
 import com.hao.app.pojo.FinanceDO;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,5 +13,7 @@ public interface FinanceMapper {
 
     int update(FinanceDO record);
 
-    List<FinanceDO> search(@Param("projectsId") Integer projectsId, @Param("fromDay") String fromDay, @Param("endDay") String endDay);
+    List<FinanceDO> search(FinanceQueryParam param);
+
+    int count(FinanceQueryParam param);
 }

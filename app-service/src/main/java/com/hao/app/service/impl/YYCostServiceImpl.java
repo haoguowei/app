@@ -21,15 +21,6 @@ public class YYCostServiceImpl implements YYCostService {
     public JsonResult<YYCostDO> searchYYCost(CostQueryParam param) {
         int count = yYCostMapper.count(param);
         List<YYCostDO> list = yYCostMapper.search(param);
-
-        if (list != null) {
-            for (YYCostDO v : list) {
-                v.setIdStr(String.valueOf(v.getId()));
-            }
-            YYCostDO last = new YYCostDO();
-            last.setIdStr("合计");
-            list.add(last);
-        }
         return new JsonResult<>(count, list);
     }
 
