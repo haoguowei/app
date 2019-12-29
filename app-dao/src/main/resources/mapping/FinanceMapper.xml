@@ -35,6 +35,7 @@
                 <![CDATA[ and up_day <= #{endDay} ]]>
             </if>
         </where>
+        order by id desc
     </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

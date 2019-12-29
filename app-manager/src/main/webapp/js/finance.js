@@ -48,6 +48,7 @@ Ext.onReady(function () {
         totalProperty: 'total',
         fields: [
             {name: 'id'},
+            {name: 'idStr'},
             {name: 'projectsName'},
             {name: 'incomeAmount'},
             {name: 'payoutAmount'},
@@ -70,7 +71,7 @@ Ext.onReady(function () {
         border: false,
         autoHeight: true,
         columns: [
-            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'idStr'},
             {width: 1, header: '收入金额(元)', align: 'left', sortable: false, dataIndex: 'incomeAmount'},
             {width: 2, header: '支出金额(元)', align: 'left', sortable: false, dataIndex: 'payoutAmount'},
             {width: 2, header: '收益(元)', align: 'left', sortable: false, dataIndex: 'profit'},
@@ -81,6 +82,9 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'upDay',
                 renderer: function (val, cell, record) {
+                    if (val == null || val == '') {
+                        return '';
+                    }
                     return new Date(val).format("Y-m");
                 }
             },
@@ -94,6 +98,9 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
+                    if (val == null || val == '') {
+                        return '';
+                    }
                     var str = '';
                     if (urlEditValid) {//权限
                         str += genButton("修改", 'updateF(' + val + ')');
