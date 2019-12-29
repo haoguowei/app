@@ -23,9 +23,9 @@ public class YYCostServiceImpl implements YYCostService {
         List<YYCostDO> list = yYCostMapper.search(param);
 
         if (list != null) {
-            list.forEach(v -> {
+            for (YYCostDO v : list) {
                 v.setIdStr(String.valueOf(v.getId()));
-            });
+            }
             YYCostDO last = new YYCostDO();
             last.setIdStr("合计");
             list.add(last);

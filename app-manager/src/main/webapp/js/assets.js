@@ -77,6 +77,9 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'buyTime',
                 renderer: function (val, cell, record) {
+                    if (val == null || val == '') {
+                        return '';
+                    }
                     return new Date(val).format("Y-m-d");
                 }
             },
@@ -88,6 +91,10 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
+                    if (val == null || val == '') {
+                        return '';
+                    }
+
                     var str = '';
                     // str += genButton("查看", 'viewF(' + val + ')');
                     if (urlEditValid) {//权限

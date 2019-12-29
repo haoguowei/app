@@ -28,11 +28,12 @@ public class AssetsServiceImpl implements AssetsService {
 
             AtomicInteger qTotal = new AtomicInteger();
             AtomicInteger qqTotal = new AtomicInteger();
-            list.forEach(v -> {
+
+            for (AssetsDO v : list) {
                 v.setIdStr(String.valueOf(v.getId()));
                 qTotal.addAndGet(v.getQuantity());
                 qqTotal.addAndGet(v.getQuoQuantity());
-            });
+            }
 
             AssetsDO last = new AssetsDO();
             last.setIdStr("合计");

@@ -28,7 +28,7 @@ Ext.onReady(function () {
     });
 
     this.searchFunc = function () {
-        gridStore.setBaseParam("projectsId", getById("status"));
+        gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
@@ -82,6 +82,9 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'enterDate',
                 renderer: function (val, cell, record) {
+                    if (val == null || val == '') {
+                        return '';
+                    }
                     return new Date(val).format("Y-m-d");
                 }
             },
@@ -92,6 +95,10 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
+                    if (val == '合计') {
+                        return '';
+                    }
+
                     var str = '';
                     // str += genButton("查看", 'viewF(' + val + ')');
                     if (urlEditValid) {//权限
@@ -110,7 +117,7 @@ Ext.onReady(function () {
             region: 'north',
             title: '资产信息',
             border: false,
-            height: 80,
+            height: 150,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {
@@ -126,13 +133,13 @@ Ext.onReady(function () {
             items: [grid],
             tbar: [
                 {
-                    text: '录入资产',
+                    text: '录入消费',
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initYYCostEdit.do";
                     }
                 }, '-', {
-                    text: '导出资产',
+                    text: '导出消费',
                     id: 'bt_exp',
                     handler: function (b, e) {
                         alert("该功能正在开发中...");
