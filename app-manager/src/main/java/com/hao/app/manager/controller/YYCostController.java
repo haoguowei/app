@@ -62,7 +62,7 @@ public class YYCostController extends BaseController {
     @RequestMapping("/searchYYCost.do")
     public void searchYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
-        String name = request.getParameter("name");
+        int employeeId = NumberUtils.toInt(request.getParameter("employeeId"), 0);
         String enterDateStart = request.getParameter("enterDateStart");
         String enterDateEnd = request.getParameter("enterDateEnd");
 
@@ -74,9 +74,10 @@ public class YYCostController extends BaseController {
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
         }
-        if (StringUtils.isNotBlank(name)) {
-            param.setName(name);
+        if (employeeId > 0) {
+            param.setProjectsId(employeeId);
         }
+
         if (StringUtils.isNotBlank(enterDateStart)) {
             param.setEnterDateStart(enterDateStart);
         }

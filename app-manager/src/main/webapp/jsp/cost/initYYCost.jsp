@@ -34,7 +34,7 @@
                 </select>
 
                 消费司机：
-                <select id="name" name="name">
+                <select id="employeeId" name="employeeId">
                     <option value="0">请选择...
                         <c:forEach items="${employeeList }" var="itm">
                     <option value="${itm.id}">${itm.name}

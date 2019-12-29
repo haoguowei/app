@@ -29,7 +29,7 @@ Ext.onReady(function () {
 
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
-        gridStore.setBaseParam("name", getById("name"));
+        gridStore.setBaseParam("employeeId", getById("employeeId"));
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
         gridStore.reload();
@@ -62,7 +62,7 @@ Ext.onReady(function () {
             projectsId: '',
             enterDateStart: '',
             enterDateEnd: '',
-            name: ''
+            employeeId: ''
         }
     });
 

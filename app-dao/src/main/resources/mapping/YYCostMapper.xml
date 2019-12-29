@@ -304,8 +304,8 @@
             <if test="projectsId != null and projectsId > 0">
                 and projects = ${projectsId}
             </if>
-            <if test="name != null">
-                and employee_name like CONCAT('%',#{name},'%')
+            <if test="employeeId != null and employeeId > 0">
+                and employee_id = ${employeeId}
             </if>
             <if test="enterDateStart != null">
                 <![CDATA[ and enter_date >= #{enterDateStart} ]]>
