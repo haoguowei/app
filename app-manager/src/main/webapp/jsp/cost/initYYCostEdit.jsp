@@ -98,20 +98,20 @@
                 </td>
             </tr>
             <tr>
-                <td width="150px">加油金额:</td>
+                <td width="150px">加油金额(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="fuelAmount" id="fuelAmount" value="${itemObj.fuelAmount }">
                 </td>
             </tr>
             <tr>
-                <td width="150px">保养费用:</td>
+                <td width="150px">保养费用(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="baoyangAmount" id="baoyangAmount"
                            value="${itemObj.baoyangAmount }">
                 </td>
             </tr>
             <tr>
-                <td width="150px">维修费用:</td>
+                <td width="150px">维修费用(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="fixAmount" id="fixAmount" value="${itemObj.fixAmount }">
                 </td>
@@ -130,14 +130,14 @@
                 </td>
             </tr>
             <tr>
-                <td width="150px">事故金额:</td>
+                <td width="150px">事故金额(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="shiguAmount" id="shiguAmount"
                            value="${itemObj.shiguAmount }">
                 </td>
             </tr>
             <tr>
-                <td width="150px">事故保险外赔偿金额:</td>
+                <td width="150px">事故保险外赔偿金额(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="shiguOutAmount" id="shiguOutAmount"
                            value="${itemObj.shiguOutAmount }">
@@ -145,7 +145,7 @@
             </tr>
 
             <tr>
-                <td width="150px">保险费用:</td>
+                <td width="150px">保险费用(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="baoxianAmount" id="baoxianAmount"
                            value="${itemObj.baoxianAmount }">
@@ -153,7 +153,7 @@
             </tr>
 
             <tr>
-                <td width="150px">年检费用:</td>
+                <td width="150px">年检费用(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="yearCheckAmount" id="yearCheckAmount" value="${itemObj.yearCheckAmount }">
                 </td>

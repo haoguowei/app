@@ -74,10 +74,10 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '收入金额(元)', align: 'left', sortable: false, dataIndex: 'incomeAmount'},
             {width: 2, header: '支出金额(元)', align: 'left', sortable: false, dataIndex: 'payoutAmount'},
-            {width: 2, header: '收益(元)', align: 'left', sortable: false, dataIndex: 'profit'},
+            {width: 2, header: '净流量(元)', align: 'left', sortable: false, dataIndex: 'profit'},
             {
                 width: 2,
-                header: '清单时间',
+                header: '录入时间',
                 align: 'left',
                 sortable: false,
                 dataIndex: 'upDay',
@@ -90,7 +90,7 @@ Ext.onReady(function () {
             },
 
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
-            {width: 2, header: '创建人', align: 'left', sortable: false, dataIndex: 'creater'},
+            {width: 2, header: '录入人', align: 'left', sortable: false, dataIndex: 'creater'},
             {
                 width: 2,
                 header: '操作',

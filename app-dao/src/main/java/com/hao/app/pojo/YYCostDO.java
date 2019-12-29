@@ -64,4 +64,7 @@ public class YYCostDO implements Serializable {
 
     private String assetsInfo;
 
+    private int dayMileage;
+    private BigDecimal avgFuel;
+
 }

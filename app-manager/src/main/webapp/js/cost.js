@@ -55,6 +55,8 @@ Ext.onReady(function () {
             {name: 'enterDate'},
             {name: 'projectsName'},
             {name: 'assetsInfo'},
+            {name: 'dayMileage'},
+            {name: 'avgFuel'},
             {name: 'employeeName'}
         ],
         baseParams: {
@@ -75,7 +77,9 @@ Ext.onReady(function () {
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '消费司机', align: 'left', sortable: false, dataIndex: 'employeeName'},
-            {width: 3, header: '消费资产', align: 'left', sortable: false, dataIndex: 'assetsInfo'},
+            {width: 4, header: '消费资产', align: 'left', sortable: false, dataIndex: 'assetsInfo'},
+            {width: 2, header: '日行驶里程', align: 'left', sortable: false, dataIndex: 'dayMileage'},
+            {width: 2, header: '平均油耗', align: 'left', sortable: false, dataIndex: 'avgFuel'},
             {
                 width: 2,
                 header: '消费日期',
@@ -89,7 +93,7 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '操作',

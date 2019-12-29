@@ -11,6 +11,7 @@ import com.hao.app.service.YYCostService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -35,6 +36,19 @@ public class YYCostServiceImpl implements YYCostService {
                     cost.setAssetsInfo(assetsDO.getName() + "(资产编号:" + assetsDO.getNumber() + "，牌照号:" + assetsDO.getLicense() + ")");
                 }
 
+                //日行驶里程，日末-日初
+                int x = cost.getEndMileage() - cost.getStartMileage();
+                x = x < 0 ? 0 : x;
+                cost.setDayMileage(x);
+
+
+                //平均油耗：（加油量/日行驶里程）* 100
+                if (x == 0) {
+                    cost.setAvgFuel(BigDecimal.valueOf(0));
+                } else {
+                    BigDecimal y = BigDecimal.valueOf(cost.getFuel()).multiply(BigDecimal.valueOf(100.00)).divide(BigDecimal.valueOf(x), 2, BigDecimal.ROUND_HALF_UP);
+                    cost.setAvgFuel(y);
+                }
             }
         }
 
