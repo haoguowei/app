@@ -66,12 +66,17 @@ public class YYCostController extends BaseController {
 
     @RequestMapping("/initYYCostEdit.do")
     public String initYYCostEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("id"));
+        YYCostDO itemObj = yYCostService.getById(id);
+        request.setAttribute("itemObj", itemObj);
+
+        request.setAttribute("projectsList", getProjectsList(request));
 
         return "jsp/cost/initYYCostEdit";
     }
 
     @RequestMapping("/saveYYCost.do")
     public String saveYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        return successResult(request, "区域管理", "initArea.do");
+        return successResult(request, "消费汇总", "initYYCost.do");
     }
 }
