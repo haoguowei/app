@@ -68,8 +68,8 @@ public class AssetsServiceImpl implements AssetsService {
 
         StringBuffer sbr = new StringBuffer();
         sbr.append("数量合计:")
-                .append(a.doubleValue()).append("    ")
-                .append("现况数量合计:").append(b).append("    ");
+                .append(a.doubleValue()).append("，")
+                .append("现况数量合计:").append(b).append("。");
         return sbr.toString();
     }
 }

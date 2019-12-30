@@ -75,9 +75,9 @@ public class FinanceServiceImpl implements FinanceService {
         }
 
         StringBuffer sbr = new StringBuffer();
-        sbr.append("收入金额合计:").append(a).append("元     ")
-                .append("支出金额合计:").append(b.doubleValue()).append("元     ")
-                .append("净流量金额合计:").append(a.subtract(b).doubleValue()).append("元     ")
+        sbr.append("收入金额合计:").append(a).append("元，")
+                .append("支出金额合计:").append(b.doubleValue()).append("元，")
+                .append("净流量金额合计:").append(a.subtract(b).doubleValue()).append("元。")
         ;
         return sbr.toString();
     }
