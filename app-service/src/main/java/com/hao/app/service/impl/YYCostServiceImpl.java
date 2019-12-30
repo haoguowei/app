@@ -94,7 +94,7 @@ public class YYCostServiceImpl implements YYCostService {
         }
 
         StringBuffer sbr = new StringBuffer();
-        sbr.append("日行驶里程合计:").append(a).append("。")
+        sbr.append("日行驶里程合计:").append(a).append("")
         ;
         return sbr.toString();
     }
