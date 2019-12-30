@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AssetsServiceImpl implements AssetsService {
@@ -52,5 +53,20 @@ public class AssetsServiceImpl implements AssetsService {
         } else {
             return ResultCodeEnum.FAIL;
         }
+    }
+
+    @Override
+    public String searchAssets4HJ(AssetsQueryParam param) {
+        Map<String, Object> map = assetsMapper.searchHJ(param);
+        int a = 0;
+        int b = 0;
+        if (map != null) {
+            a = (int) map.get("a");
+            b = (int) map.get("b");
+        }
+
+        StringBuffer sbr = new StringBuffer();
+        sbr.append("数量合计:").append(a).append("    ").append("现况数量合计:").append(b).append("    ");
+        return sbr.toString();
     }
 }

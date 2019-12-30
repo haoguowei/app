@@ -1,5 +1,6 @@
 package com.hao.app.manager.controller;
 
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
@@ -24,9 +25,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class AssetsController extends BaseController {
@@ -51,6 +50,12 @@ public class AssetsController extends BaseController {
 
     @RequestMapping("/searchAssets.do")
     public void searchAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        AssetsQueryParam param = genQueryParam(request);
+        JsonResult<AssetsDO> result = assetsService.searchAssets(param);
+        writeResponse(response, result);
+    }
+
+    private AssetsQueryParam genQueryParam(HttpServletRequest request) {
         Integer projectsId = getCurrentProjectsId(request);
 
         int start = NumberUtils.toInt(request.getParameter("start"));
@@ -76,9 +81,7 @@ public class AssetsController extends BaseController {
         if (StringUtils.isNotBlank(number)) {
             param.setNumber(number);
         }
-
-        JsonResult<AssetsDO> result = assetsService.searchAssets(param);
-        writeResponse(response, result);
+        return param;
     }
 
     @RequestMapping("/initAssetsEdit.do")
@@ -197,12 +200,15 @@ public class AssetsController extends BaseController {
             return failResult(request, resultCode);
         }
     }
-    
-    @RequestMapping("/initAssetsHeJi.do")
-public void initAssetsHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
-    Map<String,Boolean> map = new HashMap<String, Boolean>();
-    map.put(Constant.SUCCESS, false);
-    response.getWriter().write(new Gson().toJson(map));
-}
+    @RequestMapping("/initAssetsHeJi.do")
+    public void initAssetsHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        AssetsQueryParam param = genQueryParam(request);
+        String info = assetsService.searchAssets4HJ(param);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("info", info);
+        response.getWriter().write(new Gson().toJson(map));
+    }
 }

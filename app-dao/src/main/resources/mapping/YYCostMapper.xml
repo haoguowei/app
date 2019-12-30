@@ -315,4 +315,13 @@
             </if>
         </where>
     </sql>
+
+    <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
+            resultType="java.util.HashMap">
+        SELECT sum(end_mileage-start_mileage) AS a FROM yy_cost
+        <include refid="searchSQL"/>
+        order by id desc
+        limit ${pageStart},${pageLimit}
+    </select>
+
 </mapper>

@@ -14,4 +14,6 @@ public interface YYCostService {
     ResultCodeEnum insert(YYCostDO cost);
 
     ResultCodeEnum update(YYCostDO cost);
+
+    String searchYYCost4HJ(CostQueryParam param);
 }

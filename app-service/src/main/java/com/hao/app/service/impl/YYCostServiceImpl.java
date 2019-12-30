@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class YYCostServiceImpl implements YYCostService {
@@ -82,5 +83,19 @@ public class YYCostServiceImpl implements YYCostService {
         } else {
             return ResultCodeEnum.FAIL;
         }
+    }
+
+    @Override
+    public String searchYYCost4HJ(CostQueryParam param) {
+        Map<String, Object> map = yYCostMapper.searchHJ(param);
+        int a = 0;
+        if (map != null) {
+            a = (int) map.get("a");
+        }
+
+        StringBuffer sbr = new StringBuffer();
+        sbr.append("日行驶里程合计:").append(a).append("     ")
+        ;
+        return sbr.toString();
     }
 }

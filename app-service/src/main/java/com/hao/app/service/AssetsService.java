@@ -14,4 +14,6 @@ public interface AssetsService {
     ResultCodeEnum insert(AssetsDO assets);
 
     ResultCodeEnum update(AssetsDO assets);
+
+    String searchAssets4HJ(AssetsQueryParam param);
 }

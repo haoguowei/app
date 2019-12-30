@@ -5,6 +5,7 @@ import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.pojo.AssetsDO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AssetsMapper {
 
@@ -17,4 +18,6 @@ public interface AssetsMapper {
     int count(AssetsQueryParam param);
 
     List<AssetsDO> search(AssetsQueryParam param);
+
+    Map<String, Object> searchHJ(AssetsQueryParam param);
 }

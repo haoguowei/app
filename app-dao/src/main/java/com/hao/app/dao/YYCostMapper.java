@@ -5,6 +5,7 @@ import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.pojo.YYCostDO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface YYCostMapper {
 
@@ -19,4 +20,6 @@ public interface YYCostMapper {
     int count(CostQueryParam param);
 
     List<YYCostDO> search(CostQueryParam param);
+
+    Map<String, Object> searchHJ(CostQueryParam param);
 }

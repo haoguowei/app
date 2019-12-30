@@ -14,4 +14,6 @@ public interface FinanceService {
     ResultCodeEnum insert(FinanceDO finance);
 
     ResultCodeEnum update(FinanceDO finance);
+
+    String searchFinance4HJ(FinanceQueryParam param);
 }

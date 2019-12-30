@@ -1,5 +1,6 @@
 package com.hao.app.manager.controller;
 
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.param.FinanceQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -23,6 +24,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -51,6 +54,12 @@ public class FinanceController extends BaseController {
 
     @RequestMapping("/searchFinance.do")
     public void searchFinance(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        FinanceQueryParam param = genParam(request);
+        JsonResult<FinanceDO> result = financeService.searchFinance(param);
+        writeResponse(response, result);
+    }
+
+    private FinanceQueryParam genParam(HttpServletRequest request) {
         Integer projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
         if (projectsId == null || projectsId <= 0) {
             projectsId = null;
@@ -65,10 +74,7 @@ public class FinanceController extends BaseController {
         param.setProjectsId(projectsId);
         param.setFromDay(fromDay);
         param.setEndDay(endDay);
-
-
-        JsonResult<FinanceDO> result = financeService.searchFinance(param);
-        writeResponse(response, result);
+        return param;
     }
 
     @RequestMapping("/initFinanceEdit.do")
@@ -140,5 +146,16 @@ public class FinanceController extends BaseController {
         } else {
             return failResult(request, resultCode);
         }
+    }
+
+    @RequestMapping("/initFinanceHeJi.do")
+    public void initFinanceHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        FinanceQueryParam param = genParam(request);
+        String info = financeService.searchFinance4HJ(param);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("info", info);
+        response.getWriter().write(new Gson().toJson(map));
     }
 }

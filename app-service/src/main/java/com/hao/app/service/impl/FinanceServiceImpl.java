@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FinanceServiceImpl implements FinanceService {
@@ -60,5 +61,23 @@ public class FinanceServiceImpl implements FinanceService {
         } else {
             return ResultCodeEnum.FAIL;
         }
+    }
+
+    @Override
+    public String searchFinance4HJ(FinanceQueryParam param) {
+        Map<String, Object> map = financeMapper.searchHJ(param);
+        int a = 0;
+        int b = 0;
+        if (map != null) {
+            a = (int) map.get("a");
+            b = (int) map.get("b");
+        }
+
+        StringBuffer sbr = new StringBuffer();
+        sbr.append("收入金额合计:").append(a).append("元     ")
+                .append("支出金额合计:").append(b).append("元     ")
+                .append("净流量金额合计:").append(a - b).append("元     ")
+        ;
+        return sbr.toString();
     }
 }

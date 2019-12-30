@@ -29,6 +29,14 @@
         limit ${pageStart},${pageLimit}
     </select>
 
+    <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.FinanceQueryParam"
+            resultType="java.util.HashMap">
+        SELECT sum(income_amount) AS a,sum(payout_amount) AS b FROM finance
+        <include refid="searchSQL"/>
+        order by id desc
+        limit ${pageStart},${pageLimit}
+    </select>
+
 
     <select id="count" parameterType="com.hao.app.commons.entity.param.FinanceQueryParam"
             resultType="java.lang.Integer">

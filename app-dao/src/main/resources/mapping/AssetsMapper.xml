@@ -50,6 +50,14 @@
         limit ${pageStart},${pageLimit}
     </select>
 
+    <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam"
+            resultType="java.util.HashMap">
+        SELECT sum(quantity) AS a,sum(quo_quantity) AS b FROM assets
+        <include refid="searchSQL"/>
+        order by id desc
+        limit ${pageStart},${pageLimit}
+    </select>
+
     <sql id="searchSQL">
         <where>
             <if test="projectsId != null and projectsId > 0">

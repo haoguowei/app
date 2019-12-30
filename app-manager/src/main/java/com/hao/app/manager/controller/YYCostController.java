@@ -1,5 +1,6 @@
 package com.hao.app.manager.controller;
 
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
@@ -27,10 +28,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -61,6 +59,12 @@ public class YYCostController extends BaseController {
 
     @RequestMapping("/searchYYCost.do")
     public void searchYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        CostQueryParam param = genParam(request);
+        JsonResult<YYCostDO> result = yYCostService.searchYYCost(param);
+        writeResponse(response, result);
+    }
+
+    private CostQueryParam genParam(HttpServletRequest request) {
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
         int employeeId = NumberUtils.toInt(request.getParameter("employeeId"), 0);
         String enterDateStart = request.getParameter("enterDateStart");
@@ -84,11 +88,7 @@ public class YYCostController extends BaseController {
         if (StringUtils.isNotBlank(enterDateEnd)) {
             param.setEnterDateEnd(enterDateEnd);
         }
-
-        JsonResult<YYCostDO> result = yYCostService.searchYYCost(param);
-        writeResponse(response, result);
-
-
+        return param;
     }
 
     private List<EmployeeDO> getEmployeeList(Integer projectsId) {
@@ -214,5 +214,16 @@ public class YYCostController extends BaseController {
         } else {
             return failResult(request, resultCode);
         }
+    }
+
+    @RequestMapping("/initCostHeJi.do")
+    public void initCostHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        CostQueryParam param = genParam(request);
+        String info = yYCostService.searchYYCost4HJ(param);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("info", info);
+        response.getWriter().write(new Gson().toJson(map));
     }
 }

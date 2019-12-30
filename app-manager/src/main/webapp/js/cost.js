@@ -32,7 +32,24 @@ Ext.onReady(function () {
         gridStore.setBaseParam("employeeId", getById("employeeId"));
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
-        gridStore.reload();
+
+        gridStore.reload({
+            callback: function (r, options, success) {
+                if (success) {
+                    Ext.Ajax.request({
+                        url: 'initCostHeJi.do',
+                        success: function (response) {
+                            var resp = Ext.util.JSON.decode(response.responseText);
+                            if (resp.success) {
+                                Ext.getCmp("huizong_show").setText(resp.info);
+                            } else {
+                                Ext.getCmp("huizong_show").setText("合计数据获取失败！");
+                            }
+                        }
+                    });
+                }
+            }
+        });
     };
 
     this.updateF = function (id) {
@@ -137,6 +154,11 @@ Ext.onReady(function () {
             border: true,
             autoScroll: true,
             items: [grid],
+            bbar: ['->', {
+                id: 'huizong_show',
+                xtype: 'label',
+                text: ''
+            }],
             tbar: [
                 {
                     text: '录入消费信息',
