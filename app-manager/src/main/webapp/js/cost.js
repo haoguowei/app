@@ -33,6 +33,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
 
+        Ext.getCmp("huizong_show").setText("汇总信息...");
         gridStore.reload({
             callback: function (r, options, success) {
                 if (success) {
@@ -41,7 +42,6 @@ Ext.onReady(function () {
                         success: function (response) {
                             var resp = Ext.util.JSON.decode(response.responseText);
                             if (resp.success) {
-                                alert(resp.info);
                                 Ext.getCmp("huizong_show").setText(resp.info);
                             } else {
                                 Ext.getCmp("huizong_show").setText("合计数据获取失败！");
@@ -158,6 +158,7 @@ Ext.onReady(function () {
             bbar: ['->', {
                 id: 'huizong_show',
                 xtype: 'label',
+                height: 20,
                 text: ''
             }],
             tbar: [

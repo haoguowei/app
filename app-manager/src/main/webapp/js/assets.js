@@ -18,7 +18,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("number", getById("number"));
         gridStore.setBaseParam("type", getById("type"));
 
-        //huizong_show
+        Ext.getCmp("huizong_show").setText("汇总信息...");
         gridStore.reload({
             callback: function (r, options, success) {
                 if (success) {

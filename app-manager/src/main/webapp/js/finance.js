@@ -33,6 +33,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("endDay", getById("endDay"));
         gridStore.setBaseParam("projectsId", getById("projectsId"));
 
+        Ext.getCmp("huizong_show").setText("汇总信息...");
         gridStore.reload({
             callback: function (r, options, success) {
                 if (success) {
