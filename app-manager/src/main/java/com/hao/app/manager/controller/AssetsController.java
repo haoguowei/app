@@ -197,4 +197,12 @@ public class AssetsController extends BaseController {
             return failResult(request, resultCode);
         }
     }
+    
+    @RequestMapping("/initAssetsHeJi.do")
+public void initAssetsHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+    Map<String,Boolean> map = new HashMap<String, Boolean>();
+    map.put(Constant.SUCCESS, false);
+    response.getWriter().write(new Gson().toJson(map));
+}
 }
