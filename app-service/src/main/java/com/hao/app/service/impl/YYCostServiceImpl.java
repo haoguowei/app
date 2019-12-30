@@ -88,9 +88,9 @@ public class YYCostServiceImpl implements YYCostService {
     @Override
     public String searchYYCost4HJ(CostQueryParam param) {
         Map<String, Object> map = yYCostMapper.searchHJ(param);
-        int a = 0;
+        BigDecimal a = BigDecimal.valueOf(0);
         if (map != null) {
-            a = (int) map.get("a");
+            a = (BigDecimal) map.get("a");
         }
 
         StringBuffer sbr = new StringBuffer();

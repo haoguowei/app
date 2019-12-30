@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -66,17 +67,17 @@ public class FinanceServiceImpl implements FinanceService {
     @Override
     public String searchFinance4HJ(FinanceQueryParam param) {
         Map<String, Object> map = financeMapper.searchHJ(param);
-        int a = 0;
-        int b = 0;
+        BigDecimal a = BigDecimal.valueOf(0);
+        BigDecimal b = BigDecimal.valueOf(0);
         if (map != null) {
-            a = (int) map.get("a");
-            b = (int) map.get("b");
+            a = (BigDecimal) map.get("a");
+            b = (BigDecimal) map.get("b");
         }
 
         StringBuffer sbr = new StringBuffer();
         sbr.append("收入金额合计:").append(a).append("元     ")
-                .append("支出金额合计:").append(b).append("元     ")
-                .append("净流量金额合计:").append(a - b).append("元     ")
+                .append("支出金额合计:").append(b.doubleValue()).append("元     ")
+                .append("净流量金额合计:").append(a.subtract(b).doubleValue()).append("元     ")
         ;
         return sbr.toString();
     }

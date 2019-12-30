@@ -9,6 +9,7 @@ import com.hao.app.service.AssetsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -58,15 +59,17 @@ public class AssetsServiceImpl implements AssetsService {
     @Override
     public String searchAssets4HJ(AssetsQueryParam param) {
         Map<String, Object> map = assetsMapper.searchHJ(param);
-        int a = 0;
-        int b = 0;
+        BigDecimal a = BigDecimal.valueOf(0);
+        BigDecimal b = BigDecimal.valueOf(0);
         if (map != null) {
-            a = (int) map.get("a");
-            b = (int) map.get("b");
+            a = (BigDecimal) map.get("a");
+            b = (BigDecimal) map.get("b");
         }
 
         StringBuffer sbr = new StringBuffer();
-        sbr.append("数量合计:").append(a).append("    ").append("现况数量合计:").append(b).append("    ");
+        sbr.append("数量合计:")
+                .append(a.doubleValue()).append("    ")
+                .append("现况数量合计:").append(b).append("    ");
         return sbr.toString();
     }
 }

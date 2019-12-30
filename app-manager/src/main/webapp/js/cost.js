@@ -41,6 +41,7 @@ Ext.onReady(function () {
                         success: function (response) {
                             var resp = Ext.util.JSON.decode(response.responseText);
                             if (resp.success) {
+                                alert(resp.info);
                                 Ext.getCmp("huizong_show").setText(resp.info);
                             } else {
                                 Ext.getCmp("huizong_show").setText("合计数据获取失败！");
