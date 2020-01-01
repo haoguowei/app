@@ -37,6 +37,17 @@ public class BaseController {
     protected SysLogsService sysLogsService;
 
     /**
+     * 获取模板文件全路径地址
+     *
+     * @param request
+     * @param fileName
+     * @return
+     */
+    public String getModelFilePath(HttpServletRequest request, String fileName) {
+        return getRealpath(request) + "/" + MODELDIR + "/" + fileName;
+    }
+
+    /**
      * 得到登录用户名
      *
      * @param request

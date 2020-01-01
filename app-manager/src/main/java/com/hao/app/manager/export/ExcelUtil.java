@@ -101,7 +101,7 @@ public class ExcelUtil {
         return cellStyle;
     }
 
-    public static HSSFCellStyle getCellStyleKaoqin(HSSFWorkbook wb) {
+    public static HSSFCellStyle getCellStyleCenter(HSSFWorkbook wb) {
         HSSFCellStyle cellStyle = getBaseStyle(wb);
         HSSFFont font = wb.createFont();
         font.setFontName("宋体");
@@ -113,6 +113,18 @@ public class ExcelUtil {
         cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
         cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
 
+        return cellStyle;
+    }
+
+    public static HSSFCellStyle getCellStyleLeft(HSSFWorkbook wb) {
+        HSSFCellStyle cellStyle = getCellStyleCenter(wb);
+        cellStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+        return cellStyle;
+    }
+
+    public static HSSFCellStyle getCellStyleRight(HSSFWorkbook wb) {
+        HSSFCellStyle cellStyle = getCellStyleCenter(wb);
+        cellStyle.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
         return cellStyle;
     }
 
