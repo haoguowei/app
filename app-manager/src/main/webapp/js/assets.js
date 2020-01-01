@@ -159,7 +159,7 @@ Ext.onReady(function () {
                     text: '导出资产',
                     id: 'bt_exp',
                     handler: function (b, e) {
-                        alert("该功能正在开发中...");
+                        location.href = "exportAssets.do";
                     }
                 },
                 '->',

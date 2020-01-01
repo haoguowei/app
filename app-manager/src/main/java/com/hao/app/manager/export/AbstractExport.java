@@ -1,19 +1,22 @@
 package com.hao.app.manager.export;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import com.hao.app.commons.utils.Utils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.hao.app.commons.utils.Utils;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 文件导出
@@ -78,5 +81,43 @@ public abstract class AbstractExport {
 			}
 		}
 	}
+
+	protected static Cell genCell(Row row, int index) {
+		Cell cell = row.createCell(index);
+		return cell;
+	}
+
+	protected static Cell genCell(Row row, HSSFCellStyle style, int index) {
+		Cell cell = row.createCell(index);
+		cell.setCellStyle(style);
+		return cell;
+	}
+
+	protected static Cell genCell(Row row, HSSFCellStyle style, int index, String val) {
+		Cell cell = genCell(row, style, index);
+		cell.setCellValue(val);
+		return cell;
+	}
+
+	protected static Cell genCell(Row row, HSSFCellStyle style, int index, double val) {
+		Cell cell = genCell(row, style, index);
+		cell.setCellValue(val);
+		return cell;
+	}
+
+	protected static Cell genCell(Row row, HSSFCellStyle style, int index, int val) {
+		Cell cell = genCell(row, style, index);
+		cell.setCellValue(val);
+		return cell;
+	}
+
+	protected static String fmtDate(Date date) {
+		return fmtDate(date, "yyyy-MM-dd");
+	}
+
+	protected static String fmtDate(Date date, String pattern) {
+		return new SimpleDateFormat(pattern).format(date);
+	}
+
 
 }
