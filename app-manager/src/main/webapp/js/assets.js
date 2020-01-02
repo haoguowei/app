@@ -28,9 +28,6 @@ Ext.onReady(function () {
     });
 
     this.exportFunc = function () {
-        searchFunc();
-
-
         var projectsId = getById("projectsId");
         var name = getById("name");
         var number = getById("number");
@@ -39,16 +36,18 @@ Ext.onReady(function () {
         var buyTimeStart = getById("buyTimeStart");
         var buyTimeEnd = getById("buyTimeEnd");
 
-
         if (_isNull(buyTimeStart)) {
             alert("导出资产时请设置采购时间的搜索范围！");
             document.getElementById("buyTimeStart").focus();
+            return;
         }
         if (_isNull(buyTimeEnd)) {
             alert("导出资产时请设置采购时间的搜索范围！");
             document.getElementById("buyTimeEnd").focus();
+            return;
         }
 
+        searchFunc();
         location.href = "exportAssets.do?name=" + name
             + "&projectsId=" + projectsId
             + "&number=" + number

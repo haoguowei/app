@@ -38,6 +38,7 @@ public class EmployeeController extends BaseController {
 
     @RequestMapping("/initEmployee.do")
     public String initEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/employee/initEmployee";
     }
 
@@ -51,8 +52,7 @@ public class EmployeeController extends BaseController {
         String leaveDateStart = request.getParameter("leaveDateStart");
         String leaveDateEnd = request.getParameter("leaveDateEnd");
 
-        //TODO
-        Integer projectsId = getCurrentProjectsId(request);
+        int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
 
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);

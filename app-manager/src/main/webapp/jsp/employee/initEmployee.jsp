@@ -25,6 +25,13 @@
     <table class="Mytable">
         <tr>
             <td class="Myfont">
+                选择项目：
+                <select id="projectsId" name="projectsId">
+                    <c:forEach items="${projectsList }" var="itm">
+                    <option value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+
                 姓名：
                 <input style="margin-right: 20px;" type="text" name="name" id="name">
                 身份证号：
