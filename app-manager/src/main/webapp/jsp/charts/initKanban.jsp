@@ -27,16 +27,6 @@
             height: 1px;
             border-bottom: 0px;
         }
-
-        table {
-            width: 90%;
-            margin-left: 5px;
-        }
-
-        table td {
-            padding: 3px;
-            margin: 3px;
-        }
     </style>
 </head>
 <body style="background-color:white;">
