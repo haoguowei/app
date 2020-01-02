@@ -29,6 +29,7 @@ public class EmployeeDO implements Serializable {
 
     private String jobTypeStr;
 
+
     private Integer gender;
     private String genderStr;
 
@@ -63,6 +64,14 @@ public class EmployeeDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer hetong;
+    private String hetongStr;
+
+    public void setHetong(Integer hetong) {
+        this.hetongStr = (hetong != null && hetong.equals(1)) ? "是" : "否";
+        this.hetong = hetong;
+    }
 
     public void setJobType(Integer jobType) {
         this.jobTypeStr = Dicts.employeeJobTypeMap.get(jobType);

@@ -84,6 +84,7 @@ pageEncoding="UTF-8"%>
         </td>
     </tr>
 
+
             <tr>
                 <td width="100px">民族:</td>
                 <td>
@@ -173,22 +174,37 @@ pageEncoding="UTF-8"%>
     <tr>
         <td>紧急联系人</td>
         <td>
-            <input type="text"  class="Mytext" name="emergencyContact" id="emergencyContact" value="${itemObj.emergencyContact }">
+            <input type="text" class="Mytext" name="emergencyContact" id="emergencyContact"
+                   value="${itemObj.emergencyContact }">
         </td>
     </tr>
-    <tr>
-        <td>紧急联系人电话</td>
-        <td>
-            <input type="text"  class="Mytext" name="emergencyContactPhone" id="emergencyContactPhone" value="${itemObj.emergencyContactPhone }">
-        </td>
-    </tr>
-
-    <tr>
-        <td>保险类型</td>
-        <td>
-            <input type="text" class="Mytext" name="safeType" id="safeType" value="${itemObj.safeType }">
-        </td>
-    </tr>
+            <tr>
+                <td>紧急联系人电话</td>
+                <td>
+                    <input type="text" class="Mytext" name="emergencyContactPhone" id="emergencyContactPhone"
+                           value="${itemObj.emergencyContactPhone }">
+                </td>
+            </tr>
+            <tr>
+                <td>入职合同:</td>
+                <td>
+                    <select id="hetong" name="hetong">
+                        <option value="0">请选择...
+                        <option
+                                <c:if test="${1 == itemObj.hetong }">selected="selected"</c:if>
+                                value="1">是
+                        <option
+                                <c:if test="${0 == itemObj.hetong }">selected="selected"</c:if>
+                                value="0">否
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>保险类型</td>
+                <td>
+                    <input type="text" class="Mytext" name="safeType" id="safeType" value="${itemObj.safeType }">
+                </td>
+            </tr>
 
 
             <tr>

@@ -135,6 +135,7 @@ public class EmployeeController extends BaseController {
         item.setProjects(projectId); //projects
         item.setProjectsName(projectsDO.getName());
 
+        item.setHetong(NumberUtils.toInt(request.getParameter("hetong"), 0)); //jobType
         item.setJobType(NumberUtils.toInt(request.getParameter("jobType"), 0)); //jobType
         item.setEthnic(NumberUtils.toInt(request.getParameter("ethnic"), 0)); //ethnic
 
@@ -175,7 +176,6 @@ public class EmployeeController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            sysLogsService.writeLog(item.getCreater(), "新增或修改员工:" + item.toString());
             return successResult(request, "员工管理", "initEmployee.do");
         } else {
             return failResult(request, resultCode);

@@ -69,15 +69,19 @@ Ext.onReady(function () {
         fields: [
             {name: 'id'},
             {name: 'name'},
+            {name: 'idCard'},
             {name: 'status'},
             {name: 'projectsName'},
             {name: 'entryDate'},
             {name: 'leaveDate'},
             {name: 'phone'},
             {name: 'jobType'},
+            {name: 'safeType'},
             {name: 'idCard'},
             {name: 'jobTypeStr'},
             {name: 'genderStr'},
+            {name: 'hetong'},
+            {name: 'hetongStr'},
             {name: 'remark'}
         ],
         baseParams: {
@@ -102,10 +106,11 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
+            {width: 3, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
             {width: 2, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
-            {width: 2, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
+            {width: 1, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
             {
-                width: 2,
+                width: 1.5,
                 header: '入职时间',
                 align: 'left',
                 sortable: false,
@@ -115,7 +120,7 @@ Ext.onReady(function () {
                 }
             },
             {
-                width: 2,
+                width: 1.5,
                 header: '离职时间',
                 align: 'left',
                 sortable: false,
@@ -124,7 +129,9 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 2, header: '保险类型', align: 'left', sortable: false, dataIndex: 'safeType'},
+            {width: 1, header: '入职合同', align: 'left', sortable: false, dataIndex: 'hetongStr'},
             {
                 width: 2,
                 header: '操作',
