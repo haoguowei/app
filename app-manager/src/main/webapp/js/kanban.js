@@ -4,7 +4,6 @@ Ext.onReady(function () {
     var fromDIV = new com.custom.DateField({
         renderTo: 'fromDIV',
         format: 'Y-m',
-        height: 20,
         name: 'fromDate',
         value: getById('hideStartDate'),
         id: 'fromDate'
@@ -12,7 +11,6 @@ Ext.onReady(function () {
     var endDIV = new com.custom.DateField({
         renderTo: 'endDIV',
         format: 'Y-m',
-        height: 20,
         name: 'endDate',
         value: getById('hideEndDate'),
         id: 'endDate'
