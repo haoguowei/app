@@ -24,6 +24,9 @@ public class AssetsQueryParam extends QueryParam implements Serializable {
 
 	private String number;
 
+	private String buyTimeStart;
+	private String buyTimeEnd;
+
 	public AssetsQueryParam(int pageStart, int pageLimit) {
 		super(pageStart, pageLimit);
 	}

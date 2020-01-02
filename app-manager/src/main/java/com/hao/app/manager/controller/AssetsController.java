@@ -73,6 +73,9 @@ public class AssetsController extends BaseController {
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
+        String buyTimeStart = request.getParameter("buyTimeStart");
+        String buyTimeEnd = request.getParameter("buyTimeEnd");
+
         String name = request.getParameter("name");
         String number = request.getParameter("number");
         int type = NumberUtils.toInt(request.getParameter("type"));
@@ -84,6 +87,14 @@ public class AssetsController extends BaseController {
 
         if (type > -1) {
             param.setType(type);
+        }
+
+        if (StringUtils.isNotBlank(buyTimeStart)) {
+            param.setBuyTimeStart(buyTimeStart);
+        }
+
+        if (StringUtils.isNotBlank(buyTimeEnd)) {
+            param.setBuyTimeEnd(buyTimeEnd);
         }
 
         if (StringUtils.isNotBlank(name)) {

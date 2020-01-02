@@ -75,6 +75,13 @@
             <if test="number != null">
                 and number = #{number}
             </if>
+
+            <if test="buyTimeStart != null">
+                <![CDATA[ and buy_time >= #{buyTimeStart} ]]>
+            </if>
+            <if test="buyTimeEnd != null">
+                <![CDATA[ and buy_time <= #{buyTimeEnd} ]]>
+            </if>
         </where>
     </sql>
 

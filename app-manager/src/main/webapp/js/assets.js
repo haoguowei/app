@@ -12,11 +12,28 @@ Ext.onReady(function () {
     var isPRISaveMember = isHavePRI("saveAssets.do");//新增编辑用户
 
     //-----------------权限相关 end-----------
+    var buyTimeStartDIV = new com.custom.DateField({
+        renderTo: 'buyTimeStartDIV',
+        format: 'Y-m-d',
+        name: 'buyTimeStart',
+        value: '',
+        id: 'buyTimeStart'
+    });
+    var buyTimeEndDIV = new com.custom.DateField({
+        renderTo: 'buyTimeEndDIV',
+        format: 'Y-m-d',
+        name: 'buyTimeEnd',
+        value: '',
+        id: 'buyTimeEnd'
+    });
 
     this.searchFunc = function () {
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("number", getById("number"));
         gridStore.setBaseParam("type", getById("type"));
+
+        gridStore.setBaseParam("buyTimeStart", getById("buyTimeStart"));
+        gridStore.setBaseParam("buyTimeEnd", getById("buyTimeEnd"));
 
         Ext.getCmp("huizong_show").setText("汇总信息...");
         gridStore.reload({
@@ -69,6 +86,8 @@ Ext.onReady(function () {
             limit: PAGESIZE,
             name: '',
             type: '',
+            buyTimeStart: '',
+            buyTimeEnd: '',
             number: ''
         }
     });
@@ -129,7 +148,7 @@ Ext.onReady(function () {
             region: 'north',
             title: '资产信息',
             border: false,
-            height: 80,
+            height: 120,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {

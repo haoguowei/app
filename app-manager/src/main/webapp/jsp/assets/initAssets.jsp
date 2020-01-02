@@ -36,6 +36,14 @@
                     <option value="${itm.key}">${itm.value}
                         </c:forEach>
                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="Myfont">
+                <div style="float:left; ">采购时间，从：</div>
+                <div id="buyTimeStartDIV" style="float:left; "></div>
+                <div style="float:left; ">到：</div>
+                <div id="buyTimeEndDIV" style="float:left; "></div>
 
                 <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
             </td>
