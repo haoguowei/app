@@ -35,18 +35,18 @@
 <input type="hidden" id="hideEndDate" name="hideEndDate" value="${endDate}">
 
 <div id="div_panel_id">
-    <div style="float:left;margin: 10px; ">开始时间：</div>
-    <div id="fromDIV" style="float:left;margin: 10px; "></div>
+    <div style="float:left;">开始时间：</div>
+    <div id="fromDIV" style="float:left;"></div>
 
-    <div style="float:left;margin: 10px; ">结束时间：</div>
-    <div id="endDIV" style="float:left;margin: 10px; "></div>
+    <div style="float:left; ">结束时间：</div>
+    <div id="endDIV" style="float:left; "></div>
 
     <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
 
 
     <hr>
 
-    <div class="row" style="margin-left: 10px;">
+    <div class="row">
 
         <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
             <div class="card-box noradius noborder bg-default">
