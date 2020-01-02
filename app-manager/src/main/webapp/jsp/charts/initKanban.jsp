@@ -44,7 +44,7 @@
 <input type="hidden" id="hideStartDate" name="hideStartDate" value="${fromDate}">
 <input type="hidden" id="hideEndDate" name="hideEndDate" value="${endDate}">
 
-<div id="div_panel_id" style="margin: 10px;">
+<div id="div_panel_id">
     <div style="float:left;margin: 10px; ">开始时间：</div>
     <div id="fromDIV" style="float:left;margin: 10px; "></div>
 
