@@ -62,7 +62,6 @@ pageEncoding="UTF-8"%>
         <td>所属项目:<span style="color: red">*</span></td>
         <td>
             <select id="projects" name="projects">
-                <option value="0">请选择...
                     <c:forEach items="${projectsList }" var="itm">
                 <option
                         <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>

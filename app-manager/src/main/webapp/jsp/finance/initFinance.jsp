@@ -36,7 +36,6 @@ pageEncoding="UTF-8"%>
                 <div style="float:left; ">选择项目：</div>
                 <div style="float:left; ">
                     <select id="projectsId" name="projectsId">
-                        <option value="0">请选择...
                             <c:forEach items="${projectsList }" var="itm">
                         <option value="${itm.id}">${itm.name}
                             </c:forEach>

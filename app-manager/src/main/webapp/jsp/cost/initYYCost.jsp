@@ -27,7 +27,6 @@
             <td class="Myfont">
                 选择项目：
                 <select id="projectsId" name="projectsId">
-                    <option value="0">请选择...
                         <c:forEach items="${projectsList }" var="itm">
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
