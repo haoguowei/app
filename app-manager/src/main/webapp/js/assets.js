@@ -27,7 +27,38 @@ Ext.onReady(function () {
         id: 'buyTimeEnd'
     });
 
+    this.exportFunc = function () {
+        searchFunc();
+
+
+        var projectsId = getById("projectsId");
+        var name = getById("name");
+        var number = getById("number");
+        var type = getById("type");
+
+        var buyTimeStart = getById("buyTimeStart");
+        var buyTimeEnd = getById("buyTimeEnd");
+
+
+        if (_isNull(buyTimeStart)) {
+            alert("导出资产时请设置采购时间的搜索范围！");
+            document.getElementById("buyTimeStart").focus();
+        }
+        if (_isNull(buyTimeEnd)) {
+            alert("导出资产时请设置采购时间的搜索范围！");
+            document.getElementById("buyTimeEnd").focus();
+        }
+
+        location.href = "exportAssets.do?name=" + name
+            + "&projectsId=" + projectsId
+            + "&number=" + number
+            + "&type=" + type
+            + "&buyTimeStart=" + buyTimeStart
+            + "&buyTimeEnd=" + buyTimeEnd;
+    }
+
     this.searchFunc = function () {
+        gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("number", getById("number"));
         gridStore.setBaseParam("type", getById("type"));
@@ -84,6 +115,7 @@ Ext.onReady(function () {
         ],
         baseParams: {
             limit: PAGESIZE,
+            projectsId: '',
             name: '',
             type: '',
             buyTimeStart: '',
@@ -173,12 +205,6 @@ Ext.onReady(function () {
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initAssetsEdit.do";
-                    }
-                }, '-', {
-                    text: '导出资产',
-                    id: 'bt_exp',
-                    handler: function (b, e) {
-                        location.href = "exportAssets.do";
                     }
                 },
                 '->',

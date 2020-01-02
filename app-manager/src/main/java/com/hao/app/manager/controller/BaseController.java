@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,12 +75,22 @@ public class BaseController {
         }
 
         if (pid.equals(-1)) {
-            return projectsService.search(null).getResultList();
-        }
+            List<ProjectsDO> list = projectsService.search(null).getResultList();
+            if (list == null) {
+                list = new ArrayList<>();
+            }
 
+            ProjectsDO all = new ProjectsDO();
+            all.setId(0);
+            all.setName("请选择...");
+            list.add(0, all);
+
+            return list;
+        }
         ProjectsDO projectsDO = projectsService.getById(pid);
         return Arrays.asList(projectsDO);
     }
+
 
     /**
      * 得到登录用户

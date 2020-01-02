@@ -25,6 +25,13 @@
     <table class="Mytable">
         <tr>
             <td class="Myfont">
+                选择项目：
+                <select id="projectsId" name="projectsId">
+                    <c:forEach items="${projectsList }" var="itm">
+                    <option value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+
                 资产名称：
                 <input style="margin-right: 20px;" type="text" name="name" id="name">
                 资产编号：
@@ -46,6 +53,7 @@
                 <div id="buyTimeEndDIV" style="float:left; "></div>
 
                 <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+                <input style="margin-left: 50px;" type="button" value="导出资产" class="Mybotton" onclick="exportFunc()">
             </td>
         </tr>
     </table>

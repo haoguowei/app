@@ -49,6 +49,7 @@ public class AssetsController extends BaseController {
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
+        request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/assets/initAssets";
     }
 
@@ -68,11 +69,10 @@ public class AssetsController extends BaseController {
     }
 
     private AssetsQueryParam genQueryParam(HttpServletRequest request) {
-        Integer projectsId = getCurrentProjectsId(request);
-
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
+        int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
         String buyTimeStart = request.getParameter("buyTimeStart");
         String buyTimeEnd = request.getParameter("buyTimeEnd");
 
