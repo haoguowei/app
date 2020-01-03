@@ -11,10 +11,7 @@
         <result column="projects" jdbcType="INTEGER" property="projects"/>
         <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
         <result column="job_type" jdbcType="INTEGER" property="jobType"/>
-        <result column="gender" jdbcType="INTEGER" property="gender"/>
         <result column="ethnic" jdbcType="INTEGER" property="ethnic"/>
-        <result column="age" jdbcType="INTEGER" property="age"/>
-        <result column="birth_date" jdbcType="DATE" property="birthDate"/>
         <result column="entry_date" jdbcType="DATE" property="entryDate"/>
         <result column="leave_date" jdbcType="DATE" property="leaveDate"/>
         <result column="edu_type" jdbcType="INTEGER" property="eduType"/>
@@ -32,7 +29,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, status, name, phone, id_card, projects, projects_name, job_type, gender, ethnic, age, birth_date,
+        id, status, name, phone, id_card, projects, projects_name, job_type,  ethnic,
         entry_date, leave_date, edu_type, hukou_type, huji_address, address, emergency_contact,
         emergency_contact_phone, safe_type, remark, creater, create_time, update_time,hetong
     </sql>
@@ -125,17 +122,8 @@
             <if test="jobType != null">
                 job_type,
             </if>
-            <if test="gender != null">
-                gender,
-            </if>
             <if test="ethnic != null">
                 ethnic,
-            </if>
-            <if test="age != null">
-                age,
-            </if>
-            <if test="birthDate != null">
-                birth_date,
             </if>
             <if test="entryDate != null">
                 entry_date,
@@ -202,18 +190,10 @@
             <if test="jobType != null">
                 #{jobType,jdbcType=INTEGER},
             </if>
-            <if test="gender != null">
-                #{gender,jdbcType=INTEGER},
-            </if>
             <if test="ethnic != null">
                 #{ethnic,jdbcType=INTEGER},
             </if>
-            <if test="age != null">
-                #{age,jdbcType=INTEGER},
-            </if>
-            <if test="birthDate != null">
-                #{birthDate,jdbcType=DATE},
-            </if>
+
             <if test="entryDate != null">
                 #{entryDate,jdbcType=DATE},
             </if>
@@ -283,17 +263,8 @@
             <if test="jobType != null">
                 job_type = #{jobType,jdbcType=INTEGER},
             </if>
-            <if test="gender != null">
-                gender = #{gender,jdbcType=INTEGER},
-            </if>
             <if test="ethnic != null">
                 ethnic = #{ethnic,jdbcType=INTEGER},
-            </if>
-            <if test="age != null">
-                age = #{age,jdbcType=INTEGER},
-            </if>
-            <if test="birthDate != null">
-                birth_date = #{birthDate,jdbcType=DATE},
             </if>
             <if test="entryDate != null">
                 entry_date = #{entryDate,jdbcType=DATE},

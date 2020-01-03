@@ -2,13 +2,6 @@
 Ext.onReady(function () {
     Ext.QuickTips.init();
 
-    var birthDateDiv = new com.custom.DateField({
-        renderTo: 'birthDateDiv',
-        format: 'Y-m-d',
-        name: 'birthDate',
-        value: getById('hideBirthDateDiv'),
-        id: 'birthDate'
-    });
     var hideEntryDateDiv = new com.custom.DateField({
         renderTo: 'entryDateDiv',
         format: 'Y-m-d',
@@ -46,6 +39,13 @@ Ext.onReady(function () {
             document.getElementById("idCard").focus();
             return false;
         }
+        var cardResult = getById("idCard");
+        if (cardResult == true || cardResult == 'true') {
+        } else {
+            alert(cardResult);
+            $("idCard").focus();
+            return false;
+        }
 
         if (_isNull(getById("projects")) || getById("projects") == 0) {
             alert("请选择所属项目！");
@@ -59,16 +59,7 @@ Ext.onReady(function () {
             return false;
         }
 
-        if (_isNull(getById("birthDate"))) {
-            alert("请填写出生日期！");
-            document.getElementById("birthDate").focus();
-            return false;
-        }
-        if (!isDate(getById("birthDate"))) {
-            alert("出生日期格式错误！");
-            document.getElementById("birthDate").focus();
-            return false;
-        }
+
         if (_isNull(getById("entryDate"))) {
             alert("请填写入职日期！");
             document.getElementById("entryDate").focus();

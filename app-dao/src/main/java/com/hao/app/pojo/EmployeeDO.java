@@ -29,15 +29,13 @@ public class EmployeeDO implements Serializable {
 
     private String jobTypeStr;
 
-
-    private Integer gender;
     private String genderStr;
 
     private Integer ethnic;
 
     private Integer age;
 
-    private Date birthDate;
+    private String birthDate;
 
     private Date entryDate;
 
@@ -76,11 +74,6 @@ public class EmployeeDO implements Serializable {
     public void setJobType(Integer jobType) {
         this.jobTypeStr = Dicts.employeeJobTypeMap.get(jobType);
         this.jobType = jobType;
-    }
-
-    public void setGender(Integer gender) {
-        this.genderStr = Dicts.genderMap.get(gender);
-        this.gender = gender;
     }
 
 }
