@@ -107,8 +107,8 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
-            {width: 2, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
-            {width: 3, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
+            {width: 1, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
+            {width: 2, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
             {width: 2, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
             {width: 1, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
             {
