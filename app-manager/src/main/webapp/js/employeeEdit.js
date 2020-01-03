@@ -39,7 +39,7 @@ Ext.onReady(function () {
             document.getElementById("idCard").focus();
             return false;
         }
-        var cardResult = getById("idCard");
+        var cardResult = isCardID(getById("idCard"));
         if (cardResult == true || cardResult == 'true') {
         } else {
             alert(cardResult);
