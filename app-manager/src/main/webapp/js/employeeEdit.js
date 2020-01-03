@@ -43,7 +43,7 @@ Ext.onReady(function () {
         if (cardResult == true || cardResult == 'true') {
         } else {
             alert(cardResult);
-            $("idCard").focus();
+            document.getElementById("idCard").focus();
             return false;
         }
 
