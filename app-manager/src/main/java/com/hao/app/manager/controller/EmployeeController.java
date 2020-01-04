@@ -36,6 +36,13 @@ public class EmployeeController extends BaseController {
     private ProjectsService projectsService;
 
 
+    @RequestMapping("/initEmpShenqing.do")
+    public String initEmpShenqing(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("projectsList", getProjectsList(request));
+        return "jsp/employee/initEmpShenqing";
+    }
+
+
     @RequestMapping("/initEmployee.do")
     public String initEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
