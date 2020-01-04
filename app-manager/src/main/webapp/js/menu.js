@@ -201,27 +201,40 @@ Ext.onReady(function(){
 				}
 			}
 		},
-		columns: [ 
-		        {header:'ID', align:'center',sortable:false, dataIndex:'id'},
-				{header:'菜单', align:'left',sortable:false, dataIndex:'name',renderer:function(val,cell,record){
-					if(record.data.parent == 0){
-						return '<b>=== '+val+' ===</b>'
+		columns: [
+			{width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+			{
+				width: 3,
+				header: '菜单',
+				align: 'left',
+				sortable: false,
+				dataIndex: 'name',
+				renderer: function (val, cell, record) {
+					if (record.data.parent == 0) {
+						return '<b>=== ' + val + ' ===</b>'
 					}
 					return val;
-				}},
-				{header:'菜单URL', align:'left',sortable:false, dataIndex:'url'},
-				{header:'排序', align:'center',sortable:false, dataIndex:'sort'},
-				{header:'操作', align:'left',sortable:false, dataIndex:'id',renderer:function(val,cell,record){
+				}
+			},
+			{width: 3, header: '菜单URL', align: 'left', sortable: false, dataIndex: 'url'},
+			{width: 1, header: '排序', align: 'center', sortable: false, dataIndex: 'sort'},
+			{
+				width: 5,
+				header: '操作',
+				align: 'left',
+				sortable: false,
+				dataIndex: 'id',
+				renderer: function (val, cell, record) {
 					var str = '';
-					if(isPRISaveMenu){//权限
-						str += genButton("修改","updateF(this,"+val+")");
+					if (isPRISaveMenu) {//权限
+						str += genButton("修改", "updateF(this," + val + ")");
 					}
-					if(record.data.parent == 0){
-						if(isPRIDelMenu){//权限
-							str += genButton("删除菜单及子菜单","deleteF(this,"+val+")");
+					if (record.data.parent == 0) {
+						if (isPRIDelMenu) {//权限
+							str += genButton("删除菜单及子菜单", "deleteF(this," + val + ")");
 						}
-						if(isPRISaveMenu){//权限
-							str += genButton("新增子菜单","addF(this, "+val+")");
+						if (isPRISaveMenu) {//权限
+							str += genButton("新增子菜单", "addF(this, " + val + ")");
 						}
 					}else{
 						if(isPRIDelMenu){//权限
