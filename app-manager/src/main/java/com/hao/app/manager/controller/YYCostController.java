@@ -198,6 +198,15 @@ public class YYCostController extends BaseController {
             item.setEnterDate(new SimpleDateFormat("yyyy-MM-dd").parse(enterDate)); //
         }
 
+        BigDecimal total = getBigDecimal(item.getFuelAmount())
+                .add(getBigDecimal(item.getBaoyangAmount()))
+                .add(getBigDecimal(item.getFixAmount()))
+                .add(getBigDecimal(item.getShiguAmount()))
+                .add(getBigDecimal(item.getShiguOutAmount()))
+                .add(getBigDecimal(item.getBaoxianAmount()))
+                .add(getBigDecimal(item.getYearCheckAmount()));
+        item.setTotalAmount(total);
+
         ResultCodeEnum resultCode;
         if (id == 0) {
             item.setCreater(getCurrentUserName(request));
@@ -214,6 +223,13 @@ public class YYCostController extends BaseController {
         } else {
             return failResult(request, resultCode);
         }
+    }
+
+    private BigDecimal getBigDecimal(BigDecimal v) {
+        if (v == null) {
+            return BigDecimal.valueOf(0);
+        }
+        return v;
     }
 
     @RequestMapping("/initCostHeJi.do")

@@ -54,6 +54,8 @@ public class YYCostDO implements Serializable {
 
     private BigDecimal yearCheckAmount;
 
+    private BigDecimal totalAmount;
+
     private String remark;
 
     private String creater;

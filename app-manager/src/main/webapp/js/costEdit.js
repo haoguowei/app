@@ -108,7 +108,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '编辑消费信息',
+            title: '编辑车辆消费',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,

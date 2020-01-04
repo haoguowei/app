@@ -89,12 +89,15 @@ public class YYCostServiceImpl implements YYCostService {
     public String searchYYCost4HJ(CostQueryParam param) {
         Map<String, Object> map = yYCostMapper.searchHJ(param);
         BigDecimal a = BigDecimal.valueOf(0);
+        BigDecimal b = BigDecimal.valueOf(0);
         if (map != null) {
             a = (BigDecimal) map.get("a");
+            b = (BigDecimal) map.get("b");
         }
 
         StringBuffer sbr = new StringBuffer();
-        sbr.append("日行驶里程合计:").append(a).append("")
+        sbr.append("日行驶里程合计:").append(a).append("");
+        sbr.append("消费合计:").append(b).append("元")
         ;
         return sbr.toString();
     }

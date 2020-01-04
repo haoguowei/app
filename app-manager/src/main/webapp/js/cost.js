@@ -75,6 +75,7 @@ Ext.onReady(function () {
             {name: 'assetsInfo'},
             {name: 'dayMileage'},
             {name: 'avgFuel'},
+            {name: 'totalAmount'},
             {name: 'employeeName'}
         ],
         baseParams: {
@@ -112,6 +113,7 @@ Ext.onReady(function () {
                 }
             },
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 2, header: '消费合计', align: 'right', sortable: false, dataIndex: 'totalAmount'},
             {
                 width: 2,
                 header: '操作',
@@ -139,7 +141,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '消费汇总',
+            title: '车辆消费管理',
             border: false,
             height: 120,
             keys: {
@@ -163,16 +165,10 @@ Ext.onReady(function () {
             }],
             tbar: [
                 {
-                    text: '录入消费信息',
+                    text: '录入车辆消费',
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initYYCostEdit.do";
-                    }
-                }, '-', {
-                    text: '导出消费',
-                    id: 'bt_exp',
-                    handler: function (b, e) {
-                        alert("该功能正在开发中...");
                     }
                 },
                 '->',
