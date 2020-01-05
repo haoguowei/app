@@ -82,7 +82,7 @@ public class ChartsController extends BaseController {
                 sbr.append(",");
             }
 
-            double y = c.getPay().multiply(BigDecimal.valueOf(100.0)).divide(total).doubleValue();
+            double y = c.getPay().multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
             sbr.append("{ y: " + y + ", pay: " + c.getPay() + ", label: '" + c.getLabel() + "' }");
 
         }

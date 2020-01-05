@@ -44,7 +44,7 @@
             </td>
         </tr>
         <tr>
-            <td style="height: 120px">
+            <td style="height: 38px">
 
             </td>
         </tr>
@@ -72,7 +72,7 @@
             data: [{
                 type: "pie",
                 startAngle: 25,
-                toolTipContent: "<b>{label}</b>: {pay}元",
+                toolTipContent: "<b>{label}</b>: {pay}元（{y}%）",
                 showInLegend: "true",
                 legendText: "{label}",
                 indexLabelFontSize: 16,
