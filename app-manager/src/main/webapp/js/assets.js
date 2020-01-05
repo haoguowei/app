@@ -135,6 +135,7 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 1.5, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
             {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'typeStr'},
@@ -155,7 +156,6 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '操作',

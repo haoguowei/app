@@ -95,6 +95,7 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '消费司机', align: 'left', sortable: false, dataIndex: 'employeeName'},
             {width: 4, header: '消费资产', align: 'left', sortable: false, dataIndex: 'assetsInfo'},
             {width: 2, header: '日行驶里程', align: 'left', sortable: false, dataIndex: 'dayMileage'},
@@ -112,7 +113,6 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '消费合计', align: 'right', sortable: false, dataIndex: 'totalAmount'},
             {
                 width: 2,

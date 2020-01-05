@@ -106,6 +106,7 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
             {width: 1, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
@@ -124,7 +125,6 @@ Ext.onReady(function () {
                 }
             },
 
-            {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '保险类型', align: 'left', sortable: false, dataIndex: 'safeType'},
             {width: 1, header: '入职合同', align: 'left', sortable: false, dataIndex: 'hetongStr'},
             {
