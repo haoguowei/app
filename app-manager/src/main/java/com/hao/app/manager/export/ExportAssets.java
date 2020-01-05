@@ -1,6 +1,5 @@
 package com.hao.app.manager.export;
 
-import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.pojo.AssetsDO;
 import com.hao.app.service.AssetsService;
@@ -48,7 +47,7 @@ public class ExportAssets extends AbstractExport {
             //为每一列赋值
             genCell(row, cellStyleCenter, 0, numb += 1);
             genCell(row, cellStyleCenter, 1, fmtDate(assetsDO.getBuyTime()));
-            genCell(row, cellStyleLeft, 2, Dicts.assetsTypeMap.get(assetsDO.getType()));
+            genCell(row, cellStyleLeft, 2, "车辆");
             genCell(row, cellStyleLeft, 3, assetsDO.getName());
             genCell(row, cellStyleLeft, 4, assetsDO.getNumber());
 

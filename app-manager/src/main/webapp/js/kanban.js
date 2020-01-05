@@ -37,7 +37,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '收支汇总',
+            title: '费用汇总',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,
