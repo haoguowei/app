@@ -3,14 +3,14 @@ Ext.onReady(function () {
 
     var fromDIV = new com.custom.DateField({
         renderTo: 'fromDIV',
-        format: 'Y-m',
+        format: 'Y-m-d',
         name: 'fromDate',
         value: getById('hideStartDate'),
         id: 'fromDate'
     });
     var endDIV = new com.custom.DateField({
         renderTo: 'endDIV',
-        format: 'Y-m',
+        format: 'Y-m-d',
         name: 'endDate',
         value: getById('hideEndDate'),
         id: 'endDate'
@@ -37,7 +37,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '费用汇总',
+            title: '开支汇总',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,

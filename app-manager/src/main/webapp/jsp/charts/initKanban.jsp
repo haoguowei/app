@@ -14,10 +14,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>
     </title>
-    <link href="<%=syspath%>/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="<%=syspath%>/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="<%=syspath%>/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-
     <script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
     <script type="text/javascript" src="<%=syspath%>/js/kanban.js"></script>
 
@@ -29,54 +25,69 @@
         }
     </style>
 </head>
-<body style="background-color:white;">
+<body>
 
 <input type="hidden" id="hideStartDate" name="hideStartDate" value="${fromDate}">
 <input type="hidden" id="hideEndDate" name="hideEndDate" value="${endDate}">
 
 <div id="div_panel_id">
-    <div style="float:left;margin: 10px; ">开始时间：</div>
-    <div id="fromDIV" style="float:left;margin: 10px; "></div>
+    <table>
+        <tr>
+            <td style="width: 1000px;">
+                <div style="float:left;margin: 10px; ">开始时间：</div>
+                <div id="fromDIV" style="float:left;margin: 10px; "></div>
 
-    <div style="float:left;margin: 10px; ">结束时间：</div>
-    <div id="endDIV" style="float:left;margin: 10px; "></div>
+                <div style="float:left;margin: 10px; ">结束时间：</div>
+                <div id="endDIV" style="float:left;margin: 10px; "></div>
 
-    <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+                <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 120px">
 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+            </td>
+        </tr>
+    </table>
 
-    <hr>
-
-    <div class="row" style="margin-left: 10px;">
-
-        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card-box noradius noborder bg-default">
-                <i class="fa fa-file-text-o float-right text-white"></i>
-                <h6 class="text-white text-uppercase m-b-20">总收入：</h6>
-                <h2 class="m-b-20 text-white counter">${totalIn}</h2>
-                <span class="text-white">单位（元）</span>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card-box noradius noborder bg-warning">
-                <i class="fa fa-file-text-o float-right text-white"></i>
-                <h6 class="text-white text-uppercase m-b-20">总支出：</h6>
-                <h2 class="m-b-20 text-white counter">${totalOut}</h2>
-                <span class="text-white">单位（元）</span>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card-box noradius noborder bg-danger">
-                <i class="fa fa-bar-chart float-right text-white"></i>
-                <h6 class="text-white text-uppercase m-b-20">总净流量：</h6>
-                <h2 class="m-b-20 text-white counter">${total}</h2>
-                <span class="text-white">单位（元）</span>
-            </div>
-        </div>
-
-    </div>
 </div>
 
+<script>
+    window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "总开支情况"
+            },
+            data: [{
+                type: "pie",
+                startAngle: 25,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    {y: 50, label: "车辆消费"},
+                    {y: 20, label: "办公消费"},
+                    {y: 10, label: "招待消费"},
+                    {y: 20, label: "其他消费"}
+                ]
+            }]
+        });
+        chart.render();
+
+    }
+</script>
+
+<script src="<%=syspath%>/canvasjs/canvasjs.min.js"></script>
 </body>
 </html>
