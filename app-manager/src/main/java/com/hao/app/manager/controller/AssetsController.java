@@ -75,6 +75,8 @@ public class AssetsController extends BaseController {
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
+        int carType = NumberUtils.toInt(request.getParameter("carType"));
+        int brand = NumberUtils.toInt(request.getParameter("brand"));
         String buyTimeStart = request.getParameter("buyTimeStart");
         String buyTimeEnd = request.getParameter("buyTimeEnd");
 
@@ -86,6 +88,15 @@ public class AssetsController extends BaseController {
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
         }
+
+        if (brand > 0) {
+            param.setBrand(brand);
+        }
+
+        if (carType > 0) {
+            param.setCarType(carType);
+        }
+
 
         if (type > -1) {
             param.setType(type);

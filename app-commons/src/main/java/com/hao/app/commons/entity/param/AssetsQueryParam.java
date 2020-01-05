@@ -17,6 +17,8 @@ public class AssetsQueryParam extends QueryParam implements Serializable {
 	private static final long serialVersionUID = 4737617179006429526L;
 
 	private Integer projectsId;
+	private Integer carType;
+	private Integer brand;
 
 	private Integer type;
 
