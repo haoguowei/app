@@ -77,7 +77,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '编辑资产信息',
+            title: '编辑其他资产信息',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,

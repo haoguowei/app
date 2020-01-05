@@ -233,8 +233,8 @@ public class AssetsController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            sysLogsService.writeLog(item.getCreater(), "新增或修改资产信息:" + item.toString());
-            return successResult(request, "资产信息", "initAssets.do");
+            sysLogsService.writeLog(item.getCreater(), "新增或修改其他资产信息:" + item.toString());
+            return successResult(request, "其他资产管理", "initAssets.do");
         } else {
             return failResult(request, resultCode);
         }
