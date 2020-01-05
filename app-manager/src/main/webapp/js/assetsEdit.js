@@ -47,27 +47,27 @@ Ext.onReady(function () {
             return false;
         }
 
-        if (!regexVerify('num1', getById("quantity"))) {
+        if (_isNotNull(getById("quantity")) && !regexVerify('num1', getById("quantity"))) {
             alert("数量请填写正确的数字！");
             document.getElementById("quantity").focus();
             return false;
         }
-        if (!regexVerify('num1', getById("quoQuantity"))) {
+        if (_isNotNull(getById("quoQuantity")) && !regexVerify('num1', getById("quoQuantity"))) {
             alert("现况数量请填写正确的数字！");
             document.getElementById("quoQuantity").focus();
             return false;
         }
-        if (!regexVerify('num1', getById("staging"))) {
+        if (_isNotNull(getById("staging")) && !regexVerify('num1', getById("staging"))) {
             alert("分期月数请填写正确的数字！");
             document.getElementById("staging").focus();
             return false;
         }
-        if (!regexVerify('tingke', getById("price"))) {
+        if (_isNotNull(getById("price")) && !regexVerify('tingke', getById("price"))) {
             alert("单价请填写正确的金额！");
             document.getElementById("price").focus();
             return false;
         }
-        if (!regexVerify('tingke', getById("purTax"))) {
+        if (_isNotNull(getById("purTax")) && !regexVerify('tingke', getById("purTax"))) {
             alert("购置税请填写正确的金额！");
             document.getElementById("purTax").focus();
             return false;
