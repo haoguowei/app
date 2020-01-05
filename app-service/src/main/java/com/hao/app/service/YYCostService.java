@@ -5,6 +5,8 @@ import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.YYCostDO;
 
+import java.math.BigDecimal;
+
 public interface YYCostService {
 
     JsonResult<YYCostDO> searchYYCost(CostQueryParam param);
@@ -16,4 +18,6 @@ public interface YYCostService {
     ResultCodeEnum update(YYCostDO cost);
 
     String searchYYCost4HJ(CostQueryParam param);
+
+    BigDecimal searchTotalPay(CostQueryParam param);
 }

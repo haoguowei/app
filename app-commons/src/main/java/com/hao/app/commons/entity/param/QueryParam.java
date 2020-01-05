@@ -15,9 +15,12 @@ public class QueryParam implements Serializable{
 
 	private int pageLimit = 20;
 
-	public QueryParam(int pageStart, int pageLimit){
+	public QueryParam(int pageStart, int pageLimit) {
 		this.pageStart = pageStart;
 		this.pageLimit = pageLimit;
+	}
+
+	public QueryParam() {
 	}
 
 }

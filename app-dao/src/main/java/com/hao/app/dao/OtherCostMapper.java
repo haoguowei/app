@@ -2,6 +2,7 @@ package com.hao.app.dao;
 
 
 import com.hao.app.commons.entity.param.OtherCostQueryParam;
+import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.pojo.OtherCostDO;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface OtherCostMapper {
     List<OtherCostDO> search(OtherCostQueryParam param);
 
     Map<String, Object> searchHJ(OtherCostQueryParam param);
+
+    List<ResultStatistics> searchTotalPay(OtherCostQueryParam param);
 }

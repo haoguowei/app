@@ -326,6 +326,7 @@
         </where>
     </sql>
 
+
     <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
             resultType="java.util.HashMap">
         SELECT sum(end_mileage-start_mileage) AS a,sum(total_amount) as b

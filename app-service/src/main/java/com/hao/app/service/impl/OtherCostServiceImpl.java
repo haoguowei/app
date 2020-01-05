@@ -2,6 +2,7 @@ package com.hao.app.service.impl;
 
 import com.hao.app.commons.entity.param.OtherCostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.OtherCostMapper;
 import com.hao.app.pojo.OtherCostDO;
@@ -67,5 +68,10 @@ public class OtherCostServiceImpl implements OtherCostService {
         sbr.append("合计:").append(a).append("元")
         ;
         return sbr.toString();
+    }
+
+    @Override
+    public List<ResultStatistics> searchTotalPay(OtherCostQueryParam param) {
+        return otherCostMapper.searchTotalPay(param);
     }
 }

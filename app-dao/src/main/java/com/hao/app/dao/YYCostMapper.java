@@ -22,4 +22,5 @@ public interface YYCostMapper {
     List<YYCostDO> search(CostQueryParam param);
 
     Map<String, Object> searchHJ(CostQueryParam param);
+
 }

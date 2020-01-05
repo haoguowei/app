@@ -160,6 +160,14 @@
         limit ${pageStart},${pageLimit}
     </select>
 
+    <select id="searchTotalPay" parameterType="com.hao.app.commons.entity.param.OtherCostQueryParam"
+            resultType="com.hao.app.commons.entity.result.ResultStatistics">
+        SELECT pay_type as k, sum(pay_amount) AS val
+        FROM other_cost
+        <include refid="searchSQL"/>
+        GROUP BY pay_type
+    </select>
+
 
     <select id="count" parameterType="com.hao.app.commons.entity.param.OtherCostQueryParam"
             resultType="java.lang.Integer">

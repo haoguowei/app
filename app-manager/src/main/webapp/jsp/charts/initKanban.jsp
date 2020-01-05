@@ -67,27 +67,24 @@
             exportEnabled: true,
             animationEnabled: true,
             title: {
-                text: "总开支情况"
+                text: '${title}'
             },
             data: [{
                 type: "pie",
                 startAngle: 25,
-                toolTipContent: "<b>{label}</b>: {y}元",
+                toolTipContent: "<b>{label}</b>: {pay}元",
                 showInLegend: "true",
                 legendText: "{label}",
                 indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}元",
-                dataPoints: dataPoints
+                indexLabel: "{label} - {pay}元",
+                dataPoints: ${datas}
             }]
         });
 
-        // $.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales.json?callback=?", callback);
-
-
-        dataPoints.push({
-            label: 'aaa',
-            y: 100
-        });
+        // dataPoints.push({
+        //     label: 'aaa',
+        //     y: 100
+        // });
 
         chart.render();
     }

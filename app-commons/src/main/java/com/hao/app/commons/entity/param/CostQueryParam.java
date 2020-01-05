@@ -25,5 +25,8 @@ public class CostQueryParam extends QueryParam implements Serializable {
 		super(pageStart, pageLimit);
 	}
 
+	public CostQueryParam() {
+	}
+
 
 }

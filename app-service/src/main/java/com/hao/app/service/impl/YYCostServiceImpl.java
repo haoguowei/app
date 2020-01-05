@@ -101,4 +101,14 @@ public class YYCostServiceImpl implements YYCostService {
         ;
         return sbr.toString();
     }
+
+    @Override
+    public BigDecimal searchTotalPay(CostQueryParam param) {
+        Map<String, Object> map = yYCostMapper.searchHJ(param);
+        BigDecimal b = BigDecimal.valueOf(0);
+        if (map != null) {
+            b = (BigDecimal) map.get("b");
+        }
+        return b;
+    }
 }
