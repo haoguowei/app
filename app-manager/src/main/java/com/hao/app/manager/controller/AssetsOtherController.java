@@ -2,14 +2,14 @@ package com.hao.app.manager.controller;
 
 import com.google.gson.Gson;
 import com.hao.app.commons.entity.Dicts;
-import com.hao.app.commons.entity.param.AssetsQueryParam;
+import com.hao.app.commons.entity.param.AssetsOtherQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.manager.export.ExportAssets;
-import com.hao.app.pojo.AssetsDO;
+import com.hao.app.pojo.AssetsOtherDO;
 import com.hao.app.pojo.ProjectsDO;
-import com.hao.app.service.AssetsService;
+import com.hao.app.service.AssetsOtherService;
 import com.hao.app.service.EmployeeService;
 import com.hao.app.service.ProjectsService;
 import org.apache.commons.lang.StringUtils;
@@ -30,12 +30,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-public class AssetsController extends BaseController {
+public class AssetsOtherController extends BaseController {
 
-    private Logger logger = LoggerFactory.getLogger(AssetsController.class);
+    private Logger logger = LoggerFactory.getLogger(AssetsOtherController.class);
 
     @Resource
-    private AssetsService assetsService;
+    private AssetsOtherService assetsOtherService;
 
     @Resource
     private EmployeeService employeeService;
@@ -46,31 +46,25 @@ public class AssetsController extends BaseController {
     @Autowired
     private ExportAssets exportAssets;
 
-    @RequestMapping("/initAssets.do")
-    public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/initOtherAssets.do")
+    public String initOtherAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
         request.setAttribute("brandMap", Dicts.brandMap);
         request.setAttribute("carTypeMap", Dicts.carTypeMap);
         request.setAttribute("projectsList", getProjectsList(request));
-        return "jsp/assets/initAssets";
+        return "jsp/assets/initOtherAssets";
     }
 
 
-    @RequestMapping("/searchAssets.do")
-    public void searchAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        AssetsQueryParam param = genQueryParam(request);
-        JsonResult<AssetsDO> result = assetsService.searchAssets(param);
+    @RequestMapping("/searchOtherAssets.do")
+    public void searchOtherAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        AssetsOtherQueryParam param = genQueryParam(request);
+        JsonResult<AssetsOtherDO> result = assetsOtherService.searchAssets(param);
         writeResponse(response, result);
     }
 
-    //导出资产
-    @RequestMapping("/exportAssets.do")
-    public void exportAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String modelFile = getModelFilePath(request, "assets.xls");
-        exportAssets.exportExcel(modelFile, request, response);
-    }
 
-    private AssetsQueryParam genQueryParam(HttpServletRequest request) {
+    private AssetsOtherQueryParam genQueryParam(HttpServletRequest request) {
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
@@ -81,15 +75,19 @@ public class AssetsController extends BaseController {
         String buyTimeEnd = request.getParameter("buyTimeEnd");
 
         String name = request.getParameter("name");
-        String number = request.getParameter("number");
+        int type = NumberUtils.toInt(request.getParameter("type"));
 
-        AssetsQueryParam param = new AssetsQueryParam(start, limit);
+        AssetsOtherQueryParam param = new AssetsOtherQueryParam(start, limit);
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
         }
 
         if (brand > 0) {
             param.setBrand(brand);
+        }
+
+        if (type > -1) {
+            param.setType(type);
         }
 
         if (carType > 0) {
@@ -107,23 +105,18 @@ public class AssetsController extends BaseController {
         if (StringUtils.isNotBlank(name)) {
             param.setName(name);
         }
-
-        if (StringUtils.isNotBlank(number)) {
-            param.setNumber(number);
-        }
         return param;
     }
 
-    @RequestMapping("/initAssetsEdit.do")
-    public String initAssetsEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/initAssetsOtherEdit.do")
+    public String initAssetsOtherEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("id"));
 
-        AssetsDO assetsDO = assetsService.getById(id);
-        request.setAttribute("itemObj", assetsDO);
+        AssetsOtherDO item = assetsOtherService.getById(id);
+        request.setAttribute("itemObj", item);
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
-        request.setAttribute("engineNumberTypeMap", Dicts.engineNumberTypeMap);
 
         request.setAttribute("brandMap", Dicts.brandMap);
         request.setAttribute("carTypeMap", Dicts.carTypeMap);
@@ -139,11 +132,11 @@ public class AssetsController extends BaseController {
         employeeQuery.setJobTypes(set);
         request.setAttribute("ownerList", employeeService.searchEmployee(employeeQuery).getResultList());
 
-        return "jsp/assets/initAssetsEdit";
+        return "jsp/assets/initAssetsOtherEdit";
     }
 
-    @RequestMapping("/saveAssets.do")
-    public String saveAssets(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+    @RequestMapping("/saveAssetsOther.do")
+    public String saveAssetsOther(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         int id = NumberUtils.toInt(request.getParameter("hideId"), 0);
 
         int projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
@@ -155,20 +148,17 @@ public class AssetsController extends BaseController {
             return failResult(request, "请选择所属项目");
         }
 
+        int type = NumberUtils.toInt(request.getParameter("type"), 0);
         int owner = NumberUtils.toInt(request.getParameter("owner"), 0);
         int quantity = NumberUtils.toInt(request.getParameter("quantity"), 0);
         int quoQuantity = NumberUtils.toInt(request.getParameter("quoQuantity"), 0);
-        int engineNumberType = NumberUtils.toInt(request.getParameter("engineNumberType"), 0);
         int staging = NumberUtils.toInt(request.getParameter("staging"), 0);
         int brand = NumberUtils.toInt(request.getParameter("brand"), 0);
         int carType = NumberUtils.toInt(request.getParameter("carType"), 0);
 
-        String license = request.getParameter("license");
         String inOut = request.getParameter("inOut");
         String storageLocation = request.getParameter("storageLocation");
-        String engineNumber = request.getParameter("engineNumber");
         String price = request.getParameter("price");
-        String purTax = request.getParameter("purTax");
         String tanxiao = request.getParameter("tanxiao");
         String zhejiu = request.getParameter("zhejiu");
 
@@ -177,20 +167,14 @@ public class AssetsController extends BaseController {
             return failResult(request, "资产名称为必填项");
         }
 
-        String number = request.getParameter("number");
-        if (StringUtils.isBlank(number)) {
-            return failResult(request, "资产编号为必填项");
-        }
-
-        AssetsDO item = new AssetsDO();
+        AssetsOtherDO item = new AssetsOtherDO();
         item.setId(id);
         item.setName(name);
 
         item.setProjects(projectsDO.getId());
         item.setProjectsName(projectsDO.getName());
+        item.setType(type);
 
-        item.setNumber(number);
-        item.setLicense(license);
         item.setBrand(brand);
         item.setCarType(carType);
 
@@ -200,15 +184,10 @@ public class AssetsController extends BaseController {
         item.setOwner(owner);
         item.setStorageLocation(storageLocation);
 
-        item.setEngineNumber(engineNumber);
-        item.setEngineNumberType(engineNumberType);
 
         item.setStaging(staging);
         if (StringUtils.isNotBlank(price)) {
             item.setPrice(new BigDecimal(price));
-        }
-        if (StringUtils.isNotBlank(purTax)) {
-            item.setPurTax(new BigDecimal(purTax));
         }
         if (StringUtils.isNotBlank(tanxiao)) {
             item.setTanxiao(new BigDecimal(tanxiao));
@@ -229,24 +208,24 @@ public class AssetsController extends BaseController {
         if (id == 0) {
             item.setCreater(getCurrentUserName(request));
             item.setCreateTime(new Date());
-            resultCode = assetsService.insert(item);
+            resultCode = assetsOtherService.insert(item);
         } else {
             item.setUpdateTime(new Date());
-            resultCode = assetsService.update(item);
+            resultCode = assetsOtherService.update(item);
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            sysLogsService.writeLog(item.getCreater(), "新增或修改车辆管理:" + item.toString());
-            return successResult(request, "车辆管理", "initAssets.do");
+            sysLogsService.writeLog(item.getCreater(), "新增或修改其他资产:" + item.toString());
+            return successResult(request, "其他资产管理", "initOtherAssets.do");
         } else {
             return failResult(request, resultCode);
         }
     }
 
-    @RequestMapping("/initAssetsHeJi.do")
-    public void initAssetsHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        AssetsQueryParam param = genQueryParam(request);
-        String info = assetsService.searchAssets4HJ(param);
+    @RequestMapping("/initAssetsOtherHeJi.do")
+    public void initAssetsOtherHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        AssetsOtherQueryParam param = genQueryParam(request);
+        String info = assetsOtherService.searchAssets4HJ(param);
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);

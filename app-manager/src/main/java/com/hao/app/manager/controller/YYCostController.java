@@ -112,7 +112,6 @@ public class YYCostController extends BaseController {
 
         //选择资产
         AssetsQueryParam param = new AssetsQueryParam(0, 100);
-        param.setType(1); //车辆
         int projectsId = getCurrentProjectsId(request);
         if (projectsId > 0) {
             param.setProjectsId(projectsId);

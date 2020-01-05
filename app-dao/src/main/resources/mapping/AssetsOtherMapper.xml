@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hao.app.dao.AssetsMapper">
+<mapper namespace="com.hao.app.dao.AssetsOtherMapper">
 
-    <resultMap id="BaseResultMap" type="com.hao.app.pojo.AssetsDO">
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.AssetsOtherDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="number" jdbcType="VARCHAR" property="number"/>
-        <result column="license" jdbcType="VARCHAR" property="license"/>
         <result column="brand" jdbcType="INTEGER" property="brand"/>
         <result column="car_type" jdbcType="INTEGER" property="carType"/>
         <result column="buy_time" jdbcType="DATE" property="buyTime"/>
@@ -17,13 +16,10 @@
         <result column="quo_quantity" jdbcType="INTEGER" property="quoQuantity"/>
         <result column="owner" jdbcType="INTEGER" property="owner"/>
         <result column="storage_location" jdbcType="VARCHAR" property="storageLocation"/>
-        <result column="engine_number" jdbcType="VARCHAR" property="engineNumber"/>
-        <result column="engine_number_type" jdbcType="INTEGER" property="engineNumberType"/>
         <result column="price" jdbcType="DECIMAL" property="price"/>
         <result column="tanxiao" jdbcType="DECIMAL" property="tanxiao"/>
         <result column="zhejiu" jdbcType="DECIMAL" property="zhejiu"/>
         <result column="staging" jdbcType="INTEGER" property="staging"/>
-        <result column="pur_tax" jdbcType="DECIMAL" property="purTax"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
@@ -31,29 +27,32 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,  name, number, projects, projects_name, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
-        owner, storage_location, engine_number, engine_number_type, price, staging, pur_tax,
+        id, type, name, projects, projects_name, brand, car_type,
+        buy_time, in_out, quantity, quo_quantity,
+        owner, storage_location, price, staging,
         remark, creater, create_time, update_time,tanxiao,zhejiu
     </sql>
 
-    <select id="count" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam" resultType="java.lang.Integer">
+    <select id="count" parameterType="com.hao.app.commons.entity.param.AssetsOtherQueryParam"
+            resultType="java.lang.Integer">
         select count(1)
-        from assets
+        from assets_other
         <include refid="searchSQL"/>
     </select>
 
-    <select id="search" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam" resultMap="BaseResultMap">
+    <select id="search" parameterType="com.hao.app.commons.entity.param.AssetsOtherQueryParam"
+            resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from assets
+        from assets_other
         <include refid="searchSQL"/>
         order by id desc
         limit ${pageStart},${pageLimit}
     </select>
 
-    <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam"
+    <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.AssetsOtherQueryParam"
             resultType="java.util.HashMap">
-        SELECT sum(quantity) AS a,sum(quo_quantity) AS b FROM assets
+        SELECT sum(quantity) AS a,sum(quo_quantity) AS b FROM assets_other
         <include refid="searchSQL"/>
         order by id desc
         limit ${pageStart},${pageLimit}
@@ -64,19 +63,18 @@
             <if test="projectsId != null and projectsId > 0">
                 and projects = ${projectsId}
             </if>
-
+            <if test="type != null and type > 0">
+                and type = ${type}
+            </if>
             <if test="brand != null and brand > 0">
                 and brand = ${brand}
             </if>
             <if test="carType != null and carType > 0">
                 and car_type = ${carType}
             </if>
+
             <if test="name != null">
                 and name like CONCAT('%',#{name},'%')
-            </if>
-
-            <if test="number != null">
-                and number = #{number}
             </if>
 
             <if test="buyTimeStart != null">
@@ -91,13 +89,16 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from assets
+        from assets_other
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <insert id="insert" parameterType="com.hao.app.pojo.AssetsDO">
-        insert into assets
+    <insert id="insert" parameterType="com.hao.app.pojo.AssetsOtherDO">
+        insert into assets_other
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                type,
+            </if>
             <if test="projects != null">
                 projects,
             </if>
@@ -106,12 +107,6 @@
             </if>
             <if test="name != null">
                 name,
-            </if>
-            <if test="number != null">
-                number,
-            </if>
-            <if test="license != null">
-                license,
             </if>
             <if test="brand != null">
                 brand,
@@ -137,12 +132,6 @@
             <if test="storageLocation != null">
                 storage_location,
             </if>
-            <if test="engineNumber != null">
-                engine_number,
-            </if>
-            <if test="engineNumberType != null">
-                engine_number_type,
-            </if>
             <if test="price != null">
                 price,
             </if>
@@ -154,9 +143,6 @@
             </if>
             <if test="staging != null">
                 staging,
-            </if>
-            <if test="purTax != null">
-                pur_tax,
             </if>
             <if test="remark != null">
                 remark,
@@ -172,6 +158,9 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
             <if test="projects != null">
                 #{projects,jdbcType=INTEGER},
             </if>
@@ -181,12 +170,7 @@
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
-            <if test="number != null">
-                #{number,jdbcType=VARCHAR},
-            </if>
-            <if test="license != null">
-                #{license,jdbcType=VARCHAR},
-            </if>
+
             <if test="brand != null">
                 #{brand,jdbcType=INTEGER},
             </if>
@@ -211,12 +195,7 @@
             <if test="storageLocation != null">
                 #{storageLocation,jdbcType=VARCHAR},
             </if>
-            <if test="engineNumber != null">
-                #{engineNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="engineNumberType != null">
-                #{engineNumberType,jdbcType=INTEGER},
-            </if>
+
             <if test="price != null">
                 #{price,jdbcType=DECIMAL},
             </if>
@@ -229,9 +208,7 @@
             <if test="staging != null">
                 #{staging,jdbcType=INTEGER},
             </if>
-            <if test="purTax != null">
-                #{purTax,jdbcType=DECIMAL},
-            </if>
+
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
@@ -246,18 +223,16 @@
             </if>
         </trim>
     </insert>
-    <update id="update" parameterType="com.hao.app.pojo.AssetsDO">
-        update assets
+    <update id="update" parameterType="com.hao.app.pojo.AssetsOtherDO">
+        update assets_other
         <set>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="number != null">
-                number = #{number,jdbcType=VARCHAR},
-            </if>
-            <if test="license != null">
-                license = #{license,jdbcType=VARCHAR},
-            </if>
+
             <if test="brand != null">
                 brand = #{brand,jdbcType=INTEGER},
             </if>
@@ -282,12 +257,7 @@
             <if test="storageLocation != null">
                 storage_location = #{storageLocation,jdbcType=VARCHAR},
             </if>
-            <if test="engineNumber != null">
-                engine_number = #{engineNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="engineNumberType != null">
-                engine_number_type = #{engineNumberType,jdbcType=INTEGER},
-            </if>
+
             <if test="price != null">
                 price = #{price,jdbcType=DECIMAL},
             </if>
@@ -300,9 +270,7 @@
             <if test="staging != null">
                 staging = #{staging,jdbcType=INTEGER},
             </if>
-            <if test="purTax != null">
-                pur_tax = #{purTax,jdbcType=DECIMAL},
-            </if>
+
             <if test="projects != null">
                 projects = #{projects,jdbcType=INTEGER},
             </if>

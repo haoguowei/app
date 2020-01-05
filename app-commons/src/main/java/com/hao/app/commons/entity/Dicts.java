@@ -66,11 +66,10 @@ public class Dicts {
         employeeJobTypeMap.put(7, "装卸工");
         employeeJobTypeMap.put(8, "保洁员");
 
-        assetsTypeMap.put(1, "车辆");
-        assetsTypeMap.put(2, "电动人力");
-        assetsTypeMap.put(3, "箱");
-        assetsTypeMap.put(4, "桶");
-        assetsTypeMap.put(5, "辅助类");
+        assetsTypeMap.put(1, "电动人力");
+        assetsTypeMap.put(2, "箱");
+        assetsTypeMap.put(3, "桶");
+        assetsTypeMap.put(4, "辅助类");
 
         costStatusMap.put(0, "正常");
         costStatusMap.put(1, "上报");

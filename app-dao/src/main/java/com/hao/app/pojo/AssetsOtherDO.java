@@ -10,19 +10,18 @@ import java.util.Date;
 
 @Data
 @ToString
-public class AssetsDO implements Serializable {
+public class AssetsOtherDO implements Serializable {
 
     private Integer id;
 
     private Integer projects;
 
+    private Integer type;
+    private String typeStr;
+
     private String name;
 
     private String projectsName;
-
-    private String number;
-
-    private String license;
 
     private Integer brand;
     private String brandStr;
@@ -42,15 +41,9 @@ public class AssetsDO implements Serializable {
 
     private String storageLocation;
 
-    private String engineNumber;
-
-    private Integer engineNumberType;
-
     private BigDecimal price;
 
     private Integer staging;
-
-    private BigDecimal purTax;
 
     private BigDecimal tanxiao;
 
@@ -63,6 +56,11 @@ public class AssetsDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    public void setType(Integer type) {
+        this.typeStr = Dicts.assetsTypeMap.get(type);
+        this.type = type;
+    }
 
     public void setBrand(Integer brand) {
         this.brandStr = Dicts.brandMap.get(brand);

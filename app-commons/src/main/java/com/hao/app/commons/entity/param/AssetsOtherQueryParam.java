@@ -12,22 +12,22 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class AssetsQueryParam extends QueryParam implements Serializable {
+public class AssetsOtherQueryParam extends QueryParam implements Serializable {
 
 	private static final long serialVersionUID = 4737617179006429526L;
 
 	private Integer projectsId;
+	private Integer type;
+
 	private Integer carType;
 	private Integer brand;
 
 	private String name;
 
-	private String number;
-
 	private String buyTimeStart;
 	private String buyTimeEnd;
 
-	public AssetsQueryParam(int pageStart, int pageLimit) {
+	public AssetsOtherQueryParam(int pageStart, int pageLimit) {
 		super(pageStart, pageLimit);
 	}
 

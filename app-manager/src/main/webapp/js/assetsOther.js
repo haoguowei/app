@@ -6,10 +6,10 @@ Ext.onReady(function () {
 
     //-----------------权限相关 start-----------
 
-    var urlEditValid = "initAssetsEdit.do";
+    var urlEditValid = "initAssetsOtherEdit.do";
 
     //是否有权限
-    var isPRISaveMember = isHavePRI("saveAssets.do");//新增编辑用户
+    var isPRISaveMember = isHavePRI("saveAssetsOther.do");//新增编辑用户
 
     //-----------------权限相关 end-----------
     var buyTimeStartDIV = new com.custom.DateField({
@@ -58,6 +58,7 @@ Ext.onReady(function () {
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
+        gridStore.setBaseParam("type", getById("type"));
 
         gridStore.setBaseParam("brand", getById("brand"));
         gridStore.setBaseParam("carType", getById("carType"));
@@ -70,7 +71,7 @@ Ext.onReady(function () {
             callback: function (r, options, success) {
                 if (success) {
                     Ext.Ajax.request({
-                        url: 'initAssetsHeJi.do',
+                        url: 'initAssetsOtherHeJi.do',
                         success: function (response) {
                             var resp = Ext.util.JSON.decode(response.responseText);
                             if (resp.success) {
@@ -86,7 +87,7 @@ Ext.onReady(function () {
     };
 
     this.updateF = function (id) {
-        location.href = "initAssetsEdit.do?id=" + id;
+        location.href = "initAssetsOtherEdit.do?id=" + id;
     };
 
     this.viewF = function (id) {
@@ -96,19 +97,19 @@ Ext.onReady(function () {
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
-        url: 'searchAssets.do',
+        url: 'searchOtherAssets.do',
         root: 'resultList',
         remoteSort: false,
         totalProperty: 'total',
         fields: [
             {name: 'id'},
             {name: 'name'},
-            {name: 'number'},
             {name: 'brandStr'},
             {name: 'carTypeStr'},
             {name: 'projectsName'},
             {name: 'quantity'},
             {name: 'quoQuantity'},
+            {name: 'type'},
             {name: 'owner'},
             {name: 'typeStr'},
             {name: 'buyTime'}
@@ -119,6 +120,7 @@ Ext.onReady(function () {
             carType: '',
             brand: '',
             name: '',
+            type: '',
             buyTimeStart: '',
             buyTimeEnd: ''
         }
@@ -134,8 +136,8 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 1.5, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
-            {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
-            {width: 2, header: '车型', align: 'left', sortable: false, dataIndex: 'carTypeStr'},
+            {width: 2, header: '资产类型', align: 'left', sortable: false, dataIndex: 'typeStr'},
+            {width: 2, header: '规格型号', align: 'left', sortable: false, dataIndex: 'carTypeStr'},
             {width: 2, header: '品牌', align: 'left', sortable: false, dataIndex: 'brandStr'},
             {width: 2, header: '数量', align: 'right', sortable: false, dataIndex: 'quantity'},
             {width: 2, header: '现况数量', align: 'right', sortable: false, dataIndex: 'quoQuantity'},
@@ -179,7 +181,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '车辆管理',
+            title: '其他资产管理',
             border: false,
             height: 120,
             keys: {
@@ -202,10 +204,10 @@ Ext.onReady(function () {
             }],
             tbar: [
                 {
-                    text: '录入车辆资产',
+                    text: '录入其他资产',
                     id: 'bt_add',
                     handler: function (b, e) {
-                        location.href = "initAssetsEdit.do";
+                        location.href = "initAssetsOtherEdit.do";
                     }
                 },
                 '->',

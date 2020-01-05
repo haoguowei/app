@@ -11,11 +11,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
-    <script type="text/javascript" src="<%=syspath%>/js/assetsEdit.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/js/assetsOtherEdit.js"></script>
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form" action="saveAssets.do" method="post" onsubmit="return save()">
+    <form name="form" action="saveAssetsOther.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
         <input type="hidden" id="hideBuyTimeDiv" name="hideBuyTimeDiv"
                value="<fmt:formatDate value="${itemObj.buyTime }" pattern="yyyy-MM-dd" />">
@@ -33,6 +33,19 @@
                     </select>
                 </td>
             </tr>
+            <tr>
+                <td>资产类型:<span style="color: red">*</span></td>
+                <td>
+                    <select id="type" name="type">
+                        <option value="0">请选择...
+                            <c:forEach items="${assetsTypeMap }" var="itm">
+                        <option
+                                <c:if test="${itm.key == itemObj.type }">selected="selected"</c:if>
+                                value="${itm.key}">${itm.value}
+                            </c:forEach>
+                    </select>
+                </td>
+            </tr>
 
             <tr>
                 <td width="120px">资产名称:<span style="color: red">*</span></td>
@@ -40,19 +53,6 @@
                     <input type="text" class="Mytext" name="name" id="name" value="${itemObj.name }">
                 </td>
             </tr>
-            <tr>
-                <td width="120px">资产编号:<span style="color: red">*</span></td>
-                <td>
-                    <input type="text" class="Mytext" name="number" id="number" value="${itemObj.number }">
-                </td>
-            </tr>
-            <tr>
-                <td width="120px">牌照号:</td>
-                <td>
-                    <input type="text" class="Mytext" name="license" id="license" value="${itemObj.license }">
-                </td>
-            </tr>
-
 
             <tr>
                 <td>责任人:<span style="color: red">*</span></td>
@@ -93,7 +93,7 @@
             </tr>
 
             <tr>
-                <td>车型:</td>
+                <td>规格型号:</td>
                 <td>
                     <select id="carType" name="carType">
                         <option value="0">请选择...
@@ -136,26 +136,7 @@
                            value="${itemObj.storageLocation }">
                 </td>
             </tr>
-            <tr>
-                <td width="120px">发动机号:</td>
-                <td>
-                    <input type="text" class="Mytext" name="engineNumber" id="engineNumber"
-                           value="${itemObj.engineNumber }">
-                </td>
-            </tr>
-            <tr>
-                <td width="120px">发动机号牌种类:</td>
-                <td>
-                    <select id="engineNumberType" name="engineNumberType">
-                        <option value="0">请选择...
-                            <c:forEach items="${engineNumberTypeMap }" var="itm">
-                        <option
-                                <c:if test="${itm.key == itemObj.engineNumberType }">selected="selected"</c:if>
-                                value="${itm.key}">${itm.value}
-                            </c:forEach>
-                    </select>
-                </td>
-            </tr>
+
 
             <tr>
                 <td width="120px">单价（元）:</td>
@@ -170,12 +151,7 @@
                     <input type="text" class="Mytext" name="staging" id="staging" value="${itemObj.staging }">
                 </td>
             </tr>
-            <tr>
-                <td width="120px">购置税（元）:</td>
-                <td>
-                    <input type="text" class="Mytext" name="purTax" id="purTax" value="${itemObj.purTax }">
-                </td>
-            </tr>
+
             <tr>
                 <td width="120px">摊销金额（元）:</td>
                 <td>

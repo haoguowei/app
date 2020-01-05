@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<%=syspath%>/utils/upload/FileUpLoadWindow.js"></script>
 
     <script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
-    <script type="text/javascript" src="<%=syspath%>/js/assets.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/js/assetsOther.js"></script>
 </head>
 <body>
 <div id="search_div_id">
@@ -35,7 +35,16 @@
                 资产名称：
                 <input style="margin-right: 20px;" type="text" name="name" id="name">
 
-                车型：
+                资产类型：
+                <select id="type" name="type">
+                    <option value="0">请选择...
+                        <c:forEach items="${assetsTypeMap }" var="itm">
+                    <option value="${itm.key}">${itm.value}
+                        </c:forEach>
+                </select>
+
+
+                规格型号：
                 <select id="carType" name="carType">
                     <option value="0">请选择...
                         <c:forEach items="${carTypeMap }" var="itm">

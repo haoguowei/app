@@ -15,17 +15,17 @@ Ext.onReady(function () {
             document.getElementById("projects").focus();
             return false;
         }
+        if (_isNull(getById("type")) || getById("type") == 0) {
+            alert("请选择资产类型！");
+            document.getElementById("type").focus();
+            return false;
+        }
         if (_isNull(getById("name"))) {
             alert("请填写资产名称！");
             document.getElementById("name").focus();
             return false;
         }
 
-        if (_isNull(getById("number"))) {
-            alert("请填写资产编号！");
-            document.getElementById("number").focus();
-            return false;
-        }
         if (_isNull(getById("owner")) || getById("owner") == 0) {
             alert("请选择责任人！");
             document.getElementById("owner").focus();
@@ -62,11 +62,7 @@ Ext.onReady(function () {
             document.getElementById("price").focus();
             return false;
         }
-        if (_isNotNull(getById("purTax")) && !regexVerify('tingke', getById("purTax"))) {
-            alert("购置税请填写正确的金额！");
-            document.getElementById("purTax").focus();
-            return false;
-        }
+
         if (_isNotNull(getById("tanxiao")) && !regexVerify('tingke', getById("tanxiao"))) {
             alert("摊销金额请填写正确的金额！");
             document.getElementById("tanxiao").focus();
@@ -82,7 +78,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '编辑车辆资产',
+            title: '编辑其他资产',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,
