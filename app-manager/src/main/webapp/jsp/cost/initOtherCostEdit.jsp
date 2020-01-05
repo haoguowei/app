@@ -66,21 +66,24 @@
             <tr>
                 <td>付款单号:</td>
                 <td>
-                    <input type="text" class="Mytext" name="fukuan" id="fukuan" value="${itemObj.fukuan }">
+                    <input style="width: 600px" type="text" class="Mytext" name="fukuan" id="fukuan"
+                           value="${itemObj.fukuan }">
                 </td>
             </tr>
 
             <tr>
                 <td>收款方:</td>
                 <td>
-                    <input type="text" class="Mytext" name="shoukuan" id="shoukuan" value="${itemObj.shoukuan }">
+                    <input style="width: 600px" type="text" class="Mytext" name="shoukuan" id="shoukuan"
+                           value="${itemObj.shoukuan }">
                 </td>
             </tr>
 
             <tr>
                 <td>备注:</td>
                 <td>
-                    <input type="text" class="Mytext" name="remark" id="remark" value="${itemObj.remark }">
+                    <input style="width: 600px" type="text" class="Mytext" name="remark" id="remark"
+                           value="${itemObj.remark }">
                 </td>
             </tr>
 

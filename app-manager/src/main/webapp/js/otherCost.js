@@ -95,7 +95,7 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
-            {width: 3, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
+            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
                 header: '消费日期',
@@ -110,11 +110,11 @@ Ext.onReady(function () {
                 }
             },
             {width: 3, header: '消费类型', align: 'left', sortable: false, dataIndex: 'payTypeStr'},
-            {width: 3, header: '消费金额(元)', align: 'right', sortable: false, dataIndex: 'payAmount'},
-            {width: 3, header: '付款单号', align: 'right', sortable: false, dataIndex: 'fukuan'},
-            {width: 3, header: '收款方', align: 'left', sortable: false, dataIndex: 'shoukuan'},
+            {width: 2, header: '消费金额(元)', align: 'right', sortable: false, dataIndex: 'payAmount'},
+            {width: 4, header: '付款单号', align: 'right', sortable: false, dataIndex: 'fukuan'},
+            {width: 4, header: '收款方', align: 'left', sortable: false, dataIndex: 'shoukuan'},
             {
-                width: 3,
+                width: 2,
                 header: '操作',
                 align: 'center',
                 sortable: false,

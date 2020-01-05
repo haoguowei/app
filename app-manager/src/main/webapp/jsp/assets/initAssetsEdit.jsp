@@ -190,11 +190,11 @@
             </tr>
 
 
-
             <tr>
                 <td>备注:</td>
                 <td>
-                    <input type="text"  class="Mytext" name="remark" id="remark" value="${itemObj.remark }">
+                    <input style="width: 600px" type="text" class="Mytext" name="remark" id="remark"
+                           value="${itemObj.remark }">
                 </td>
             </tr>
 
