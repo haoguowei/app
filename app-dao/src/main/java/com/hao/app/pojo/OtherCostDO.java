@@ -1,5 +1,6 @@
 package com.hao.app.pojo;
 
+import com.hao.app.commons.entity.Dicts;
 import lombok.Data;
 import lombok.ToString;
 
@@ -20,13 +21,10 @@ public class OtherCostDO implements Serializable {
 
     private Date payDay;
 
-    private BigDecimal bangongAmount;
+    private Integer payType; //pay_type
+    private String payTypeStr; //pay_type
 
-    private BigDecimal zhaodaiAmount;
-
-    private BigDecimal otherAmount;
-
-    private BigDecimal totalAmount;
+    private BigDecimal payAmount;//pay_amount
 
     private String remark;
 
@@ -36,5 +34,9 @@ public class OtherCostDO implements Serializable {
 
     private Date updateTime;
 
+    public void setPayType(Integer payType) {
+        this.payType = payType;
+        this.payTypeStr = Dicts.otherPayTypeMap.get(payType);
+    }
 
 }

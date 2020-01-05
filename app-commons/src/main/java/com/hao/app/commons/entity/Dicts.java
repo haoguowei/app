@@ -17,8 +17,13 @@ public class Dicts {
     public static Map<Integer, String> engineNumberTypeMap = new LinkedHashMap<>();
 
     public static Map<Integer, String> costStatusMap = new LinkedHashMap<>();
+    public static Map<Integer, String> otherPayTypeMap = new LinkedHashMap<>();
 
     static {
+        otherPayTypeMap.put(1, "办公费用");
+        otherPayTypeMap.put(2, "招待费用");
+        otherPayTypeMap.put(3, "其他费用");
+
         engineNumberTypeMap.put(1, "小型车");
         engineNumberTypeMap.put(2, "大型车");
         engineNumberTypeMap.put(3, "低速车");
