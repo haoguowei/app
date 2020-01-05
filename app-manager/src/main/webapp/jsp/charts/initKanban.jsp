@@ -60,6 +60,8 @@
 <script>
     window.onload = function () {
 
+        var dataPoints = [];
+
         var chart = new CanvasJS.Chart("chartContainer", {
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             exportEnabled: true,
@@ -70,21 +72,24 @@
             data: [{
                 type: "pie",
                 startAngle: 25,
-                toolTipContent: "<b>{label}</b>: {y}%",
+                toolTipContent: "<b>{label}</b>: {y}元",
                 showInLegend: "true",
                 legendText: "{label}",
                 indexLabelFontSize: 16,
-                indexLabel: "{label} - {y}%",
-                dataPoints: [
-                    {y: 50, label: "车辆消费"},
-                    {y: 20, label: "办公消费"},
-                    {y: 10, label: "招待消费"},
-                    {y: 20, label: "其他消费"}
-                ]
+                indexLabel: "{label} - {y}元",
+                dataPoints: dataPoints
             }]
         });
-        chart.render();
 
+        // $.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales.json?callback=?", callback);
+
+
+        dataPoints.push({
+            label: 'aaa',
+            y: 100
+        });
+
+        chart.render();
     }
 </script>
 
