@@ -139,6 +139,9 @@ public class AssetsController extends BaseController {
         employeeQuery.setProjectsId(getCurrentProjectsId(request));
         Set<Integer> set = new HashSet<>();
         set.add(1); //经理
+        set.add(2); //主管
+        set.add(5); //队长
+        set.add(6); //司机
         employeeQuery.setJobTypes(set);
         request.setAttribute("ownerList", employeeService.searchEmployee(employeeQuery).getResultList());
 
