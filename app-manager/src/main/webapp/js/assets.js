@@ -183,7 +183,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '其他资产管理',
+            title: '车辆管理',
             border: false,
             height: 120,
             keys: {
@@ -206,7 +206,7 @@ Ext.onReady(function () {
             }],
             tbar: [
                 {
-                    text: '录入其他资产',
+                    text: '录入车辆资产',
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initAssetsEdit.do";

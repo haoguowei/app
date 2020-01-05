@@ -173,6 +173,8 @@ public class AssetsController extends BaseController {
         String engineNumber = request.getParameter("engineNumber");
         String price = request.getParameter("price");
         String purTax = request.getParameter("purTax");
+        String tanxiao = request.getParameter("tanxiao");
+        String zhejiu = request.getParameter("zhejiu");
 
         String name = request.getParameter("name");
         if (StringUtils.isBlank(name)) {
@@ -213,6 +215,12 @@ public class AssetsController extends BaseController {
         if (StringUtils.isNotBlank(purTax)) {
             item.setPurTax(new BigDecimal(purTax));
         }
+        if (StringUtils.isNotBlank(tanxiao)) {
+            item.setTanxiao(new BigDecimal(tanxiao));
+        }
+        if (StringUtils.isNotBlank(zhejiu)) {
+            item.setZhejiu(new BigDecimal(zhejiu));
+        }
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String buyTime = request.getParameter("buyTime");
@@ -233,8 +241,8 @@ public class AssetsController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            sysLogsService.writeLog(item.getCreater(), "新增或修改其他资产信息:" + item.toString());
-            return successResult(request, "其他资产管理", "initAssets.do");
+            sysLogsService.writeLog(item.getCreater(), "新增或修改车辆管理:" + item.toString());
+            return successResult(request, "车辆管理", "initAssets.do");
         } else {
             return failResult(request, resultCode);
         }

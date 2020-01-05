@@ -188,6 +188,18 @@
                     <input type="text" class="Mytext" name="purTax" id="purTax" value="${itemObj.purTax }">
                 </td>
             </tr>
+            <tr>
+                <td width="120px">摊销金额（元）:</td>
+                <td>
+                    <input type="text" class="Mytext" name="tanxiao" id="tanxiao" value="${itemObj.tanxiao }">
+                </td>
+            </tr>
+            <tr>
+                <td width="120px">折旧金额（元）:</td>
+                <td>
+                    <input type="text" class="Mytext" name="zhejiu" id="zhejiu" value="${itemObj.zhejiu }">
+                </td>
+            </tr>
 
 
             <tr>

@@ -21,6 +21,8 @@
         <result column="engine_number" jdbcType="VARCHAR" property="engineNumber"/>
         <result column="engine_number_type" jdbcType="INTEGER" property="engineNumberType"/>
         <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="tanxiao" jdbcType="DECIMAL" property="tanxiao"/>
+        <result column="zhejiu" jdbcType="DECIMAL" property="zhejiu"/>
         <result column="staging" jdbcType="INTEGER" property="staging"/>
         <result column="pur_tax" jdbcType="DECIMAL" property="purTax"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -32,7 +34,7 @@
     <sql id="Base_Column_List">
         id, type, name, number, projects, projects_name, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
         owner, storage_location, engine_number, engine_number_type, price, staging, pur_tax,
-        remark, creater, create_time, update_time
+        remark, creater, create_time, update_time,tanxiao,zhejiu
     </sql>
 
     <select id="count" parameterType="com.hao.app.commons.entity.param.AssetsQueryParam" resultType="java.lang.Integer">
@@ -153,6 +155,12 @@
             <if test="price != null">
                 price,
             </if>
+            <if test="tanxiao != null">
+                tanxiao,
+            </if>
+            <if test="zhejiu != null">
+                zhejiu,
+            </if>
             <if test="staging != null">
                 staging,
             </if>
@@ -224,6 +232,12 @@
             <if test="price != null">
                 #{price,jdbcType=DECIMAL},
             </if>
+            <if test="tanxiao != null">
+                #{tanxiao,jdbcType=DECIMAL},
+            </if>
+            <if test="zhejiu != null">
+                #{zhejiu,jdbcType=DECIMAL},
+            </if>
             <if test="staging != null">
                 #{staging,jdbcType=INTEGER},
             </if>
@@ -291,6 +305,12 @@
             </if>
             <if test="price != null">
                 price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="tanxiao != null">
+                tanxiao = #{tanxiao,jdbcType=DECIMAL},
+            </if>
+            <if test="zhejiu != null">
+                zhejiu = #{zhejiu,jdbcType=DECIMAL},
             </if>
             <if test="staging != null">
                 staging = #{staging,jdbcType=INTEGER},

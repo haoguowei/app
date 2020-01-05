@@ -55,6 +55,10 @@ public class AssetsDO implements Serializable {
 
     private BigDecimal purTax;
 
+    private BigDecimal tanxiao;
+
+    private BigDecimal zhejiu;
+
     private String remark;
 
     private String creater;

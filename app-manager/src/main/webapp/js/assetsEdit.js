@@ -72,12 +72,22 @@ Ext.onReady(function () {
             document.getElementById("purTax").focus();
             return false;
         }
+        if (_isNotNull(getById("tanxiao")) && !regexVerify('tingke', getById("tanxiao"))) {
+            alert("摊销金额请填写正确的金额！");
+            document.getElementById("tanxiao").focus();
+            return false;
+        }
+        if (_isNotNull(getById("zhejiu")) && !regexVerify('tingke', getById("zhejiu"))) {
+            alert("折旧金额请填写正确的金额！");
+            document.getElementById("zhejiu").focus();
+            return false;
+        }
     };
 
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '编辑其他资产信息',
+            title: '编辑车辆资产',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,
