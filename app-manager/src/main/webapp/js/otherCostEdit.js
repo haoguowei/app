@@ -36,7 +36,7 @@ Ext.onReady(function () {
 
 
         if (_isNotNull(getById("payAmount")) && !regexVerify('tingke', getById("payAmount"))) {
-            alert("消费费用请填写正确的金额！");
+            alert("消费金额请填写正确的金额！");
             document.getElementById("payAmount").focus();
             return false;
         }

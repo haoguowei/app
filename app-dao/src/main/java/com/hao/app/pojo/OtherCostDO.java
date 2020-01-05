@@ -19,6 +19,10 @@ public class OtherCostDO implements Serializable {
 
     private String projectsName;
 
+    private String fukuan;
+
+    private String shoukuan;
+
     private Date payDay;
 
     private Integer payType; //pay_type

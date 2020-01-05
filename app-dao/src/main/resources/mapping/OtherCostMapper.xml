@@ -13,13 +13,15 @@
 
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
+        <result column="fukuan" jdbcType="VARCHAR" property="fukuan"/>
+        <result column="shoukuan" jdbcType="VARCHAR" property="shoukuan"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id, pay_day, projects, projects_name,pay_type,pay_amount, remark, creater, create_time,
-        update_time
+        update_time,fukuan,shoukuan
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -41,6 +43,12 @@
             </if>
             <if test="projectsName != null">
                 projects_name,
+            </if>
+            <if test="fukuan != null">
+                fukuan,
+            </if>
+            <if test="shoukuan != null">
+                shoukuan,
             </if>
             <if test="payType != null">
                 pay_type,
@@ -71,6 +79,12 @@
             </if>
             <if test="projectsName != null">
                 #{projectsName,jdbcType=VARCHAR},
+            </if>
+            <if test="fukuan != null">
+                #{fukuan,jdbcType=VARCHAR},
+            </if>
+            <if test="shoukuan != null">
+                #{shoukuan,jdbcType=VARCHAR},
             </if>
 
             <if test="payType != null">
@@ -108,6 +122,12 @@
             </if>
             <if test="projectsName != null">
                 projects_name = #{projectsName,jdbcType=VARCHAR},
+            </if>
+            <if test="fukuan != null">
+                fukuan = #{fukuan,jdbcType=VARCHAR},
+            </if>
+            <if test="shoukuan != null">
+                shoukuan = #{shoukuan,jdbcType=VARCHAR},
             </if>
             <if test="payType != null">
                 pay_type = #{payType,jdbcType=INTEGER},

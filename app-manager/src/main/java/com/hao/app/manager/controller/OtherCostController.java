@@ -106,6 +106,8 @@ public class OtherCostController extends BaseController {
 
         OtherCostDO item = new OtherCostDO();
         item.setId(id);
+        item.setFukuan(request.getParameter("fukuan"));
+        item.setShoukuan(request.getParameter("shoukuan"));
         item.setRemark(request.getParameter("remark"));
         item.setProjects(projectsDO.getId());
         item.setProjectsName(projectsDO.getName());

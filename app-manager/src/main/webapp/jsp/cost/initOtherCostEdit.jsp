@@ -57,9 +57,23 @@
             </tr>
 
             <tr>
-                <td width="150px">消费费用(元):</td>
+                <td width="150px">消费金额(元):</td>
                 <td>
                     <input type="text" class="Mytext" name="payAmount" id="payAmount" value="${itemObj.payAmount }">
+                </td>
+            </tr>
+
+            <tr>
+                <td>付款单号:</td>
+                <td>
+                    <input type="text" class="Mytext" name="fukuan" id="fukuan" value="${itemObj.fukuan }">
+                </td>
+            </tr>
+
+            <tr>
+                <td>收款方:</td>
+                <td>
+                    <input type="text" class="Mytext" name="shoukuan" id="shoukuan" value="${itemObj.shoukuan }">
                 </td>
             </tr>
 
