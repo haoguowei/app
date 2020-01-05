@@ -31,8 +31,6 @@
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
                 </select>
-            </td>
-            <td class="Myfont">
                 消费类型：
                 <select id="payType" name="payType">
                     <option value="0">请选择...
