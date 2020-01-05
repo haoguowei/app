@@ -34,13 +34,31 @@
 
                 资产名称：
                 <input style="margin-right: 20px;" type="text" name="name" id="name">
-                资产编号：
-                <input style="margin-right: 20px;width: 200px;" type="text" name="number" id="number">
+
                 资产类型：
                 <select id="type" name="type">
                     <option value="0">请选择...
                         <c:forEach items="${assetsTypeMap }" var="itm">
                     <option value="${itm.key}">${itm.value}
+                        </c:forEach>
+                </select>
+
+
+                车型：
+                <select id="carType" name="carType">
+                    <option value="0">请选择...
+                        <c:forEach items="${carTypeMap }" var="itm">
+                    <option
+                            value="${itm.key}">${itm.value}
+                        </c:forEach>
+                </select>
+
+                品牌：
+                <select id="brand" name="brand">
+                    <option value="0">请选择...
+                        <c:forEach items="${brandMap }" var="itm">
+                    <option
+                            value="${itm.key}">${itm.value}
                         </c:forEach>
                 </select>
             </td>
@@ -53,7 +71,7 @@
                 <div id="buyTimeEndDIV" style="float:left; "></div>
 
                 <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
-                <input style="margin-left: 50px;" type="button" value="导出资产" class="Mybotton" onclick="exportFunc()">
+                <%--                <input style="margin-left: 50px;" type="button" value="导出资产" class="Mybotton" onclick="exportFunc()">--%>
             </td>
         </tr>
     </table>

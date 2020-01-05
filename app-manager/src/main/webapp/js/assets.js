@@ -27,40 +27,41 @@ Ext.onReady(function () {
         id: 'buyTimeEnd'
     });
 
-    this.exportFunc = function () {
-        var projectsId = getById("projectsId");
-        var name = getById("name");
-        var number = getById("number");
-        var type = getById("type");
-
-        var buyTimeStart = getById("buyTimeStart");
-        var buyTimeEnd = getById("buyTimeEnd");
-
-        if (_isNull(buyTimeStart)) {
-            alert("导出资产时请设置采购时间的搜索范围！");
-            document.getElementById("buyTimeStart").focus();
-            return;
-        }
-        if (_isNull(buyTimeEnd)) {
-            alert("导出资产时请设置采购时间的搜索范围！");
-            document.getElementById("buyTimeEnd").focus();
-            return;
-        }
-
-        searchFunc();
-        location.href = "exportAssets.do?name=" + name
-            + "&projectsId=" + projectsId
-            + "&number=" + number
-            + "&type=" + type
-            + "&buyTimeStart=" + buyTimeStart
-            + "&buyTimeEnd=" + buyTimeEnd;
-    }
+    // this.exportFunc = function () {
+    //     var projectsId = getById("projectsId");
+    //     var name = getById("name");
+    //     var type = getById("type");
+    //
+    //     var buyTimeStart = getById("buyTimeStart");
+    //     var buyTimeEnd = getById("buyTimeEnd");
+    //
+    //     if (_isNull(buyTimeStart)) {
+    //         alert("导出资产时请设置采购时间的搜索范围！");
+    //         document.getElementById("buyTimeStart").focus();
+    //         return;
+    //     }
+    //     if (_isNull(buyTimeEnd)) {
+    //         alert("导出资产时请设置采购时间的搜索范围！");
+    //         document.getElementById("buyTimeEnd").focus();
+    //         return;
+    //     }
+    //
+    //     searchFunc();
+    //     location.href = "exportAssets.do?name=" + name
+    //         + "&projectsId=" + projectsId
+    //         + "&number=" + number
+    //         + "&type=" + type
+    //         + "&buyTimeStart=" + buyTimeStart
+    //         + "&buyTimeEnd=" + buyTimeEnd;
+    // }
 
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
-        gridStore.setBaseParam("number", getById("number"));
         gridStore.setBaseParam("type", getById("type"));
+
+        gridStore.setBaseParam("brand", getById("brand"));
+        gridStore.setBaseParam("carType", getById("carType"));
 
         gridStore.setBaseParam("buyTimeStart", getById("buyTimeStart"));
         gridStore.setBaseParam("buyTimeEnd", getById("buyTimeEnd"));
@@ -104,6 +105,8 @@ Ext.onReady(function () {
             {name: 'id'},
             {name: 'name'},
             {name: 'number'},
+            {name: 'brandStr'},
+            {name: 'carTypeStr'},
             {name: 'projectsName'},
             {name: 'quantity'},
             {name: 'quoQuantity'},
@@ -115,11 +118,12 @@ Ext.onReady(function () {
         baseParams: {
             limit: PAGESIZE,
             projectsId: '',
+            carType: '',
+            brand: '',
             name: '',
             type: '',
             buyTimeStart: '',
-            buyTimeEnd: '',
-            number: ''
+            buyTimeEnd: ''
         }
     });
 
@@ -134,6 +138,8 @@ Ext.onReady(function () {
             {width: 2, header: '资产名称', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 2, header: '资产编号', align: 'left', sortable: false, dataIndex: 'number'},
             {width: 2, header: '类型', align: 'left', sortable: false, dataIndex: 'typeStr'},
+            {width: 2, header: '车型', align: 'left', sortable: false, dataIndex: 'carTypeStr'},
+            {width: 2, header: '品牌', align: 'left', sortable: false, dataIndex: 'brandStr'},
             {width: 2, header: '数量', align: 'right', sortable: false, dataIndex: 'quantity'},
             {width: 2, header: '现况数量', align: 'right', sortable: false, dataIndex: 'quoQuantity'},
             {

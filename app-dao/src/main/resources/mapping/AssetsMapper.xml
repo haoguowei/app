@@ -8,8 +8,8 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="number" jdbcType="VARCHAR" property="number"/>
         <result column="license" jdbcType="VARCHAR" property="license"/>
-        <result column="brand" jdbcType="VARCHAR" property="brand"/>
-        <result column="car_type" jdbcType="VARCHAR" property="carType"/>
+        <result column="brand" jdbcType="INTEGER" property="brand"/>
+        <result column="car_type" jdbcType="INTEGER" property="carType"/>
         <result column="buy_time" jdbcType="DATE" property="buyTime"/>
         <result column="in_out" jdbcType="VARCHAR" property="inOut"/>
         <result column="quantity" jdbcType="INTEGER" property="quantity"/>
@@ -185,10 +185,10 @@
                 #{license,jdbcType=VARCHAR},
             </if>
             <if test="brand != null">
-                #{brand,jdbcType=VARCHAR},
+                #{brand,jdbcType=INTEGER},
             </if>
             <if test="carType != null">
-                #{carType,jdbcType=VARCHAR},
+                #{carType,jdbcType=INTEGER},
             </if>
             <if test="buyTime != null">
                 #{buyTime,jdbcType=DATE},
@@ -253,10 +253,10 @@
                 license = #{license,jdbcType=VARCHAR},
             </if>
             <if test="brand != null">
-                brand = #{brand,jdbcType=VARCHAR},
+                brand = #{brand,jdbcType=INTEGER},
             </if>
             <if test="carType != null">
-                car_type = #{carType,jdbcType=VARCHAR},
+                car_type = #{carType,jdbcType=INTEGER},
             </if>
             <if test="buyTime != null">
                 buy_time = #{buyTime,jdbcType=DATE},

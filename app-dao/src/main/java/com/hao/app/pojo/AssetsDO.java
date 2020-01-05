@@ -27,9 +27,11 @@ public class AssetsDO implements Serializable {
 
     private String license;
 
-    private String brand;
+    private Integer brand;
+    private String brandStr;
 
-    private String carType;
+    private Integer carType;
+    private String carTypeStr;
 
     private Date buyTime;
 
@@ -64,5 +66,15 @@ public class AssetsDO implements Serializable {
     public void setType(Integer type) {
         this.typeStr = Dicts.assetsTypeMap.get(type);
         this.type = type;
+    }
+
+    public void setBrand(Integer brand) {
+        this.brandStr = Dicts.brandMap.get(brand);
+        this.brand = brand;
+    }
+
+    public void setCarType(Integer carType) {
+        this.carTypeStr = Dicts.carTypeMap.get(carType);
+        this.carType = carType;
     }
 }

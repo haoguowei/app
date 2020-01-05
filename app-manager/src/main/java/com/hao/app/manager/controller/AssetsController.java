@@ -49,6 +49,8 @@ public class AssetsController extends BaseController {
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
+        request.setAttribute("brandMap", Dicts.brandMap);
+        request.setAttribute("carTypeMap", Dicts.carTypeMap);
         request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/assets/initAssets";
     }
@@ -118,6 +120,9 @@ public class AssetsController extends BaseController {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
         request.setAttribute("engineNumberTypeMap", Dicts.engineNumberTypeMap);
 
+        request.setAttribute("brandMap", Dicts.brandMap);
+        request.setAttribute("carTypeMap", Dicts.carTypeMap);
+
         //责任人
         EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
         employeeQuery.setProjectsId(getCurrentProjectsId(request));
@@ -148,10 +153,10 @@ public class AssetsController extends BaseController {
         int quoQuantity = NumberUtils.toInt(request.getParameter("quoQuantity"), 0);
         int engineNumberType = NumberUtils.toInt(request.getParameter("engineNumberType"), 0);
         int staging = NumberUtils.toInt(request.getParameter("staging"), 0);
+        int brand = NumberUtils.toInt(request.getParameter("brand"), 0);
+        int carType = NumberUtils.toInt(request.getParameter("carType"), 0);
 
         String license = request.getParameter("license");
-        String brand = request.getParameter("brand");
-        String carType = request.getParameter("carType");
         String inOut = request.getParameter("inOut");
         String storageLocation = request.getParameter("storageLocation");
         String engineNumber = request.getParameter("engineNumber");

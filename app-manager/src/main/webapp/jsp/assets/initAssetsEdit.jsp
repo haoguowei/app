@@ -67,6 +67,7 @@
                 </td>
             </tr>
 
+
             <tr>
                 <td>责任人:<span style="color: red">*</span></td>
                 <td>
@@ -88,17 +89,32 @@
                 </td>
             </tr>
 
+
             <tr>
-                <td width="120px">品牌:</td>
+                <td>品牌:</td>
                 <td>
-                    <input type="text" class="Mytext" name="brand" id="brand" value="${itemObj.brand }">
+                    <select id="brand" name="brand">
+                        <option value="0">请选择...
+                            <c:forEach items="${brandMap }" var="itm">
+                        <option
+                                <c:if test="${itm.key == itemObj.brand }">selected="selected"</c:if>
+                                value="${itm.key}">${itm.value}
+                            </c:forEach>
+                    </select>
                 </td>
             </tr>
 
             <tr>
-                <td width="120px">规格型号:</td>
+                <td>车型:</td>
                 <td>
-                    <input type="text" class="Mytext" name="carType" id="carType" value="${itemObj.carType }">
+                    <select id="carType" name="carType">
+                        <option value="0">请选择...
+                            <c:forEach items="${carTypeMap }" var="itm">
+                        <option
+                                <c:if test="${itm.key == itemObj.carType }">selected="selected"</c:if>
+                                value="${itm.key}">${itm.value}
+                            </c:forEach>
+                    </select>
                 </td>
             </tr>
 
