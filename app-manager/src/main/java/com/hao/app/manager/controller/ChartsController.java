@@ -164,7 +164,8 @@ public class ChartsController extends BaseController {
         }
 
         //生成标题
-        String title = fromDate + " 到 " + endDate + "总开支" + total + "元";
+        String pname = projectsDO == null ? "" : projectsDO.getName();
+        String title = fromDate + " 到 " + endDate + pname + "总开支" + total + "元";
         request.setAttribute("title", title);
 
         if (total.equals(BigDecimal.valueOf(0))) {

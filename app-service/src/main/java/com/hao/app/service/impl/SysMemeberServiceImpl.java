@@ -1,16 +1,15 @@
 package com.hao.app.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.hao.app.commons.entity.param.QueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.SysMemberMapper;
 import com.hao.app.pojo.SysMember;
 import com.hao.app.service.SysMemeberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SysMemeberServiceImpl implements SysMemeberService {
@@ -28,7 +27,15 @@ public class SysMemeberServiceImpl implements SysMemeberService {
 		QueryParam queryParam = new QueryParam(start, limit);
 		int count = sysMemberMapper.queryMembersCount();
 		List<SysMember> list = sysMemberMapper.queryMembersPageList(queryParam);
-		
+
+		if (list != null) {
+			for (SysMember s : list) {
+				if (s.getProjectsId() == -1) {
+					s.setProjectsName("总公司");
+				}
+			}
+		}
+
 		return new JsonResult<SysMember>(count, list);
 	}
 
