@@ -40,17 +40,35 @@
                 <div style="float:left;margin: 10px; ">结束时间：</div>
                 <div id="endDIV" style="float:left;margin: 10px; "></div>
 
-                <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+
+                <div style="float:left;margin: 10px; ">
+                    <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+                </div>
             </td>
         </tr>
         <tr>
-            <td style="height: 38px">
-
+            <td style="height: 30px">
+                <hr>
             </td>
         </tr>
         <tr>
             <td>
-                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                <div id="chartContainer" style="height: 400px; max-width: 800px; margin: 0px auto;"></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 30px">
+                <hr>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="chartContainer2" style="height: 500px; max-width: 800px; margin: 0px auto;"></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 30px">
+
             </td>
         </tr>
     </table>
@@ -67,7 +85,8 @@
             exportEnabled: true,
             animationEnabled: true,
             title: {
-                text: '${title}'
+                text: '${title}',
+                titleFontSize: 20
             },
             data: [{
                 type: "pie",
@@ -75,7 +94,7 @@
                 toolTipContent: "<b>{label}</b>: {pay}元（{y}%）",
                 showInLegend: "true",
                 legendText: "{label}",
-                indexLabelFontSize: 16,
+                indexLabelFontSize: 14,
                 indexLabel: "{label} - {pay}元",
                 dataPoints: ${datas}
             }]
@@ -87,6 +106,45 @@
         // });
 
         chart.render();
+
+        ////////////////////////////////////////////////////////////////////////////////
+
+
+        var chart2 = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            exportEnabled: true,
+            theme: "light2",
+            title: {
+                text: "项目开支情况"
+            },
+            axisY: {
+                title: "开支（元）",
+                titleFontSize: 24
+            },
+            axisX: {
+                title: "",
+                titleFontSize: 20
+            },
+            data: [{
+                type: "column",
+                yValueFormatString: "#,### 元",
+                indexLabelFontSize: 14,
+                indexLabel: "{y}",
+                dataPoints: [{
+                    // x:0, //横轴顺序
+                    label: '阜平',
+                    y: 100
+                }, {
+                    label: '行唐',
+                    y: 200
+                }, {
+                    label: '保定',
+                    y: 300
+                }]
+            }]
+        });
+
+        chart2.render();
     }
 </script>
 
