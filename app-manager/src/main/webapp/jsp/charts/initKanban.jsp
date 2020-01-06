@@ -95,7 +95,7 @@
 
         var chart = new CanvasJS.Chart("chartContainer", {
             theme: "light2", // "light1", "light2", "dark1", "dark2"
-            exportEnabled: true,
+            exportEnabled: false,
             animationEnabled: true,
             title: {
                 text: '${title}'
@@ -124,7 +124,7 @@
 
         var chart2 = new CanvasJS.Chart("chartContainer2", {
             animationEnabled: true,
-            exportEnabled: true,
+            exportEnabled: false,
             theme: "light2",
             title: {
                 text: '${title2}'
