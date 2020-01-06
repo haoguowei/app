@@ -11,6 +11,7 @@ import com.hao.app.service.OtherCostService;
 import com.hao.app.service.ProjectsService;
 import com.hao.app.service.YYCostService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,7 @@ public class ChartsController extends BaseController {
 
     @RequestMapping("/initKanban.do")
     public String initArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("projectsList", getProjectsList(request));
         SimpleDateFormat DATE = new SimpleDateFormat("yyyy-MM-dd");
         String fromDate = request.getParameter("fromDate");
         String endDate = request.getParameter("endDate");
@@ -54,7 +56,8 @@ public class ChartsController extends BaseController {
         request.setAttribute("endDate", endDate);
 
         //项目
-        Integer projectId = null;
+        Integer projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
+        request.setAttribute("projectId", projectId);
         ProjectsDO projectsDO = projectsService.getById(projectId);
 
         //饼状图
@@ -96,7 +99,8 @@ public class ChartsController extends BaseController {
         //生成标题
         String title = projectsDO != null ? projectsDO.getName() : "所有";
         title += "项目开支" + total + "元";
-        request.setAttribute("title2", title);
+//        request.setAttribute("title2", title);
+        request.setAttribute("title2", "项目开支情况");
 
 //      [{
 //            // x:0, //横轴顺序
@@ -153,8 +157,7 @@ public class ChartsController extends BaseController {
         }
 
         //生成标题
-        String title = projectsDO != null ? projectsDO.getName() : "所有";
-        title += "项目" + fromDate + " 到 " + endDate + "总开支" + total + "元";
+        String title = fromDate + " 到 " + endDate + "总开支" + total + "元";
         request.setAttribute("title", title);
 
         if (total.equals(BigDecimal.valueOf(0))) {

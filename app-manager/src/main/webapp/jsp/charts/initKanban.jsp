@@ -34,6 +34,19 @@
     <table>
         <tr>
             <td style="width: 1000px;">
+
+                <div style="float:left;margin: 10px; ">
+                    选择项目：
+                    <select id="projects" name="projects">
+                        <c:forEach items="${projectsList }" var="itm">
+                        <option
+                                <c:if test="${itm.id == projectId }">selected="selected"</c:if>
+                                value="${itm.id}">${itm.name}
+                            </c:forEach>
+                    </select>
+                </div>
+
+
                 <div style="float:left;margin: 10px; ">开始时间：</div>
                 <div id="fromDIV" style="float:left;margin: 10px; "></div>
 
