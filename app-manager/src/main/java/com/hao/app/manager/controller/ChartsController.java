@@ -72,7 +72,15 @@ public class ChartsController extends BaseController {
 
         //获取所有项目
         List<Chart> list = new ArrayList<>();
-        List<ProjectsDO> projectList = projectsService.search(null).getResultList();
+        List<ProjectsDO> projectList = null;
+        if (projectsDO == null) {
+            projectList = projectsService.search(null).getResultList();
+            projectList = projectList == null ? new ArrayList<>() : projectList;
+        } else {
+            projectList = new ArrayList<>();
+            projectList.add(projectsDO);
+        }
+
 
         //车辆消费
         Map<Integer, BigDecimal> cardMap = searchCardTotalForProjects(projectsId, fromDate, endDate);
