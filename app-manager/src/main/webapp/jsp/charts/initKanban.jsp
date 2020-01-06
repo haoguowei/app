@@ -139,6 +139,8 @@
                 type: "column",
                 yValueFormatString: "#,### 元",
                 indexLabelFontSize: 14,
+                     indexLabelFontColor: "#5A5757",
+  indexLabelPlacement: "outside",
                 indexLabel: "{y}",
                 dataPoints: ${datas2}
             }]
