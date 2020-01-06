@@ -2,6 +2,8 @@ package com.hao.app.dao;
 
 
 import com.hao.app.commons.entity.param.CostQueryParam;
+import com.hao.app.commons.entity.param.OtherCostQueryParam;
+import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.pojo.YYCostDO;
 
 import java.util.List;
@@ -23,4 +25,5 @@ public interface YYCostMapper {
 
     Map<String, Object> searchHJ(CostQueryParam param);
 
+    List<ResultStatistics> searchTotalPayForProjects(OtherCostQueryParam param);
 }

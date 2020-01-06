@@ -22,9 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ChartsController extends BaseController {
@@ -69,18 +67,66 @@ public class ChartsController extends BaseController {
     }
 
     private void printColumnChart(HttpServletRequest request, ProjectsDO projectsDO, String fromDate, String endDate) {
+        BigDecimal total = BigDecimal.valueOf(0);
+        Integer projectsId = projectsDO == null ? null : projectsDO.getId();
 
+        //获取所有项目
+        List<Chart> list = new ArrayList<>();
+        List<ProjectsDO> projectList = projectsService.search(null).getResultList();
+
+        //车辆消费
+        Map<Integer, BigDecimal> cardMap = searchCardTotalForProjects(projectsId, fromDate, endDate);
+        Map<Integer, BigDecimal> otherMap = searchOtherTotalPayForProjects(projectsId, fromDate, endDate);
+        for (ProjectsDO pro : projectList) {
+            Integer pid = pro.getId();
+            BigDecimal a = fmtBigDecimal(cardMap.get(pid));
+            BigDecimal b = fmtBigDecimal(otherMap.get(pid));
+            list.add(new Chart(pro.getName(), a.add(b), null));
+            total = total.add(a).add(b);
+        }
+
+        //生成标题
+        String title = projectsDO != null ? projectsDO.getName() : "所有";
+        title += "项目开支" + total + "元";
+        request.setAttribute("title2", title);
+
+//      [{
+//            // x:0, //横轴顺序
+//            label: '阜平',
+//                    y: 100
+//        }, {
+//            label: '行唐',
+//                    y: 200
+//        }, {
+//            label: '保定',
+//                    y: 300
+//        }]
+
+        StringBuffer sbr = new StringBuffer("[");
+        for (int i = 0; i < list.size(); i++) {
+            Chart c = list.get(i);
+            if (i != 0) {
+                sbr.append(",");
+            }
+
+            sbr.append("{label: '" + c.getLabel() + "', y: " + c.getY() + "}");
+        }
+        sbr.append("]");
+        request.setAttribute("datas2", sbr.toString());
+
+    }
+
+    private BigDecimal fmtBigDecimal(BigDecimal v) {
+        if (v == null) {
+            return BigDecimal.valueOf(0);
+        }
+        return v;
     }
 
     //饼状图
     private void printPieChart(HttpServletRequest request, ProjectsDO projectsDO, String fromDate, String endDate) {
         BigDecimal total = BigDecimal.valueOf(0);
         Integer projectsId = projectsDO == null ? null : projectsDO.getId();
-
-        //生成标题
-        String title = projectsDO != null ? projectsDO.getName() : "所有";
-        title += "项目" + fromDate + " 到 " + endDate + "总开支" + total + "元";
-        request.setAttribute("title", title);
 
         //车辆消费
         List<Chart> list = new ArrayList<>();
@@ -97,6 +143,11 @@ public class ChartsController extends BaseController {
                 total = total.add(rs.getVal());
             }
         }
+
+        //生成标题
+        String title = projectsDO != null ? projectsDO.getName() : "所有";
+        title += "项目" + fromDate + " 到 " + endDate + "总开支" + total + "元";
+        request.setAttribute("title", title);
 
         if (total.equals(BigDecimal.valueOf(0))) {
             return;
@@ -119,6 +170,7 @@ public class ChartsController extends BaseController {
 //      request.setAttribute("datas", "[{ y: 10, pay: 1000, label: 'Chrome' }]");
     }
 
+
     private List<ResultStatistics> searchOtherTotal(Integer projectsId, String dateStart, String dateEnd) {
         OtherCostQueryParam param = new OtherCostQueryParam();
         param.setProjectsId(projectsId);
@@ -135,5 +187,35 @@ public class ChartsController extends BaseController {
         return yyCostService.searchTotalPay(param);
     }
 
+    private Map<Integer, BigDecimal> searchOtherTotalPayForProjects(Integer projectsId, String dateStart, String dateEnd) {
+        OtherCostQueryParam param = new OtherCostQueryParam();
+        param.setProjectsId(projectsId);
+        param.setDateStart(dateStart);
+        param.setDateEnd(dateEnd);
+        List<ResultStatistics> list = oherCostService.searchTotalPayForProjects(param);
+        return change2Map(list);
+    }
+
+    private Map<Integer, BigDecimal> searchCardTotalForProjects(Integer projectsId, String dateStart, String dateEnd) {
+        OtherCostQueryParam param = new OtherCostQueryParam();
+        param.setProjectsId(projectsId);
+        param.setDateStart(dateStart);
+        param.setDateEnd(dateEnd);
+        List<ResultStatistics> list = yyCostService.searchTotalPayForProjects(param);
+        return change2Map(list);
+    }
+
+    private Map<Integer, BigDecimal> change2Map(List<ResultStatistics> list) {
+        Map<Integer, BigDecimal> map = new HashMap<>();
+        if (list == null) {
+            return map;
+        }
+
+        for (ResultStatistics rs : list) {
+            map.put(rs.getK(), rs.getVal());
+        }
+
+        return map;
+    }
 
 }

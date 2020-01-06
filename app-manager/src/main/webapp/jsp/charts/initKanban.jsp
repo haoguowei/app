@@ -115,7 +115,7 @@
             exportEnabled: true,
             theme: "light2",
             title: {
-                text: "项目开支情况"
+                text: '${title2}'
             },
             axisY: {
                 title: "开支（元）",
@@ -130,17 +130,7 @@
                 yValueFormatString: "#,### 元",
                 indexLabelFontSize: 14,
                 indexLabel: "{y}",
-                dataPoints: [{
-                    // x:0, //横轴顺序
-                    label: '阜平',
-                    y: 100
-                }, {
-                    label: '行唐',
-                    y: 200
-                }, {
-                    label: '保定',
-                    y: 300
-                }]
+                dataPoints: ${datas2}
             }]
         });
 

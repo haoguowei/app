@@ -1,7 +1,9 @@
 package com.hao.app.service.impl;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
+import com.hao.app.commons.entity.param.OtherCostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.AssetsMapper;
 import com.hao.app.dao.YYCostMapper;
@@ -110,5 +112,10 @@ public class YYCostServiceImpl implements YYCostService {
             b = (BigDecimal) map.get("b");
         }
         return b;
+    }
+
+    @Override
+    public List<ResultStatistics> searchTotalPayForProjects(OtherCostQueryParam param) {
+        return yYCostMapper.searchTotalPayForProjects(param);
     }
 }

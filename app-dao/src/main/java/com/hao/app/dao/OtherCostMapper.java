@@ -23,4 +23,6 @@ public interface OtherCostMapper {
     Map<String, Object> searchHJ(OtherCostQueryParam param);
 
     List<ResultStatistics> searchTotalPay(OtherCostQueryParam param);
+
+    List<ResultStatistics> searchTotalPayForProjects(OtherCostQueryParam param);
 }

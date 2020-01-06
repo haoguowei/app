@@ -336,4 +336,12 @@
         limit ${pageStart},${pageLimit}
     </select>
 
+    <select id="searchTotalPayForProjects" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
+            resultType="java.util.HashMap">
+        SELECT projects as k, sum(total_amount) AS val
+        FROM yy_cost
+        <include refid="searchSQL"/>
+        GROUP BY projects
+    </select>
+
 </mapper>

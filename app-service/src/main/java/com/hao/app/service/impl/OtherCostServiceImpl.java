@@ -74,4 +74,9 @@ public class OtherCostServiceImpl implements OtherCostService {
     public List<ResultStatistics> searchTotalPay(OtherCostQueryParam param) {
         return otherCostMapper.searchTotalPay(param);
     }
+
+    @Override
+    public List<ResultStatistics> searchTotalPayForProjects(OtherCostQueryParam param) {
+        return otherCostMapper.searchTotalPayForProjects(param);
+    }
 }

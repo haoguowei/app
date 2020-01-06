@@ -21,4 +21,6 @@ public interface OtherCostService {
     String searchCost4HJ(OtherCostQueryParam param);
 
     List<ResultStatistics> searchTotalPay(OtherCostQueryParam param);
+
+    List<ResultStatistics> searchTotalPayForProjects(OtherCostQueryParam param);
 }

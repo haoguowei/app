@@ -168,6 +168,14 @@
         GROUP BY pay_type
     </select>
 
+    <select id="searchTotalPayForProjects" parameterType="com.hao.app.commons.entity.param.OtherCostQueryParam"
+            resultType="com.hao.app.commons.entity.result.ResultStatistics">
+        SELECT projects as k, sum(pay_amount) AS val
+        FROM other_cost
+        <include refid="searchSQL"/>
+        GROUP BY projects
+    </select>
+
 
     <select id="count" parameterType="com.hao.app.commons.entity.param.OtherCostQueryParam"
             resultType="java.lang.Integer">
