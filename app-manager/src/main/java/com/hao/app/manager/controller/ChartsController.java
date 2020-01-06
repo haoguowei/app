@@ -205,10 +205,10 @@ public class ChartsController extends BaseController {
     }
 
     private Map<Integer, BigDecimal> searchCardTotalForProjects(Integer projectsId, String dateStart, String dateEnd) {
-        OtherCostQueryParam param = new OtherCostQueryParam();
+        CostQueryParam param = new CostQueryParam();
         param.setProjectsId(projectsId);
-        param.setDateStart(dateStart);
-        param.setDateEnd(dateEnd);
+        param.setEnterDateStart(dateStart);
+        param.setEnterDateEnd(dateEnd);
         List<ResultStatistics> list = yyCostService.searchTotalPayForProjects(param);
         return change2Map(list);
     }

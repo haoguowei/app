@@ -1,7 +1,6 @@
 package com.hao.app.service;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
-import com.hao.app.commons.entity.param.OtherCostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -24,5 +23,5 @@ public interface YYCostService {
 
     BigDecimal searchTotalPay(CostQueryParam param);
 
-    List<ResultStatistics> searchTotalPayForProjects(OtherCostQueryParam param);
+    List<ResultStatistics> searchTotalPayForProjects(CostQueryParam param);
 }

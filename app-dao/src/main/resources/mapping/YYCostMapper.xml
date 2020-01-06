@@ -337,7 +337,7 @@
     </select>
 
     <select id="searchTotalPayForProjects" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
-            resultType="java.util.HashMap">
+            resultType="com.hao.app.commons.entity.result.ResultStatistics">
         SELECT projects as k, sum(total_amount) AS val
         FROM yy_cost
         <include refid="searchSQL"/>
