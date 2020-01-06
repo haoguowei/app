@@ -19,6 +19,7 @@ Ext.onReady(function () {
     this.searchFunc = function () {
         var fromDate = getById("fromDate");
         var endDate = getById("endDate");
+        var projects = getById("projects");
 
         if (_isNull(fromDate)) {
             alert("请选择搜索的开始时间！");
@@ -30,7 +31,7 @@ Ext.onReady(function () {
             document.getElementById("endDate").focus();
             return;
         }
-        location.href = "initKanban.do?fromDate=" + fromDate + "&endDate=" + endDate;
+        location.href = "initKanban.do?abc=1&projects=" + projects + "&fromDate=" + fromDate + "&endDate=" + endDate;
     };
 
 

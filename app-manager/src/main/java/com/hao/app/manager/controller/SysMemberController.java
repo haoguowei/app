@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -54,6 +55,12 @@ public class SysMemberController extends BaseController {
 		request.setAttribute("member", member);
 
 		List<ProjectsDO> result = projectsService.search(null).getResultList();
+		result = result == null ? new ArrayList<>() : result;
+		ProjectsDO adminPro = new ProjectsDO();
+		adminPro.setId(-1);
+		adminPro.setName("总公司");
+		result.add(0, adminPro);
+
 		request.setAttribute("projectsList", result);
 
 		return "jsp/memberEdit";

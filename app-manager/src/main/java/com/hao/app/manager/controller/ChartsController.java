@@ -55,8 +55,15 @@ public class ChartsController extends BaseController {
         request.setAttribute("fromDate", fromDate);
         request.setAttribute("endDate", endDate);
 
-        //项目
-        Integer projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
+        int abc = NumberUtils.toInt(request.getParameter("abc"), 0);
+        Integer projectId = 0;
+        if (abc == 0) {
+            projectId = getCurrentProjectsId(request);
+            projectId = projectId > 0 ? projectId : 0;
+        } else {
+            projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
+        }
+
         request.setAttribute("projectId", projectId);
         ProjectsDO projectsDO = projectsService.getById(projectId);
 
