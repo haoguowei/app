@@ -6,7 +6,9 @@ import com.hao.app.commons.entity.param.OtherCostQueryParam;
 import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.manager.dto.Chart;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.OtherCostService;
+import com.hao.app.service.ProjectsService;
 import com.hao.app.service.YYCostService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -33,34 +35,60 @@ public class ChartsController extends BaseController {
     private YYCostService yyCostService;
 
     @Resource
-    private OtherCostService otherCostService;
+    private OtherCostService oherCostService;
+
+    @Resource
+    private ProjectsService projectsService;
 
 
     @RequestMapping("/initKanban.do")
     public String initArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        SimpleDateFormat DATE = new SimpleDateFormat("yyyy-MM-dd");
         String fromDate = request.getParameter("fromDate");
         String endDate = request.getParameter("endDate");
-
-        SimpleDateFormat DATE = new SimpleDateFormat("yyyy-MM-dd");
-
         if (StringUtils.isBlank(fromDate)) {
             fromDate = DATE.format(DateUtil.addMonth(new Date(), -6));
         }
         if (StringUtils.isBlank(endDate)) {
             endDate = DATE.format(new Date());
         }
-
         request.setAttribute("fromDate", fromDate);
         request.setAttribute("endDate", endDate);
 
-        Integer projectsId = null;
-        BigDecimal total = BigDecimal.valueOf(0);
+        //项目
+        Integer projectId = null;
+        ProjectsDO projectsDO = projectsService.getById(projectId);
 
+        //饼状图
+        printPieChart(request, projectsDO, fromDate, endDate);
+
+        //柱状图
+        printColumnChart(request, projectsDO, fromDate, endDate);
+
+        return "jsp/charts/initKanban";
+    }
+
+    private void printColumnChart(HttpServletRequest request, ProjectsDO projectsDO, String fromDate, String endDate) {
+
+    }
+
+    //饼状图
+    private void printPieChart(HttpServletRequest request, ProjectsDO projectsDO, String fromDate, String endDate) {
+        BigDecimal total = BigDecimal.valueOf(0);
+        Integer projectsId = projectsDO == null ? null : projectsDO.getId();
+
+        //生成标题
+        String title = projectsDO != null ? projectsDO.getName() : "所有";
+        title += "项目" + fromDate + " 到 " + endDate + "总开支" + total + "元";
+        request.setAttribute("title", title);
+
+        //车辆消费
         List<Chart> list = new ArrayList<>();
         BigDecimal cardTotal = searchCardTotal(projectsId, fromDate, endDate);
         list.add(new Chart("车辆消费", cardTotal));
         total = total.add(cardTotal);
 
+        //其他消费
         List<ResultStatistics> otherList = searchOtherTotal(projectsId, fromDate, endDate);
         if (otherList != null) {
             for (ResultStatistics rs : otherList) {
@@ -70,11 +98,11 @@ public class ChartsController extends BaseController {
             }
         }
 
-        request.setAttribute("title", fromDate + " 到 " + endDate + "总开支" + total + "元");
         if (total.equals(BigDecimal.valueOf(0))) {
-            return "jsp/charts/initKanban";
+            return;
         }
 
+        //生成json
         StringBuffer sbr = new StringBuffer("[");
         for (int i = 0; i < list.size(); i++) {
             Chart c = list.get(i);
@@ -88,9 +116,7 @@ public class ChartsController extends BaseController {
         }
         sbr.append("]");
         request.setAttribute("datas", sbr.toString());
-//        request.setAttribute("datas", "[{ y: 10, pay: 1000, label: 'Chrome' }]");
-
-        return "jsp/charts/initKanban";
+//      request.setAttribute("datas", "[{ y: 10, pay: 1000, label: 'Chrome' }]");
     }
 
     private List<ResultStatistics> searchOtherTotal(Integer projectsId, String dateStart, String dateEnd) {
@@ -98,7 +124,7 @@ public class ChartsController extends BaseController {
         param.setProjectsId(projectsId);
         param.setDateStart(dateStart);
         param.setDateEnd(dateEnd);
-        return otherCostService.searchTotalPay(param);
+        return oherCostService.searchTotalPay(param);
     }
 
     private BigDecimal searchCardTotal(Integer projectsId, String enterDateStart, String enterDateEnd) {

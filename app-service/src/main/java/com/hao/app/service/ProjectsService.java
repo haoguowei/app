@@ -10,7 +10,7 @@ public interface ProjectsService {
 
     ResultCodeEnum update(ProjectsDO obj);
 
-    ProjectsDO getById(int id);
+    ProjectsDO getById(Integer id);
 
     JsonResult<ProjectsDO> search(Integer areaId);
 }

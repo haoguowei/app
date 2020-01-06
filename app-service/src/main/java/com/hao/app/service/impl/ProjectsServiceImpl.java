@@ -41,8 +41,11 @@ public class ProjectsServiceImpl implements ProjectsService {
     }
 
     @Override
-    public ProjectsDO getById(int id) {
-        return projectsMapper.selectByPrimaryKey(id);
+    public ProjectsDO getById(Integer id) {
+        if (id != null && id > 0) {
+            return projectsMapper.selectByPrimaryKey(id);
+        }
+        return null;
     }
 
     @Override
