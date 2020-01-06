@@ -66,7 +66,7 @@
         </tr>
         <tr>
             <td>
-                <div id="chartContainer" style="height: 400px; max-width: 800px; margin: 0px auto;"></div>
+                <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
             </td>
         </tr>
         <tr>
@@ -76,7 +76,7 @@
         </tr>
         <tr>
             <td>
-                <div id="chartContainer2" style="height: 500px; max-width: 800px; margin: 0px auto;"></div>
+                <div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
             </td>
         </tr>
         <tr>
@@ -98,8 +98,7 @@
             exportEnabled: true,
             animationEnabled: true,
             title: {
-                text: '${title}',
-                titleFontSize: 20
+                text: '${title}'
             },
             data: [{
                 type: "pie",
@@ -131,12 +130,10 @@
                 text: '${title2}'
             },
             axisY: {
-                title: "开支（元）",
-                titleFontSize: 24
+                title: "开支（元）"
             },
             axisX: {
-                title: "",
-                titleFontSize: 20
+                title: ""
             },
             data: [{
                 type: "column",
