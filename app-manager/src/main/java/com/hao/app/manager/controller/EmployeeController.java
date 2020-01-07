@@ -42,6 +42,12 @@ public class EmployeeController extends BaseController {
         return "jsp/employee/initEmpShenqing";
     }
 
+    @RequestMapping("/initEmpShengHe.do")
+    public String initEmpShengHe(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("projectsList", getProjectsList(request));
+        return "jsp/employee/initEmpShengHe";
+    }
+
 
     @RequestMapping("/initEmpLizhi.do")
     public String initEmpLizhi(HttpServletRequest request, HttpServletResponse response) throws IOException {
