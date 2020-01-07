@@ -66,6 +66,10 @@ public class EmployeeDO implements Serializable {
     private Integer hetong;
     private String hetongStr;
 
+    private String shenqing;
+
+    private String descr;
+
     public void setHetong(Integer hetong) {
         this.hetongStr = (hetong != null && hetong.equals(1)) ? "是" : "否";
         this.hetong = hetong;

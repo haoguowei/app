@@ -205,26 +205,29 @@ public class EmployeeController extends BaseController {
         }
     }
 
-    @RequestMapping("/shenqingEmpF.do")
-    public void shenqingEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = NumberUtils.toInt(request.getParameter("empId"));
-        String shuoming = request.getParameter("shenqingshuoming");
-        boolean result = employeeService.shenqing(id, shuoming);
+    @RequestMapping("/applyF.do")
+    public void applyF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("id"));
+        String shenqing = request.getParameter("shenqing");
+        boolean result = employeeService.applyF(id, shenqing);
         writeResponse(response, new JsonResultAjax(result));
     }
 
     @RequestMapping("/tongguoEmpF.do")
     public void tongguoEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = NumberUtils.toInt(request.getParameter("empId"));
-        boolean result = employeeService.tongguo(id);
+        int id = NumberUtils.toInt(request.getParameter("id"));
+        String descr = request.getParameter("descr");
+        boolean result = employeeService.passd(id, descr);
         writeResponse(response, new JsonResultAjax(result));
     }
 
 
     @RequestMapping("/butongguo.do")
     public void butongguoEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = NumberUtils.toInt(request.getParameter("empId"));
-        boolean result = employeeService.butongguo(id);
+        int id = NumberUtils.toInt(request.getParameter("id"));
+        String descr = request.getParameter("descr");
+
+        boolean result = employeeService.noPassed(id, descr);
         writeResponse(response, new JsonResultAjax(result));
     }
 

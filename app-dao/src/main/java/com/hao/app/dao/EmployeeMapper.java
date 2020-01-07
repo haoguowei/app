@@ -19,9 +19,9 @@ public interface EmployeeMapper {
 
     List<EmployeeDO> search(EmployeeQueryParam param);
 
-    int shenqing(@Param("id") int id, @Param("shuoming") String shuoming);
+    int applyF(@Param("id") int id, @Param("shenqing") String shenqing);
 
-    int tongguo(@Param("id") int id);
+    int passd(@Param("id") int id, @Param("descr") String descr);
 
-    int butongguo(@Param("id") int id);
+    int noPassed(@Param("id") int id, @Param("descr") String descr);
 }

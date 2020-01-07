@@ -82,20 +82,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean shenqing(int id, String shuoming) {
-        int res = employeeMapper.shenqing(id, shuoming);
+    public boolean applyF(int id, String shenqing) {
+        int res = employeeMapper.applyF(id, shenqing);
         return res > 0;
     }
 
     @Override
-    public boolean tongguo(int id) {
-        int res = employeeMapper.tongguo(id);
+    public boolean passd(int id, String descr) {
+        int res = employeeMapper.passd(id, descr);
         return res > 0;
     }
 
     @Override
-    public boolean butongguo(int id) {
-        int res = employeeMapper.butongguo(id);
+    public boolean noPassed(int id, String descr) {
+        int res = employeeMapper.noPassed(id, descr);
         return res > 0;
     }
 }

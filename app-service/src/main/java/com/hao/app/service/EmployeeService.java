@@ -15,9 +15,9 @@ public interface EmployeeService {
 
     ResultCodeEnum update(EmployeeDO employee);
 
-    boolean shenqing(int id, String shuoming);
+    boolean applyF(int id, String shenqing);
 
-    boolean tongguo(int id);
+    boolean passd(int id, String descr);
 
-    boolean butongguo(int id);
+    boolean noPassed(int id, String descr);
 }

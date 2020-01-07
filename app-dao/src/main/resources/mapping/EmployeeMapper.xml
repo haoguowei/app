@@ -24,12 +24,14 @@
         <result column="safe_type" jdbcType="VARCHAR" property="safeType"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
+        <result column="shenqing" jdbcType="VARCHAR" property="shenqing"/>
+        <result column="descr" jdbcType="VARCHAR" property="descr"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, status, name, phone, id_card, projects, projects_name, job_type,  ethnic,
+        id, status, name, phone, id_card, projects, projects_name, job_type,  ethnic,shenqing,descr
         entry_date, leave_date, edu_type, hukou_type, huji_address, address, emergency_contact,
         emergency_contact_phone, safe_type, remark, creater, create_time, update_time,hetong
     </sql>
@@ -51,21 +53,24 @@
         limit ${pageStart},${pageLimit}
     </select>
 
-    <update id="shenqing">
+    <update id="applyF">
         update employee
         set status = 3
+         shenqing = #{shenqing}
         where id=#{id}
     </update>
 
-    <update id="tongguo">
+    <update id="passd">
         update employee
         set status = 1
+        descr = #{descr}
         where id=#{id}
     </update>
 
-    <update id="butongguo">
+    <update id="noPassed">
         update employee
         set status = 0
+        descr = #{descr}
         where id=#{id}
     </update>
 
