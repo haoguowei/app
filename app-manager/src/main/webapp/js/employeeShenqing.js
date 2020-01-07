@@ -40,10 +40,10 @@ Ext.onReady(function () {
             text: '申请',
             handler: function () {
                 var hidEmpId = document.getElementById("hidEmpId").value;
-                var shenqingshuoming = document.getElementById("shenqingshuoming").value;
+                var shenqing = document.getElementById("shenqingshuoming").value;
 
-                var url = "shenqingEmpF.do?empId=" + hidEmpId
-                    + "&shenqingshuoming=" + shenqingshuoming;
+                var url = "applyF.do?id=" + hidEmpId
+                    + "&shenqing=" + shenqing;
 
                 Ext.Ajax.request({
                     url: url,

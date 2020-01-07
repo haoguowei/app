@@ -55,21 +55,14 @@
 
     <update id="applyF">
         update employee
-        set status = 3
-         shenqing = #{shenqing}
+        set status = 100
+        shenqing = #{shenqing}
         where id=#{id}
     </update>
 
-    <update id="passd">
+    <update id="passdOrNot">
         update employee
-        set status = 1
-        descr = #{descr}
-        where id=#{id}
-    </update>
-
-    <update id="noPassed">
-        update employee
-        set status = 0
+        set status = #{status}
         descr = #{descr}
         where id=#{id}
     </update>

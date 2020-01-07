@@ -34,7 +34,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("idCard", getById("idCard"));
         gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
         gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
-        gridStore.setBaseParam("status", 2);
+        gridStore.setBaseParam("status", 99);
 
         gridStore.reload();
     };

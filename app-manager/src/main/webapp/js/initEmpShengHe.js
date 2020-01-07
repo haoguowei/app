@@ -18,7 +18,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("idCard", getById("idCard"));
-        gridStore.setBaseParam("status", 3);
+        gridStore.setBaseParam("status", 100);
 
         gridStore.reload();
     };

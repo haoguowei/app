@@ -2,6 +2,7 @@ package com.hao.app.service.impl;
 
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.enums.EmpStatusEnum;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.commons.utils.IdCardUtils;
 import com.hao.app.dao.EmployeeMapper;
@@ -89,13 +90,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean passd(int id, String descr) {
-        int res = employeeMapper.passd(id, descr);
+        int res = employeeMapper.passdOrNot(id, EmpStatusEnum.OFFICIAL.getCode(), descr);
         return res > 0;
     }
 
     @Override
     public boolean noPassed(int id, String descr) {
-        int res = employeeMapper.noPassed(id, descr);
+        int res = employeeMapper.passdOrNot(id, EmpStatusEnum.INIT.getCode(), descr);
         return res > 0;
     }
 }

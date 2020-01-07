@@ -21,7 +21,5 @@ public interface EmployeeMapper {
 
     int applyF(@Param("id") int id, @Param("shenqing") String shenqing);
 
-    int passd(@Param("id") int id, @Param("descr") String descr);
-
-    int noPassed(@Param("id") int id, @Param("descr") String descr);
+    int passdOrNot(@Param("id") int id, @Param("status") int status, @Param("descr") String descr);
 }
