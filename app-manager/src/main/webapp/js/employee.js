@@ -43,6 +43,10 @@ Ext.onReady(function () {
         location.href = "initEmployeeEdit.do?id=" + id;
     };
 
+    this.leaveF = function (id) {
+
+    };
+
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
@@ -118,9 +122,8 @@ Ext.onReady(function () {
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
                     var str = '';
-                    if (urlEditValid) {//权限
-                        str += genButton("修改", 'updateF(' + val + ')');
-                    }
+                    str += genButton("修改", 'updateF(' + val + ')');
+                    str += genButton("离职", 'leaveF(' + val + ')');
                     return str;
                 }
             }

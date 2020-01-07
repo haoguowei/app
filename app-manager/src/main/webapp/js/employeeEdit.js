@@ -9,14 +9,6 @@ Ext.onReady(function () {
         value: getById('hideEntryDateDiv'),
         id: 'entryDate'
     });
-    var hideLeaveDateDiv = new com.custom.DateField({
-        renderTo: 'leaveDateDiv',
-        format: 'Y-m-d',
-        name: 'leaveDate',
-        value: getById('hideLeaveDateDiv'),
-        id: 'leaveDate'
-    });
-
 
     this.save = function () {
         if (_isNull(getById("name"))) {
@@ -68,11 +60,6 @@ Ext.onReady(function () {
         if (!isDate(getById("entryDate"))) {
             alert("入职日期格式错误！");
             document.getElementById("entryDate").focus();
-            return false;
-        }
-        if (!_isNull(getById("leaveDate")) && !isDate(getById("leaveDate"))) {
-            alert("离职日期格式错误！");
-            document.getElementById("leaveDate").focus();
             return false;
         }
     };

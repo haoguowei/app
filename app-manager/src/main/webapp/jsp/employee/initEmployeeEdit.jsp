@@ -20,8 +20,6 @@
 
         <input type="hidden" id="hideEntryDateDiv" name="hideEntryDateDiv"
                value="<fmt:formatDate value="${itemObj.entryDate }" pattern="yyyy-MM-dd" />">
-        <input type="hidden" id="hideLeaveDateDiv" name="hideLeaveDateDiv"
-               value="<fmt:formatDate value="${itemObj.leaveDate }" pattern="yyyy-MM-dd" />">
 
         <table class="Mytable">
             <tr>
@@ -93,17 +91,6 @@
                     <div id="entryDateDiv"></div>
                 </td>
             </tr>
-
-
-            <tr>
-                <td class="Myfont">
-                    离职日期：
-                </td>
-                <td class="Myfont">
-                    <div id="leaveDateDiv"></div>
-                </td>
-            </tr>
-
             <tr>
                 <td>学历</td>
                 <td>
