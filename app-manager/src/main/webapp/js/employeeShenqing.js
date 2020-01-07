@@ -18,6 +18,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("idCard", getById("idCard"));
+        gridStore.setBaseParam("status", 0);
 
         gridStore.reload();
     };
@@ -61,6 +62,7 @@ Ext.onReady(function () {
             limit: PAGESIZE,
             projectsId: '',
             name: '',
+            status: '',
             idCard: ''
         }
     });

@@ -34,6 +34,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("idCard", getById("idCard"));
         gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
         gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
+        gridStore.setBaseParam("status", 2);
 
         gridStore.reload();
     };
@@ -73,6 +74,7 @@ Ext.onReady(function () {
             limit: PAGESIZE,
             projectsId: '',
             name: '',
+            status: '',
             leaveDateStart: '',
             leaveDateEnd: '',
             idCard: ''

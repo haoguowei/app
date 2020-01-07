@@ -46,7 +46,7 @@ public class EmployeeController extends BaseController {
     @RequestMapping("/initEmpLizhi.do")
     public String initEmpLizhi(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
-        return "jsp/employee/initEmployeeLizhi.jsp";
+        return "jsp/employee/initEmployeeLizhi";
     }
 
 
@@ -67,6 +67,7 @@ public class EmployeeController extends BaseController {
         String leaveDateEnd = request.getParameter("leaveDateEnd");
 
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
+        int status = NumberUtils.toInt(request.getParameter("status")); //0-未入职；1-正式员工；2-离职
 
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
@@ -75,6 +76,11 @@ public class EmployeeController extends BaseController {
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
         }
+
+        if (projectsId >= 0) {
+            param.setStatus(status);
+        }
+
 
         if (StringUtils.isNotBlank(name)) {
             param.setName(name);
