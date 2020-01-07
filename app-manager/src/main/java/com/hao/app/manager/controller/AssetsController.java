@@ -5,6 +5,7 @@ import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.enums.EmpStatusEnum;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.manager.export.ExportAssets;
 import com.hao.app.pojo.AssetsDO;
@@ -130,6 +131,7 @@ public class AssetsController extends BaseController {
 
         //责任人
         EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
+        employeeQuery.setStatus(EmpStatusEnum.OFFICIAL.getCode());
         employeeQuery.setProjectsId(getCurrentProjectsId(request));
         Set<Integer> set = new HashSet<>();
         set.add(1); //经理

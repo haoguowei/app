@@ -99,4 +99,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         int res = employeeMapper.passdOrNot(id, EmpStatusEnum.INIT.getCode(), descr);
         return res > 0;
     }
+
+    @Override
+    public boolean leave(int id, String leaveDate) {
+        int res = employeeMapper.leave(id, EmpStatusEnum.LEAVE.getCode(), leaveDate);
+        return res > 0;
+    }
 }

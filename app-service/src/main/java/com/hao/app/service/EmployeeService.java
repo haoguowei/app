@@ -20,4 +20,6 @@ public interface EmployeeService {
     boolean passd(int id, String descr);
 
     boolean noPassed(int id, String descr);
+
+    boolean leave(int id, String leaveDate);
 }

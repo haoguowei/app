@@ -67,6 +67,13 @@
         where id=#{id}
     </update>
 
+    <update id="leave">
+        update employee
+        set status = #{status},
+        leave_date = #{leaveDate}
+        where id=#{id}
+    </update>
+
     <sql id="searchSQL">
         <where>
             <if test="projectsId != null and projectsId > 0">

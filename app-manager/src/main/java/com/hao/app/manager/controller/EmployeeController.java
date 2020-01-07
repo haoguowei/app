@@ -231,5 +231,14 @@ public class EmployeeController extends BaseController {
         writeResponse(response, new JsonResultAjax(result));
     }
 
+    @RequestMapping("/leaveF.do")
+    public void leaveF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("id"));
+        String leaveDate = request.getParameter("leaveDate");
+
+        boolean result = employeeService.leave(id, leaveDate);
+        writeResponse(response, new JsonResultAjax(result));
+    }
+
 
 }

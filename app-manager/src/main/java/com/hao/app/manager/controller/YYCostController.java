@@ -5,6 +5,7 @@ import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.enums.EmpStatusEnum;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.AssetsDO;
 import com.hao.app.pojo.EmployeeDO;
@@ -94,6 +95,7 @@ public class YYCostController extends BaseController {
     private List<EmployeeDO> getEmployeeList(Integer projectsId) {
         //选择司机
         EmployeeQueryParam employeeQuery = new EmployeeQueryParam(0, 100);
+        employeeQuery.setStatus(EmpStatusEnum.OFFICIAL.getCode());
         employeeQuery.setProjectsId(projectsId);
         Set<Integer> set = new HashSet<>();
         set.add(6); //司机

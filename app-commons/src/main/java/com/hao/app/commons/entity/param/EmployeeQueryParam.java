@@ -18,7 +18,7 @@ public class EmployeeQueryParam extends QueryParam implements Serializable {
 	private static final long serialVersionUID = 4737617179006429526L;
 
 	private Integer projectsId;
-	private Integer status;
+	private Integer status; //
 
 	private String name;
 	private String idCard;

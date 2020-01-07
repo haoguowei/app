@@ -28,6 +28,14 @@ Ext.onReady(function () {
         id: 'entryDateEnd'
     });
 
+    var leaveDIV = new com.custom.DateField({
+        renderTo: 'leaveDIV',
+        format: 'Y-m-d',
+        name: 'leaveDate',
+        value: '',
+        id: 'leaveDate'
+    });
+
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
@@ -44,9 +52,52 @@ Ext.onReady(function () {
     };
 
     this.leaveF = function (id) {
-
+        document.getElementById("hidEmpId").value = id;
+        sqWindow.show();
     };
 
+    var sqWindow = new com.custom.Window({
+        title: '员工离职',
+        width: 500,
+        height: 250,
+        contentEl: 'sqWindow',
+        buttons: [{
+            text: '确定',
+            handler: function () {
+                var hidEmpId = document.getElementById("hidEmpId").value;
+                var leaveDate = document.getElementById("leaveDate").value;
+                if (_isNull(leaveDate)) {
+                    alert('请选择离职时间');
+                    return;
+                }
+                var url = "leaveF.do?id=" + hidEmpId
+                    + "&leaveDate=" + leaveDate;
+
+                Ext.Ajax.request({
+                    url: url,
+                    success: function (response) {
+                        var resp = Ext.util.JSON.decode(response.responseText);
+                        if (resp.success) {
+                            alert("操作成功！");
+                            sqWindow.hide();
+                            searchFunc();
+                        } else {
+                            alert("操作失败：" + resp.resultTipMsg);
+                        }
+                    }
+                });
+            }
+        }, {
+            text: '关闭',
+            handler: function () {
+                sqWindow.hide();
+            }
+        }]
+    });
+
+    sqWindow.on("beforeshow", function () {
+        document.getElementById("leaveDate").value = '';
+    });
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
