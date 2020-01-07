@@ -43,5 +43,20 @@
     </table>
 </div>
 
+
+<div id="sqWindow" class="windowDiv">
+    <input type="hidden" id="hidEmpId" name="hidEmpId" value="">
+    <table>
+        <tbody>
+        <tr>
+            <td>申请说明:</td>
+            <td>
+                <textarea id="shenqingshuoming" name="shenqingshuoming" rows="8" cols="55"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>

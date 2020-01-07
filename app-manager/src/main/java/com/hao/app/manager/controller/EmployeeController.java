@@ -3,6 +3,7 @@ package com.hao.app.manager.controller;
 import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.result.JsonResultAjax;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.EmployeeDO;
 import com.hao.app.pojo.ProjectsDO;
@@ -203,7 +204,13 @@ public class EmployeeController extends BaseController {
             return failResult(request, resultCode);
         }
     }
-    
-    
+
+    @RequestMapping("/shenqingEmpF.do")
+    public void shenqingEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("empId"));
+        String shuoming = request.getParameter("shenqingshuoming");
+        boolean result = true;
+        writeResponse(response, new JsonResultAjax(result));
+    }
 
 }

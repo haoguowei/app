@@ -27,10 +27,49 @@ Ext.onReady(function () {
         location.href = "initEmployeeEdit.do?id=" + id;
     };
     this.shenqingF = function (id) {
-        alert('申请成为正式员工');
-        // location.href = "initEmployeeEdit.do?id=" + id;
+        document.getElementById("hidEmpId").value = id;
+        sqWindow.show();
     };
 
+    var sqWindow = new com.custom.Window({
+        title: '申请正式员工',
+        width: 500,
+        height: 250,
+        contentEl: 'sqWindow',
+        buttons: [{
+            text: '申请',
+            handler: function () {
+                var hidEmpId = document.getElementById("hidEmpId").value;
+                var shenqingshuoming = document.getElementById("shenqingshuoming").value;
+
+                var url = "shenqingEmpF.do?empId=" + hidEmpId
+                    + "&shenqingshuoming=" + shenqingshuoming;
+
+                Ext.Ajax.request({
+                    url: url,
+                    success: function (response) {
+                        var resp = Ext.util.JSON.decode(response.responseText);
+                        if (resp.success) {
+                            alert("操作成功！");
+                            sqWindow.hide();
+                            searchFunc();
+                        } else {
+                            alert("操作失败：" + resp.resultTipMsg);
+                        }
+                    }
+                });
+            }
+        }, {
+            text: '关闭',
+            handler: function () {
+                sqWindow.hide();
+            }
+        }]
+    });
+
+    sqWindow.on("beforeshow", function () {
+        document.getElementById("shenqingshuoming").value = '';
+    });
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
