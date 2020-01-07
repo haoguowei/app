@@ -28,36 +28,19 @@ Ext.onReady(function () {
         id: 'entryDateEnd'
     });
 
-    var leaveDateStartDIV = new com.custom.DateField({
-        renderTo: 'leaveDateStartDIV',
-        format: 'Y-m-d',
-        name: 'leaveDateStart',
-        value: '',
-        id: 'leaveDateStart'
-    });
-    var leaveDateEndDIV = new com.custom.DateField({
-        renderTo: 'leaveDateEndDIV',
-        format: 'Y-m-d',
-        name: 'leaveDateEnd',
-        value: '',
-        id: 'leaveDateEnd'
-    });
-
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("idCard", getById("idCard"));
         gridStore.setBaseParam("entryDateStart", getById("entryDateStart"));
         gridStore.setBaseParam("entryDateEnd", getById("entryDateEnd"));
-        gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
-        gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
 
         gridStore.reload();
     };
 
-    this.updateF = function (id) {
-        location.href = "initEmployeeEdit.do?id=" + id;
-    };
+    // this.updateF = function (id) {
+    //     location.href = "initEmployeeEdit.do?id=" + id;
+    // };
 
 
     //列表数据
@@ -92,8 +75,6 @@ Ext.onReady(function () {
             name: '',
             entryDateStart: '',
             entryDateEnd: '',
-            leaveDateStart: '',
-            leaveDateEnd: '',
             idCard: ''
         }
     });
@@ -150,7 +131,7 @@ Ext.onReady(function () {
             region: 'north',
             title: '员工管理',
             border: false,
-            height: 165,
+            height: 120,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {
@@ -164,13 +145,15 @@ Ext.onReady(function () {
             border: true,
             autoScroll: true,
             items: [grid],
-            tbar: [{
-                text: '新增员工',
-                id: 'bt_add',
-                handler: function (b, e) {
-                    location.href = "initEmployeeEdit.do";
-                }
-            }, '->',
+            tbar: [
+                //     {
+                //     text: '新增员工',
+                //     id: 'bt_add',
+                //     handler: function (b, e) {
+                //         location.href = "initEmployeeEdit.do";
+                //     }
+                // },
+                '->',
                 new Ext.PagingToolbar({
                     pageSize: PAGESIZE,
                     store: gridStore,

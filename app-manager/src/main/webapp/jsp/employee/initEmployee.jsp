@@ -44,14 +44,6 @@
                 <div id="entryDateStartDIV" style="float:left; "></div>
                 <div style="float:left; ">到：</div>
                 <div id="entryDateEndDIV" style="float:left; "></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="Myfont">
-                <div style="float:left; ">离职日期，从：</div>
-                <div id="leaveDateStartDIV" style="float:left; "></div>
-                <div style="float:left; ">到：</div>
-                <div id="leaveDateEndDIV" style="float:left; "></div>
 
                 <div style="float:left; ">
                     <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">

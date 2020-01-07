@@ -13,50 +13,21 @@ Ext.onReady(function () {
 
     //-----------------权限相关 end-----------
 
-    var entryDateStartDIV = new com.custom.DateField({
-        renderTo: 'entryDateStartDIV',
-        format: 'Y-m-d',
-        name: 'entryDateStart',
-        value: '',
-        id: 'entryDateStart'
-    });
-    var entryDateEndDIV = new com.custom.DateField({
-        renderTo: 'entryDateEndDIV',
-        format: 'Y-m-d',
-        name: 'entryDateEnd',
-        value: '',
-        id: 'entryDateEnd'
-    });
-
-    var leaveDateStartDIV = new com.custom.DateField({
-        renderTo: 'leaveDateStartDIV',
-        format: 'Y-m-d',
-        name: 'leaveDateStart',
-        value: '',
-        id: 'leaveDateStart'
-    });
-    var leaveDateEndDIV = new com.custom.DateField({
-        renderTo: 'leaveDateEndDIV',
-        format: 'Y-m-d',
-        name: 'leaveDateEnd',
-        value: '',
-        id: 'leaveDateEnd'
-    });
 
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("name", getById("name"));
         gridStore.setBaseParam("idCard", getById("idCard"));
-        gridStore.setBaseParam("entryDateStart", getById("entryDateStart"));
-        gridStore.setBaseParam("entryDateEnd", getById("entryDateEnd"));
-        gridStore.setBaseParam("leaveDateStart", getById("leaveDateStart"));
-        gridStore.setBaseParam("leaveDateEnd", getById("leaveDateEnd"));
 
         gridStore.reload();
     };
 
     this.updateF = function (id) {
         location.href = "initEmployeeEdit.do?id=" + id;
+    };
+    this.shenqingF = function (id) {
+        alert('申请成为正式员工');
+        // location.href = "initEmployeeEdit.do?id=" + id;
     };
 
 
@@ -90,10 +61,6 @@ Ext.onReady(function () {
             limit: PAGESIZE,
             projectsId: '',
             name: '',
-            entryDateStart: '',
-            entryDateEnd: '',
-            leaveDateStart: '',
-            leaveDateEnd: '',
             idCard: ''
         }
     });
@@ -106,38 +73,23 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
+            {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
-            {width: 1, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
             {width: 3, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
+            {width: 1.5, header: '出生日期', align: 'left', sortable: false, dataIndex: 'birthDate'},
+            {width: 1, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
             {width: 1.5, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
             {width: 1, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
-            {width: 1.5, header: '出生日期', align: 'left', sortable: false, dataIndex: 'birthDate'},
             {
-                width: 1.5,
-                header: '入职时间',
-                align: 'left',
-                sortable: false,
-                dataIndex: 'entryDate',
-                renderer: function (val, cell, record) {
-                    return new Date(val).format("Y-m-d");
-                }
-            },
-
-            {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
-            {width: 2, header: '保险类型', align: 'left', sortable: false, dataIndex: 'safeType'},
-            {width: 1, header: '入职合同', align: 'left', sortable: false, dataIndex: 'hetongStr'},
-            {
-                width: 2,
+                width: 3,
                 header: '操作',
                 align: 'center',
                 sortable: false,
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
-                    var str = '';
-                    if (urlEditValid) {//权限
-                        str += genButton("修改", 'updateF(' + val + ')');
-                    }
+                    var str = genButton("修改", 'updateF(' + val + ')');
+                    str += genButton("申请正式员工", 'shenqingF(' + val + ')');
                     return str;
                 }
             }
@@ -148,9 +100,9 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '员工管理',
+            title: '人事申请',
             border: false,
-            height: 165,
+            height: 75,
             keys: {
                 key: Ext.EventObject.ENTER,
                 fn: function (btn, e) {
@@ -165,7 +117,7 @@ Ext.onReady(function () {
             autoScroll: true,
             items: [grid],
             tbar: [{
-                text: '新增员工',
+                text: '新增人员',
                 id: 'bt_add',
                 handler: function (b, e) {
                     location.href = "initEmployeeEdit.do";
