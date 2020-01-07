@@ -14,4 +14,10 @@ public interface EmployeeService {
     ResultCodeEnum insert(EmployeeDO employee);
 
     ResultCodeEnum update(EmployeeDO employee);
+
+    boolean shenqing(int id, String shuoming);
+
+    boolean tongguo(int id);
+
+    boolean butongguo(int id);
 }

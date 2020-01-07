@@ -80,4 +80,22 @@ public class EmployeeServiceImpl implements EmployeeService {
             return ResultCodeEnum.FAIL;
         }
     }
+
+    @Override
+    public boolean shenqing(int id, String shuoming) {
+        int res = employeeMapper.shenqing(id, shuoming);
+        return res > 0;
+    }
+
+    @Override
+    public boolean tongguo(int id) {
+        int res = employeeMapper.tongguo(id);
+        return res > 0;
+    }
+
+    @Override
+    public boolean butongguo(int id) {
+        int res = employeeMapper.butongguo(id);
+        return res > 0;
+    }
 }

@@ -3,6 +3,7 @@ package com.hao.app.dao;
 
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.pojo.EmployeeDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,10 @@ public interface EmployeeMapper {
     int count(EmployeeQueryParam param);
 
     List<EmployeeDO> search(EmployeeQueryParam param);
+
+    int shenqing(@Param("id") int id, @Param("shuoming") String shuoming);
+
+    int tongguo(@Param("id") int id);
+
+    int butongguo(@Param("id") int id);
 }

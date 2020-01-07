@@ -209,8 +209,24 @@ public class EmployeeController extends BaseController {
     public void shenqingEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("empId"));
         String shuoming = request.getParameter("shenqingshuoming");
-        boolean result = true;
+        boolean result = employeeService.shenqing(id, shuoming);
         writeResponse(response, new JsonResultAjax(result));
     }
+
+    @RequestMapping("/tongguoEmpF.do")
+    public void tongguoEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("empId"));
+        boolean result = employeeService.tongguo(id);
+        writeResponse(response, new JsonResultAjax(result));
+    }
+
+
+    @RequestMapping("/butongguo.do")
+    public void butongguoEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("empId"));
+        boolean result = employeeService.butongguo(id);
+        writeResponse(response, new JsonResultAjax(result));
+    }
+
 
 }

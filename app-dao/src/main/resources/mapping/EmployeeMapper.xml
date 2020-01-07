@@ -51,6 +51,24 @@
         limit ${pageStart},${pageLimit}
     </select>
 
+    <update id="shenqing">
+        update employee
+        set status = 3
+        where id=#{id}
+    </update>
+
+    <update id="tongguo">
+        update employee
+        set status = 1
+        where id=#{id}
+    </update>
+
+    <update id="butongguo">
+        update employee
+        set status = 0
+        where id=#{id}
+    </update>
+
     <sql id="searchSQL">
         <where>
             <if test="projectsId != null and projectsId > 0">
