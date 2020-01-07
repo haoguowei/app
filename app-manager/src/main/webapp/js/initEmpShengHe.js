@@ -24,9 +24,64 @@ Ext.onReady(function () {
     };
 
     this.shengheF = function (id) {
-        alert('审核');
+        document.getElementById("hidEmpId").value = id;
+        sqWindow.show();
     };
 
+    var sqWindow = new com.custom.Window({
+        title: '成为正式员工审核',
+        width: 500,
+        height: 250,
+        contentEl: 'sqWindow',
+        buttons: [{
+            text: '通过',
+            handler: function () {
+                var hidEmpId = document.getElementById("hidEmpId").value;
+                var descr = document.getElementById("descr").value;
+
+                var url = "passEmpF.do?id=" + hidEmpId
+                    + "&descr=" + descr;
+
+                passOrNot(url);
+            }
+        }, {
+            text: '不通过',
+            handler: function () {
+                var hidEmpId = document.getElementById("hidEmpId").value;
+                var descr = document.getElementById("descr").value;
+
+                var url = "notPassEmpF.do?id=" + hidEmpId
+                    + "&descr=" + descr;
+
+                passOrNot(url);
+            }
+        }, {
+            text: '关闭',
+            handler: function () {
+                sqWindow.hide();
+            }
+        }]
+    });
+
+    function passOrNot(url) {
+        Ext.Ajax.request({
+            url: url,
+            success: function (response) {
+                var resp = Ext.util.JSON.decode(response.responseText);
+                if (resp.success) {
+                    alert("操作成功！");
+                    sqWindow.hide();
+                    searchFunc();
+                } else {
+                    alert("操作失败：" + resp.resultTipMsg);
+                }
+            }
+        });
+    }
+
+    sqWindow.on("beforeshow", function () {
+        document.getElementById("descr").value = '';
+    });
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
@@ -38,6 +93,7 @@ Ext.onReady(function () {
             {name: 'id'},
             {name: 'name'},
             {name: 'idCard'},
+            {name: 'shenqing'},
             {name: 'status'},
             {name: 'projectsName'},
             {name: 'entryDate'},
@@ -63,6 +119,7 @@ Ext.onReady(function () {
         }
     });
 
+
     var grid = new com.custom.GridPanel({
         store: gridStore,
         region: 'center',
@@ -74,13 +131,14 @@ Ext.onReady(function () {
             {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
             {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
-            {width: 3, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
+            {width: 2.5, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
             {width: 1.5, header: '出生日期', align: 'left', sortable: false, dataIndex: 'birthDate'},
             {width: 1, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
             {width: 1.5, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
             {width: 1, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
+            {width: 2.5, header: '申请说明', align: 'left', sortable: false, dataIndex: 'shenqing'},
             {
-                width: 3,
+                width: 2,
                 header: '操作',
                 align: 'center',
                 sortable: false,

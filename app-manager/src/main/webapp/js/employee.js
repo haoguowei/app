@@ -39,9 +39,9 @@ Ext.onReady(function () {
         gridStore.reload();
     };
 
-    // this.updateF = function (id) {
-    //     location.href = "initEmployeeEdit.do?id=" + id;
-    // };
+    this.updateF = function (id) {
+        location.href = "initEmployeeEdit.do?id=" + id;
+    };
 
 
     //列表数据

@@ -213,8 +213,8 @@ public class EmployeeController extends BaseController {
         writeResponse(response, new JsonResultAjax(result));
     }
 
-    @RequestMapping("/tongguoEmpF.do")
-    public void tongguoEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/passEmpF.do")
+    public void passEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("id"));
         String descr = request.getParameter("descr");
         boolean result = employeeService.passd(id, descr);
@@ -222,8 +222,8 @@ public class EmployeeController extends BaseController {
     }
 
 
-    @RequestMapping("/butongguo.do")
-    public void butongguoEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/notPassEmpF.do")
+    public void notPassEmpF(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("id"));
         String descr = request.getParameter("descr");
 
