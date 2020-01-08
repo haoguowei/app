@@ -4,6 +4,7 @@ import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.EmpStatusEnum;
 import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.commons.utils.IdCardUtils;
 import com.hao.app.dao.EmployeeMapper;
 import com.hao.app.pojo.EmployeeDO;
@@ -13,6 +14,9 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,13 +53,29 @@ public class EmployeeServiceImpl implements EmployeeService {
             Map<String, String> map = IdCardUtils.getBirAgeSex(item.getIdCard());
             if (map != null) {
                 item.setBirthDate(map.get("birthday"));
+                Date bd = null;
+                try {
+                    bd = new SimpleDateFormat("yyyy-MM-dd").parse(map.get("birthday"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 item.setAge(NumberUtils.isNumber(map.get("age")) ? Integer.valueOf(map.get("age")) : null);
                 String sex = map.get("sexCode");
 
                 item.setGenderStr(StringUtils.isNotBlank(sex) && sex.equals("F") ? "女" : "男");
 
                 if (item.getAge() != null) {
-                    item.setBirthDate(item.getBirthDate() + "(" + item.getAge() + "岁)");
+                    if (item.getAge() >= 68) {
+                        item.setBirthDate("<span style='color:red;'>" + item.getBirthDate() + "(" + item.getAge() + "岁)</span>");
+                    } else {
+                        Date soon = DateUtil.getSoonPassAgeDate();
+                        if (bd != null && soon != null && bd.before(soon)) {
+                            item.setBirthDate("<span style='color:#DAA520;'>" + item.getBirthDate() + "(" + item.getAge() + "岁)</span>");
+                        } else {
+                            item.setBirthDate(item.getBirthDate() + "(" + item.getAge() + "岁)");
+                        }
+                    }
                 }
             }
         }

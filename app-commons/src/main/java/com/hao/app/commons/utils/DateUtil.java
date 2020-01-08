@@ -1,5 +1,6 @@
 package com.hao.app.commons.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,8 +59,26 @@ public class DateUtil {
 
 
     public static Date getSoonPassAgeDate() {
-        int chaolingMonth = -1 * (67 * 12 + 11);
-		return addMonth(new Date(), chaolingMonth);
+		int chaolingMonth = -1 * (67 * 12 + 11);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.setFirstDayOfWeek(Calendar.MONDAY);
+		calendar.add(Calendar.MONTH, chaolingMonth);
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		String monthStr = month < 10 ? "0" + month : String.valueOf(month);
+
+		SimpleDateFormat xx = new SimpleDateFormat("yyyy-MM-dd");
+		String full = year + monthStr + "-01";
+
+		try {
+			return xx.parse(full);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static String getSoonPassAgeDateStr() {
