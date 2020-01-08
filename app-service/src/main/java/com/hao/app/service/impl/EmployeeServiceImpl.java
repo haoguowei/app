@@ -53,6 +53,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 String sex = map.get("sexCode");
 
                 item.setGenderStr(StringUtils.isNotBlank(sex) && sex.equals("F") ? "女" : "男");
+
+                if (item.getAge() != null) {
+                    item.setBirthDate(item.getBirthDate() + "(" + item.getAge() + "岁)");
+                }
             }
         }
     }

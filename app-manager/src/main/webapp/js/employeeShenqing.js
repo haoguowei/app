@@ -120,7 +120,6 @@ Ext.onReady(function () {
             {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
             {width: 2, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
             {width: 1.5, header: '出生日期', align: 'left', sortable: false, dataIndex: 'birthDate'},
-            {width: 1, header: '年龄', align: 'left', sortable: false, dataIndex: 'age'},
             {width: 1.5, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
             {width: 1, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
             {width: 3, header: '不通过理由', align: 'left', sortable: false, dataIndex: 'descr'},

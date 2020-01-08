@@ -48,4 +48,24 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 
+	public static Date getPassAgeDate() {
+		int chaolingMonth = -1 * (67 * 12 + 12);
+		return addMonth(new Date(), chaolingMonth);
+	}
+
+	public static String getPassAgeDateStr() {
+		Date dt = getPassAgeDate();
+		return new SimpleDateFormat("yyyy-MM-dd").format(dt);
+	}
+
+	public static Date getSoonPassAgeDate() {
+		int chaolingMonth = -1 * (67 * 12 + 11);
+		return addMonth(new Date(), chaolingMonth);
+	}
+
+	public static String getSoonPassAgeDateStr() {
+		Date dt = getSoonPassAgeDate();
+		return new SimpleDateFormat("yyyy-MM-dd").format(dt);
+	}
+
 }
