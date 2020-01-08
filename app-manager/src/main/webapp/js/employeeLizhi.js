@@ -91,9 +91,9 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 1, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '姓名', align: 'left', sortable: false, dataIndex: 'name'},
-            {width: 1, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
+            {width: 0.5, header: '性别', align: 'left', sortable: false, dataIndex: 'genderStr'},
             {width: 3, header: '身份证', align: 'left', sortable: false, dataIndex: 'idCard'},
-            {width: 1.5, header: '出生日期', align: 'left', sortable: false, dataIndex: 'birthDate'},
+            {width: 2.5, header: '出生日期', align: 'left', sortable: false, dataIndex: 'birthDate'},
             {width: 1.5, header: '手机号', align: 'left', sortable: false, dataIndex: 'phone'},
             {width: 1, header: '职位', align: 'left', sortable: false, dataIndex: 'jobTypeStr'},
             {

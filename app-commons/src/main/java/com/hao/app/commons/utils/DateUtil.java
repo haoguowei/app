@@ -49,8 +49,11 @@ public class DateUtil {
 	}
 
 	public static Date getPassAgeDate() {
-		int chaolingMonth = -1 * (67 * 12 + 12);
-		return addMonth(new Date(), chaolingMonth);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.setFirstDayOfWeek(Calendar.MONDAY);
+		calendar.add(Calendar.YEAR, 68); //68岁前的人
+		return calendar.getTime();
 	}
 
 	public static String getPassAgeDateStr() {
