@@ -77,6 +77,14 @@
 
     <sql id="searchSQL">
         <where>
+            <if test="passAge != null">
+                <if test="passAge == 1">
+                    <![CDATA[  and birth_day >= ${birthDay}  ]]>
+                </if>
+                <if test="passAge == 2">
+                    <![CDATA[  and birth_day < ${birthDay}  ]]>
+                </if>
+            </if>
             <if test="projectsId != null and projectsId > 0">
                 and projects = ${projectsId}
             </if>

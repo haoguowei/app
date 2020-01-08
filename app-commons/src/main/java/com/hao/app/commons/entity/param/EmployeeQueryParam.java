@@ -1,5 +1,6 @@
 package com.hao.app.commons.entity.param;
 
+import com.hao.app.commons.utils.DateUtil;
 import lombok.Data;
 import lombok.ToString;
 
@@ -30,6 +31,11 @@ public class EmployeeQueryParam extends QueryParam implements Serializable {
 	private String leaveDateEnd;
 
 	private Set<Integer> jobTypes;
+
+
+	//超龄
+	private String birthDay = DateUtil.getPassAgeDate();
+	private Integer passAge; //0-所有；1-未超龄；2-超龄
 
 	public EmployeeQueryParam(int pageStart, int pageLimit) {
 		super(pageStart, pageLimit);

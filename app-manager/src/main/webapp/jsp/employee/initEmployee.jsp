@@ -36,6 +36,12 @@
                 <input style="margin-right: 20px;" type="text" name="name" id="name">
                 身份证号：
                 <input style="margin-right: 20px;width: 200px;" type="text" name="idCard" id="idCard">
+                超龄：
+                <select id="passAge" name="passAge">
+                    <option value="0">请选择
+                    <option value="1">未超龄
+                    <option value="2">超龄
+                </select>
             </td>
         </tr>
         <tr>

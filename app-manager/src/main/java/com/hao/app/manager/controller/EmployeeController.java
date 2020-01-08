@@ -77,6 +77,7 @@ public class EmployeeController extends BaseController {
 
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
         int status = NumberUtils.toInt(request.getParameter("status")); //0-未入职；1-正式员工；2-离职
+        int passAge = NumberUtils.toInt(request.getParameter("passAge")); //0-所有；1-未超龄；2-超龄
 
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
@@ -84,6 +85,10 @@ public class EmployeeController extends BaseController {
         EmployeeQueryParam param = new EmployeeQueryParam(start, limit);
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
+        }
+
+        if (passAge > 0) {
+            param.setPassAge(passAge);
         }
 
         if (projectsId >= 0) {

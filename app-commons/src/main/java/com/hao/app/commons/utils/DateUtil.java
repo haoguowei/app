@@ -38,31 +38,27 @@ public class DateUtil {
 		calendar.setFirstDayOfWeek(Calendar.MONDAY);
 		calendar.add(Calendar.DATE, amount);
 		return calendar.getTime();
-	}
+    }
 
-	public static Date addMonth(Date date, int amount) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.add(Calendar.MONTH, amount);
-		return calendar.getTime();
-	}
+    public static Date addMonth(Date date, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        calendar.add(Calendar.MONTH, amount);
+        return calendar.getTime();
+    }
 
-	public static Date getPassAgeDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.add(Calendar.YEAR, 68); //68岁前的人
-		return calendar.getTime();
-	}
+    public static String getPassAgeDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.YEAR, 68); //68岁前的人
+        int year = calendar.get(Calendar.YEAR);
+        return year + "-01-01";
+    }
 
-	public static String getPassAgeDateStr() {
-		Date dt = getPassAgeDate();
-		return new SimpleDateFormat("yyyy-MM-dd").format(dt);
-	}
 
-	public static Date getSoonPassAgeDate() {
-		int chaolingMonth = -1 * (67 * 12 + 11);
+    public static Date getSoonPassAgeDate() {
+        int chaolingMonth = -1 * (67 * 12 + 11);
 		return addMonth(new Date(), chaolingMonth);
 	}
 
