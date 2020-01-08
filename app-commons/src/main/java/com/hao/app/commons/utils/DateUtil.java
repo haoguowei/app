@@ -51,7 +51,7 @@ public class DateUtil {
     public static String getPassAgeDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.YEAR, 68); //68岁前的人
+		calendar.add(Calendar.YEAR, -68); //68岁前的人
         int year = calendar.get(Calendar.YEAR);
         return year + "-01-01";
     }

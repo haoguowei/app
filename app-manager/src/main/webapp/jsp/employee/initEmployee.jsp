@@ -67,11 +67,12 @@
         <tr>
             <td>离职时间:</td>
             <td>
-                <div id="leaveDIV"></div>
+                <div id="leaveDIV" style="z-index: 0"></div>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
 </body>
 </html>
