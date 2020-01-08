@@ -14,6 +14,7 @@
         <result column="ethnic" jdbcType="INTEGER" property="ethnic"/>
         <result column="entry_date" jdbcType="DATE" property="entryDate"/>
         <result column="leave_date" jdbcType="DATE" property="leaveDate"/>
+        <result column="birth_day" jdbcType="DATE" property="birthDay"/>
         <result column="edu_type" jdbcType="INTEGER" property="eduType"/>
         <result column="hetong" jdbcType="INTEGER" property="hetong"/>
         <result column="hukou_type" jdbcType="INTEGER" property="hukouType"/>
@@ -33,7 +34,7 @@
     <sql id="Base_Column_List">
         id, status, name, phone, id_card, projects, projects_name, job_type,  ethnic, shenqing, descr,
         entry_date, leave_date, edu_type, hukou_type, huji_address, address, emergency_contact,
-        emergency_contact_phone, safe_type, remark, creater, create_time, update_time,hetong
+        emergency_contact_phone, safe_type, remark, creater, create_time, update_time,hetong,birth_day
     </sql>
 
 
@@ -154,6 +155,9 @@
             <if test="leaveDate != null">
                 leave_date,
             </if>
+            <if test="birthDay != null">
+                birth_day,
+            </if>
             <if test="eduType != null">
                 edu_type,
             </if>
@@ -222,6 +226,9 @@
             </if>
             <if test="leaveDate != null">
                 #{leaveDate,jdbcType=DATE},
+            </if>
+            <if test="birthDay != null">
+                #{birthDay,jdbcType=DATE},
             </if>
             <if test="eduType != null">
                 #{eduType,jdbcType=INTEGER},
@@ -294,6 +301,9 @@
             </if>
             <if test="leaveDate != null">
                 leave_date = #{leaveDate,jdbcType=DATE},
+            </if>
+            <if test="birthDay != null">
+                birth_day = #{birthDay,jdbcType=DATE},
             </if>
             <if test="eduType != null">
                 edu_type = #{eduType,jdbcType=INTEGER},

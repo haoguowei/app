@@ -5,6 +5,7 @@ import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.JsonResultAjax;
 import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.commons.utils.IdCardUtils;
 import com.hao.app.pojo.EmployeeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.EmployeeService;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 
 @Controller
@@ -187,6 +189,13 @@ public class EmployeeController extends BaseController {
         item.setSafeType(request.getParameter("safeType")); //safeType
 
         item.setRemark(request.getParameter("remark"));
+
+        Map<String, String> map = IdCardUtils.getBirAgeSex(item.getIdCard());
+        if (map != null) {
+            if (StringUtils.isNotBlank(map.get("birthday"))) {
+                item.setBirthDay(format.parse(map.get("birthday")));
+            }
+        }
 
         ResultCodeEnum resultCode;
         if (id == 0) {

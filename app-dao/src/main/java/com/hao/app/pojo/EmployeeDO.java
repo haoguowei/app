@@ -35,11 +35,13 @@ public class EmployeeDO implements Serializable {
 
     private Integer age;
 
-    private String birthDate;
 
     private Date entryDate;
 
     private Date leaveDate;
+
+    private Date birthDay;
+    private String birthDate;
 
     private Integer eduType;
 
