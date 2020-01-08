@@ -79,10 +79,10 @@
         <where>
             <if test="passAge != null">
                 <if test="passAge == 1">
-                    <![CDATA[  and birth_day >= ${birthDay}  ]]>
+                    <![CDATA[  and (birth_day > '0000-01-01' and birth_day >= ${birthDay})  ]]>
                 </if>
                 <if test="passAge == 2">
-                    <![CDATA[  and birth_day < ${birthDay}  ]]>
+                    <![CDATA[  and birth_day > '0000-01-01' and birth_day < ${birthDay}  ]]>
                 </if>
             </if>
             <if test="projectsId != null and projectsId > 0">

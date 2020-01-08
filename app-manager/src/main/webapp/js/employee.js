@@ -224,5 +224,8 @@ Ext.onReady(function () {
 //		Ext.getCmp("bt_add").hide();
 //	}
 
+    sqWindow.show();
+    sqWindow.hide();
+
     searchFunc();
 });
