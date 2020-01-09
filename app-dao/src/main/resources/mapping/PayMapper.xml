@@ -147,4 +147,38 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <select id="count" parameterType="com.hao.app.commons.entity.param.PayQueryParam"
+            resultType="java.lang.Integer">
+        select count(1)
+        from pay
+        <include refid="searchSQL"/>
+    </select>
+
+    <select id="search" parameterType="com.hao.app.commons.entity.param.PayQueryParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pay
+        <include refid="searchSQL"/>
+        order by id desc
+        limit ${pageStart},${pageLimit}
+    </select>
+
+    <sql id="searchSQL">
+        <where>
+            <if test="projectsId != null and projectsId > 0">
+                and projects = ${projectsId}
+            </if>
+            <if test="status != null and status >= 0">
+                and pay_status = ${status}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                <![CDATA[ and pay_month >= #{startDate} ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[ and pay_month <= #{endDate} ]]>
+            </if>
+        </where>
+    </sql>
 </mapper>

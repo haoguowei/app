@@ -18,7 +18,7 @@ public class PayDO implements Serializable {
 
     private Date payMonth;
 
-    private Integer payStatus;
+    private Integer payStatus; //是否全部发放
 
     private Integer totalMan;
 
