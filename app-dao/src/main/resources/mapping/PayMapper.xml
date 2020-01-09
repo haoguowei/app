@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.app.dao.PayMapper">
+
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.PayDO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
+        <result column="pay_month" jdbcType="DATE" property="payMonth"/>
+        <result column="pay_status" jdbcType="INTEGER" property="payStatus"/>
+        <result column="total_man" jdbcType="INTEGER" property="totalMan"/>
+        <result column="total_amount" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="payed_amount" jdbcType="DECIMAL" property="payedAmount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="creater" jdbcType="VARCHAR" property="creater"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, projects, projects_name, pay_month, pay_status, total_man, total_amount, payed_amount, 
+    remark, creater, create_time, update_time
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pay
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.hao.app.pojo.PayDO">
+        insert into pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projects != null">
+                projects,
+            </if>
+            <if test="projectsName != null">
+                projects_name,
+            </if>
+            <if test="payMonth != null">
+                pay_month,
+            </if>
+            <if test="payStatus != null">
+                pay_status,
+            </if>
+            <if test="totalMan != null">
+                total_man,
+            </if>
+            <if test="totalAmount != null">
+                total_amount,
+            </if>
+            <if test="payedAmount != null">
+                payed_amount,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projects != null">
+                #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                #{projectsName,jdbcType=VARCHAR},
+            </if>
+            <if test="payMonth != null">
+                #{payMonth,jdbcType=DATE},
+            </if>
+            <if test="payStatus != null">
+                #{payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="totalMan != null">
+                #{totalMan,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payedAmount != null">
+                #{payedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.hao.app.pojo.PayDO">
+        update pay
+        <set>
+            <if test="projects != null">
+                projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                projects_name = #{projectsName,jdbcType=VARCHAR},
+            </if>
+            <if test="payMonth != null">
+                pay_month = #{payMonth,jdbcType=DATE},
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="totalMan != null">
+                total_man = #{totalMan,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payedAmount != null">
+                payed_amount = #{payedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
