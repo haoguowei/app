@@ -60,14 +60,19 @@ public class PayServiceImpl implements PayService {
         int totalMan = detailList.size();
         PayStatusEnum payStatusEnum = PayStatusEnum.YES;
         BigDecimal totalAmount = BigDecimal.valueOf(0);
+        BigDecimal payedAmount = BigDecimal.valueOf(0);
 
         for (PayDetailDO item : detailList) {
             if (item.getPayStatus() == null || item.getPayStatus().equals(PayStatusEnum.NO.getCode())) {
                 payStatusEnum = PayStatusEnum.NO;
             }
 
-            if (item.getPayAmount() != null) {
-                totalAmount = totalAmount.add(item.getPayAmount());
+            if (item.getTotalAmount() != null) {
+                totalAmount = totalAmount.add(item.getTotalAmount());
+            }
+
+            if (item.getPayedAmount() != null) {
+                payedAmount = payedAmount.add(item.getPayedAmount());
             }
         }
 
@@ -75,7 +80,7 @@ public class PayServiceImpl implements PayService {
             payStatusEnum = PayStatusEnum.NO;
         }
 
-        return payMapper.updateTotals(payId, totalMan, payStatusEnum.getCode(), totalAmount);
+        return payMapper.updateTotals(payId, totalMan, payStatusEnum.getCode(), totalAmount, payedAmount);
 
     }
 

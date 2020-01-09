@@ -18,7 +18,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,7 +62,7 @@ public class PayController extends BaseController {
             param.setProjectsId(projectsId);
         }
         if (status >= 0) {
-            param.setProjectsId(status);
+            param.setStatus(status);
         }
 
         if (StringUtils.isNotBlank(startDate)) {
@@ -109,9 +108,9 @@ public class PayController extends BaseController {
             item.setPayMonth(new SimpleDateFormat("yyyy-MM-dd").parse(payMonth + "-01")); //
         }
 
-        //已付金额
-        String payedAmount = request.getParameter("payedAmount");
-        item.setPayedAmount(StringUtils.isBlank(payedAmount) ? BigDecimal.valueOf(0) : new BigDecimal(payedAmount));
+//        //已付金额
+//        String payedAmount = request.getParameter("payedAmount");
+//        item.setPayedAmount(StringUtils.isBlank(payedAmount) ? BigDecimal.valueOf(0) : new BigDecimal(payedAmount));
 
         ResultCodeEnum resultCode;
         if (id == 0) {

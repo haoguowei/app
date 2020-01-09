@@ -22,5 +22,5 @@ public interface PayMapper {
 
     List<PayDO> search(PayQueryParam param);
 
-    int updateTotals(@Param("payId") int payId, @Param("totalMan") int totalMan, @Param("payStatus") int payStatus, @Param("totalAmount") BigDecimal totalAmount);
+    int updateTotals(@Param("payId") int payId, @Param("totalMan") int totalMan, @Param("payStatus") int payStatus, @Param("totalAmount") BigDecimal totalAmount, @Param("payedAmount") BigDecimal payedAmount);
 }

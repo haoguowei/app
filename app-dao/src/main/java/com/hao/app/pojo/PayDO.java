@@ -26,6 +26,8 @@ public class PayDO implements Serializable {
 
     private BigDecimal payedAmount;
 
+    private BigDecimal yuAmount;
+
     private String remark;
 
     private String creater;

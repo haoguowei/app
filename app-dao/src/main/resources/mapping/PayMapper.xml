@@ -152,7 +152,8 @@
         update pay
         set pay_status = #{payStatus,jdbcType=INTEGER},
         total_man = #{totalMan,jdbcType=INTEGER},
-        total_amount = #{totalAmount,jdbcType=DECIMAL}
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+        payed_amount = #{payedAmount,jdbcType=DECIMAL}
         where id = #{payId,jdbcType=INTEGER}
     </update>
 
