@@ -148,6 +148,13 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <update id="updateTotals">
+        update pay
+        set pay_status = #{payStatus,jdbcType=INTEGER},
+        total_man = #{totalMan,jdbcType=INTEGER},
+        total_amount = #{totalAmount,jdbcType=DECIMAL}
+        where id = #{payId,jdbcType=INTEGER}
+    </update>
 
     <select id="count" parameterType="com.hao.app.commons.entity.param.PayQueryParam"
             resultType="java.lang.Integer">

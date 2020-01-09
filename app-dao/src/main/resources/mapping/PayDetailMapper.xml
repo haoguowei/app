@@ -228,4 +228,13 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <select id="search" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pay_detail
+        where pay_id = #{payId}
+        order by id asc
+    </select>
 </mapper>
