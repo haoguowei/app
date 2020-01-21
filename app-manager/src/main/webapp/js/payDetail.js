@@ -63,7 +63,7 @@ Ext.onReady(function () {
         ]
     });
 
-    var title = getById("projectsName") + getById("payMonth") + "员工工资明细(" + getById('payId') + ")";
+    var title = getById("projectsName") + getById("payMonth") + "员工工资明细(ID-" + getById('payId') + ")";
     new Ext.Viewport({
         layout: 'border',
         items: [{
