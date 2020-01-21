@@ -108,10 +108,6 @@ public class PayController extends BaseController {
             item.setPayMonth(new SimpleDateFormat("yyyy-MM-dd").parse(payMonth + "-01")); //
         }
 
-//        //已付金额
-//        String payedAmount = request.getParameter("payedAmount");
-//        item.setPayedAmount(StringUtils.isBlank(payedAmount) ? BigDecimal.valueOf(0) : new BigDecimal(payedAmount));
-
         ResultCodeEnum resultCode;
         if (id == 0) {
             item.setCreater(getCurrentUserName(request));

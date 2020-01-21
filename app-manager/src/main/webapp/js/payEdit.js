@@ -3,7 +3,7 @@ Ext.onReady(function () {
 
     var enterDateDiv = new com.custom.DateField({
         renderTo: 'enterDateDiv',
-        format: 'Y-m-d',
+        format: 'Y-m',
         name: 'payMonth',
         value: getById('hideEnterDateDiv'),
         id: 'payMonth'
