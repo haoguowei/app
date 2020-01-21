@@ -15,10 +15,10 @@
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form1" action="saveYYCost.do" method="post" onsubmit="return save()">
+    <form name="form1" action="savePay.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
         <input type="hidden" id="hideEnterDateDiv" name="hideEnterDateDiv"
-               value="<fmt:formatDate value="${itemObj.enterDate }" pattern="yyyy-MM-dd" />">
+               value="<fmt:formatDate value="${itemObj.payMonth }" pattern="yyyy-MM-dd" />">
 
         <table class="Mytable">
             <tr>

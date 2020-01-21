@@ -22,11 +22,11 @@ Ext.onReady(function () {
             document.getElementById("payMonth").focus();
             return false;
         }
-        if (!isDate(getById("payMonth"))) {
-            alert("工资日期格式错误！");
-            document.getElementById("payMonth").focus();
-            return false;
-        }
+        // if (!isDate(getById("payMonth"))) {
+        //     alert("工资日期格式错误！");
+        //     document.getElementById("payMonth").focus();
+        //     return false;
+        // }
     };
 
     new Ext.Viewport({
