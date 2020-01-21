@@ -14,14 +14,14 @@ Ext.onReady(function () {
     //-----------------权限相关 end-----------
     var entryDateStartDIV = new com.custom.DateField({
         renderTo: 'entryDateStartDIV',
-        format: 'Y-m-d',
+        format: 'Y-m',
         name: 'startDate',
         value: '',
         id: 'startDate'
     });
     var entryDateEndDIV = new com.custom.DateField({
         renderTo: 'entryDateEndDIV',
-        format: 'Y-m-d',
+        format: 'Y-m',
         name: 'endDate',
         value: '',
         id: 'endDate'
@@ -32,25 +32,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("status", getById("status"));
         gridStore.setBaseParam("startDate", getById("startDate"));
         gridStore.setBaseParam("endDate", getById("endDate"));
-
-        // Ext.getCmp("huizong_show").setText("汇总信息...");
-        // gridStore.reload({
-        //     callback: function (r, options, success) {
-        //         if (success) {
-        //             Ext.Ajax.request({
-        //                 url: 'initCostHeJi.do',
-        //                 success: function (response) {
-        //                     var resp = Ext.util.JSON.decode(response.responseText);
-        //                     if (resp.success) {
-        //                         Ext.getCmp("huizong_show").setText(resp.info);
-        //                     } else {
-        //                         Ext.getCmp("huizong_show").setText("合计数据获取失败！");
-        //                     }
-        //                 }
-        //             });
-        //         }
-        //     }
-        // });
+        gridStore.reload();
     };
 
     this.updateF = function (id) {
