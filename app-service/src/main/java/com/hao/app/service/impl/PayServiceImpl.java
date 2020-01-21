@@ -98,4 +98,10 @@ public class PayServiceImpl implements PayService {
         List<PayDO> list = payMapper.search(param);
         return new JsonResult<>(count, list);
     }
+
+    @Override
+    public JsonResult<PayDetailDO> searchPayDetail(int payId) {
+        List<PayDetailDO> list = payDetailMapper.search(payId);
+        return new JsonResult<>(list == null ? 0 : list.size(), list);
+    }
 }

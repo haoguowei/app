@@ -39,8 +39,8 @@ Ext.onReady(function () {
         location.href = "initPayEdit.do?id=" + id;
     };
 
-    this.viewF = function (id) {
-        // location.href = "initAssetsEdit.do?view=1&id=" + id;
+    this.detailF = function (id) {
+        location.href = "initPayDetail.do?payId=" + id;
     };
 
 
@@ -102,7 +102,7 @@ Ext.onReady(function () {
             {width: 2, header: '备注', align: 'left', sortable: false, dataIndex: 'remark'},
             {width: 1, header: '创建人', align: 'left', sortable: false, dataIndex: 'creater'},
             {
-                width: 2,
+                width: 3,
                 header: '操作',
                 align: 'center',
                 sortable: false,
@@ -116,6 +116,8 @@ Ext.onReady(function () {
                     if (urlEditValid) {//权限
                         str += genButton("修改", 'updateF(' + val + ')');
                     }
+
+                    str += genButton("员工工资", 'detailF(' + val + ')');
 
                     return str;
                 }

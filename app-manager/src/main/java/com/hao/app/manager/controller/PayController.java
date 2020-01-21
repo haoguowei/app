@@ -4,6 +4,7 @@ import com.hao.app.commons.entity.param.PayQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.PayDO;
+import com.hao.app.pojo.PayDetailDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.PayService;
 import com.hao.app.service.ProjectsService;
@@ -37,6 +38,26 @@ public class PayController extends BaseController {
     public String initPay(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/pay/initPay";
+    }
+
+
+    @RequestMapping("/initPayDetail.do")
+    public String initPayDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int payId = NumberUtils.toInt(request.getParameter("payId"), 0);
+        if (payId <= 0) {
+            return failResult(request, "请先选择工资单");
+        }
+
+        PayDO itemObj = payService.getById(payId);
+        request.setAttribute("itemObj", itemObj);
+        return "jsp/pay/initPayDetail";
+    }
+
+    @RequestMapping("/searchPayDetail.do")
+    public void searchPayDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int payId = NumberUtils.toInt(request.getParameter("payId"), 0);
+        JsonResult<PayDetailDO> result = payService.searchPayDetail(payId);
+        writeResponse(response, result);
     }
 
 
@@ -85,6 +106,16 @@ public class PayController extends BaseController {
     }
 
 
+    @RequestMapping("/initPayDetailEdit.do")
+    public String initPayDetailEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("id"));
+//        PayDO itemObj = payService.getById(id);
+//        request.setAttribute("itemObj", itemObj);
+//        request.setAttribute("projectsList", getProjectsList(request));
+        return "jsp/pay/initPayDetailEdit";
+    }
+
+
     @RequestMapping("/savePay.do")
     public String savePay(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
         int id = NumberUtils.toInt(request.getParameter("hideId"), 0);
@@ -124,6 +155,11 @@ public class PayController extends BaseController {
         } else {
             return failResult(request, resultCode);
         }
+    }
+
+    @RequestMapping("/savePayDetail.do")
+    public String savePayDetail(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException {
+        return null;
     }
 
 
