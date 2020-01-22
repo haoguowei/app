@@ -17,4 +17,10 @@ public interface PayService {
     JsonResult<PayDO> searchPay(PayQueryParam param);
 
     JsonResult<PayDetailDO> searchPayDetail(int payId);
+
+    PayDetailDO getDetailById(int id);
+
+    ResultCodeEnum insertDetail(PayDetailDO item);
+
+    ResultCodeEnum updateDetail(PayDetailDO item);
 }

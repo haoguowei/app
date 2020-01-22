@@ -104,4 +104,22 @@ public class PayServiceImpl implements PayService {
         List<PayDetailDO> list = payDetailMapper.search(payId);
         return new JsonResult<>(list == null ? 0 : list.size(), list);
     }
+
+    @Override
+    public PayDetailDO getDetailById(int id) {
+        if (id > 0) {
+            return payDetailMapper.selectByPrimaryKey(id);
+        }
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum insertDetail(PayDetailDO item) {
+        return null;
+    }
+
+    @Override
+    public ResultCodeEnum updateDetail(PayDetailDO item) {
+        return null;
+    }
 }

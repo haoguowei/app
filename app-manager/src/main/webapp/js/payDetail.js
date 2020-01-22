@@ -16,7 +16,7 @@ Ext.onReady(function () {
     };
 
     this.updateF = function (id) {
-        location.href = "initPayDetailEdit.do?id=" + id;
+        location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + id;
     };
 
 
@@ -63,7 +63,7 @@ Ext.onReady(function () {
         ]
     });
 
-    var title = getById("projectsName") + getById("payMonth") + "员工工资明细(ID-" + getById('payId') + ")";
+    var title = getById("projectsName") + "-" + getById("payMonth") + "，工资明细(ID-" + getById('payId') + ")";
     new Ext.Viewport({
         layout: 'border',
         items: [{
@@ -74,10 +74,16 @@ Ext.onReady(function () {
             autoScroll: true,
             items: [grid],
             tbar: [{
-                text: '选择员工',
+                text: '新增员工工资',
                 id: 'bt_add',
                 handler: function (b, e) {
-                    //TODO
+                    location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=0";
+                }
+            }, {
+                text: '新增外部人员工资',
+                id: 'bt_add',
+                handler: function (b, e) {
+                    location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=100";
                 }
             }, '->',
                 new Ext.PagingToolbar({

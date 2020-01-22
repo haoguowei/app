@@ -117,7 +117,7 @@ Ext.onReady(function () {
                         str += genButton("修改", 'updateF(' + val + ')');
                     }
 
-                    str += genButton("员工工资", 'detailF(' + val + ')');
+                    str += genButton("工资明细", 'detailF(' + val + ')');
 
                     return str;
                 }
