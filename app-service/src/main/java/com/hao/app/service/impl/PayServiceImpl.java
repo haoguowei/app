@@ -115,11 +115,27 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public ResultCodeEnum insertDetail(PayDetailDO item) {
-        return null;
+        int res = payDetailMapper.insert(item);
+        if (res > 0) {
+            updateTotals(item.getPayId());
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 
     @Override
     public ResultCodeEnum updateDetail(PayDetailDO item) {
-        return null;
+        PayDetailDO old = payDetailMapper.selectByPrimaryKey(item.getId());
+        if (old == null) {
+            return ResultCodeEnum.FAIL_ITEM;
+        }
+        int res = payDetailMapper.update(item);
+        if (res > 0) {
+            updateTotals(item.getPayId());
+            return ResultCodeEnum.SUCCESS;
+        } else {
+            return ResultCodeEnum.FAIL;
+        }
     }
 }

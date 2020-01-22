@@ -47,7 +47,7 @@ Ext.onReady(function () {
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {
-                width: 2, header: '名称', align: 'center', sortable: false, dataIndex: 'id',
+                width: 2, header: '名称', align: 'left', sortable: false, dataIndex: 'id',
                 renderer: function (val, cell, record) {
                     return record.data.projectsName + "-" + new Date(record.data.payMonth).format("Y年m月");
                 }
