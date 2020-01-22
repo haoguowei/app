@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form1" action="saveYYCost.do" method="post" onsubmit="return save()">
+    <form name="form1" action="savePayDetail.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${payDetail.id }">
         <input type="hidden" id="payId" name="payId" value="${payItem.id }">
         <input type="hidden" id="flag" name="flag" value="${flag }">

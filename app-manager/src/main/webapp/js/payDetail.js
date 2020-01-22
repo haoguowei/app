@@ -30,6 +30,7 @@ Ext.onReady(function () {
             {name: 'id'},
             {name: 'payId'},
             {name: 'projectsName'},
+            {name: 'payMonth'},
             {name: 'remark'}
         ],
         baseParams: {
@@ -45,7 +46,13 @@ Ext.onReady(function () {
         autoHeight: true,
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
-            {width: 3, header: '备注', align: 'left', sortable: false, dataIndex: 'remark'},
+            {
+                width: 2, header: '名称', align: 'center', sortable: false, dataIndex: 'id',
+                renderer: function (val, cell, record) {
+                    return record.data.projectsName + "-" + new Date(record.data.payMonth).format("Y年m月");
+                }
+            },
+            {width: 2, header: '备注', align: 'left', sortable: false, dataIndex: 'remark'},
             {
                 width: 2,
                 header: '操作',
@@ -79,9 +86,9 @@ Ext.onReady(function () {
                 handler: function (b, e) {
                     location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=0";
                 }
-            }, {
+            }, '-', {
                 text: '新增外部人员工资',
-                id: 'bt_add',
+                id: 'bt_add_2',
                 handler: function (b, e) {
                     location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=100";
                 }
