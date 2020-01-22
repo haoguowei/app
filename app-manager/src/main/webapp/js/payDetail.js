@@ -65,8 +65,8 @@ Ext.onReady(function () {
             {width: 2, header: '绩效', align: 'right', sortable: false, dataIndex: 'jixiaoAmount'},
             {width: 2, header: '奖金', align: 'right', sortable: false, dataIndex: 'jiangjinAmount'},
             {width: 2, header: '罚款', align: 'right', sortable: false, dataIndex: 'fakuanAmount'},
-            {width: 2, header: '总金额', align: 'right', sortable: false, dataIndex: 'totalAmount'},
-            {width: 2, header: '已支付', align: 'right', sortable: false, dataIndex: 'payedAmount'},
+            {width: 2, header: '应发工资', align: 'right', sortable: false, dataIndex: 'totalAmount'},
+            {width: 2, header: '已发工资', align: 'right', sortable: false, dataIndex: 'payedAmount'},
             {width: 2, header: '支付状态', align: 'right', sortable: false, dataIndex: 'payStatus'},
             {
                 width: 2,

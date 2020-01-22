@@ -85,7 +85,6 @@ Ext.onReady(function () {
                     return record.data.projectsName + "-" + new Date(record.data.payMonth).format("Y年m月");
                 }
             },
-            {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {width: 2, header: '总人数', align: 'right', sortable: false, dataIndex: 'totalMan'},
             {width: 2, header: '总工资额', align: 'right', sortable: false, dataIndex: 'totalAmount'},
             {width: 2, header: '已发金额', align: 'right', sortable: false, dataIndex: 'payedAmount'},
