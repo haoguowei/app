@@ -205,6 +205,7 @@ public class PayController extends BaseController {
 
         PayDetailDO item = new PayDetailDO();
         item.setId(id);
+        item.setPayId(payId);
         item.setRemark(request.getParameter("remark"));
         item.setProjects(payDO.getProjects());
         item.setProjectsName(payDO.getProjectsName());

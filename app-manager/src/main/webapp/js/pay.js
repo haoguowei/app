@@ -80,16 +80,9 @@ Ext.onReady(function () {
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {
-                width: 2,
-                header: '日期',
-                align: 'left',
-                sortable: false,
-                dataIndex: 'payMonth',
+                width: 2, header: '工资单', align: 'left', sortable: false, dataIndex: 'id',
                 renderer: function (val, cell, record) {
-                    if (val == null || val == '') {
-                        return '';
-                    }
-                    return new Date(val).format("Y-m");
+                    return record.data.projectsName + "-" + new Date(record.data.payMonth).format("Y年m月");
                 }
             },
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
