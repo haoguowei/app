@@ -39,6 +39,8 @@ Ext.onReady(function () {
             {name: 'totalAmount'},
             {name: 'payedAmount'},
             {name: 'payStatus'},
+            {name: 'empName'},
+            {name: 'yuAmount'},
             {name: 'remark'}
         ],
         baseParams: {
@@ -60,6 +62,7 @@ Ext.onReady(function () {
                     return record.data.projectsName + "-" + new Date(record.data.payMonth).format("Y年m月");
                 }
             },
+            {width: 2, header: '人员', align: 'left', sortable: false, dataIndex: 'empName'},
             {width: 2, header: '固定工资', align: 'right', sortable: false, dataIndex: 'fixAmount'},
             {width: 2, header: '加班费', align: 'right', sortable: false, dataIndex: 'jiabanAmount'},
             {width: 2, header: '绩效', align: 'right', sortable: false, dataIndex: 'jixiaoAmount'},
@@ -67,7 +70,18 @@ Ext.onReady(function () {
             {width: 2, header: '罚款', align: 'right', sortable: false, dataIndex: 'fakuanAmount'},
             {width: 2, header: '应发工资', align: 'right', sortable: false, dataIndex: 'totalAmount'},
             {width: 2, header: '已发工资', align: 'right', sortable: false, dataIndex: 'payedAmount'},
-            {width: 2, header: '支付状态', align: 'right', sortable: false, dataIndex: 'payStatus'},
+            {width: 2, header: '未发工资', align: 'right', sortable: false, dataIndex: 'yuAmount'},
+
+            {
+                width: 2,
+                header: '发放状态',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'payStatus',
+                renderer: function (val, cell, record) {
+                    return (val == '1' || val == 1) ? '发放' : '未发放';
+                }
+            },
             {
                 width: 2,
                 header: '操作',

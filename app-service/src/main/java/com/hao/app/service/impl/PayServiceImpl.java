@@ -102,6 +102,13 @@ public class PayServiceImpl implements PayService {
     @Override
     public JsonResult<PayDetailDO> searchPayDetail(int payId) {
         List<PayDetailDO> list = payDetailMapper.search(payId);
+        if (list != null) {
+            for (PayDetailDO pd : list) {
+                BigDecimal total = pd.getTotalAmount() == null ? BigDecimal.ZERO : pd.getTotalAmount();
+                BigDecimal payed = pd.getPayedAmount() == null ? BigDecimal.ZERO : pd.getPayedAmount();
+                pd.setYuAmount(total.subtract(payed));
+            }
+        }
         return new JsonResult<>(list == null ? 0 : list.size(), list);
     }
 

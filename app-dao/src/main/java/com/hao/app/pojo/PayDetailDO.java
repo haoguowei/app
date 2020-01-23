@@ -42,6 +42,8 @@ public class PayDetailDO implements Serializable {
 
     private BigDecimal payedAmount;
 
+    private BigDecimal yuAmount;
+
     private Integer payStatus;
 
     private String remark;

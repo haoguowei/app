@@ -46,7 +46,6 @@ public class PayController extends BaseController {
         return "jsp/pay/initPay";
     }
 
-
     @RequestMapping("/initPayDetail.do")
     public String initPayDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int payId = NumberUtils.toInt(request.getParameter("payId"), 0);
@@ -243,7 +242,7 @@ public class PayController extends BaseController {
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
             sysLogsService.writeLog(item.getCreater(), "新增或修改工资明细:" + item.toString());
-            return successResult(request, "工资明细管理", "initPay.do");
+            return successResult(request, "工资明细管理", "initPayDetail.do?payId=" + payId);
         } else {
             return failResult(request, resultCode);
         }
