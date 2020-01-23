@@ -89,7 +89,6 @@ Ext.onReady(function () {
             {width: 2, header: '总工资额', align: 'right', sortable: false, dataIndex: 'totalAmount'},
             {width: 2, header: '已发金额', align: 'right', sortable: false, dataIndex: 'payedAmount'},
             {width: 2, header: '未发金额', align: 'right', sortable: false, dataIndex: 'yuAmount'},
-            {width: 1, header: '全部发放', align: 'left', sortable: false, dataIndex: 'assetsInfo'},
 
             {width: 2, header: '备注', align: 'left', sortable: false, dataIndex: 'remark'},
             {width: 1, header: '创建人', align: 'left', sortable: false, dataIndex: 'creater'},

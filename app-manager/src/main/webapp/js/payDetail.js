@@ -115,13 +115,15 @@ Ext.onReady(function () {
                 handler: function (b, e) {
                     location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=0";
                 }
-            }, '-', {
-                text: '新增外部人员工资',
-                id: 'bt_add_2',
-                handler: function (b, e) {
-                    location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=100";
-                }
-            }, '->',
+            }, '-',
+                //     {
+                //     text: '新增外部人员工资',
+                //     id: 'bt_add_2',
+                //     handler: function (b, e) {
+                //         location.href = "initPayDetailEdit.do?payId=" + getById("payId") + "&id=" + 0 + "&flag=100";
+                //     }
+                // },
+                '->',
                 new Ext.PagingToolbar({
                     store: gridStore,
                     style: {'border': 0},

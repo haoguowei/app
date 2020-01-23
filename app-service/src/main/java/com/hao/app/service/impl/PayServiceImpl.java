@@ -96,6 +96,13 @@ public class PayServiceImpl implements PayService {
     public JsonResult<PayDO> searchPay(PayQueryParam param) {
         int count = payMapper.count(param);
         List<PayDO> list = payMapper.search(param);
+        if (list != null) {
+            for (PayDO pd : list) {
+                BigDecimal total = pd.getTotalAmount() == null ? BigDecimal.ZERO : pd.getTotalAmount();
+                BigDecimal payed = pd.getPayedAmount() == null ? BigDecimal.ZERO : pd.getPayedAmount();
+                pd.setYuAmount(total.subtract(payed));
+            }
+        }
         return new JsonResult<>(count, list);
     }
 
