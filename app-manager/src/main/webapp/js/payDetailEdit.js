@@ -1,6 +1,22 @@
 Ext.onReady(function () {
     Ext.QuickTips.init();
 
+    this.calTotal = function () {
+        var fixAmount = getById("fixAmount");
+        var jiabanAmount = getById("jiabanAmount");
+        var jixiaoAmount = getById("jixiaoAmount");
+        var jiangjinAmount = getById("jiangjinAmount");
+        var fakuanAmount = getById("fakuanAmount");
+
+        fixAmount = _isNull(fixAmount) ? 0 : fixAmount;
+        jiabanAmount = _isNull(jiabanAmount) ? 0 : jiabanAmount;
+        jixiaoAmount = _isNull(jixiaoAmount) ? 0 : jixiaoAmount;
+        jiangjinAmount = _isNull(jiangjinAmount) ? 0 : jiangjinAmount;
+        fakuanAmount = _isNull(fakuanAmount) ? 0 : fakuanAmount;
+
+        var total = fixAmount + jiabanAmount + jixiaoAmount + jiangjinAmount - fakuanAmount;
+        document.getElementById("totalAmount").innerText = total;
+    }
 
     this.save = function () {
         if (_isNull(getById("employeeId")) || getById("employeeId") == 0) {

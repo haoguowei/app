@@ -46,21 +46,21 @@
             <tr>
                 <td width="150px">固定工资:</td>
                 <td>
-                    <input type="text" class="Mytext" name="fixAmount" id="fixAmount"
+                    <input type="text" class="Mytext" name="fixAmount" id="fixAmount" onchange="calTotal()"
                            value="${payDetail.fixAmount }">
                 </td>
             </tr>
             <tr>
                 <td width="150px">加班费:</td>
                 <td>
-                    <input type="text" class="Mytext" name="jiabanAmount" id="jiabanAmount"
+                    <input type="text" class="Mytext" name="jiabanAmount" id="jiabanAmount" onchange="calTotal()"
                            value="${payDetail.jiabanAmount }">
                 </td>
             </tr>
             <tr>
                 <td width="150px">绩效费:</td>
                 <td>
-                    <input type="text" class="Mytext" name="jixiaoAmount" id="jixiaoAmount"
+                    <input type="text" class="Mytext" name="jixiaoAmount" id="jixiaoAmount" onchange="calTotal()"
                            value="${payDetail.jixiaoAmount }">
                 </td>
             </tr>
@@ -68,14 +68,14 @@
             <tr>
                 <td width="150px">奖金:</td>
                 <td>
-                    <input type="text" class="Mytext" name="jiangjinAmount" id="jiangjinAmount"
+                    <input type="text" class="Mytext" name="jiangjinAmount" id="jiangjinAmount" onchange="calTotal()"
                            value="${payDetail.jiangjinAmount }">
                 </td>
             </tr>
             <tr>
                 <td width="150px">罚款:</td>
                 <td>
-                    <input type="text" class="Mytext" name="fakuanAmount" id="fakuanAmount"
+                    <input type="text" class="Mytext" name="fakuanAmount" id="fakuanAmount" onchange="calTotal()"
                            value="${payDetail.fakuanAmount }">
                 </td>
             </tr>
