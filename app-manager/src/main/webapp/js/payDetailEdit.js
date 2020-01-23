@@ -14,7 +14,11 @@ Ext.onReady(function () {
         jiangjinAmount = _isNull(jiangjinAmount) ? 0 : jiangjinAmount;
         fakuanAmount = _isNull(fakuanAmount) ? 0 : fakuanAmount;
 
-        var total = fixAmount + jiabanAmount + jixiaoAmount + jiangjinAmount - fakuanAmount;
+        var total = Number(fixAmount)
+            + Number(jiabanAmount)
+            + Number(jixiaoAmount)
+            + Number(jiangjinAmount)
+            - Number(fakuanAmount);
         document.getElementById("totalAmount").innerText = total;
     }
 
