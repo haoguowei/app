@@ -39,22 +39,22 @@ Ext.onReady(function () {
         }
 
 
-        if (_isNotNull(getById("startMileage")) && !regexVerify('intege1', getById("startMileage"))) {
+        if (_isNotNull(getById("startMileage")) && !regexVerify('num1', getById("startMileage"))) {
             alert("日末里程数请填写正确的数字！");
             document.getElementById("startMileage").focus();
             return false;
         }
-        if (_isNotNull(getById("endMileage")) && !regexVerify('intege1', getById("endMileage"))) {
+        if (_isNotNull(getById("endMileage")) && !regexVerify('num1', getById("endMileage"))) {
             alert("日末里程数请填写正确的数字！");
             document.getElementById("endMileage").focus();
             return false;
         }
-        if (_isNotNull(getById("workload")) && !regexVerify('intege1', getById("workload"))) {
+        if (_isNotNull(getById("workload")) && !regexVerify('num', getById("workload"))) {
             alert("作业量请填写正确的数字！");
             document.getElementById("workload").focus();
             return false;
         }
-        if (_isNotNull(getById("fuel")) && !regexVerify('intege1', getById("fuel"))) {
+        if (_isNotNull(getById("fuel")) && !regexVerify('num', getById("fuel"))) {
             alert("加油量请填写正确的数字！");
             document.getElementById("fuel").focus();
             return false;
@@ -76,7 +76,7 @@ Ext.onReady(function () {
             return false;
         }
 
-        if (_isNotNull(getById("shiguTimes")) && !regexVerify('intege1', getById("shiguTimes"))) {
+        if (_isNotNull(getById("shiguTimes")) && !regexVerify('num1', getById("shiguTimes"))) {
             alert("事故次数请填写正确的数字！");
             document.getElementById("shiguTimes").focus();
             return false;
