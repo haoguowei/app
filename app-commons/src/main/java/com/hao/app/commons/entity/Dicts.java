@@ -23,9 +23,13 @@ public class Dicts {
     public static Map<Integer, String> carTypeMap = new LinkedHashMap<>();
 
     static {
-        brandMap.put(1, "A");
-        brandMap.put(2, "B");
-        brandMap.put(3, "C");
+        brandMap.put(1, "福田普罗科");
+        brandMap.put(2, "中联重科");
+        brandMap.put(3, "宇通环卫");
+        brandMap.put(4, "湖北楚胜");
+        brandMap.put(5, "湖北奥龙");
+        brandMap.put(6, "湖北程力");
+        brandMap.put(100, "其他");
 
         carTypeMap.put(1, "压缩");
         carTypeMap.put(2, "勾臂");
