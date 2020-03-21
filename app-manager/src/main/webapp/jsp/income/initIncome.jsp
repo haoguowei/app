@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<%=syspath%>/utils/upload/FileUpLoadWindow.js"></script>
 
     <script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
-    <script type="text/javascript" src="<%=syspath%>/js/otherCost.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/js/income.js"></script>
 </head>
 <body>
 <div id="search_div_id">
@@ -31,16 +31,10 @@
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
                 </select>
-                消费类型：
-                <select id="payType" name="payType">
-                    <option value="0">请选择...
-                        <c:forEach items="${otherPayTypeMap }" var="itm">
-                    <option value="${itm.key}">${itm.value}
-                        </c:forEach>
-                </select>
+
             </td>
-        </tr>
-        <tr>
+            <%--        </tr>--%>
+            <%--        <tr>--%>
             <td class="Myfont">
                 <div style="float:left; ">消费日期，从：</div>
                 <div id="dateStartDIV" style="float:left; "></div>
@@ -50,6 +44,7 @@
                 <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
             </td>
         </tr>
+
     </table>
 </div>
 

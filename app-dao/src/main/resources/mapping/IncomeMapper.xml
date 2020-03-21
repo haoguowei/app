@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.app.dao.IncomeMapper">
+
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.IncomeDO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="income_day" jdbcType="DATE" property="incomeDay"/>
+
+        <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
+
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="jiafang" jdbcType="VARCHAR" property="jiafang"/>
+        <result column="jiafang_info" jdbcType="VARCHAR" property="jiafangInfo"/>
+
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="creater" jdbcType="VARCHAR" property="creater"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,projects,projects_name,income_day,amount,jiafang,jiafang_info,remark,creater,create_time,update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from income
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <insert id="insert" parameterType="com.hao.app.pojo.IncomeDO">
+        insert into income
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="incomeDay != null">
+                income_day,
+            </if>
+            <if test="projects != null">
+                projects,
+            </if>
+            <if test="projectsName != null">
+                projects_name,
+            </if>
+
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="jiafang != null">
+                jiafang,
+            </if>
+            <if test="jiafangInfo != null">
+                jiafang_info,
+            </if>
+
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="incomeDay != null">
+                #{incomeDay,jdbcType=DATE},
+            </if>
+            <if test="projects != null">
+                #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                #{projectsName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="jiafang != null">
+                #{jiafang,jdbcType=VARCHAR},
+            </if>
+            <if test="jiafangInfo != null">
+                #{jiafangInfo,jdbcType=VARCHAR},
+            </if>
+
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.hao.app.pojo.IncomeDO">
+        update income
+        <set>
+            <if test="incomeDay != null">
+                income_day = #{incomeDay,jdbcType=DATE},
+            </if>
+            <if test="projects != null">
+                projects = #{projects,jdbcType=INTEGER},
+            </if>
+            <if test="projectsName != null">
+                projects_name = #{projectsName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="jiafang != null">
+                jiafang = #{jiafang,jdbcType=VARCHAR},
+            </if>
+            <if test="jiafangInfo != null">
+                jiafang_info = #{jiafangInfo,jdbcType=VARCHAR},
+            </if>
+
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="count" parameterType="com.hao.app.commons.entity.param.IncomeQueryParam"
+            resultType="java.lang.Integer">
+        select count(1)
+        from income
+        <include refid="searchSQL"/>
+    </select>
+
+    <select id="search" parameterType="com.hao.app.commons.entity.param.IncomeQueryParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from income
+        <include refid="searchSQL"/>
+        order by id desc
+        limit ${pageStart},${pageLimit}
+    </select>
+
+    <sql id="searchSQL">
+        <where>
+            <if test="projectsId != null and projectsId > 0">
+                and projects = ${projectsId}
+            </if>
+
+            <if test="dateStart != null">
+                <![CDATA[ and income_day >= #{dateStart} ]]>
+            </if>
+            <if test="dateEnd != null">
+                <![CDATA[ and income_day <= #{dateEnd} ]]>
+            </if>
+        </where>
+    </sql>
+
+
+</mapper>
