@@ -18,6 +18,7 @@ public class Dicts {
 
     public static Map<Integer, String> costStatusMap = new LinkedHashMap<>();
     public static Map<Integer, String> otherPayTypeMap = new LinkedHashMap<>();
+    public static Map<Integer, String> yunyingPayTypeMap = new LinkedHashMap<>();
 
     public static Map<Integer, String> brandMap = new LinkedHashMap<>();
     public static Map<Integer, String> carTypeMap = new LinkedHashMap<>();
@@ -41,7 +42,14 @@ public class Dicts {
         otherPayTypeMap.put(5, "房租-租赁费");
         otherPayTypeMap.put(6, "房租-物业费");
         otherPayTypeMap.put(7, "房租-采暖费");
-        otherPayTypeMap.put(100, "其他费用");
+        otherPayTypeMap.put(100, "其他办公费用");
+
+        yunyingPayTypeMap.put(1, "扫保工具");
+        yunyingPayTypeMap.put(2, "运营水电费");
+        yunyingPayTypeMap.put(3, "劳保费用");
+        yunyingPayTypeMap.put(4, "临时费用");
+        yunyingPayTypeMap.put(5, "外包费用");
+        yunyingPayTypeMap.put(100, "其他运营费用");
 
         engineNumberTypeMap.put(1, "小型车");
         engineNumberTypeMap.put(2, "大型车");
