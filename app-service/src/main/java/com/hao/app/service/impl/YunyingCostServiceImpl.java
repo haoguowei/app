@@ -7,12 +7,14 @@ import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.YunyingCostMapper;
 import com.hao.app.pojo.YunyingCostDO;
 import com.hao.app.service.YunyingCostService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class YunyingCostServiceImpl implements YunyingCostService {
 
     @Resource

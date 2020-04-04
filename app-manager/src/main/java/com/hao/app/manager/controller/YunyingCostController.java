@@ -134,7 +134,7 @@ public class YunyingCostController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            return successResult(request, "办公管理费", "initYunyingCost.do");
+            return successResult(request, "运营管理费", "initYunyingCost.do");
         } else {
             return failResult(request, resultCode);
         }
