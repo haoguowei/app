@@ -47,7 +47,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '编辑日常消费',
+            title: '编辑办公管理费',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,

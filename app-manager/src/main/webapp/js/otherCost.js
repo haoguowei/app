@@ -140,7 +140,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '日常消费管理',
+            title: '办公管理费',
             border: false,
             height: 120,
             keys: {
@@ -164,7 +164,7 @@ Ext.onReady(function () {
             }],
             tbar: [
                 {
-                    text: '录入日常消费',
+                    text: '录入办公管理费',
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initOtherCostEdit.do";

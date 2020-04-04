@@ -219,7 +219,6 @@ public class YYCostController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            sysLogsService.writeLog(item.getCreater(), "新增或修改区域:" + item.toString());
             return successResult(request, "消费汇总", "initYYCost.do");
         } else {
             return failResult(request, resultCode);

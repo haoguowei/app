@@ -34,16 +34,13 @@ public class Dicts {
         carTypeMap.put(1, "压缩");
         carTypeMap.put(2, "勾臂");
 
-        otherPayTypeMap.put(1, "招待费用");
-        otherPayTypeMap.put(2, "办公用品费用");
-        otherPayTypeMap.put(3, "维修费用");
-        otherPayTypeMap.put(4, "运营水电费用");
-        otherPayTypeMap.put(5, "差旅费用");
-        otherPayTypeMap.put(6, "房租费用");
-        otherPayTypeMap.put(7, "扫保工具费用");
-        otherPayTypeMap.put(8, "劳保费用");
-        otherPayTypeMap.put(9, "临时费用");
-        otherPayTypeMap.put(10, "外包费用");
+        otherPayTypeMap.put(1, "办公用品");
+        otherPayTypeMap.put(2, "办公维修");
+        otherPayTypeMap.put(3, "煤水电");
+        otherPayTypeMap.put(4, "差旅费");
+        otherPayTypeMap.put(5, "房租-租赁费");
+        otherPayTypeMap.put(6, "房租-物业费");
+        otherPayTypeMap.put(7, "房租-采暖费");
         otherPayTypeMap.put(100, "其他费用");
 
         engineNumberTypeMap.put(1, "小型车");

@@ -135,7 +135,7 @@ public class OtherCostController extends BaseController {
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
             sysLogsService.writeLog(item.getCreater(), "新增或修改日常费用:" + item.toString());
-            return successResult(request, "日常消费管理", "initOtherCost.do");
+            return successResult(request, "办公管理费", "initOtherCost.do");
         } else {
             return failResult(request, resultCode);
         }
