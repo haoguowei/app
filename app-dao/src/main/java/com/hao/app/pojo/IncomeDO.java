@@ -21,6 +21,10 @@ public class IncomeDO implements Serializable {
 
     private BigDecimal incomeAmount;
 
+
+    private String contractNumb;
+    private BigDecimal contractAmount;
+
     private String jiafang;
 
     private String jiafangInfo;

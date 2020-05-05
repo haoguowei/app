@@ -14,14 +14,14 @@ Ext.onReady(function () {
     //-----------------权限相关 end-----------
     var dateStartDIV = new com.custom.DateField({
         renderTo: 'dateStartDIV',
-        format: 'Y-m',
+        format: 'Y-m-d',
         name: 'dateStart',
         value: '',
         id: 'dateStart'
     });
     var dateEndDIV = new com.custom.DateField({
         renderTo: 'dateEndDIV',
-        format: 'Y-m',
+        format: 'Y-m-d',
         name: 'dateEnd',
         value: '',
         id: 'dateEnd'
@@ -73,7 +73,9 @@ Ext.onReady(function () {
             {name: 'id'},
             {name: 'incomeDay'},
             {name: 'projectsName'},
-            {name: 'amount'},
+            {name: 'incomeAmount'},
+            {name: 'contractNumb'},
+            {name: 'contractAmount'},
             {name: 'jiafang'},
             {name: 'jiafangInfo'},
             {name: 'remark'},
@@ -98,7 +100,7 @@ Ext.onReady(function () {
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
                 width: 2,
-                header: '回款所属月份',
+                header: '回款日期',
                 align: 'left',
                 sortable: false,
                 dataIndex: 'incomeDay',
@@ -109,7 +111,7 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m");
                 }
             },
-            {width: 2, header: '金额(元)', align: 'right', sortable: false, dataIndex: 'amount'},
+            {width: 3, header: '回款金额(元)', align: 'right', sortable: false, dataIndex: 'incomeAmount'},
             {width: 4, header: '甲方', align: 'right', sortable: false, dataIndex: 'jiafang'},
             {width: 4, header: '甲方联系方式', align: 'left', sortable: false, dataIndex: 'jiafangInfo'},
             {width: 2, header: '录入人', align: 'left', sortable: false, dataIndex: 'creater'},

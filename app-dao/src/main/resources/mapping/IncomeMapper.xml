@@ -4,12 +4,16 @@
 
     <resultMap id="BaseResultMap" type="com.hao.app.pojo.IncomeDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="income_day" jdbcType="DATE" property="incomeDay"/>
 
         <result column="projects" jdbcType="INTEGER" property="projects"/>
         <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
 
+        <result column="income_day" jdbcType="DATE" property="incomeDay"/>
         <result column="income_amount" jdbcType="DECIMAL" property="incomeAmount"/>
+
+        <result column="contract_numb" jdbcType="VARCHAR" property="contractNumb"/>
+        <result column="contract_amount" jdbcType="DECIMAL" property="contractAmount"/>
+
         <result column="jiafang" jdbcType="VARCHAR" property="jiafang"/>
         <result column="jiafang_info" jdbcType="VARCHAR" property="jiafangInfo"/>
 
@@ -20,7 +24,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,projects,projects_name,income_day,income_amount,jiafang,jiafang_info,remark,creater,create_time,update_time
+        id,projects,projects_name,income_day,income_amount,contract_numb,contract_amount,jiafang,jiafang_info,remark,creater,create_time,update_time
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -46,6 +50,12 @@
 
             <if test="incomeAmount != null">
                 income_amount,
+            </if>
+            <if test="contractNumb != null">
+                contract_numb,
+            </if>
+            <if test="contractAmount != null">
+                contract_amount,
             </if>
             <if test="jiafang != null">
                 jiafang,
@@ -80,6 +90,12 @@
 
             <if test="incomeAmount != null">
                 #{incomeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractNumb != null">
+                #{contractNumb,jdbcType=VARCHAR},
+            </if>
+            <if test="contractAmount != null">
+                #{contractAmount,jdbcType=DECIMAL},
             </if>
             <if test="jiafang != null">
                 #{jiafang,jdbcType=VARCHAR},
@@ -118,6 +134,12 @@
 
             <if test="incomeAmount != null">
                 income_amount = #{incomeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractNumb != null">
+                contract_numb = #{incomeAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="contractAmount != null">
+                contract_amount = #{incomeAmount,jdbcType=DECIMAL},
             </if>
             <if test="jiafang != null">
                 jiafang = #{jiafang,jdbcType=VARCHAR},

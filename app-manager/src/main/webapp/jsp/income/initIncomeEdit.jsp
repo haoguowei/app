@@ -52,6 +52,22 @@
                 </td>
             </tr>
 
+            <tr>
+                <td width="150px">合同编号:</td>
+                <td>
+                    <input type="text" class="Mytext" name="contractNumb" id="contractNumb"
+                           value="${itemObj.contractNumb }">
+                </td>
+            </tr>
+
+            <tr>
+                <td width="150px">合同金额(元):</td>
+                <td>
+                    <input type="text" class="Mytext" name="contractAmount" id="contractAmount"
+                           value="${itemObj.contractAmount }">
+                </td>
+            </tr>
+
 
             <tr>
                 <td>甲方:</td>

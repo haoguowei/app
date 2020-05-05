@@ -107,6 +107,11 @@ public class IncomeController extends BaseController {
         String incomeAmount = request.getParameter("incomeAmount");
         item.setIncomeAmount(StringUtils.isBlank(incomeAmount) ? BigDecimal.valueOf(0) : new BigDecimal(incomeAmount));
 
+        item.setContractNumb(request.getParameter("contractNumb"));
+        String contractAmount = request.getParameter("contractAmount");
+        item.setContractAmount(StringUtils.isBlank(contractAmount) ? BigDecimal.valueOf(0) : new BigDecimal(contractAmount));
+
+
         String incomeDay = request.getParameter("incomeDay");
         if (StringUtils.isNotBlank(incomeDay)) {
             item.setIncomeDay(new SimpleDateFormat("yyyy-MM-dd").parse(incomeDay));

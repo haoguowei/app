@@ -36,7 +36,7 @@
             <%--        </tr>--%>
             <%--        <tr>--%>
             <td class="Myfont">
-                <div style="float:left; ">消费日期，从：</div>
+                <div style="float:left; ">回款日期，从：</div>
                 <div id="dateStartDIV" style="float:left; "></div>
                 <div style="float:left; ">到：</div>
                 <div id="dateEndDIV" style="float:left; "></div>
