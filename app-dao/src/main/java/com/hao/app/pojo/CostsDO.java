@@ -15,46 +15,20 @@ public class CostsDO implements Serializable {
     private Integer id;
 
     private Date enterDate;
-
-    private Integer assetId;
-
-    private Integer employeeId;
-
-    private String employeeName;
-
     private Integer status;
 
     private Integer projects;
-
     private String projectsName;
 
-    private Integer startMileage;
 
-    private Integer endMileage;
+    private Integer type1;
+    private Integer type2;
+    private Integer type3;
 
-    private Integer workload;
+    private BigDecimal amount;
+    private String numb;
+    private String use;
 
-    private Integer fuel;
-
-    private BigDecimal fuelAmount;
-
-    private BigDecimal baoyangAmount;
-
-    private BigDecimal fixAmount;
-
-    private String fixFactory;
-
-    private Integer shiguTimes;
-
-    private BigDecimal shiguAmount;
-
-    private BigDecimal shiguOutAmount;
-
-    private BigDecimal baoxianAmount;
-
-    private BigDecimal yearCheckAmount;
-
-    private BigDecimal totalAmount;
 
     private String remark;
 
@@ -63,10 +37,5 @@ public class CostsDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
-
-    private String assetsInfo;
-
-    private int dayMileage;
-    private BigDecimal avgFuel;
 
 }

@@ -5,26 +5,15 @@
     <resultMap id="BaseResultMap" type="com.hao.app.pojo.CostsDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="enter_date" jdbcType="DATE" property="enterDate"/>
-        <result column="asset_id" jdbcType="VARCHAR" property="assetId"/>
-        <result column="employee_id" jdbcType="INTEGER" property="employeeId"/>
-        <result column="employee_name" jdbcType="VARCHAR" property="employeeName"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="projects" jdbcType="INTEGER" property="projects"/>
         <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
-        <result column="start_mileage" jdbcType="INTEGER" property="startMileage"/>
-        <result column="end_mileage" jdbcType="INTEGER" property="endMileage"/>
-        <result column="workload" jdbcType="INTEGER" property="workload"/>
-        <result column="fuel" jdbcType="INTEGER" property="fuel"/>
-        <result column="fuel_amount" jdbcType="DECIMAL" property="fuelAmount"/>
-        <result column="baoyang_amount" jdbcType="DECIMAL" property="baoyangAmount"/>
-        <result column="fix_amount" jdbcType="DECIMAL" property="fixAmount"/>
-        <result column="fix_factory" jdbcType="VARCHAR" property="fixFactory"/>
-        <result column="shigu_times" jdbcType="INTEGER" property="shiguTimes"/>
-        <result column="shigu_amount" jdbcType="DECIMAL" property="shiguAmount"/>
-        <result column="shigu_out_amount" jdbcType="DECIMAL" property="shiguOutAmount"/>
-        <result column="baoxian_amount" jdbcType="DECIMAL" property="baoxianAmount"/>
-        <result column="year_check_amount" jdbcType="DECIMAL" property="yearCheckAmount"/>
-        <result column="total_amount" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="type_1" jdbcType="INTEGER" property="type1"/>
+        <result column="type_2" jdbcType="INTEGER" property="type2"/>
+        <result column="type_3" jdbcType="INTEGER" property="type3"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="numb" jdbcType="VARCHAR" property="numb"/>
+        <result column="use" jdbcType="VARCHAR" property="use"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
@@ -32,10 +21,11 @@
     </resultMap>
     
     <sql id="Base_Column_List">
-        id, enter_date, asset_id, employee_id, employee_name, status, projects, projects_name, start_mileage, end_mileage, workload,
-        fuel, fuel_amount, baoyang_amount, fix_amount, fix_factory, shigu_times, shigu_amount,
-        shigu_out_amount, baoxian_amount, year_check_amount, remark, creater, create_time,
-        update_time,total_amount
+        id, enter_date, status,
+        projects, projects_name,
+        type_1,type_2,type_3,
+        amount,numb,use,
+        remark, creater, create_time,update_time
     </sql>
     
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -57,15 +47,6 @@
             <if test="enterDate != null">
                 enter_date,
             </if>
-            <if test="assetId != null">
-                asset_id,
-            </if>
-            <if test="employeeId != null">
-                employee_id,
-            </if>
-            <if test="employeeName != null">
-                employee_name,
-            </if>
             <if test="status != null">
                 status,
             </if>
@@ -75,51 +56,28 @@
             <if test="projectsName != null">
                 projects_name,
             </if>
-            <if test="startMileage != null">
-                start_mileage,
+            <if test="type1 != null">
+                type_1,
             </if>
-            <if test="endMileage != null">
-                end_mileage,
+            <if test="type2 != null">
+                type_2,
             </if>
-            <if test="workload != null">
-                workload,
+            <if test="type3 != null">
+                type_3,
             </if>
-            <if test="fuel != null">
-                fuel,
+            <if test="amount != null">
+                amount,
             </if>
-            <if test="fuelAmount != null">
-                fuel_amount,
+            <if test="numb != null">
+                numb,
             </if>
-            <if test="baoyangAmount != null">
-                baoyang_amount,
-            </if>
-            <if test="fixAmount != null">
-                fix_amount,
-            </if>
-            <if test="fixFactory != null">
-                fix_factory,
-            </if>
-            <if test="shiguTimes != null">
-                shigu_times,
-            </if>
-            <if test="shiguAmount != null">
-                shigu_amount,
-            </if>
-            <if test="shiguOutAmount != null">
-                shigu_out_amount,
-            </if>
-            <if test="baoxianAmount != null">
-                baoxian_amount,
-            </if>
-            <if test="yearCheckAmount != null">
-                year_check_amount,
-            </if>
-            <if test="totalAmount != null">
-                total_amount,
+            <if test="use != null">
+                use,
             </if>
             <if test="remark != null">
                 remark,
             </if>
+
             <if test="creater != null">
                 creater,
             </if>
@@ -134,65 +92,35 @@
             <if test="enterDate != null">
                 #{enterDate,jdbcType=DATE},
             </if>
-            <if test="assetId != null">
-                #{assetId,jdbcType=INTEGER},
-            </if>
-            <if test="employeeId != null">
-                #{employeeId,jdbcType=INTEGER},
-            </if>
-            <if test="employeeName != null">
-                #{employeeName,jdbcType=VARCHAR},
-            </if>
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
             </if>
+
             <if test="projects != null">
                 #{projects,jdbcType=INTEGER},
             </if>
             <if test="projectsName != null">
                 #{projectsName,jdbcType=VARCHAR},
             </if>
-            <if test="startMileage != null">
-                #{startMileage,jdbcType=INTEGER},
+
+            <if test="type1 != null">
+                #{type1,jdbcType=INTEGER},
             </if>
-            <if test="endMileage != null">
-                #{endMileage,jdbcType=INTEGER},
+            <if test="type2 != null">
+                #{type2,jdbcType=INTEGER},
             </if>
-            <if test="workload != null">
-                #{workload,jdbcType=INTEGER},
+            <if test="type3 != null">
+                #{type3,jdbcType=INTEGER},
             </if>
-            <if test="fuel != null">
-                #{fuel,jdbcType=INTEGER},
+
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
             </if>
-            <if test="fuelAmount != null">
-                #{fuelAmount,jdbcType=DECIMAL},
+            <if test="numb != null">
+                #{numb,jdbcType=VARCHAR},
             </if>
-            <if test="baoyangAmount != null">
-                #{baoyangAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="fixAmount != null">
-                #{fixAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="fixFactory != null">
-                #{fixFactory,jdbcType=VARCHAR},
-            </if>
-            <if test="shiguTimes != null">
-                #{shiguTimes,jdbcType=INTEGER},
-            </if>
-            <if test="shiguAmount != null">
-                #{shiguAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="shiguOutAmount != null">
-                #{shiguOutAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="baoxianAmount != null">
-                #{baoxianAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="yearCheckAmount != null">
-                #{yearCheckAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="totalAmount != null">
-                #{totalAmount,jdbcType=DECIMAL},
+            <if test="use != null">
+                #{use,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -215,15 +143,6 @@
             <if test="enterDate != null">
                 enter_date = #{enterDate,jdbcType=DATE},
             </if>
-            <if test="assetId != null">
-                asset_id = #{assetId,jdbcType=INTEGER},
-            </if>
-            <if test="employeeId != null">
-                employee_id = #{employeeId,jdbcType=INTEGER},
-            </if>
-            <if test="assetId != null">
-                employee_name = #{employeeName,jdbcType=VARCHAR},
-            </if>
 
             <if test="status != null">
                 status = #{status,jdbcType=INTEGER},
@@ -234,48 +153,26 @@
             <if test="projectsName != null">
                 projects_name = #{projectsName,jdbcType=VARCHAR},
             </if>
-            <if test="startMileage != null">
-                start_mileage = #{startMileage,jdbcType=INTEGER},
+            <if test="type1 != null">
+                type_1 = #{type1,jdbcType=INTEGER},
             </if>
             <if test="endMileage != null">
-                end_mileage = #{endMileage,jdbcType=INTEGER},
+                type_2 = #{type2,jdbcType=INTEGER},
             </if>
             <if test="workload != null">
-                workload = #{workload,jdbcType=INTEGER},
+                type_3 = #{type3,jdbcType=INTEGER},
             </if>
-            <if test="fuel != null">
-                fuel = #{fuel,jdbcType=INTEGER},
+
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
             </if>
-            <if test="fuelAmount != null">
-                fuel_amount = #{fuelAmount,jdbcType=DECIMAL},
+            <if test="numb != null">
+                numb = #{numb,jdbcType=VARCHAR},
             </if>
-            <if test="baoyangAmount != null">
-                baoyang_amount = #{baoyangAmount,jdbcType=DECIMAL},
+            <if test="use != null">
+                use = #{use,jdbcType=VARCHAR},
             </if>
-            <if test="fixAmount != null">
-                fix_amount = #{fixAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="fixFactory != null">
-                fix_factory = #{fixFactory,jdbcType=VARCHAR},
-            </if>
-            <if test="shiguTimes != null">
-                shigu_times = #{shiguTimes,jdbcType=INTEGER},
-            </if>
-            <if test="shiguAmount != null">
-                shigu_amount = #{shiguAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="shiguOutAmount != null">
-                shigu_out_amount = #{shiguOutAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="baoxianAmount != null">
-                baoxian_amount = #{baoxianAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="yearCheckAmount != null">
-                year_check_amount = #{yearCheckAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="totalAmount != null">
-                total_amount = #{totalAmount,jdbcType=DECIMAL},
-            </if>
+
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
@@ -314,9 +211,6 @@
             <if test="projectsId != null and projectsId > 0">
                 and projects = ${projectsId}
             </if>
-            <if test="employeeId != null and employeeId > 0">
-                and employee_id = ${employeeId}
-            </if>
             <if test="enterDateStart != null">
                 <![CDATA[ and enter_date >= #{enterDateStart} ]]>
             </if>
@@ -325,23 +219,5 @@
             </if>
         </where>
     </sql>
-
-
-    <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
-            resultType="java.util.HashMap">
-        SELECT sum(end_mileage-start_mileage) AS a,sum(total_amount) as b
-        FROM costs
-        <include refid="searchSQL"/>
-        order by id desc
-        limit ${pageStart},${pageLimit}
-    </select>
-
-    <select id="searchTotalPayForProjects" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
-            resultType="com.hao.app.commons.entity.result.ResultStatistics">
-        SELECT projects as k, sum(total_amount) AS val
-        FROM costs
-        <include refid="searchSQL"/>
-        GROUP BY projects
-    </select>
 
 </mapper>

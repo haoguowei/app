@@ -108,7 +108,7 @@ Ext.onReady(function () {
     new Ext.Viewport({
         layout: 'fit',
         items: [{
-            title: '编辑车辆管理费',
+            title: '编辑费用',
             region: 'center',
             bodyStyle: 'padding:5px',
             border: true,

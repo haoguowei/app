@@ -37,125 +37,40 @@
             </tr>
             <tr>
                 <td class="Myfont">
-                    消费日期:<span style="color: red">*</span>
+                    费用日期:<span style="color: red">*</span>
                 </td>
                 <td class="Myfont">
                     <div id="enterDateDiv"></div>
                 </td>
             </tr>
+
             <tr>
-                <td>消费司机:<span style="color: red">*</span></td>
-                <td>
-                    <select id="employeeId" name="employeeId">
-                        <option value="0">请选择...
-                            <c:forEach items="${employeeList }" var="itm">
-                        <option
-                                <c:if test="${itm.id == itemObj.employeeId }">selected="selected"</c:if>
-                                value="${itm.id}">${itm.name}
-                            </c:forEach>
-                    </select>
+                <td class="Myfont">
+                    费用类型:<span style="color: red">*</span>
                 </td>
-            </tr>
-            <tr>
-                <td>消费资产:<span style="color: red">*</span></td>
-                <td>
-                    <select id="assetId" name="assetId">
-                        <option value="0">请选择...
-                            <c:forEach items="${assetsList }" var="itm">
-                        <option
-                                <c:if test="${itm.id == itemObj.assetId }">selected="selected"</c:if>
-                                value="${itm.id}">${itm.name} （资产编号：${itm.number} ，牌照号：${itm.license}）
-                            </c:forEach>
-                    </select>
+                <td class="Myfont">
+
                 </td>
             </tr>
 
             <tr>
-                <td width="150px">日初里程数:</td>
+                <td>费用金额:</td>
                 <td>
-                    <input type="text" class="Mytext" name="startMileage" id="startMileage"
-                           value="${itemObj.startMileage }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">日末里程数:</td>
-                <td>
-                    <input type="text" class="Mytext" name="endMileage" id="endMileage" value="${itemObj.endMileage }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">作业量:</td>
-                <td>
-                    <input type="text" class="Mytext" name="workload" id="workload" value="${itemObj.workload }">
+
                 </td>
             </tr>
 
             <tr>
-                <td width="150px">加油量:</td>
+                <td>费用单号:</td>
                 <td>
-                    <input type="text" class="Mytext" name="fuel" id="fuel" value="${itemObj.fuel }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">加油金额(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="fuelAmount" id="fuelAmount" value="${itemObj.fuelAmount }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">保养费用(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="baoyangAmount" id="baoyangAmount"
-                           value="${itemObj.baoyangAmount }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">维修费用(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="fixAmount" id="fixAmount" value="${itemObj.fixAmount }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">维修厂:</td>
-                <td>
-                    <input type="text" class="Mytext" name="fixFactory" id="fixFactory" value="${itemObj.fixFactory }">
+
                 </td>
             </tr>
 
             <tr>
-                <td width="150px">事故次数:</td>
+                <td>费用用途:</td>
                 <td>
-                    <input type="text" class="Mytext" name="shiguTimes" id="shiguTimes" value="${itemObj.shiguTimes }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">事故金额(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="shiguAmount" id="shiguAmount"
-                           value="${itemObj.shiguAmount }">
-                </td>
-            </tr>
-            <tr>
-                <td width="150px">事故保险外赔偿金额(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="shiguOutAmount" id="shiguOutAmount"
-                           value="${itemObj.shiguOutAmount }">
-                </td>
-            </tr>
 
-            <tr>
-                <td width="150px">保险费用(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="baoxianAmount" id="baoxianAmount"
-                           value="${itemObj.baoxianAmount }">
-                </td>
-            </tr>
-
-            <tr>
-                <td width="150px">年检费用(元):</td>
-                <td>
-                    <input type="text" class="Mytext" name="yearCheckAmount" id="yearCheckAmount"
-                           value="${itemObj.yearCheckAmount }">
                 </td>
             </tr>
 
@@ -170,7 +85,8 @@
             <tr>
                 <td>&nbsp;</td>
                 <td colspan="2">
-                    <input type="submit" value="确定" class="Mybotton">
+                    <input type="submit" value="保存" class="Mybotton">
+                    <input type="button" value="保存并提交" class="Mybotton">
                     <input type="button" value="取消" class="Mybotton" onclick="_back()">
                 </td>
             </tr>

@@ -141,7 +141,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '车辆管理费',
+            title: '费用管理',
             border: false,
             height: 120,
             keys: {
@@ -165,7 +165,7 @@ Ext.onReady(function () {
             }],
             tbar: [
                 {
-                    text: '录入车辆管理费',
+                    text: '录入费用',
                     id: 'bt_add',
                     handler: function (b, e) {
                         location.href = "initCostsEdit.do";

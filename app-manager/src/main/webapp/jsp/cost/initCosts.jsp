@@ -31,18 +31,15 @@
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
                 </select>
+            </td>
 
-                消费司机：
-                <select id="employeeId" name="employeeId">
-                    <option value="0">请选择...
-                        <c:forEach items="${employeeList }" var="itm">
-                    <option value="${itm.id}">${itm.name}
-                        </c:forEach>
-                </select>
+            <td class="Myfont">
+                费用类型：
+
             </td>
         <tr>
             <td class="Myfont">
-                <div style="float:left; ">录入日期，从：</div>
+                <div style="float:left; ">费用日期，从：</div>
                 <div id="entryDateStartDIV" style="float:left; "></div>
                 <div style="float:left; ">到：</div>
                 <div id="entryDateEndDIV" style="float:left; "></div>
