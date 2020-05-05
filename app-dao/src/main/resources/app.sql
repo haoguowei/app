@@ -83,8 +83,8 @@ VALUES
 	(30,0,'资产管理','#',40),
 	(31,30,'录入资产','initAssetsEdit.do',1),
 	(32,30,'资产信息','initAssets.do',2),
-	(33,30,'录入消费','initYYCostEdit.do',3),
-	(34,30,'消费汇总','initYYCost.do',4),
+	(33,30,'录入消费','initCostsEdit.do',3),
+	(34,30,'消费汇总','initCosts.do',4),
 	(40,0,'财务管理','#',50),
 	(41,40,'录入收支','initFinanceEdit.do',1),
 	(42,40,'收支清单','initFinance.do',2);

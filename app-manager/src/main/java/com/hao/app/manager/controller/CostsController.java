@@ -33,9 +33,9 @@ import java.util.*;
 
 
 @Controller
-public class YYCostController extends BaseController {
+public class CostsController extends BaseController {
 
-    private Logger logger = LoggerFactory.getLogger(YYCostController.class);
+    private Logger logger = LoggerFactory.getLogger(CostsController.class);
 
     @Resource
     private CostsService costsService;
@@ -48,13 +48,13 @@ public class YYCostController extends BaseController {
     @Resource
     private EmployeeService employeeService;
 
-    @RequestMapping("/initYYCost.do")
-    public String initYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/initCosts.do")
+    public String initCosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
 
         //选择司机
         request.setAttribute("employeeList", getEmployeeList(getCurrentProjectsId(request)));
-        return "jsp/cost/initYYCost";
+        return "jsp/cost/initCosts";
     }
 
 
@@ -103,8 +103,8 @@ public class YYCostController extends BaseController {
         return employeeService.searchEmployee(employeeQuery).getResultList();
     }
 
-    @RequestMapping("/initYYCostEdit.do")
-    public String initYYCostEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/initCostsEdit.do")
+    public String initCostsEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("id"));
         CostsDO itemObj = costsService.getById(id);
         request.setAttribute("itemObj", itemObj);
@@ -123,7 +123,7 @@ public class YYCostController extends BaseController {
 
         request.setAttribute("projectsList", getProjectsList(request));
 
-        return "jsp/cost/initYYCostEdit";
+        return "jsp/cost/initCostsEdit";
     }
 
     @RequestMapping("/saveYYCost.do")
@@ -219,7 +219,7 @@ public class YYCostController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            return successResult(request, "消费汇总", "initYYCost.do");
+            return successResult(request, "消费汇总", "initCosts.do");
         } else {
             return failResult(request, resultCode);
         }

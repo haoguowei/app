@@ -6,7 +6,7 @@ Ext.onReady(function () {
 
     //-----------------权限相关 start-----------
 
-    var urlEditValid = "initYYCostEdit.do";
+    var urlEditValid = "initCostsEdit.do";
 
     //是否有权限
     var isPRISaveMember = isHavePRI("saveYYCost.do");//新增编辑用户
@@ -54,7 +54,7 @@ Ext.onReady(function () {
     };
 
     this.updateF = function (id) {
-        location.href = "initYYCostEdit.do?id=" + id;
+        location.href = "initCostsEdit.do?id=" + id;
     };
 
     this.viewF = function (id) {
@@ -168,7 +168,7 @@ Ext.onReady(function () {
                     text: '录入车辆管理费',
                     id: 'bt_add',
                     handler: function (b, e) {
-                        location.href = "initYYCostEdit.do";
+                        location.href = "initCostsEdit.do";
                     }
                 },
                 '->',
