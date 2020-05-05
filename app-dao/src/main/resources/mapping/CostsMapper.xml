@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hao.app.dao.YYCostMapper">
+<mapper namespace="com.hao.app.dao.CostsMapper">
 
-    <resultMap id="BaseResultMap" type="com.hao.app.pojo.YYCostDO">
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.CostsDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="enter_date" jdbcType="DATE" property="enterDate"/>
         <result column="asset_id" jdbcType="VARCHAR" property="assetId"/>
@@ -41,18 +41,18 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from yy_cost
+        from costs
         where id = #{id,jdbcType=INTEGER}
     </select>
-    
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from yy_cost
+        delete from costs
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    
-    
-    <insert id="insert" parameterType="com.hao.app.pojo.YYCostDO">
-        insert into yy_cost
+
+
+    <insert id="insert" parameterType="com.hao.app.pojo.CostsDO">
+        insert into costs
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="enterDate != null">
                 enter_date,
@@ -208,9 +208,9 @@
             </if>
         </trim>
     </insert>
-    
-    <update id="update" parameterType="com.hao.app.pojo.YYCostDO">
-        update yy_cost
+
+    <update id="update" parameterType="com.hao.app.pojo.CostsDO">
+        update costs
         <set>
             <if test="enterDate != null">
                 enter_date = #{enterDate,jdbcType=DATE},
@@ -296,14 +296,14 @@
     <select id="count" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
             resultType="java.lang.Integer">
         select count(1)
-        from yy_cost
+        from costs
         <include refid="searchSQL"/>
     </select>
 
     <select id="search" parameterType="com.hao.app.commons.entity.param.CostQueryParam" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from yy_cost
+        from costs
         <include refid="searchSQL"/>
         order by id desc
         limit ${pageStart},${pageLimit}
@@ -330,7 +330,7 @@
     <select id="searchHJ" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
             resultType="java.util.HashMap">
         SELECT sum(end_mileage-start_mileage) AS a,sum(total_amount) as b
-        FROM yy_cost
+        FROM costs
         <include refid="searchSQL"/>
         order by id desc
         limit ${pageStart},${pageLimit}
@@ -339,7 +339,7 @@
     <select id="searchTotalPayForProjects" parameterType="com.hao.app.commons.entity.param.CostQueryParam"
             resultType="com.hao.app.commons.entity.result.ResultStatistics">
         SELECT projects as k, sum(total_amount) AS val
-        FROM yy_cost
+        FROM costs
         <include refid="searchSQL"/>
         GROUP BY projects
     </select>

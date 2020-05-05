@@ -1,17 +1,16 @@
 package com.hao.app.service.impl;
 
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.hao.app.commons.entity.param.SysLogsQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.dao.SysLogsMapper;
 import com.hao.app.pojo.SysLogs;
 import com.hao.app.service.SysLogsService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 系统日志处理

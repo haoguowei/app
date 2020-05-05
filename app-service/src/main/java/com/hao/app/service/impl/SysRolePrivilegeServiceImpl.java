@@ -1,14 +1,13 @@
 package com.hao.app.service.impl;
 
+import com.hao.app.dao.SysRolePrivilegeMapper;
+import com.hao.app.pojo.SysRolePrivilege;
+import com.hao.app.service.SysRolePrivilegeService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.hao.app.dao.SysRolePrivilegeMapper;
-import com.hao.app.pojo.SysRolePrivilege;
-import com.hao.app.service.SysRolePrivilegeService;
 
 @Service
 public class SysRolePrivilegeServiceImpl implements SysRolePrivilegeService {

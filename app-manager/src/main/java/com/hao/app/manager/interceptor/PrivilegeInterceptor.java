@@ -1,22 +1,20 @@
 package com.hao.app.manager.interceptor;
 
-import java.io.PrintWriter;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.gson.Gson;
+import com.hao.app.commons.entity.Constants;
+import com.hao.app.commons.entity.result.JsonResultAjax;
+import com.hao.app.pojo.SysMember;
+import com.hao.app.service.SysPrivilegeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.hao.app.commons.entity.Constants;
-import com.hao.app.commons.entity.result.JsonResultAjax;
-import com.hao.app.pojo.SysMember;
-import com.hao.app.service.SysPrivilegeService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.util.Set;
 
 /**
  * 权限拦截器

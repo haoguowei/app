@@ -4,20 +4,20 @@ import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.enums.ResultCodeEnum;
-import com.hao.app.pojo.YYCostDO;
+import com.hao.app.pojo.CostsDO;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface YYCostService {
+public interface CostsService {
 
-    JsonResult<YYCostDO> searchYYCost(CostQueryParam param);
+    JsonResult<CostsDO> searchYYCost(CostQueryParam param);
 
-    YYCostDO getById(int id);
+    CostsDO getById(int id);
 
-    ResultCodeEnum insert(YYCostDO cost);
+    ResultCodeEnum insert(CostsDO cost);
 
-    ResultCodeEnum update(YYCostDO cost);
+    ResultCodeEnum update(CostsDO cost);
 
     String searchYYCost4HJ(CostQueryParam param);
 

@@ -1,15 +1,12 @@
 package com.hao.app.manager.controller;
 
-import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.entity.param.CostQueryParam;
-import com.hao.app.commons.entity.param.OtherCostQueryParam;
 import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.manager.dto.Chart;
 import com.hao.app.pojo.ProjectsDO;
-import com.hao.app.service.OtherCostService;
+import com.hao.app.service.CostsService;
 import com.hao.app.service.ProjectsService;
-import com.hao.app.service.YYCostService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -31,10 +28,7 @@ public class ChartsController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(ChartsController.class);
 
     @Resource
-    private YYCostService yyCostService;
-
-    @Resource
-    private OtherCostService oherCostService;
+    private CostsService costsService;
 
     @Resource
     private ProjectsService projectsService;
@@ -91,18 +85,6 @@ public class ChartsController extends BaseController {
             projectList.add(projectsDO);
         }
 
-
-        //车辆消费
-        Map<Integer, BigDecimal> cardMap = searchCardTotalForProjects(projectsId, fromDate, endDate);
-        Map<Integer, BigDecimal> otherMap = searchOtherTotalPayForProjects(projectsId, fromDate, endDate);
-        for (ProjectsDO pro : projectList) {
-            Integer pid = pro.getId();
-            BigDecimal a = fmtBigDecimal(cardMap.get(pid));
-            BigDecimal b = fmtBigDecimal(otherMap.get(pid));
-            list.add(new Chart(pro.getName(), a.add(b), null));
-            total = total.add(a).add(b);
-        }
-
         //生成标题
         String title = projectsDO != null ? projectsDO.getName() : "所有";
         title += "项目开支" + total + "元";
@@ -153,15 +135,6 @@ public class ChartsController extends BaseController {
         list.add(new Chart("车辆消费", cardTotal));
         total = total.add(cardTotal);
 
-        //其他消费
-        List<ResultStatistics> otherList = searchOtherTotal(projectsId, fromDate, endDate);
-        if (otherList != null) {
-            for (ResultStatistics rs : otherList) {
-                String name = Dicts.otherPayTypeMap.get(rs.getK());
-                list.add(new Chart(StringUtils.isBlank(name) ? "未知" : name, rs.getVal()));
-                total = total.add(rs.getVal());
-            }
-        }
 
         //生成标题
         String pname = projectsDO == null ? "" : projectsDO.getName();
@@ -190,29 +163,12 @@ public class ChartsController extends BaseController {
     }
 
 
-    private List<ResultStatistics> searchOtherTotal(Integer projectsId, String dateStart, String dateEnd) {
-        OtherCostQueryParam param = new OtherCostQueryParam();
-        param.setProjectsId(projectsId);
-        param.setDateStart(dateStart);
-        param.setDateEnd(dateEnd);
-        return oherCostService.searchTotalPay(param);
-    }
-
     private BigDecimal searchCardTotal(Integer projectsId, String enterDateStart, String enterDateEnd) {
         CostQueryParam param = new CostQueryParam();
         param.setProjectsId(projectsId);
         param.setEnterDateStart(enterDateStart);
         param.setEnterDateEnd(enterDateEnd);
-        return yyCostService.searchTotalPay(param);
-    }
-
-    private Map<Integer, BigDecimal> searchOtherTotalPayForProjects(Integer projectsId, String dateStart, String dateEnd) {
-        OtherCostQueryParam param = new OtherCostQueryParam();
-        param.setProjectsId(projectsId);
-        param.setDateStart(dateStart);
-        param.setDateEnd(dateEnd);
-        List<ResultStatistics> list = oherCostService.searchTotalPayForProjects(param);
-        return change2Map(list);
+        return costsService.searchTotalPay(param);
     }
 
     private Map<Integer, BigDecimal> searchCardTotalForProjects(Integer projectsId, String dateStart, String dateEnd) {
@@ -220,7 +176,7 @@ public class ChartsController extends BaseController {
         param.setProjectsId(projectsId);
         param.setEnterDateStart(dateStart);
         param.setEnterDateEnd(dateEnd);
-        List<ResultStatistics> list = yyCostService.searchTotalPayForProjects(param);
+        List<ResultStatistics> list = costsService.searchTotalPayForProjects(param);
         return change2Map(list);
     }
 

@@ -1,14 +1,13 @@
 package com.hao.app.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.hao.app.dao.SysRoleMapper;
 import com.hao.app.dao.SysRolePrivilegeMapper;
 import com.hao.app.pojo.SysRole;
 import com.hao.app.service.SysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {

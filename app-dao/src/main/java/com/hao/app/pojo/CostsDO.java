@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 @ToString
-public class YYCostDO implements Serializable {
+public class CostsDO implements Serializable {
 
     private Integer id;
 

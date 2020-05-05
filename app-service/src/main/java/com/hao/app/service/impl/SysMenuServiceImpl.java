@@ -1,18 +1,17 @@
 package com.hao.app.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.dao.SysMenuMapper;
 import com.hao.app.dao.SysPrivilegeMapper;
 import com.hao.app.dao.SysRolePrivilegeMapper;
 import com.hao.app.pojo.SysMenu;
 import com.hao.app.service.SysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SysMenuServiceImpl implements SysMenuService {

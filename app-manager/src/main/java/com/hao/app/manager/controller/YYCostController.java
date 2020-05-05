@@ -8,13 +8,13 @@ import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.EmpStatusEnum;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.AssetsDO;
+import com.hao.app.pojo.CostsDO;
 import com.hao.app.pojo.EmployeeDO;
 import com.hao.app.pojo.ProjectsDO;
-import com.hao.app.pojo.YYCostDO;
 import com.hao.app.service.AssetsService;
+import com.hao.app.service.CostsService;
 import com.hao.app.service.EmployeeService;
 import com.hao.app.service.ProjectsService;
-import com.hao.app.service.YYCostService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class YYCostController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(YYCostController.class);
 
     @Resource
-    private YYCostService yYCostService;
+    private CostsService costsService;
 
     @Resource
     private AssetsService assetsService;
@@ -61,7 +61,7 @@ public class YYCostController extends BaseController {
     @RequestMapping("/searchYYCost.do")
     public void searchYYCost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CostQueryParam param = genParam(request);
-        JsonResult<YYCostDO> result = yYCostService.searchYYCost(param);
+        JsonResult<CostsDO> result = costsService.searchYYCost(param);
         writeResponse(response, result);
     }
 
@@ -106,7 +106,7 @@ public class YYCostController extends BaseController {
     @RequestMapping("/initYYCostEdit.do")
     public String initYYCostEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = NumberUtils.toInt(request.getParameter("id"));
-        YYCostDO itemObj = yYCostService.getById(id);
+        CostsDO itemObj = costsService.getById(id);
         request.setAttribute("itemObj", itemObj);
 
         //选择司机
@@ -150,7 +150,7 @@ public class YYCostController extends BaseController {
             return failResult(request, "请选择消费司机");
         }
 
-        YYCostDO item = new YYCostDO();
+        CostsDO item = new CostsDO();
         item.setId(id);
         item.setRemark(request.getParameter("remark"));
         item.setProjects(projectsDO.getId());
@@ -212,10 +212,10 @@ public class YYCostController extends BaseController {
         if (id == 0) {
             item.setCreater(getCurrentUserName(request));
             item.setCreateTime(new Date());
-            resultCode = yYCostService.insert(item);
+            resultCode = costsService.insert(item);
         } else {
             item.setUpdateTime(new Date());
-            resultCode = yYCostService.update(item);
+            resultCode = costsService.update(item);
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
@@ -235,7 +235,7 @@ public class YYCostController extends BaseController {
     @RequestMapping("/initCostHeJi.do")
     public void initCostHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CostQueryParam param = genParam(request);
-        String info = yYCostService.searchYYCost4HJ(param);
+        String info = costsService.searchYYCost4HJ(param);
 
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);

@@ -1,19 +1,18 @@
 package com.hao.app.service.impl;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.google.gson.JsonObject;
+import com.hao.app.commons.entity.Constants;
+import com.hao.app.commons.utils.PropertiesUtils;
+import com.hao.app.commons.utils.Utils;
+import com.hao.app.service.SysUploadService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.JsonObject;
-import com.hao.app.commons.entity.Constants;
-import com.hao.app.commons.utils.PropertiesUtils;
-import com.hao.app.commons.utils.Utils;
-import com.hao.app.service.SysUploadService;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class SysUploadServiceImpl implements SysUploadService {

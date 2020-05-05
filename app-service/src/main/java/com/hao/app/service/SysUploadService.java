@@ -1,8 +1,7 @@
 package com.hao.app.service;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.google.gson.JsonObject;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface SysUploadService {
 

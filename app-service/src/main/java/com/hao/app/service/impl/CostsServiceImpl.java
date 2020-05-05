@@ -5,10 +5,10 @@ import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.AssetsMapper;
-import com.hao.app.dao.YYCostMapper;
+import com.hao.app.dao.CostsMapper;
 import com.hao.app.pojo.AssetsDO;
-import com.hao.app.pojo.YYCostDO;
-import com.hao.app.service.YYCostService;
+import com.hao.app.pojo.CostsDO;
+import com.hao.app.service.CostsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,22 +17,22 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class YYCostServiceImpl implements YYCostService {
+public class CostsServiceImpl implements CostsService {
 
     @Resource
-    private YYCostMapper yYCostMapper;
+    private CostsMapper costsMapper;
 
     @Resource
     private AssetsMapper assetsMapper;
 
 
     @Override
-    public JsonResult<YYCostDO> searchYYCost(CostQueryParam param) {
-        int count = yYCostMapper.count(param);
-        List<YYCostDO> list = yYCostMapper.search(param);
+    public JsonResult<CostsDO> searchYYCost(CostQueryParam param) {
+        int count = costsMapper.count(param);
+        List<CostsDO> list = costsMapper.search(param);
 
         if (list != null) {
-            for (YYCostDO cost : list) {
+            for (CostsDO cost : list) {
                 if (cost.getAssetId() > 0) {
                     AssetsDO assetsDO = assetsMapper.selectByPrimaryKey(cost.getAssetId());
                     cost.setAssetsInfo(assetsDO.getName() + "(资产编号:" + assetsDO.getNumber() + "，牌照号:" + assetsDO.getLicense() + ")");
@@ -58,13 +58,13 @@ public class YYCostServiceImpl implements YYCostService {
     }
 
     @Override
-    public YYCostDO getById(int id) {
-        return yYCostMapper.selectByPrimaryKey(id);
+    public CostsDO getById(int id) {
+        return costsMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public ResultCodeEnum insert(YYCostDO cost) {
-        int res = yYCostMapper.insert(cost);
+    public ResultCodeEnum insert(CostsDO cost) {
+        int res = costsMapper.insert(cost);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;
         } else {
@@ -73,12 +73,12 @@ public class YYCostServiceImpl implements YYCostService {
     }
 
     @Override
-    public ResultCodeEnum update(YYCostDO cost) {
-        YYCostDO old = yYCostMapper.selectByPrimaryKey(cost.getId());
+    public ResultCodeEnum update(CostsDO cost) {
+        CostsDO old = costsMapper.selectByPrimaryKey(cost.getId());
         if (old == null) {
             return ResultCodeEnum.FAIL_ITEM;
         }
-        int res = yYCostMapper.update(cost);
+        int res = costsMapper.update(cost);
         if (res > 0) {
             return ResultCodeEnum.SUCCESS;
         } else {
@@ -88,7 +88,7 @@ public class YYCostServiceImpl implements YYCostService {
 
     @Override
     public String searchYYCost4HJ(CostQueryParam param) {
-        Map<String, Object> map = yYCostMapper.searchHJ(param);
+        Map<String, Object> map = costsMapper.searchHJ(param);
         BigDecimal a = BigDecimal.valueOf(0);
         BigDecimal b = BigDecimal.valueOf(0);
         if (map != null) {
@@ -105,7 +105,7 @@ public class YYCostServiceImpl implements YYCostService {
 
     @Override
     public BigDecimal searchTotalPay(CostQueryParam param) {
-        Map<String, Object> map = yYCostMapper.searchHJ(param);
+        Map<String, Object> map = costsMapper.searchHJ(param);
         BigDecimal b = BigDecimal.valueOf(0);
         if (map != null) {
             b = (BigDecimal) map.get("b");
@@ -115,6 +115,6 @@ public class YYCostServiceImpl implements YYCostService {
 
     @Override
     public List<ResultStatistics> searchTotalPayForProjects(CostQueryParam param) {
-        return yYCostMapper.searchTotalPayForProjects(param);
+        return costsMapper.searchTotalPayForProjects(param);
     }
 }

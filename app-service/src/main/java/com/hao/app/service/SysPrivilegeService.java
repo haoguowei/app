@@ -1,11 +1,11 @@
 package com.hao.app.service;
 
+import com.hao.app.commons.entity.TreeNodeMode;
+import com.hao.app.pojo.SysPrivilege;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.hao.app.commons.entity.TreeNodeMode;
-import com.hao.app.pojo.SysPrivilege;
 
 public interface SysPrivilegeService {
 	

@@ -1,8 +1,7 @@
 package com.hao.app.spring.schema;
 
-import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
-
 import com.hao.app.commons.entity.DemoBean;
+import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 public class AppNamespaceHandler extends NamespaceHandlerSupport{
 

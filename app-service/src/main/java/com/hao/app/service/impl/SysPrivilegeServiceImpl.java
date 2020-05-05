@@ -1,21 +1,15 @@
 package com.hao.app.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.hao.app.commons.entity.TreeNodeMode;
 import com.hao.app.dao.SysPrivilegeMapper;
 import com.hao.app.dao.SysRolePrivilegeMapper;
 import com.hao.app.pojo.SysPrivilege;
 import com.hao.app.service.SysPrivilegeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 @Service
 public class SysPrivilegeServiceImpl implements SysPrivilegeService {
