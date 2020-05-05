@@ -36,7 +36,7 @@
 
             <tr>
                 <td class="Myfont">
-                    回款所属月份:<span style="color: red">*</span>
+                    回款日期:<span style="color: red">*</span>
                 </td>
                 <td class="Myfont">
                     <div id="incomeDayDiv"></div>
@@ -45,9 +45,10 @@
 
 
             <tr>
-                <td width="150px">金额(元):</td>
+                <td width="150px">回款金额(元):</td>
                 <td>
-                    <input type="text" class="Mytext" name="amount" id="amount" value="${itemObj.amount }">
+                    <input type="text" class="Mytext" name="incomeAmount" id="incomeAmount"
+                           value="${itemObj.incomeAmount }">
                 </td>
             </tr>
 

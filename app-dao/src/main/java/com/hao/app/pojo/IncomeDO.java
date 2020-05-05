@@ -19,7 +19,7 @@ public class IncomeDO implements Serializable {
 
     private Date incomeDay;
 
-    private BigDecimal amount;//pay_amount
+    private BigDecimal incomeAmount;
 
     private String jiafang;
 

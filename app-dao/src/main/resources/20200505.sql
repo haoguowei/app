@@ -1,6 +1,24 @@
 DROP TABLE yunying_cost;
 DROP TABLE other_cost;
 DROP TABLE yy_cost;
+DROP TABLE income;
+
+CREATE TABLE `income` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `projects` int(10) NOT NULL DEFAULT '0',
+  `projects_name` varchar(100) NOT NULL DEFAULT '',
+  `income_day` date NOT NULL COMMENT '回款日期',
+  `income_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '回款金额',
+  `contract_numb` varchar(100) NOT NULL DEFAULT '' COMMENT '合同编号',
+  `contract_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '合同金额',
+  `jiafang` varchar(200) NOT NULL DEFAULT '' COMMENT '甲方',
+  `jiafang_info` varchar(200) NOT NULL DEFAULT '' COMMENT '甲方联系方式',
+  `remark` varchar(500) NOT NULL DEFAULT '' COMMENT '备注',
+  `creater` varchar(200) NOT NULL DEFAULT '' COMMENT '创建人',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='收入管理';
 
 
 CREATE TABLE `costs` (

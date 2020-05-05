@@ -9,7 +9,7 @@
         <result column="projects" jdbcType="INTEGER" property="projects"/>
         <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
 
-        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="income_amount" jdbcType="DECIMAL" property="incomeAmount"/>
         <result column="jiafang" jdbcType="VARCHAR" property="jiafang"/>
         <result column="jiafang_info" jdbcType="VARCHAR" property="jiafangInfo"/>
 
@@ -20,7 +20,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,projects,projects_name,income_day,amount,jiafang,jiafang_info,remark,creater,create_time,update_time
+        id,projects,projects_name,income_day,income_amount,jiafang,jiafang_info,remark,creater,create_time,update_time
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -44,8 +44,8 @@
                 projects_name,
             </if>
 
-            <if test="amount != null">
-                amount,
+            <if test="incomeAmount != null">
+                income_amount,
             </if>
             <if test="jiafang != null">
                 jiafang,
@@ -78,8 +78,8 @@
                 #{projectsName,jdbcType=VARCHAR},
             </if>
 
-            <if test="amount != null">
-                #{amount,jdbcType=DECIMAL},
+            <if test="incomeAmount != null">
+                #{incomeAmount,jdbcType=DECIMAL},
             </if>
             <if test="jiafang != null">
                 #{jiafang,jdbcType=VARCHAR},
@@ -116,8 +116,8 @@
                 projects_name = #{projectsName,jdbcType=VARCHAR},
             </if>
 
-            <if test="amount != null">
-                amount = #{amount,jdbcType=DECIMAL},
+            <if test="incomeAmount != null">
+                income_amount = #{incomeAmount,jdbcType=DECIMAL},
             </if>
             <if test="jiafang != null">
                 jiafang = #{jiafang,jdbcType=VARCHAR},

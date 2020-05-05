@@ -3,7 +3,7 @@ Ext.onReady(function () {
 
     var payDayDiv = new com.custom.DateField({
         renderTo: 'incomeDayDiv',
-        format: 'Y-m',
+        format: 'Y-m-d',
         name: 'incomeDay',
         value: getById('hideIncomeDay'),
         id: 'incomeDay'
@@ -24,9 +24,9 @@ Ext.onReady(function () {
         }
 
 
-        if (_isNotNull(getById("amount")) && !regexVerify('tingke', getById("amount"))) {
-            alert("填写正确的金额！");
-            document.getElementById("amount").focus();
+        if (_isNotNull(getById("incomeAmount")) && !regexVerify('tingke', getById("incomeAmount"))) {
+            alert("填写正确的回款金额！");
+            document.getElementById("incomeAmount").focus();
             return false;
         }
 

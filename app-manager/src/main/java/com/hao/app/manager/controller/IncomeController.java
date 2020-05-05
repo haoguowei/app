@@ -104,12 +104,12 @@ public class IncomeController extends BaseController {
         item.setProjectsName(projectsDO.getName());
 
 
-        String payAmount = request.getParameter("amount");
-        item.setAmount(StringUtils.isBlank(payAmount) ? BigDecimal.valueOf(0) : new BigDecimal(payAmount));
+        String incomeAmount = request.getParameter("incomeAmount");
+        item.setIncomeAmount(StringUtils.isBlank(incomeAmount) ? BigDecimal.valueOf(0) : new BigDecimal(incomeAmount));
 
         String incomeDay = request.getParameter("incomeDay");
         if (StringUtils.isNotBlank(incomeDay)) {
-            item.setIncomeDay(new SimpleDateFormat("yyyy-MM-dd").parse(incomeDay + "-01"));
+            item.setIncomeDay(new SimpleDateFormat("yyyy-MM-dd").parse(incomeDay));
         }
 
         ResultCodeEnum resultCode;
