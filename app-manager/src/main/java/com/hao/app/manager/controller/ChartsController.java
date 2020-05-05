@@ -1,6 +1,5 @@
 package com.hao.app.manager.controller;
 
-import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.result.ResultStatistics;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.manager.dto.Chart;
@@ -131,9 +130,6 @@ public class ChartsController extends BaseController {
 
         //车辆消费
         List<Chart> list = new ArrayList<>();
-        BigDecimal cardTotal = searchCardTotal(projectsId, fromDate, endDate);
-        list.add(new Chart("车辆消费", cardTotal));
-        total = total.add(cardTotal);
 
 
         //生成标题
@@ -163,22 +159,6 @@ public class ChartsController extends BaseController {
     }
 
 
-    private BigDecimal searchCardTotal(Integer projectsId, String enterDateStart, String enterDateEnd) {
-        CostQueryParam param = new CostQueryParam();
-        param.setProjectsId(projectsId);
-        param.setEnterDateStart(enterDateStart);
-        param.setEnterDateEnd(enterDateEnd);
-        return costsService.searchTotalPay(param);
-    }
-
-    private Map<Integer, BigDecimal> searchCardTotalForProjects(Integer projectsId, String dateStart, String dateEnd) {
-        CostQueryParam param = new CostQueryParam();
-        param.setProjectsId(projectsId);
-        param.setEnterDateStart(dateStart);
-        param.setEnterDateEnd(dateEnd);
-        List<ResultStatistics> list = costsService.searchTotalPayForProjects(param);
-        return change2Map(list);
-    }
 
     private Map<Integer, BigDecimal> change2Map(List<ResultStatistics> list) {
         Map<Integer, BigDecimal> map = new HashMap<>();

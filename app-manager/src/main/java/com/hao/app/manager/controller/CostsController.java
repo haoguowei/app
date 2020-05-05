@@ -1,6 +1,5 @@
 package com.hao.app.manager.controller;
 
-import com.google.gson.Gson;
 import com.hao.app.commons.entity.param.AssetsQueryParam;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.param.EmployeeQueryParam;
@@ -29,7 +28,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -155,58 +157,14 @@ public class CostsController extends BaseController {
         item.setRemark(request.getParameter("remark"));
         item.setProjects(projectsDO.getId());
         item.setProjectsName(projectsDO.getName());
-        item.setAssetId(assetId);
-        item.setEmployeeId(employeeDO.getId());
-        item.setEmployeeName(employeeDO.getName());
-
-        int startMileage = NumberUtils.toInt(request.getParameter("startMileage"), 0);
-        int endMileage = NumberUtils.toInt(request.getParameter("endMileage"), 0);
-
-        int workload = NumberUtils.toInt(request.getParameter("workload"), 0);
-        int fuel = NumberUtils.toInt(request.getParameter("fuel"), 0);
-        int shiguTimes = NumberUtils.toInt(request.getParameter("shiguTimes"), 0);
-
-        item.setStartMileage(startMileage);
-        item.setEndMileage(endMileage);
-        item.setWorkload(workload);
-        item.setFuel(fuel);
-        item.setShiguTimes(shiguTimes);
-        item.setFixFactory(request.getParameter("fixFactory"));
-
-        String fuelAmount = request.getParameter("fuelAmount");
-        item.setFuelAmount(StringUtils.isBlank(fuelAmount) ? BigDecimal.valueOf(0) : new BigDecimal(fuelAmount));
-
-        String baoyangAmount = request.getParameter("baoyangAmount");
-        item.setBaoyangAmount(StringUtils.isBlank(baoyangAmount) ? BigDecimal.valueOf(0) : new BigDecimal(baoyangAmount));
-
-        String fixAmount = request.getParameter("fixAmount");
-        item.setFixAmount(StringUtils.isBlank(fixAmount) ? BigDecimal.valueOf(0) : new BigDecimal(fixAmount));
-
-        String shiguAmount = request.getParameter("shiguAmount");
-        item.setShiguAmount(StringUtils.isBlank(shiguAmount) ? BigDecimal.valueOf(0) : new BigDecimal(shiguAmount));
-
-        String shiguOutAmount = request.getParameter("shiguOutAmount");
-        item.setShiguOutAmount(StringUtils.isBlank(shiguOutAmount) ? BigDecimal.valueOf(0) : new BigDecimal(shiguOutAmount));
-
-        String baoxianAmount = request.getParameter("baoxianAmount");
-        item.setBaoxianAmount(StringUtils.isBlank(baoxianAmount) ? BigDecimal.valueOf(0) : new BigDecimal(baoxianAmount));
-
-        String yearCheckAmount = request.getParameter("yearCheckAmount");
-        item.setYearCheckAmount(StringUtils.isBlank(yearCheckAmount) ? BigDecimal.valueOf(0) : new BigDecimal(yearCheckAmount));
 
         String enterDate = request.getParameter("enterDate");
         if (StringUtils.isNotBlank(enterDate)) {
             item.setEnterDate(new SimpleDateFormat("yyyy-MM-dd").parse(enterDate)); //
         }
 
-        BigDecimal total = getBigDecimal(item.getFuelAmount())
-                .add(getBigDecimal(item.getBaoyangAmount()))
-                .add(getBigDecimal(item.getFixAmount()))
-                .add(getBigDecimal(item.getShiguAmount()))
-                .add(getBigDecimal(item.getShiguOutAmount()))
-                .add(getBigDecimal(item.getBaoxianAmount()))
-                .add(getBigDecimal(item.getYearCheckAmount()));
-        item.setTotalAmount(total);
+//        BigDecimal total = getBigDecimal(item.getFuelAmount());
+//        item.setTotalAmount(total);
 
         ResultCodeEnum resultCode;
         if (id == 0) {
@@ -232,14 +190,4 @@ public class CostsController extends BaseController {
         return v;
     }
 
-    @RequestMapping("/initCostHeJi.do")
-    public void initCostHeJi(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        CostQueryParam param = genParam(request);
-        String info = costsService.searchYYCost4HJ(param);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("success", true);
-        map.put("info", info);
-        response.getWriter().write(new Gson().toJson(map));
-    }
 }
