@@ -74,4 +74,9 @@ public class AssetsDO implements Serializable {
         this.carTypeStr = Dicts.carTypeMap.get(carType);
         this.carType = carType;
     }
+
+    public void setNameId(Integer nameId) {
+        this.name = Dicts.carNameMap.get(nameId);
+        this.nameId = nameId;
+    }
 }

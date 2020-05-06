@@ -64,12 +64,17 @@ public class AssetsOtherDO implements Serializable {
     }
 
     public void setBrand(Integer brand) {
-        this.brandStr = Dicts.carBrandMap.get(brand);
+        this.brandStr = Dicts.assetsBrandMap.get(brand);
         this.brand = brand;
     }
 
     public void setCarType(Integer carType) {
-        this.carTypeStr = Dicts.carTypeMap.get(carType);
+        this.carTypeStr = Dicts.assetsNumberTypeMap.get(carType);
         this.carType = carType;
+    }
+
+    public void setNameId(Integer nameId) {
+        this.name = Dicts.assetsNameMap.get(nameId);
+        this.nameId = nameId;
     }
 }
