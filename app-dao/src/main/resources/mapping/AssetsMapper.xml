@@ -5,6 +5,7 @@
     <resultMap id="BaseResultMap" type="com.hao.app.pojo.AssetsDO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="name_id" jdbcType="INTEGER" property="nameId"/>
         <result column="number" jdbcType="VARCHAR" property="number"/>
         <result column="license" jdbcType="VARCHAR" property="license"/>
         <result column="brand" jdbcType="INTEGER" property="brand"/>
@@ -31,7 +32,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,  name, number, projects, projects_name, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
+        id,  name,name_id, number, projects, projects_name, license, brand, car_type, buy_time, in_out, quantity, quo_quantity,
         owner, storage_location, engine_number, engine_number_type, price, staging, pur_tax,
         remark, creater, create_time, update_time,tanxiao,zhejiu
     </sql>
@@ -71,9 +72,7 @@
             <if test="carType != null and carType > 0">
                 and car_type = ${carType}
             </if>
-            <if test="name != null">
-                and name like CONCAT('%',#{name},'%')
-            </if>
+
 
             <if test="number != null">
                 and number = #{number}
@@ -106,6 +105,9 @@
             </if>
             <if test="name != null">
                 name,
+            </if>
+            <if test="nameId != null">
+                name_id,
             </if>
             <if test="number != null">
                 number,
@@ -181,6 +183,9 @@
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
+            <if test="nameId != null">
+                #{nameId,jdbcType=INTEGER},
+            </if>
             <if test="number != null">
                 #{number,jdbcType=VARCHAR},
             </if>
@@ -251,6 +256,9 @@
         <set>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameId != null">
+                name_id = #{nameId,jdbcType=VARCHAR},
             </if>
             <if test="number != null">
                 number = #{number,jdbcType=VARCHAR},

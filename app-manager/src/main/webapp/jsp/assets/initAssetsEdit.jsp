@@ -37,7 +37,13 @@
             <tr>
                 <td width="120px">资产名称:<span style="color: red">*</span></td>
                 <td>
-                    <input type="text" class="Mytext" name="name" id="name" value="${itemObj.name }">
+                    <select id="nameId" name="nameId">
+                        <c:forEach items="${carNameMap }" var="itm">
+                        <option
+                                <c:if test="${itm.id == itemObj.nameId }">selected="selected"</c:if>
+                                value="${itm.id}">${itm.name}
+                            </c:forEach>
+                    </select>
                 </td>
             </tr>
             <tr>

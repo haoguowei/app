@@ -6,6 +6,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="name_id" jdbcType="INTEGER" property="nameId"/>
         <result column="brand" jdbcType="INTEGER" property="brand"/>
         <result column="car_type" jdbcType="INTEGER" property="carType"/>
         <result column="buy_time" jdbcType="DATE" property="buyTime"/>
@@ -27,7 +28,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, type, name, projects, projects_name, brand, car_type,
+        id, type, name, name_id,projects, projects_name, brand, car_type,
         buy_time, in_out, quantity, quo_quantity,
         owner, storage_location, price, staging,
         remark, creater, create_time, update_time,tanxiao,zhejiu
@@ -73,10 +74,6 @@
                 and car_type = ${carType}
             </if>
 
-            <if test="name != null">
-                and name like CONCAT('%',#{name},'%')
-            </if>
-
             <if test="buyTimeStart != null">
                 <![CDATA[ and buy_time >= #{buyTimeStart} ]]>
             </if>
@@ -107,6 +104,9 @@
             </if>
             <if test="name != null">
                 name,
+            </if>
+            <if test="nameId != null">
+                name_id,
             </if>
             <if test="brand != null">
                 brand,
@@ -170,6 +170,9 @@
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
+            <if test="nameId != null">
+                #{nameId,jdbcType=INTEGER},
+            </if>
 
             <if test="brand != null">
                 #{brand,jdbcType=INTEGER},
@@ -231,6 +234,9 @@
             </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="nameId != null">
+                name_id = #{nameId,jdbcType=VARCHAR},
             </if>
 
             <if test="brand != null">

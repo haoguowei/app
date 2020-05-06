@@ -3,6 +3,12 @@ DROP TABLE other_cost;
 DROP TABLE yy_cost;
 DROP TABLE income;
 
+
+
+ALTER TABLE `assets` ADD `name_id` INT  NULL  DEFAULT NULL COMMENT '名称id' AFTER `name`;
+ALTER TABLE `assets_other` ADD `name_id` INT  NULL  DEFAULT NULL COMMENT '名称id' AFTER `name`;
+
+
 CREATE TABLE `income` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `projects` int(10) NOT NULL DEFAULT '0',

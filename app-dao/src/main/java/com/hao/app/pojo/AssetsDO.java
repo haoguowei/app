@@ -17,6 +17,7 @@ public class AssetsDO implements Serializable {
     private Integer projects;
 
     private String name;
+    private Integer nameId;
 
     private String projectsName;
 

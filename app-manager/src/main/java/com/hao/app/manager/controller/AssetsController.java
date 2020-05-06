@@ -123,6 +123,7 @@ public class AssetsController extends BaseController {
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("engineNumberTypeMap", Dicts.engineNumberTypeMap);
+        request.setAttribute("carNameMap", Dicts.carNameMap);
         request.setAttribute("carBrandMap", Dicts.carBrandMap);
         request.setAttribute("carTypeMap", Dicts.carTypeMap);
 
@@ -161,6 +162,7 @@ public class AssetsController extends BaseController {
         int staging = NumberUtils.toInt(request.getParameter("staging"), 0);
         int brand = NumberUtils.toInt(request.getParameter("brand"), 0);
         int carType = NumberUtils.toInt(request.getParameter("carType"), 0);
+        int nameId = NumberUtils.toInt(request.getParameter("nameId"), 0);
 
         String license = request.getParameter("license");
         String inOut = request.getParameter("inOut");
@@ -171,10 +173,6 @@ public class AssetsController extends BaseController {
         String tanxiao = request.getParameter("tanxiao");
         String zhejiu = request.getParameter("zhejiu");
 
-        String name = request.getParameter("name");
-        if (StringUtils.isBlank(name)) {
-            return failResult(request, "资产名称为必填项");
-        }
 
         String number = request.getParameter("number");
         if (StringUtils.isBlank(number)) {
@@ -183,7 +181,8 @@ public class AssetsController extends BaseController {
 
         AssetsDO item = new AssetsDO();
         item.setId(id);
-        item.setName(name);
+        item.setNameId(nameId);
+        item.setName(Dicts.carNameMap.get(nameId));
 
         item.setProjects(projectsDO.getId());
         item.setProjectsName(projectsDO.getName());

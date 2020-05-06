@@ -20,6 +20,7 @@ public class AssetsOtherDO implements Serializable {
     private String typeStr;
 
     private String name;
+    private Integer nameId;
 
     private String projectsName;
 

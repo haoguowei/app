@@ -20,9 +20,9 @@ Ext.onReady(function () {
             document.getElementById("type").focus();
             return false;
         }
-        if (_isNull(getById("name"))) {
-            alert("请填写资产名称！");
-            document.getElementById("name").focus();
+        if (_isNull(getById("nameId")) || getById("nameId") == 0) {
+            alert("请选择资产名称！");
+            document.getElementById("nameId").focus();
             return false;
         }
 

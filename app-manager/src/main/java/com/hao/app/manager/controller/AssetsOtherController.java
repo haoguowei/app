@@ -118,6 +118,7 @@ public class AssetsOtherController extends BaseController {
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
+        request.setAttribute("assetsNameMap", Dicts.assetsNameMap);
 
         request.setAttribute("assetsBrandMap", Dicts.assetsBrandMap);
         request.setAttribute("assetsNumberTypeMap", Dicts.assetsNumberTypeMap);
@@ -157,6 +158,7 @@ public class AssetsOtherController extends BaseController {
         int staging = NumberUtils.toInt(request.getParameter("staging"), 0);
         int brand = NumberUtils.toInt(request.getParameter("brand"), 0);
         int carType = NumberUtils.toInt(request.getParameter("carType"), 0);
+        int nameId = NumberUtils.toInt(request.getParameter("nameId"), 0);
 
         String inOut = request.getParameter("inOut");
         String storageLocation = request.getParameter("storageLocation");
@@ -164,14 +166,11 @@ public class AssetsOtherController extends BaseController {
         String tanxiao = request.getParameter("tanxiao");
         String zhejiu = request.getParameter("zhejiu");
 
-        String name = request.getParameter("name");
-        if (StringUtils.isBlank(name)) {
-            return failResult(request, "资产名称为必填项");
-        }
 
         AssetsOtherDO item = new AssetsOtherDO();
         item.setId(id);
-        item.setName(name);
+        item.setNameId(nameId);
+        item.setName(Dicts.assetsNameMap.get(nameId));
 
         item.setProjects(projectsDO.getId());
         item.setProjectsName(projectsDO.getName());
