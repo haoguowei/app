@@ -63,7 +63,7 @@ public class AssetsOtherDO implements Serializable {
     }
 
     public void setBrand(Integer brand) {
-        this.brandStr = Dicts.brandMap.get(brand);
+        this.brandStr = Dicts.cardBrandMap.get(brand);
         this.brand = brand;
     }
 

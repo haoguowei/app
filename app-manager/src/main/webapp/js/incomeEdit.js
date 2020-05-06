@@ -18,7 +18,7 @@ Ext.onReady(function () {
         }
 
         if (_isNull(getById("incomeDay"))) {
-            alert("请填写回款所属月份！");
+            alert("请填写回款日期！");
             document.getElementById("incomeDay").focus();
             return false;
         }
@@ -27,6 +27,12 @@ Ext.onReady(function () {
         if (_isNotNull(getById("incomeAmount")) && !regexVerify('tingke', getById("incomeAmount"))) {
             alert("填写正确的回款金额！");
             document.getElementById("incomeAmount").focus();
+            return false;
+        }
+
+        if (_isNotNull(getById("contractAmount")) && !regexVerify('tingke', getById("contractAmount"))) {
+            alert("填写正确的合同金额！");
+            document.getElementById("contractAmount").focus();
             return false;
         }
 

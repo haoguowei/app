@@ -13,42 +13,92 @@ public class Dicts {
     public static Map<Integer, String> employeeStatusMap = new LinkedHashMap<>();
     public static Map<Integer, String> employeeJobTypeMap = new LinkedHashMap<>();
 
-    public static Map<Integer, String> assetsTypeMap = new LinkedHashMap<>();
-    public static Map<Integer, String> engineNumberTypeMap = new LinkedHashMap<>();
 
     public static Map<Integer, String> costStatusMap = new LinkedHashMap<>();
     public static Map<Integer, String> otherPayTypeMap = new LinkedHashMap<>();
     public static Map<Integer, String> yunyingPayTypeMap = new LinkedHashMap<>();
 
-    public static Map<Integer, String> assetsNameMap = new LinkedHashMap<>();
-    public static Map<Integer, String> brandMap = new LinkedHashMap<>();
+    public static Map<Integer, String> cardNameMap = new LinkedHashMap<>();
+    public static Map<Integer, String> cardBrandMap = new LinkedHashMap<>();
     public static Map<Integer, String> carTypeMap = new LinkedHashMap<>();
+    public static Map<Integer, String> cardNumberTypeMap = new LinkedHashMap<>();
+
+    public static Map<Integer, String> assetsNameMap = new LinkedHashMap<>();
+    public static Map<Integer, String> assetsBrandMap = new LinkedHashMap<>();
+    public static Map<Integer, String> assetsTypeMap = new LinkedHashMap<>();
+    public static Map<Integer, String> assetsNumberTypeMap = new LinkedHashMap<>();
 
 
     static {
-        //吊装压缩车、封闭转运车、勾臂转运车、后挂压缩车、侧挂压缩车、翻斗收运车、
-        //低压洒水车、高压清洗车、洗扫车、扫路车
-        assetsNameMap.put(1, "吊装压缩车");
-        assetsNameMap.put(2, "封闭转运车");
-        assetsNameMap.put(3, "勾臂转运车");
-        assetsNameMap.put(4, "后挂压缩车");
-        assetsNameMap.put(5, "侧挂压缩车");
-        assetsNameMap.put(6, "翻斗收运车");
-        assetsNameMap.put(7, "低压洒水车");
-        assetsNameMap.put(8, "高压清洗车");
-        assetsNameMap.put(9, "洗扫车");
-        assetsNameMap.put(10, "扫路车");
+        //assetsNameMap
+        //压缩箱、垃圾收集箱、垃圾桶、电动保洁车、人力三轮车、电动自行车
+        assetsNameMap.put(1, "压缩箱");
+        assetsNameMap.put(2, "垃圾收集箱");
+        assetsNameMap.put(3, "垃圾桶");
+        assetsNameMap.put(4, "电动保洁车");
+        assetsNameMap.put(5, "人力三轮车");
+        assetsNameMap.put(6, "电动自行车");
         assetsNameMap.put(100, "其他");
 
-        brandMap.put(1, "徐工");
-        brandMap.put(2, "中联");
-        brandMap.put(3, "龙马");
-        brandMap.put(4, "森源");
-        brandMap.put(5, "五征");
-        brandMap.put(6, "程力");
-        brandMap.put(7, "合力");
-        brandMap.put(8, "东风");
-        brandMap.put(100, "其他");
+        //东风、资产、鑫鼎、隆鑫、广泰、浩鑫、禧天龙、雷沃、领程、郎洁、富兴
+        assetsBrandMap.put(1, "东风");
+        assetsBrandMap.put(2, "资产");
+        assetsBrandMap.put(3, "鑫鼎");
+        assetsBrandMap.put(4, "隆鑫");
+        assetsBrandMap.put(5, "广泰");
+        assetsBrandMap.put(6, "浩鑫");
+        assetsBrandMap.put(7, "禧天龙");
+        assetsBrandMap.put(8, "雷沃");
+        assetsBrandMap.put(9, "领程");
+        assetsBrandMap.put(10, "郎洁");
+        assetsBrandMap.put(11, "富兴");
+        assetsBrandMap.put(100, "其他");
+
+        //assetsNumberTypeMap
+        //4桶、双桶、10L、20L、30L、50L、60L、100L、120L、240L、
+        //360L、450L、3方、5方、8方、18方
+        assetsNumberTypeMap.put(1, "4桶");
+        assetsNumberTypeMap.put(2, "双桶");
+        assetsNumberTypeMap.put(3, "10L");
+        assetsNumberTypeMap.put(4, "20L");
+        assetsNumberTypeMap.put(5, "30L");
+        assetsNumberTypeMap.put(6, "50L");
+        assetsNumberTypeMap.put(7, "60L");
+        assetsNumberTypeMap.put(8, "100L");
+        assetsNumberTypeMap.put(9, "120L");
+        assetsNumberTypeMap.put(10, "240L");
+        assetsNumberTypeMap.put(11, "360L");
+        assetsNumberTypeMap.put(12, "450L");
+        assetsNumberTypeMap.put(13, "3方");
+        assetsNumberTypeMap.put(14, "5方");
+        assetsNumberTypeMap.put(15, "8方");
+        assetsNumberTypeMap.put(16, "18方");
+        assetsNumberTypeMap.put(100, "其他");
+
+
+        //吊装压缩车、封闭转运车、勾臂转运车、后挂压缩车、侧挂压缩车、翻斗收运车、
+        //低压洒水车、高压清洗车、洗扫车、扫路车
+        cardNameMap.put(1, "吊装压缩车");
+        cardNameMap.put(2, "封闭转运车");
+        cardNameMap.put(3, "勾臂转运车");
+        cardNameMap.put(4, "后挂压缩车");
+        cardNameMap.put(5, "侧挂压缩车");
+        cardNameMap.put(6, "翻斗收运车");
+        cardNameMap.put(7, "低压洒水车");
+        cardNameMap.put(8, "高压清洗车");
+        cardNameMap.put(9, "洗扫车");
+        cardNameMap.put(10, "扫路车");
+        cardNameMap.put(100, "其他");
+
+        cardBrandMap.put(1, "徐工");
+        cardBrandMap.put(2, "中联");
+        cardBrandMap.put(3, "龙马");
+        cardBrandMap.put(4, "森源");
+        cardBrandMap.put(5, "五征");
+        cardBrandMap.put(6, "程力");
+        cardBrandMap.put(7, "合力");
+        cardBrandMap.put(8, "东风");
+        cardBrandMap.put(100, "其他");
 
         //大型、中型、小型、微型
         carTypeMap.put(1, "大型");
@@ -56,26 +106,11 @@ public class Dicts {
         carTypeMap.put(3, "小型");
         carTypeMap.put(4, "微型");
 
-        otherPayTypeMap.put(1, "办公用品");
-        otherPayTypeMap.put(2, "办公维修");
-        otherPayTypeMap.put(3, "煤水电");
-        otherPayTypeMap.put(4, "差旅费");
-        otherPayTypeMap.put(5, "房租-租赁费");
-        otherPayTypeMap.put(6, "房租-物业费");
-        otherPayTypeMap.put(7, "房租-采暖费");
-        otherPayTypeMap.put(100, "其他办公费用");
 
-        yunyingPayTypeMap.put(1, "扫保工具");
-        yunyingPayTypeMap.put(2, "运营水电费");
-        yunyingPayTypeMap.put(3, "劳保费用");
-        yunyingPayTypeMap.put(4, "临时费用");
-        yunyingPayTypeMap.put(5, "外包费用");
-        yunyingPayTypeMap.put(100, "其他运营费用");
-
-        engineNumberTypeMap.put(1, "小型车");
-        engineNumberTypeMap.put(2, "大型车");
-        engineNumberTypeMap.put(3, "低速车");
-        engineNumberTypeMap.put(4, "其他");
+        cardNumberTypeMap.put(1, "小型车");
+        cardNumberTypeMap.put(2, "大型车");
+        cardNumberTypeMap.put(3, "低速车");
+        cardNumberTypeMap.put(4, "其他");
 
         hukouTypeMap.put(1, "农村");
         hukouTypeMap.put(2, "城镇");
@@ -100,10 +135,10 @@ public class Dicts {
         employeeJobTypeMap.put(7, "装卸工");
         employeeJobTypeMap.put(8, "保洁员");
 
-        assetsTypeMap.put(1, "电动人力");
-        assetsTypeMap.put(2, "箱");
-        assetsTypeMap.put(3, "桶");
-        assetsTypeMap.put(4, "辅助类");
+        //收集容器、中转容器、保洁车辆
+        assetsTypeMap.put(1, "收集容器");
+        assetsTypeMap.put(2, "中转容器");
+        assetsTypeMap.put(3, "保洁车辆");
 
         costStatusMap.put(0, "正常");
         costStatusMap.put(1, "上报");
@@ -170,6 +205,22 @@ public class Dicts {
         minzuMap.put(55, "珞巴族");
         minzuMap.put(56, "基诺族");
 
+
+        otherPayTypeMap.put(1, "办公用品");
+        otherPayTypeMap.put(2, "办公维修");
+        otherPayTypeMap.put(3, "煤水电");
+        otherPayTypeMap.put(4, "差旅费");
+        otherPayTypeMap.put(5, "房租-租赁费");
+        otherPayTypeMap.put(6, "房租-物业费");
+        otherPayTypeMap.put(7, "房租-采暖费");
+        otherPayTypeMap.put(100, "其他办公费用");
+
+        yunyingPayTypeMap.put(1, "扫保工具");
+        yunyingPayTypeMap.put(2, "运营水电费");
+        yunyingPayTypeMap.put(3, "劳保费用");
+        yunyingPayTypeMap.put(4, "临时费用");
+        yunyingPayTypeMap.put(5, "外包费用");
+        yunyingPayTypeMap.put(100, "其他运营费用");
 
     }
 }

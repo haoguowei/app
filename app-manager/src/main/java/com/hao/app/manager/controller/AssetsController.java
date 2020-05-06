@@ -50,7 +50,7 @@ public class AssetsController extends BaseController {
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
-        request.setAttribute("brandMap", Dicts.brandMap);
+        request.setAttribute("brandMap", Dicts.cardBrandMap);
         request.setAttribute("carTypeMap", Dicts.carTypeMap);
         request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/assets/initAssets";
@@ -124,9 +124,9 @@ public class AssetsController extends BaseController {
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
-        request.setAttribute("engineNumberTypeMap", Dicts.engineNumberTypeMap);
+        request.setAttribute("engineNumberTypeMap", Dicts.cardNumberTypeMap);
 
-        request.setAttribute("brandMap", Dicts.brandMap);
+        request.setAttribute("brandMap", Dicts.cardBrandMap);
         request.setAttribute("carTypeMap", Dicts.carTypeMap);
 
         //责任人
