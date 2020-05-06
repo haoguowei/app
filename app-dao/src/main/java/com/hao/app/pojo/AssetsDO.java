@@ -65,7 +65,7 @@ public class AssetsDO implements Serializable {
     private Date updateTime;
 
     public void setBrand(Integer brand) {
-        this.brandStr = Dicts.cardBrandMap.get(brand);
+        this.brandStr = Dicts.carBrandMap.get(brand);
         this.brand = brand;
     }
 

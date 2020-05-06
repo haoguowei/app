@@ -18,10 +18,10 @@ public class Dicts {
     public static Map<Integer, String> otherPayTypeMap = new LinkedHashMap<>();
     public static Map<Integer, String> yunyingPayTypeMap = new LinkedHashMap<>();
 
-    public static Map<Integer, String> cardNameMap = new LinkedHashMap<>();
-    public static Map<Integer, String> cardBrandMap = new LinkedHashMap<>();
+    public static Map<Integer, String> carNameMap = new LinkedHashMap<>();
+    public static Map<Integer, String> carBrandMap = new LinkedHashMap<>();
     public static Map<Integer, String> carTypeMap = new LinkedHashMap<>();
-    public static Map<Integer, String> cardNumberTypeMap = new LinkedHashMap<>();
+    public static Map<Integer, String> engineNumberTypeMap = new LinkedHashMap<>();
 
     public static Map<Integer, String> assetsNameMap = new LinkedHashMap<>();
     public static Map<Integer, String> assetsBrandMap = new LinkedHashMap<>();
@@ -78,27 +78,27 @@ public class Dicts {
 
         //吊装压缩车、封闭转运车、勾臂转运车、后挂压缩车、侧挂压缩车、翻斗收运车、
         //低压洒水车、高压清洗车、洗扫车、扫路车
-        cardNameMap.put(1, "吊装压缩车");
-        cardNameMap.put(2, "封闭转运车");
-        cardNameMap.put(3, "勾臂转运车");
-        cardNameMap.put(4, "后挂压缩车");
-        cardNameMap.put(5, "侧挂压缩车");
-        cardNameMap.put(6, "翻斗收运车");
-        cardNameMap.put(7, "低压洒水车");
-        cardNameMap.put(8, "高压清洗车");
-        cardNameMap.put(9, "洗扫车");
-        cardNameMap.put(10, "扫路车");
-        cardNameMap.put(100, "其他");
+        carNameMap.put(1, "吊装压缩车");
+        carNameMap.put(2, "封闭转运车");
+        carNameMap.put(3, "勾臂转运车");
+        carNameMap.put(4, "后挂压缩车");
+        carNameMap.put(5, "侧挂压缩车");
+        carNameMap.put(6, "翻斗收运车");
+        carNameMap.put(7, "低压洒水车");
+        carNameMap.put(8, "高压清洗车");
+        carNameMap.put(9, "洗扫车");
+        carNameMap.put(10, "扫路车");
+        carNameMap.put(100, "其他");
 
-        cardBrandMap.put(1, "徐工");
-        cardBrandMap.put(2, "中联");
-        cardBrandMap.put(3, "龙马");
-        cardBrandMap.put(4, "森源");
-        cardBrandMap.put(5, "五征");
-        cardBrandMap.put(6, "程力");
-        cardBrandMap.put(7, "合力");
-        cardBrandMap.put(8, "东风");
-        cardBrandMap.put(100, "其他");
+        carBrandMap.put(1, "徐工");
+        carBrandMap.put(2, "中联");
+        carBrandMap.put(3, "龙马");
+        carBrandMap.put(4, "森源");
+        carBrandMap.put(5, "五征");
+        carBrandMap.put(6, "程力");
+        carBrandMap.put(7, "合力");
+        carBrandMap.put(8, "东风");
+        carBrandMap.put(100, "其他");
 
         //大型、中型、小型、微型
         carTypeMap.put(1, "大型");
@@ -107,10 +107,10 @@ public class Dicts {
         carTypeMap.put(4, "微型");
 
 
-        cardNumberTypeMap.put(1, "小型车");
-        cardNumberTypeMap.put(2, "大型车");
-        cardNumberTypeMap.put(3, "低速车");
-        cardNumberTypeMap.put(4, "其他");
+        engineNumberTypeMap.put(1, "小型车");
+        engineNumberTypeMap.put(2, "大型车");
+        engineNumberTypeMap.put(3, "低速车");
+        engineNumberTypeMap.put(4, "其他");
 
         hukouTypeMap.put(1, "农村");
         hukouTypeMap.put(2, "城镇");

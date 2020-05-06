@@ -83,7 +83,7 @@
                 <td>
                     <select id="brand" name="brand">
                         <option value="0">请选择...
-                            <c:forEach items="${brandMap }" var="itm">
+                            <c:forEach items="${carBrandMap }" var="itm">
                         <option
                                 <c:if test="${itm.key == itemObj.brand }">selected="selected"</c:if>
                                 value="${itm.key}">${itm.value}

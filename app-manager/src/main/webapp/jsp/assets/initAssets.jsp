@@ -47,7 +47,7 @@
                 品牌：
                 <select id="brand" name="brand">
                     <option value="0">请选择...
-                        <c:forEach items="${brandMap }" var="itm">
+                        <c:forEach items="${carBrandMap }" var="itm">
                     <option
                             value="${itm.key}">${itm.value}
                         </c:forEach>

@@ -83,7 +83,7 @@
                 <td>
                     <select id="brand" name="brand">
                         <option value="0">请选择...
-                            <c:forEach items="${brandMap }" var="itm">
+                            <c:forEach items="${assetsBrandMap }" var="itm">
                         <option
                                 <c:if test="${itm.key == itemObj.brand }">selected="selected"</c:if>
                                 value="${itm.key}">${itm.value}
@@ -97,7 +97,7 @@
                 <td>
                     <select id="carType" name="carType">
                         <option value="0">请选择...
-                            <c:forEach items="${carTypeMap }" var="itm">
+                            <c:forEach items="${assetsNumberTypeMap }" var="itm">
                         <option
                                 <c:if test="${itm.key == itemObj.carType }">selected="selected"</c:if>
                                 value="${itm.key}">${itm.value}
