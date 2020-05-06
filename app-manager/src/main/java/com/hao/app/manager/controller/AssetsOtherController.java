@@ -217,8 +217,8 @@ public class AssetsOtherController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            sysLogsService.writeLog(item.getCreater(), "新增或修改其他资产:" + item.toString());
-            return successResult(request, "其他资产管理", "initOtherAssets.do");
+            sysLogsService.writeLog(item.getCreater(), "新增或修改设备设施:" + item.toString());
+            return successResult(request, "设备设施管理", "initOtherAssets.do");
         } else {
             return failResult(request, resultCode);
         }

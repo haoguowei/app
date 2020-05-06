@@ -20,21 +20,41 @@ public class Dicts {
     public static Map<Integer, String> otherPayTypeMap = new LinkedHashMap<>();
     public static Map<Integer, String> yunyingPayTypeMap = new LinkedHashMap<>();
 
+    public static Map<Integer, String> assetsNameMap = new LinkedHashMap<>();
     public static Map<Integer, String> brandMap = new LinkedHashMap<>();
     public static Map<Integer, String> carTypeMap = new LinkedHashMap<>();
 
 
     static {
-        brandMap.put(1, "福田普罗科");
-        brandMap.put(2, "中联重科");
-        brandMap.put(3, "宇通环卫");
-        brandMap.put(4, "湖北楚胜");
-        brandMap.put(5, "湖北奥龙");
-        brandMap.put(6, "湖北程力");
+        //吊装压缩车、封闭转运车、勾臂转运车、后挂压缩车、侧挂压缩车、翻斗收运车、
+        //低压洒水车、高压清洗车、洗扫车、扫路车
+        assetsNameMap.put(1, "吊装压缩车");
+        assetsNameMap.put(2, "封闭转运车");
+        assetsNameMap.put(3, "勾臂转运车");
+        assetsNameMap.put(4, "后挂压缩车");
+        assetsNameMap.put(5, "侧挂压缩车");
+        assetsNameMap.put(6, "翻斗收运车");
+        assetsNameMap.put(7, "低压洒水车");
+        assetsNameMap.put(8, "高压清洗车");
+        assetsNameMap.put(9, "洗扫车");
+        assetsNameMap.put(10, "扫路车");
+        assetsNameMap.put(100, "其他");
+
+        brandMap.put(1, "徐工");
+        brandMap.put(2, "中联");
+        brandMap.put(3, "龙马");
+        brandMap.put(4, "森源");
+        brandMap.put(5, "五征");
+        brandMap.put(6, "程力");
+        brandMap.put(7, "合力");
+        brandMap.put(8, "东风");
         brandMap.put(100, "其他");
 
-        carTypeMap.put(1, "压缩");
-        carTypeMap.put(2, "勾臂");
+        //大型、中型、小型、微型
+        carTypeMap.put(1, "大型");
+        carTypeMap.put(2, "中型");
+        carTypeMap.put(3, "小型");
+        carTypeMap.put(4, "微型");
 
         otherPayTypeMap.put(1, "办公用品");
         otherPayTypeMap.put(2, "办公维修");
