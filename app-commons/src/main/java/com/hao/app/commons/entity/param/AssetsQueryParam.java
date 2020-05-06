@@ -14,22 +14,22 @@ import java.io.Serializable;
 @ToString
 public class AssetsQueryParam extends QueryParam implements Serializable {
 
-	private static final long serialVersionUID = 4737617179006429526L;
+    private static final long serialVersionUID = 4737617179006429526L;
 
-	private Integer projectsId;
-	private Integer carType;
-	private Integer brand;
+    private Integer projectsId;
+    private Integer carType;
+    private Integer brand;
 
-	private String name;
+    private Integer nameId;
 
-	private String number;
+    private String number;
 
-	private String buyTimeStart;
-	private String buyTimeEnd;
+    private String buyTimeStart;
+    private String buyTimeEnd;
 
-	public AssetsQueryParam(int pageStart, int pageLimit) {
-		super(pageStart, pageLimit);
-	}
+    public AssetsQueryParam(int pageStart, int pageLimit) {
+        super(pageStart, pageLimit);
+    }
 
 
 }

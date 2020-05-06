@@ -33,7 +33,12 @@
                 </select>
 
                 资产名称：
-                <input style="margin-right: 20px;" type="text" name="name" id="name">
+                <select id="nameId" name="nameId">
+                    <option value="0">请选择...
+                        <c:forEach items="${assetsNameMap }" var="itm">
+                    <option value="${itm.key}">${itm.value}
+                        </c:forEach>
+                </select>
 
                 资产类型：
                 <select id="type" name="type">

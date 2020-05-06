@@ -51,6 +51,7 @@ public class AssetsOtherController extends BaseController {
     public String initOtherAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("assetsTypeMap", Dicts.assetsTypeMap);
         request.setAttribute("assetsBrandMap", Dicts.assetsBrandMap);
+        request.setAttribute("assetsNameMap", Dicts.assetsNameMap);
         request.setAttribute("assetsNumberTypeMap", Dicts.assetsNumberTypeMap);
         request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/assets/initOtherAssets";
@@ -72,10 +73,10 @@ public class AssetsOtherController extends BaseController {
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
         int carType = NumberUtils.toInt(request.getParameter("carType"));
         int brand = NumberUtils.toInt(request.getParameter("brand"));
+        int nameId = NumberUtils.toInt(request.getParameter("nameId"));
         String buyTimeStart = request.getParameter("buyTimeStart");
         String buyTimeEnd = request.getParameter("buyTimeEnd");
 
-        String name = request.getParameter("name");
         int type = NumberUtils.toInt(request.getParameter("type"));
 
         AssetsOtherQueryParam param = new AssetsOtherQueryParam(start, limit);
@@ -103,8 +104,8 @@ public class AssetsOtherController extends BaseController {
             param.setBuyTimeEnd(buyTimeEnd);
         }
 
-        if (StringUtils.isNotBlank(name)) {
-            param.setName(name);
+        if (nameId > 0) {
+            param.setNameId(nameId);
         }
         return param;
     }

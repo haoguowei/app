@@ -67,6 +67,9 @@
             <if test="type != null and type > 0">
                 and type = ${type}
             </if>
+            <if test="nameId != null and nameId > 0">
+                and name_id = ${nameId}
+            </if>
             <if test="brand != null and brand > 0">
                 and brand = ${brand}
             </if>

@@ -22,7 +22,7 @@ public class AssetsOtherQueryParam extends QueryParam implements Serializable {
 	private Integer carType;
 	private Integer brand;
 
-	private String name;
+	private Integer nameId;
 
 	private String buyTimeStart;
 	private String buyTimeEnd;

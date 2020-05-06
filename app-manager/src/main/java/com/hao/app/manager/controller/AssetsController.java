@@ -50,6 +50,7 @@ public class AssetsController extends BaseController {
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("carBrandMap", Dicts.carBrandMap);
+        request.setAttribute("carNameMap", Dicts.carNameMap);
         request.setAttribute("carTypeMap", Dicts.carTypeMap);
         request.setAttribute("projectsList", getProjectsList(request));
         return "jsp/assets/initAssets";
@@ -77,10 +78,10 @@ public class AssetsController extends BaseController {
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"));
         int carType = NumberUtils.toInt(request.getParameter("carType"));
         int brand = NumberUtils.toInt(request.getParameter("brand"));
+        int nameId = NumberUtils.toInt(request.getParameter("nameId"));
         String buyTimeStart = request.getParameter("buyTimeStart");
         String buyTimeEnd = request.getParameter("buyTimeEnd");
 
-        String name = request.getParameter("name");
         String number = request.getParameter("number");
 
         AssetsQueryParam param = new AssetsQueryParam(start, limit);
@@ -104,8 +105,8 @@ public class AssetsController extends BaseController {
             param.setBuyTimeEnd(buyTimeEnd);
         }
 
-        if (StringUtils.isNotBlank(name)) {
-            param.setName(name);
+        if (nameId > 0) {
+            param.setNameId(nameId);
         }
 
         if (StringUtils.isNotBlank(number)) {

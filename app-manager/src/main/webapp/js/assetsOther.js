@@ -57,7 +57,7 @@ Ext.onReady(function () {
 
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
-        gridStore.setBaseParam("name", getById("name"));
+        gridStore.setBaseParam("nameId", getById("nameId"));
         gridStore.setBaseParam("type", getById("type"));
 
         gridStore.setBaseParam("brand", getById("brand"));
@@ -119,7 +119,7 @@ Ext.onReady(function () {
             projectsId: '',
             carType: '',
             brand: '',
-            name: '',
+            nameId: '',
             type: '',
             buyTimeStart: '',
             buyTimeEnd: ''

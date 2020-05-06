@@ -73,6 +73,9 @@
                 and car_type = ${carType}
             </if>
 
+            <if test="nameId != null and nameId > 0">
+                and name_id = ${nameId}
+            </if>
 
             <if test="number != null">
                 and number = #{number}
