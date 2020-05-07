@@ -17,7 +17,7 @@
 </head>
 <body>
 <div id="div_panel_id">
-    <form name="form1" action="saveYYCost.do" method="post" onsubmit="return save()">
+    <form name="form1" action="saveCosts.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
         <input type="hidden" id="hideEnterDateDiv" name="hideEnterDateDiv"
                value="<fmt:formatDate value="${itemObj.enterDate }" pattern="yyyy-MM-dd" />">
@@ -86,7 +86,6 @@
                 <td>&nbsp;</td>
                 <td colspan="2">
                     <input type="submit" value="保存" class="Mybotton">
-                    <input type="button" value="保存并提交" class="Mybotton">
                     <input type="button" value="取消" class="Mybotton" onclick="_back()">
                 </td>
             </tr>

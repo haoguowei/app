@@ -31,9 +31,7 @@
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
                 </select>
-            </td>
 
-            <td class="Myfont">
                 费用类型：
 
             </td>

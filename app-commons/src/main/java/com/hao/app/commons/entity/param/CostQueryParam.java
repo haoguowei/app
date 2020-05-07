@@ -17,7 +17,6 @@ public class CostQueryParam extends QueryParam implements Serializable {
 	private static final long serialVersionUID = 4737617179006429526L;
 
 	private Integer projectsId;
-	private Integer employeeId;
 	private String enterDateStart;
 	private String enterDateEnd;
 

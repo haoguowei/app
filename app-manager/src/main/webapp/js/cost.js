@@ -9,7 +9,7 @@ Ext.onReady(function () {
     var urlEditValid = "initCostsEdit.do";
 
     //是否有权限
-    var isPRISaveMember = isHavePRI("saveYYCost.do");//新增编辑用户
+    var isPRISaveMember = isHavePRI("saveCosts.do");//新增编辑用户
 
     //-----------------权限相关 end-----------
     var entryDateStartDIV = new com.custom.DateField({
@@ -64,26 +64,20 @@ Ext.onReady(function () {
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
-        url: 'searchYYCost.do',
+        url: 'searchCosts.do',
         root: 'resultList',
         remoteSort: false,
         totalProperty: 'total',
         fields: [
             {name: 'id'},
             {name: 'enterDate'},
-            {name: 'projectsName'},
-            {name: 'assetsInfo'},
-            {name: 'dayMileage'},
-            {name: 'avgFuel'},
-            {name: 'totalAmount'},
-            {name: 'employeeName'}
+            {name: 'projectsName'}
         ],
         baseParams: {
             limit: PAGESIZE,
             projectsId: '',
             enterDateStart: '',
-            enterDateEnd: '',
-            employeeId: ''
+            enterDateEnd: ''
         }
     });
 
@@ -96,10 +90,6 @@ Ext.onReady(function () {
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
-            {width: 2, header: '消费司机', align: 'left', sortable: false, dataIndex: 'employeeName'},
-            {width: 4, header: '消费资产', align: 'left', sortable: false, dataIndex: 'assetsInfo'},
-            {width: 2, header: '日行驶里程', align: 'left', sortable: false, dataIndex: 'dayMileage'},
-            {width: 2, header: '平均油耗', align: 'left', sortable: false, dataIndex: 'avgFuel'},
             {
                 width: 2,
                 header: '消费日期',
@@ -113,7 +103,6 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 2, header: '消费合计', align: 'right', sortable: false, dataIndex: 'totalAmount'},
             {
                 width: 2,
                 header: '操作',
