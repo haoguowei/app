@@ -23,6 +23,17 @@ Ext.onReady(function () {
             return false;
         }
 
+        if (_isNull(getById("incomeAmount"))) {
+            alert("请填写回款金额！");
+            document.getElementById("incomeAmount").focus();
+            return false;
+        }
+        if (_isNull(getById("contractAmount"))) {
+            alert("请填写合同金额！");
+            document.getElementById("contractAmount").focus();
+            return false;
+        }
+
 
         if (_isNotNull(getById("incomeAmount")) && !regexVerify('tingke', getById("incomeAmount"))) {
             alert("填写正确的回款金额！");

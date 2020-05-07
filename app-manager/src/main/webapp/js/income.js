@@ -79,6 +79,8 @@ Ext.onReady(function () {
             {name: 'jiafang'},
             {name: 'jiafangInfo'},
             {name: 'remark'},
+            {name: 'contractNumb'},
+            {name: 'contractAmount'},
             {name: 'creater'}
         ],
         baseParams: {
@@ -99,7 +101,7 @@ Ext.onReady(function () {
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
             {
-                width: 2,
+                width: 3,
                 header: '回款日期',
                 align: 'left',
                 sortable: false,
@@ -108,12 +110,14 @@ Ext.onReady(function () {
                     if (val == null || val == '') {
                         return '';
                     }
-                    return new Date(val).format("Y-m");
+                    return new Date(val).format("Y-m-d");
                 }
             },
             {width: 3, header: '回款金额(元)', align: 'right', sortable: false, dataIndex: 'incomeAmount'},
-            {width: 4, header: '甲方', align: 'right', sortable: false, dataIndex: 'jiafang'},
-            {width: 4, header: '甲方联系方式', align: 'left', sortable: false, dataIndex: 'jiafangInfo'},
+            {width: 3, header: '合同编号', align: 'left', sortable: false, dataIndex: 'contractNumb'},
+            {width: 3, header: '合同金额(元)', align: 'right', sortable: false, dataIndex: 'contractAmount'},
+            {width: 3, header: '甲方', align: 'right', sortable: false, dataIndex: 'jiafang'},
+            {width: 3, header: '甲方联系方式', align: 'left', sortable: false, dataIndex: 'jiafangInfo'},
             {width: 2, header: '录入人', align: 'left', sortable: false, dataIndex: 'creater'},
             {
                 width: 2,
@@ -142,7 +146,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '录入管理',
+            title: '收入管理',
             border: false,
             height: 80,
             keys: {

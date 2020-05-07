@@ -18,7 +18,7 @@
     <form name="form1" action="saveIncome.do" method="post" onsubmit="return save()">
         <input type="hidden" id="hideId" name="hideId" value="${itemObj.id }">
         <input type="hidden" id="hideIncomeDay" name="hideIncomeDay"
-               value="<fmt:formatDate value="${itemObj.incomeDay }" pattern="yyyy-MM" />">
+               value="<fmt:formatDate value="${itemObj.incomeDay }" pattern="yyyy-MM-dd" />">
 
         <table class="Mytable">
             <tr>
@@ -45,7 +45,7 @@
 
 
             <tr>
-                <td width="150px">回款金额(元):</td>
+                <td width="150px">回款金额(元):<span style="color: red">*</span></td>
                 <td>
                     <input type="text" class="Mytext" name="incomeAmount" id="incomeAmount"
                            value="${itemObj.incomeAmount }">
@@ -61,7 +61,7 @@
             </tr>
 
             <tr>
-                <td width="150px">合同金额(元):</td>
+                <td width="150px">合同金额(元):<span style="color: red">*</span></td>
                 <td>
                     <input type="text" class="Mytext" name="contractAmount" id="contractAmount"
                            value="${itemObj.contractAmount }">
