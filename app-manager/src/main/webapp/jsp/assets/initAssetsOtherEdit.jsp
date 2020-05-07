@@ -51,8 +51,7 @@
                 <td width="120px">资产名称:<span style="color: red">*</span></td>
                 <td>
                     <select id="nameId" name="nameId">
-                        <option value="0">请选择...
-                            <c:forEach items="${assetsNameMap }" var="itm">
+                        <c:forEach items="${assetsNameMap }" var="itm">
                         <option
                                 <c:if test="${itm.key == itemObj.nameId }">selected="selected"</c:if>
                                 value="${itm.key}">${itm.value}

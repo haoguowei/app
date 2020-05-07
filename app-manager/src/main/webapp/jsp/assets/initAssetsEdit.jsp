@@ -40,8 +40,8 @@
                     <select id="nameId" name="nameId">
                         <c:forEach items="${carNameMap }" var="itm">
                         <option
-                                <c:if test="${itm.id == itemObj.nameId }">selected="selected"</c:if>
-                                value="${itm.id}">${itm.name}
+                                <c:if test="${itm.key == itemObj.nameId }">selected="selected"</c:if>
+                                value="${itm.key}">${itm.value}
                             </c:forEach>
                     </select>
                 </td>
