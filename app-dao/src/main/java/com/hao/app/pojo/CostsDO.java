@@ -24,6 +24,10 @@ public class CostsDO implements Serializable {
     private Integer type2;
     private Integer type3;
 
+    private String type1Str;
+    private String type2Str;
+    private String type3Str;
+
     private BigDecimal amount;
     private String numb;
     private String useful;

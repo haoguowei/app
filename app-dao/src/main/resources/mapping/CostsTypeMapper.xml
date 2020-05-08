@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.app.dao.CostsTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.hao.app.pojo.CostsTypeDO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, parent_id
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from costs_type
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="searchByParentId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from costs_type
+        where parent_id = #{parentId,jdbcType=INTEGER}
+        order by id
+    </select>
+
+
+    <select id="search" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from costs_type
+    </select>
+
+</mapper>

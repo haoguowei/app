@@ -74,6 +74,9 @@ Ext.onReady(function () {
             {name: 'type1'},
             {name: 'type2'},
             {name: 'type3'},
+            {name: 'type1Str'},
+            {name: 'type2Str'},
+            {name: 'type3Str'},
             {name: 'amount'},
             {name: 'numb'},
             {name: 'useful'},
@@ -114,7 +117,23 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 2, header: '费用类型', align: 'left', sortable: false, dataIndex: 'type3'},
+            {
+                width: 4,
+                header: '费用类型',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'type3',
+                renderer: function (val, cell, record) {
+                    var a = record.data.typ1Str;
+                    var b = record.data.typ2Str;
+                    var c = record.data.typ3Str;
+
+                    if ((a == null || a == '') && (b == null || b == '') && (c == null || c == '')) {
+                        return '';
+                    }
+                    return a + "-" + b + "-" + c;
+                }
+            },
             {width: 2, header: '费用金额', align: 'right', sortable: false, dataIndex: 'amount'},
             {
                 width: 2,
@@ -130,6 +149,8 @@ Ext.onReady(function () {
                     }
                 }
             },
+            {width: 2, header: '费用单号', align: 'left', sortable: false, dataIndex: 'numb'},
+            {width: 2, header: '费用用途', align: 'left', sortable: false, dataIndex: 'useful'},
             {width: 2, header: '创建人', align: 'left', sortable: false, dataIndex: 'creater'},
             {
                 width: 2,
