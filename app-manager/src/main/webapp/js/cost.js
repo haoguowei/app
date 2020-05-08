@@ -205,9 +205,9 @@ Ext.onReady(function () {
             {width: 2, header: '费用用途', align: 'left', sortable: false, dataIndex: 'useful'},
             {width: 2, header: '创建人', align: 'left', sortable: false, dataIndex: 'creater'},
             {
-                width: 2,
+                width: 3,
                 header: '操作',
-                align: 'center',
+                align: 'left',
                 sortable: false,
                 dataIndex: 'id',
                 renderer: function (val, cell, record) {
