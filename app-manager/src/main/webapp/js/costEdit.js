@@ -77,6 +77,28 @@ Ext.onReady(function () {
             document.getElementById("enterDate").focus();
             return false;
         }
+
+        var type1 = getById("type1");
+        var type2 = getById("type2");
+        var type3 = getById("type3");
+
+        if (_isNull(type1) || type1 == 0) {
+            alert("请选择费用类型！");
+            document.getElementById("type1").focus();
+            return false;
+        }
+        if (_isNull(type2) || type2 == 0) {
+            alert("请选择费用类型！");
+            document.getElementById("type2").focus();
+            return false;
+        }
+        if (_isNull(type3) || type3 == 0) {
+            alert("请选择费用类型！");
+            document.getElementById("type3").focus();
+            return false;
+        }
+
+
         if (_isNull(getById("amount"))) {
             alert("请填写费用金额！");
             document.getElementById("amount").focus();
