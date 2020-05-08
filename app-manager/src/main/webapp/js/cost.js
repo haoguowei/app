@@ -101,11 +101,9 @@ Ext.onReady(function () {
         columns: [
             {width: 1, header: 'ID', align: 'center', sortable: false, dataIndex: 'id'},
             {width: 2, header: '所属项目', align: 'left', sortable: false, dataIndex: 'projectsName'},
-            {width: 2, header: '费用类型', align: 'left', sortable: false, dataIndex: 'type3'},
-            {width: 2, header: '费用金额', align: 'right', sortable: false, dataIndex: 'amount'},
             {
                 width: 2,
-                header: '消费日期',
+                header: '费用日期',
                 align: 'left',
                 sortable: false,
                 dataIndex: 'enterDate',
@@ -116,7 +114,22 @@ Ext.onReady(function () {
                     return new Date(val).format("Y-m-d");
                 }
             },
-            {width: 2, header: '费用状态', align: 'left', sortable: false, dataIndex: 'status'},
+            {width: 2, header: '费用类型', align: 'left', sortable: false, dataIndex: 'type3'},
+            {width: 2, header: '费用金额', align: 'right', sortable: false, dataIndex: 'amount'},
+            {
+                width: 2,
+                header: '费用状态',
+                align: 'left',
+                sortable: false,
+                dataIndex: 'status',
+                renderer: function (val, cell, record) {
+                    if (val == null || val == '' || val == 0 || val == '0') {
+                        return '录入';
+                    } else if (val == 1 || val == '1') {
+                        return '提交';
+                    }
+                }
+            },
             {width: 2, header: '创建人', align: 'left', sortable: false, dataIndex: 'creater'},
             {
                 width: 2,
