@@ -31,25 +31,7 @@ Ext.onReady(function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
-
-        Ext.getCmp("huizong_show").setText("汇总信息...");
-        gridStore.reload({
-            callback: function (r, options, success) {
-                if (success) {
-                    Ext.Ajax.request({
-                        url: 'initCostHeJi.do',
-                        success: function (response) {
-                            var resp = Ext.util.JSON.decode(response.responseText);
-                            if (resp.success) {
-                                Ext.getCmp("huizong_show").setText(resp.info);
-                            } else {
-                                Ext.getCmp("huizong_show").setText("合计数据获取失败！");
-                            }
-                        }
-                    });
-                }
-            }
-        });
+        gridStore.reload();
     };
 
     this.updateF = function (id) {
@@ -134,7 +116,7 @@ Ext.onReady(function () {
                     return a + "-" + b + "-" + c;
                 }
             },
-            {width: 2, header: '费用金额', align: 'right', sortable: false, dataIndex: 'amount'},
+            {width: 2, header: '费用金额(元)', align: 'right', sortable: false, dataIndex: 'amount'},
             {
                 width: 2,
                 header: '费用状态',
