@@ -101,6 +101,13 @@ public class CostsController extends BaseController {
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("type1List", costsService.listCostsTypeByParentId(null));
+
+        if (itemObj != null && itemObj.getType1() != null && itemObj.getType1() > 0) {
+            request.setAttribute("type2List", costsService.listCostsTypeByParentId(itemObj.getType1()));
+        }
+        if (itemObj != null && itemObj.getType2() != null && itemObj.getType2() > 0) {
+            request.setAttribute("type3List", costsService.listCostsTypeByParentId(itemObj.getType2()));
+        }
         return "jsp/cost/initCostsEdit";
     }
 
