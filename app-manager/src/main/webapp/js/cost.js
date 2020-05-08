@@ -119,9 +119,9 @@ Ext.onReady(function () {
                 sortable: false,
                 dataIndex: 'type3',
                 renderer: function (val, cell, record) {
-                    var a = record.data.typ1Str;
-                    var b = record.data.typ2Str;
-                    var c = record.data.typ3Str;
+                    var a = record.data.type1Str;
+                    var b = record.data.type2Str;
+                    var c = record.data.type3Str;
 
                     if ((a == null || a == '') && (b == null || b == '') && (c == null || c == '')) {
                         return '';
