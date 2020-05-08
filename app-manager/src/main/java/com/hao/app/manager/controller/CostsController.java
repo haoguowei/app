@@ -57,7 +57,6 @@ public class CostsController extends BaseController {
         int start = NumberUtils.toInt(request.getParameter("start"));
         int limit = NumberUtils.toInt(request.getParameter("limit"), 100);
 
-
         CostQueryParam param = new CostQueryParam(start, limit);
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
@@ -66,9 +65,11 @@ public class CostsController extends BaseController {
         if (StringUtils.isNotBlank(enterDateStart)) {
             param.setEnterDateStart(enterDateStart);
         }
+
         if (StringUtils.isNotBlank(enterDateEnd)) {
             param.setEnterDateEnd(enterDateEnd);
         }
+
         return param;
     }
 
