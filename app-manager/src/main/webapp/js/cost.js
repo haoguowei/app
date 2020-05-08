@@ -194,9 +194,10 @@ Ext.onReady(function () {
                 dataIndex: 'status',
                 renderer: function (val, cell, record) {
                     if (val == null || val == '' || val == 0 || val == '0') {
-                        return '录入';
+                        return '<span style="color: green;">录入</span>';
+                        ;
                     } else if (val == 1 || val == '1') {
-                        return '提交';
+                        return '<span style="color: red;">已提交</span>';
                     }
                 }
             },
