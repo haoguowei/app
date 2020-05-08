@@ -27,12 +27,24 @@
             <td class="Myfont">
                 选择项目：
                 <select id="projectsId" name="projectsId">
-                        <c:forEach items="${projectsList }" var="itm">
+                    <c:forEach items="${projectsList }" var="itm">
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
                 </select>
 
                 费用类型：
+                <select id="type1" name="type1">
+                    <option value="0">请选择...</option>
+                    <c:forEach items="${type1List }" var="itm">
+                    <option value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+                <select id="type2" name="type2">
+                    <option value="0">请选择...</option>
+                </select>
+                <select id="type3" name="type3">
+                    <option value="0">请选择...</option>
+                </select>
 
             </td>
         <tr>

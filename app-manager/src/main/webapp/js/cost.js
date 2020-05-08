@@ -31,6 +31,9 @@ Ext.onReady(function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
+        gridStore.setBaseParam("type1", getById("type1"));
+        gridStore.setBaseParam("type2", getById("type2"));
+        gridStore.setBaseParam("type3", getById("type3"));
         gridStore.reload();
     };
 
@@ -42,6 +45,13 @@ Ext.onReady(function () {
         // location.href = "initAssetsEdit.do?view=1&id=" + id;
     };
 
+    this.selectType2 = function () {
+
+    };
+
+    this.selectType3 = function () {
+
+    };
 
     //列表数据
     var gridStore = new Ext.data.JsonStore({
@@ -73,6 +83,9 @@ Ext.onReady(function () {
             limit: PAGESIZE,
             projectsId: '',
             enterDateStart: '',
+            type1: '',
+            type2: '',
+            type3: '',
             enterDateEnd: ''
         }
     });

@@ -211,6 +211,15 @@
             <if test="projectsId != null and projectsId > 0">
                 and projects = ${projectsId}
             </if>
+            <if test="type1 != null and type1 > 0">
+                and type_1 = ${type1}
+            </if>
+            <if test="type2 != null and type2 > 0">
+                and type_2 = ${type2}
+            </if>
+            <if test="type3 != null and type3 > 0">
+                and type_3 = ${type3}
+            </if>
             <if test="enterDateStart != null">
                 <![CDATA[ and enter_date >= #{enterDateStart} ]]>
             </if>

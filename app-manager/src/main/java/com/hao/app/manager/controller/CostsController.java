@@ -38,6 +38,7 @@ public class CostsController extends BaseController {
     @RequestMapping("/initCosts.do")
     public String initCosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
+        request.setAttribute("type1List", costsService.listCostsTypeByParentId(null));
         return "jsp/cost/initCosts";
     }
 
@@ -51,6 +52,10 @@ public class CostsController extends BaseController {
 
     private CostQueryParam genParam(HttpServletRequest request) {
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
+        int type1 = NumberUtils.toInt(request.getParameter("type1"), 0);
+        int type2 = NumberUtils.toInt(request.getParameter("type2"), 0);
+        int type3 = NumberUtils.toInt(request.getParameter("type3"), 0);
+
         String enterDateStart = request.getParameter("enterDateStart");
         String enterDateEnd = request.getParameter("enterDateEnd");
 
@@ -60,6 +65,15 @@ public class CostsController extends BaseController {
         CostQueryParam param = new CostQueryParam(start, limit);
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
+        }
+        if (type1 > 0) {
+            param.setType1(type1);
+        }
+        if (type2 > 0) {
+            param.setType2(type2);
+        }
+        if (type3 > 0) {
+            param.setType3(type3);
         }
 
         if (StringUtils.isNotBlank(enterDateStart)) {
@@ -81,6 +95,7 @@ public class CostsController extends BaseController {
         request.setAttribute("itemObj", itemObj);
 
         request.setAttribute("projectsList", getProjectsList(request));
+        request.setAttribute("type1List", costsService.listCostsTypeByParentId(null));
         return "jsp/cost/initCostsEdit";
     }
 

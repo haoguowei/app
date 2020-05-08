@@ -1,10 +1,8 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@include file="../../import.jsp"%>
+         pageEncoding="UTF-8" %>
+<%@include file="../../import.jsp" %>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -27,7 +25,7 @@
                 <td>所属项目:<span style="color: red">*</span></td>
                 <td>
                     <select id="projects" name="projects">
-                            <c:forEach items="${projectsList }" var="itm">
+                        <c:forEach items="${projectsList }" var="itm">
                         <option
                                 <c:if test="${itm.id == itemObj.projects }">selected="selected"</c:if>
                                 value="${itm.id}">${itm.name}
@@ -49,7 +47,18 @@
                     费用类型:<span style="color: red">*</span>
                 </td>
                 <td class="Myfont">
-
+                    <select id="type1" name="type1">
+                        <option value="0">请选择...</option>
+                        <c:forEach items="${type1List }" var="itm">
+                        <option value="${itm.id}">${itm.name}
+                            </c:forEach>
+                    </select>
+                    <select id="type2" name="type2">
+                        <option value="0">请选择...</option>
+                    </select>
+                    <select id="type3" name="type3">
+                        <option value="0">请选择...</option>
+                    </select>
                 </td>
             </tr>
 
