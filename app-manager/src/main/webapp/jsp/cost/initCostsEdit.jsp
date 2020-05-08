@@ -54,23 +54,26 @@
             </tr>
 
             <tr>
-                <td>费用金额:</td>
+                <td>费用金额:<span style="color: red">*</span></td>
                 <td>
-
+                    <input type="text" class="Mytext" name="amount" id="amount"
+                           value="${itemObj.amount }">
                 </td>
             </tr>
 
             <tr>
                 <td>费用单号:</td>
                 <td>
-
+                    <input type="text" class="Mytext" name="numb" id="numb"
+                           value="${itemObj.numb }">
                 </td>
             </tr>
 
             <tr>
                 <td>费用用途:</td>
                 <td>
-
+                    <input type="text" class="Mytext" name="useful" id="useful"
+                           value="${itemObj.useful }">
                 </td>
             </tr>
 
@@ -92,4 +95,5 @@
         </table>
     </form>
 </div>
+</body>
 </html>

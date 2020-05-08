@@ -16,90 +16,24 @@ Ext.onReady(function () {
             document.getElementById("projects").focus();
             return false;
         }
-
         if (_isNull(getById("enterDate"))) {
-            alert("请填写消费日期！");
+            alert("请填写费用日期！");
             document.getElementById("enterDate").focus();
             return false;
         }
         if (!isDate(getById("enterDate"))) {
-            alert("消费日期格式错误！");
+            alert("费用日期格式错误！");
             document.getElementById("enterDate").focus();
             return false;
         }
-        if (_isNull(getById("employeeId")) || getById("employeeId") == 0) {
-            alert("请选择消费司机！");
-            document.getElementById("employeeId").focus();
+        if (_isNull(getById("amount"))) {
+            alert("请填写费用金额！");
+            document.getElementById("amount").focus();
             return false;
         }
-        if (_isNull(getById("assetId")) || getById("assetId") == 0) {
-            alert("请选择消费资产！");
-            document.getElementById("assetId").focus();
-            return false;
-        }
-
-
-        if (_isNotNull(getById("startMileage")) && !regexVerify('num1', getById("startMileage"))) {
-            alert("日末里程数请填写正确的数字！");
-            document.getElementById("startMileage").focus();
-            return false;
-        }
-        if (_isNotNull(getById("endMileage")) && !regexVerify('num1', getById("endMileage"))) {
-            alert("日末里程数请填写正确的数字！");
-            document.getElementById("endMileage").focus();
-            return false;
-        }
-        if (_isNotNull(getById("workload")) && !regexVerify('num', getById("workload"))) {
-            alert("作业量请填写正确的数字！");
-            document.getElementById("workload").focus();
-            return false;
-        }
-        if (_isNotNull(getById("fuel")) && !regexVerify('num', getById("fuel"))) {
-            alert("加油量请填写正确的数字！");
-            document.getElementById("fuel").focus();
-            return false;
-        }
-
-        if (_isNotNull(getById("fuelAmount")) && !regexVerify('tingke', getById("fuelAmount"))) {
-            alert("加油金额请填写正确的金额！");
-            document.getElementById("fuelAmount").focus();
-            return false;
-        }
-        if (_isNotNull(getById("baoyangAmount")) && !regexVerify('tingke', getById("baoyangAmount"))) {
-            alert("保养费用请填写正确的金额！");
-            document.getElementById("baoyangAmount").focus();
-            return false;
-        }
-        if (_isNotNull(getById("fixAmount")) && !regexVerify('tingke', getById("fixAmount"))) {
-            alert("维修费用请填写正确的金额！");
-            document.getElementById("fixAmount").focus();
-            return false;
-        }
-
-        if (_isNotNull(getById("shiguTimes")) && !regexVerify('num1', getById("shiguTimes"))) {
-            alert("事故次数请填写正确的数字！");
-            document.getElementById("shiguTimes").focus();
-            return false;
-        }
-
-        if (_isNotNull(getById("shiguAmount")) && !regexVerify('tingke', getById("shiguAmount"))) {
-            alert("事故金额请填写正确的金额！");
-            document.getElementById("shiguAmount").focus();
-            return false;
-        }
-        if (_isNotNull(getById("shiguOutAmount")) && !regexVerify('tingke', getById("shiguOutAmount"))) {
-            alert("事故保险外赔偿金额请填写正确的金额！");
-            document.getElementById("shiguOutAmount").focus();
-            return false;
-        }
-        if (_isNotNull(getById("baoxianAmount")) && !regexVerify('tingke', getById("baoxianAmount"))) {
-            alert("保险费用请填写正确的金额！");
-            document.getElementById("baoxianAmount").focus();
-            return false;
-        }
-        if (_isNotNull(getById("yearCheckAmount")) && !regexVerify('tingke', getById("yearCheckAmount"))) {
-            alert("年检费用请填写正确的金额！");
-            document.getElementById("yearCheckAmount").focus();
+        if (_isNotNull(getById("amount")) && !regexVerify('tingke', getById("amount"))) {
+            alert("填写正确的费用金额！");
+            document.getElementById("amount").focus();
             return false;
         }
 

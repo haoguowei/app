@@ -7,7 +7,7 @@ import com.hao.app.pojo.CostsDO;
 
 public interface CostsService {
 
-    JsonResult<CostsDO> searchYYCost(CostQueryParam param);
+    JsonResult<CostsDO> searchCosts(CostQueryParam param);
 
     CostsDO getById(int id);
 

@@ -7,13 +7,13 @@
         <result column="enter_date" jdbcType="DATE" property="enterDate"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="projects" jdbcType="INTEGER" property="projects"/>
-        <result column="projects_name" jdbcType="INTEGER" property="projectsName"/>
+        <result column="projects_name" jdbcType="VARCHAR" property="projectsName"/>
         <result column="type_1" jdbcType="INTEGER" property="type1"/>
         <result column="type_2" jdbcType="INTEGER" property="type2"/>
         <result column="type_3" jdbcType="INTEGER" property="type3"/>
         <result column="amount" jdbcType="DECIMAL" property="amount"/>
         <result column="numb" jdbcType="VARCHAR" property="numb"/>
-        <result column="use" jdbcType="VARCHAR" property="use"/>
+        <result column="useful" jdbcType="VARCHAR" property="useful"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="creater" jdbcType="VARCHAR" property="creater"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
@@ -24,7 +24,7 @@
         id, enter_date, status,
         projects, projects_name,
         type_1,type_2,type_3,
-        amount,numb,use,
+        amount,numb,useful,
         remark, creater, create_time,update_time
     </sql>
     
@@ -71,8 +71,8 @@
             <if test="numb != null">
                 numb,
             </if>
-            <if test="use != null">
-                use,
+            <if test="useful != null">
+                useful,
             </if>
             <if test="remark != null">
                 remark,
@@ -119,8 +119,8 @@
             <if test="numb != null">
                 #{numb,jdbcType=VARCHAR},
             </if>
-            <if test="use != null">
-                #{use,jdbcType=VARCHAR},
+            <if test="useful != null">
+                #{useful,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -169,8 +169,8 @@
             <if test="numb != null">
                 numb = #{numb,jdbcType=VARCHAR},
             </if>
-            <if test="use != null">
-                use = #{use,jdbcType=VARCHAR},
+            <if test="useful != null">
+                useful = #{useful,jdbcType=VARCHAR},
             </if>
 
             <if test="remark != null">

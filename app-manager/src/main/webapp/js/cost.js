@@ -29,7 +29,6 @@ Ext.onReady(function () {
 
     this.searchFunc = function () {
         gridStore.setBaseParam("projectsId", getById("projectsId"));
-        gridStore.setBaseParam("employeeId", getById("employeeId"));
         gridStore.setBaseParam("enterDateStart", getById("enterDateStart"));
         gridStore.setBaseParam("enterDateEnd", getById("enterDateEnd"));
 
@@ -71,6 +70,18 @@ Ext.onReady(function () {
         fields: [
             {name: 'id'},
             {name: 'enterDate'},
+            {name: 'status'},
+            {name: 'type1'},
+            {name: 'type2'},
+            {name: 'type3'},
+            {name: 'amount'},
+            {name: 'numb'},
+            {name: 'useful'},
+            {name: 'remark'},
+            {name: 'creater'},
+            {name: 'createTime'},
+            {name: 'updateTime'},
+            {name: 'projects'},
             {name: 'projectsName'}
         ],
         baseParams: {

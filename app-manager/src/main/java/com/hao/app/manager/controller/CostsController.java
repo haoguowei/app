@@ -45,7 +45,7 @@ public class CostsController extends BaseController {
     @RequestMapping("/searchCosts.do")
     public void searchCosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
         CostQueryParam param = genParam(request);
-        JsonResult<CostsDO> result = costsService.searchYYCost(param);
+        JsonResult<CostsDO> result = costsService.searchCosts(param);
         writeResponse(response, result);
     }
 
@@ -107,15 +107,29 @@ public class CostsController extends BaseController {
             item.setEnterDate(new SimpleDateFormat("yyyy-MM-dd").parse(enterDate)); //
         }
 
-//        BigDecimal total = getBigDecimal(item.getFuelAmount());
-//        item.setTotalAmount(total);
+        //费用金额
+        String amount = request.getParameter("amount");
+        item.setAmount(StringUtils.isBlank(amount) ? BigDecimal.valueOf(0) : new BigDecimal(amount));
+
+        item.setNumb(request.getParameter("numb"));
+        item.setUseful(request.getParameter("useful"));
+
+        //费用类型
+        int type1 = NumberUtils.toInt(request.getParameter("type1"), 0);
+        int type2 = NumberUtils.toInt(request.getParameter("type2"), 0);
+        int type3 = NumberUtils.toInt(request.getParameter("type3"), 0);
+        item.setType1(type1);
+        item.setType2(type2);
+        item.setType3(type3);
 
         ResultCodeEnum resultCode;
         if (id == 0) {
             item.setCreater(getCurrentUserName(request));
             item.setCreateTime(new Date());
+            item.setStatus(0);
             resultCode = costsService.insert(item);
         } else {
+            item.setStatus(0);
             item.setUpdateTime(new Date());
             resultCode = costsService.update(item);
         }

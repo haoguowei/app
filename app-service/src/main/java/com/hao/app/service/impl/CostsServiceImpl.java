@@ -18,7 +18,7 @@ public class CostsServiceImpl implements CostsService {
     private CostsMapper costsMapper;
 
     @Override
-    public JsonResult<CostsDO> searchYYCost(CostQueryParam param) {
+    public JsonResult<CostsDO> searchCosts(CostQueryParam param) {
         int count = costsMapper.count(param);
         List<CostsDO> list = costsMapper.search(param);
         return new JsonResult<>(count, list);
