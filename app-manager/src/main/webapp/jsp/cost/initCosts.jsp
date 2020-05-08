@@ -33,13 +33,13 @@
                 </select>
 
                 费用类型：
-                <select id="type1" name="type1">
+                <select id="type1" name="type1" onchange="selectType2()">
                     <option value="0">请选择...</option>
                     <c:forEach items="${type1List }" var="itm">
                     <option value="${itm.id}">${itm.name}
                         </c:forEach>
                 </select>
-                <select id="type2" name="type2">
+                <select id="type2" name="type2" onchange="selectType3()">
                     <option value="0">请选择...</option>
                 </select>
                 <select id="type3" name="type3">

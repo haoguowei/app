@@ -1,9 +1,11 @@
 package com.hao.app.manager.controller;
 
+import com.google.gson.Gson;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.CostsDO;
+import com.hao.app.pojo.CostsTypeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.ProjectsService;
@@ -22,6 +24,9 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -157,11 +162,16 @@ public class CostsController extends BaseController {
         }
     }
 
-    private BigDecimal getBigDecimal(BigDecimal v) {
-        if (v == null) {
-            return BigDecimal.valueOf(0);
-        }
-        return v;
+    @RequestMapping("/getTypeListByParentId.do")
+    public void getTypeListByParentId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int parentId = NumberUtils.toInt(request.getParameter("parentId"), 0);
+        List<CostsTypeDO> list = costsService.listCostsTypeByParentId(parentId);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("info", list);
+        response.getWriter().write(new Gson().toJson(map));
     }
+
 
 }

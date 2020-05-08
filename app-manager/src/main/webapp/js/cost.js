@@ -46,11 +46,44 @@ Ext.onReady(function () {
     };
 
     this.selectType2 = function () {
+        var type1 = getById("type1");
+        $("#type2").empty();
+        $("#type3").empty();
 
+        Ext.Ajax.request({
+            url: 'getTypeListByParentId.do?parentId=' + type1,
+            success: function (response) {
+                var resp = Ext.util.JSON.decode(response.responseText);
+                if (resp.success) {
+                    $("#type2").append("<option value='0'>请选择...</option>");
+                    resp.info.forEach(function (v) {
+                        $("#type2").append("<option value='" + v.id + "'>" + v.name + "</option>");
+                    })
+                } else {
+                    alert("消费类型获取失败");
+                }
+            }
+        });
     };
 
     this.selectType3 = function () {
+        var type2 = getById("type2");
+        $("#type3").empty();
 
+        Ext.Ajax.request({
+            url: 'getTypeListByParentId.do?parentId=' + type2,
+            success: function (response) {
+                var resp = Ext.util.JSON.decode(response.responseText);
+                if (resp.success) {
+                    $("#type3").append("<option value='0'>请选择...</option>");
+                    resp.info.forEach(function (v) {
+                        $("#type3").append("<option value='" + v.id + "'>" + v.name + "</option>");
+                    })
+                } else {
+                    alert("消费类型获取失败");
+                }
+            }
+        });
     };
 
     //列表数据
