@@ -87,4 +87,10 @@ public class CostsServiceImpl implements CostsService {
             return ResultCodeEnum.FAIL;
         }
     }
+
+    @Override
+    public boolean updateStatus(int id) {
+        int v = costsMapper.updateStatus(id);
+        return v > 0;
+    }
 }

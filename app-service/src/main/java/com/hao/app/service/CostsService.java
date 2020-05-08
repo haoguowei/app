@@ -23,4 +23,5 @@ public interface CostsService {
 
     ResultCodeEnum update(CostsDO cost);
 
+    boolean updateStatus(int id);
 }

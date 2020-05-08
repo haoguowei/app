@@ -41,8 +41,21 @@ Ext.onReady(function () {
         location.href = "initCostsEdit.do?id=" + id;
     };
 
-    this.viewF = function (id) {
-        // location.href = "initAssetsEdit.do?view=1&id=" + id;
+    this.statusF = function (id) {
+        if (confirm("确定要提交该记录吗？提交后记录将不可修改！")) {
+            Ext.Ajax.request({
+                url: 'statusF.do?id=' + id,
+                success: function (response) {
+                    var resp = Ext.util.JSON.decode(response.responseText);
+                    if (resp.success) {
+                        alert("操作成功！");
+                        searchFunc();
+                    } else {
+                        alert("操作失败：" + resp.resultTipMsg);
+                    }
+                }
+            });
+        }
     };
 
     this.selectType2 = function () {
@@ -200,13 +213,13 @@ Ext.onReady(function () {
                     if (val == null || val == '') {
                         return '';
                     }
-
                     var str = '';
-                    // str += genButton("查看", 'viewF(' + val + ')');
-                    if (urlEditValid) {//权限
+                    if (record.data.status == '1' || record.data.status == 1) {
+                        //donothing
+                    } else {
                         str += genButton("修改", 'updateF(' + val + ')');
+                        str += genButton("提交", 'statusF(' + val + ')');
                     }
-
                     return str;
                 }
             }

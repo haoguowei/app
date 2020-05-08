@@ -3,6 +3,7 @@ package com.hao.app.dao;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.pojo.CostsDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface CostsMapper {
 
     List<CostsDO> search(CostQueryParam param);
 
+    int updateStatus(@Param("id") int id);
 }

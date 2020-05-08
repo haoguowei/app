@@ -180,5 +180,16 @@ public class CostsController extends BaseController {
         response.getWriter().write(new Gson().toJson(map));
     }
 
+    @RequestMapping("/statusF.do")
+    public void statusF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = NumberUtils.toInt(request.getParameter("id"), 0);
+
+        boolean res = costsService.updateStatus(id);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", res);
+        response.getWriter().write(new Gson().toJson(map));
+    }
+
 
 }
