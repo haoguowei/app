@@ -156,10 +156,10 @@
             <if test="type1 != null">
                 type_1 = #{type1,jdbcType=INTEGER},
             </if>
-            <if test="endMileage != null">
+            <if test="type2 != null">
                 type_2 = #{type2,jdbcType=INTEGER},
             </if>
-            <if test="workload != null">
+            <if test="type3 != null">
                 type_3 = #{type3,jdbcType=INTEGER},
             </if>
 
