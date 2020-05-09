@@ -5,14 +5,18 @@ import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.pojo.CostsDO;
 import com.hao.app.pojo.CostsTypeDO;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 public interface CostsService {
+
+    Map<TableKey, BigDecimal> getIncomeTable(TableQueryParam param);
 
     Map<Integer, String> mapCostsType();
 

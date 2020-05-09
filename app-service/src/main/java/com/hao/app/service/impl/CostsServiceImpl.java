@@ -5,6 +5,7 @@ import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
+import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.CostsMapper;
 import com.hao.app.dao.CostsTypeMapper;
@@ -15,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,18 @@ public class CostsServiceImpl implements CostsService {
 
     @Resource
     private CostsTypeMapper costsTypeMapper;
+
+    @Override
+    public Map<TableKey, BigDecimal> getIncomeTable(TableQueryParam param) {
+        List<AmountTable> list = costsMapper.searchCostTable(param);
+        Map<TableKey, BigDecimal> map = new HashMap<>();
+        if (list != null) {
+            for (AmountTable table : list) {
+                map.put(new TableKey(table.getProjects(), table.getType3()), table.getAmount());
+            }
+        }
+        return map;
+    }
 
     @Override
     public Map<Integer, String> mapCostsType() {
