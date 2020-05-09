@@ -1,6 +1,9 @@
 package com.hao.app.service.impl;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
+import com.hao.app.commons.entity.param.CostTableQueryParam;
+import com.hao.app.commons.entity.result.CostsTable;
+import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
 import com.hao.app.dao.CostsMapper;
@@ -92,5 +95,15 @@ public class CostsServiceImpl implements CostsService {
     public boolean updateStatus(int id) {
         int v = costsMapper.updateStatus(id);
         return v > 0;
+    }
+
+    @Override
+    public List<CostsTable> searchCostsTable(CostTableQueryParam param) {
+        return null;
+    }
+
+    @Override
+    public List<CostsTableMonth> searchCostsTableMonth(CostTableQueryParam param) {
+        return null;
     }
 }
