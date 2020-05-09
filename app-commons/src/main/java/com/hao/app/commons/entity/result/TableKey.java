@@ -18,6 +18,10 @@ public class TableKey implements Serializable {
 
     }
 
+    public TableKey(int projectId) {
+        this.projectId = projectId;
+    }
+
     public TableKey(int projectId, int type3) {
         this.projectId = projectId;
         this.type3 = type3;

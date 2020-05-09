@@ -2,8 +2,6 @@ package com.hao.app.service;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.param.TableQueryParam;
-import com.hao.app.commons.entity.result.AmountTable;
-import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -16,9 +14,11 @@ import java.util.Map;
 
 public interface CostsService {
 
-    Map<TableKey, BigDecimal> getIncomeTable(TableQueryParam param);
+    Map<TableKey, BigDecimal> getCostTable(TableQueryParam param);
 
     Map<Integer, String> mapCostsType();
+
+    List<CostsTypeDO> getTableTypes();
 
     List<CostsTypeDO> listCostsTypeByParentId(Integer parentId);
 
@@ -32,7 +32,4 @@ public interface CostsService {
 
     boolean updateStatus(int id);
 
-    List<AmountTable> searchCostsTable(TableQueryParam param);
-
-    List<CostsTableMonth> searchCostsTableMonth(TableQueryParam param);
 }

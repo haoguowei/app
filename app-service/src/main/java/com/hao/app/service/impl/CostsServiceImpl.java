@@ -3,7 +3,6 @@ package com.hao.app.service.impl;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.AmountTable;
-import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -31,7 +30,7 @@ public class CostsServiceImpl implements CostsService {
     private CostsTypeMapper costsTypeMapper;
 
     @Override
-    public Map<TableKey, BigDecimal> getIncomeTable(TableQueryParam param) {
+    public Map<TableKey, BigDecimal> getCostTable(TableQueryParam param) {
         List<AmountTable> list = costsMapper.searchCostTable(param);
         Map<TableKey, BigDecimal> map = new HashMap<>();
         if (list != null) {
@@ -50,6 +49,28 @@ public class CostsServiceImpl implements CostsService {
             map.put(ct.getId(), ct.getName());
         }
         return map;
+    }
+
+    @Override
+    public List<CostsTypeDO> getTableTypes() {
+        List<CostsTypeDO> type1s = costsTypeMapper.searchByParentId(0);
+
+        for (CostsTypeDO type1 : type1s) {
+            List<CostsTypeDO> type2s = costsTypeMapper.searchByParentId(type1.getId());
+            type1.setChilds(type2s);
+
+            int merges = 0;
+            for (CostsTypeDO type2 : type2s) {
+                List<CostsTypeDO> type3s = costsTypeMapper.searchByParentId(type2.getId());
+                type2.setChilds(type3s);
+                type2.setMerges(type3s.size());
+                merges += type3s.size();
+            }
+
+            type1.setMerges(merges);
+        }
+
+        return type1s;
     }
 
     @Override
@@ -109,15 +130,5 @@ public class CostsServiceImpl implements CostsService {
     public boolean updateStatus(int id) {
         int v = costsMapper.updateStatus(id);
         return v > 0;
-    }
-
-    @Override
-    public List<AmountTable> searchCostsTable(TableQueryParam param) {
-        return null;
-    }
-
-    @Override
-    public List<CostsTableMonth> searchCostsTableMonth(TableQueryParam param) {
-        return null;
     }
 }

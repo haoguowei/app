@@ -1,8 +1,9 @@
 package com.hao.app.manager.controller;
 
 import com.hao.app.commons.entity.param.TableQueryParam;
-import com.hao.app.commons.entity.result.AmountTable;
-import com.hao.app.commons.entity.result.CostsTableMonth;
+import com.hao.app.commons.entity.result.TableKey;
+import com.hao.app.pojo.CostsTypeDO;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.IncomeService;
 import com.hao.app.service.ProjectsService;
@@ -17,7 +18,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -36,23 +39,27 @@ public class CostsTableController extends BaseController {
     @Resource
     private ProjectsService projectsService;
 
-    @RequestMapping("/initCostsTable.do")
+    @RequestMapping("/initCostsTableMonth.do")
     public String initCostsTable(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TableQueryParam param = genParam(request);
-        List<AmountTable> costsTableList = costsService.searchCostsTable(param);
+        Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable(param);
+        Map<TableKey, BigDecimal> costTable = costsService.getCostTable(param);
+        request.setAttribute("incomeTable", incomeTable);
+        request.setAttribute("costTable", costTable);
 
-        request.setAttribute("costsTableList", costsTableList);
+        List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
+        request.setAttribute("projectsList", projectsList);
 
-        return "jsp/costtable/initCostsTable";
+        List<CostsTypeDO> allTypeList = costsService.getTableTypes();
+        request.setAttribute("allTypeList", allTypeList);
+
+        return "jsp/costtable/initCostsTableMonth";
     }
 
-    @RequestMapping("/initCostsTableMonth.do")
+    @RequestMapping("/initCostsTable.do")
     public String initCostsTableMonth(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TableQueryParam param = genParam(request);
-        List<CostsTableMonth> costsTableList = costsService.searchCostsTableMonth(param);
-
-        request.setAttribute("costsTableList", costsTableList);
-        return "jsp/costtable/initCostsTableMonth";
+        return "jsp/costtable/initCostsTable";
     }
 
 
@@ -67,11 +74,11 @@ public class CostsTableController extends BaseController {
         }
 
         if (StringUtils.isNotBlank(enterDateStart)) {
-            param.setEnterDateStart(enterDateStart);
+            param.setEnterDateStart(enterDateStart + "-01");
         }
 
         if (StringUtils.isNotBlank(enterDateEnd)) {
-            param.setEnterDateEnd(enterDateEnd);
+            param.setEnterDateEnd(enterDateEnd + "-31");
         }
 
         return param;
