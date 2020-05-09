@@ -1,8 +1,8 @@
 package com.hao.app.service;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
-import com.hao.app.commons.entity.param.CostTableQueryParam;
-import com.hao.app.commons.entity.result.CostsTable;
+import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -28,7 +28,7 @@ public interface CostsService {
 
     boolean updateStatus(int id);
 
-    List<CostsTable> searchCostsTable(CostTableQueryParam param);
+    List<AmountTable> searchCostsTable(TableQueryParam param);
 
-    List<CostsTableMonth> searchCostsTableMonth(CostTableQueryParam param);
+    List<CostsTableMonth> searchCostsTableMonth(TableQueryParam param);
 }

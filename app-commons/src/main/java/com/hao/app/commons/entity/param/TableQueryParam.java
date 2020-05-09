@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class CostTableQueryParam implements Serializable {
+public class TableQueryParam implements Serializable {
 
 	private static final long serialVersionUID = 4737617179006429526L;
 

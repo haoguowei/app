@@ -1,8 +1,8 @@
 package com.hao.app.service.impl;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
-import com.hao.app.commons.entity.param.CostTableQueryParam;
-import com.hao.app.commons.entity.result.CostsTable;
+import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.CostsTableMonth;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -98,12 +98,12 @@ public class CostsServiceImpl implements CostsService {
     }
 
     @Override
-    public List<CostsTable> searchCostsTable(CostTableQueryParam param) {
+    public List<AmountTable> searchCostsTable(TableQueryParam param) {
         return null;
     }
 
     @Override
-    public List<CostsTableMonth> searchCostsTableMonth(CostTableQueryParam param) {
+    public List<CostsTableMonth> searchCostsTableMonth(TableQueryParam param) {
         return null;
     }
 }

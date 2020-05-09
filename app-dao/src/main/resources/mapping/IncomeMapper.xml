@@ -23,6 +23,11 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
 
+    <resultMap id="TableResultMap" type="com.hao.app.commons.entity.result.AmountTable">
+        <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id,projects,projects_name,income_day,income_amount,contract_numb,contract_amount,jiafang,jiafang_info,remark,creater,create_time,update_time
     </sql>
@@ -195,5 +200,22 @@
         </where>
     </sql>
 
+    <select id="searchIncomeTable" parameterType="com.hao.app.commons.entity.param.TableQueryParam"
+            resultMap="TableResultMap">
+        SELECT projects,sum(income_amount) as amount
+        FROM income
+        WHERE 1
+        <if test="projectsId != null and projectsId > 0">
+            and projects = ${projectsId}
+        </if>
+        <if test="enterDateStart != null">
+            <![CDATA[ and income_day >= #{enterDateStart} ]]>
+        </if>
+        <if test="enterDateEnd != null">
+            <![CDATA[ and income_day <= #{enterDateEnd} ]]>
+        </if>
+        GROUP BY projects
+
+    </select>
 
 </mapper>
