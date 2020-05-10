@@ -22,7 +22,6 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
-            /*width: 100%;*/
         }
 
         table td {
@@ -50,7 +49,11 @@
 <h1>月度费用</h1>
 <hr>
 
-<h4>报表月份：</h4>
+<h4>
+    报表月份：
+
+</h4>
+
 
 <table style="height: 40px;">
     <tr>

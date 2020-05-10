@@ -26,4 +26,6 @@ public class CostsTypeDO implements Serializable {
 
     private Set<Integer> leafIds;
 
+    private int rowspan;
+
 }
