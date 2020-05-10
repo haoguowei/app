@@ -69,7 +69,7 @@
 </table>
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table>
-        <tr>
+        <tr style="background-color: #E6E6FA;">
             <td style="width: 350px;" colspan="3">
                 合同收入
             </td>
@@ -81,7 +81,7 @@
         </tr>
 
         <c:forEach items="${allTypeList }" var="typeItem">
-            <tr>
+            <tr style="${(typeItem.id == -1 || typeItem.id == -2) ? 'background-color: #D8BFD8;' : 'background-color: #F8F8FF;'} ">
                 <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
                         ${typeItem.name1 }
                 </td>
@@ -94,7 +94,6 @@
                             ${typeItem.name3 }
                     </td>
                 </c:if>
-
                 <c:if test="${typeItem.id < 0}">
                     <td align="center" colspan="2">
                             ${typeItem.name2 }

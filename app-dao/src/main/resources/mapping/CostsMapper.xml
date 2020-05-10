@@ -245,7 +245,7 @@
             resultMap="TableResultMap">
         SELECT projects,type_3,sum(amount) as amount
         FROM costs
-        WHERE 1
+        WHERE status = 1
         <if test="projectsId != null and projectsId > 0">
             and projects = ${projectsId}
         </if>
