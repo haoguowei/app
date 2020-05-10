@@ -39,17 +39,23 @@ public class DateUtil {
 		calendar.setFirstDayOfWeek(Calendar.MONDAY);
 		calendar.add(Calendar.DATE, amount);
 		return calendar.getTime();
-    }
+	}
 
-    public static Date addMonth(Date date, int amount) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.setFirstDayOfWeek(Calendar.MONDAY);
-        calendar.add(Calendar.MONTH, amount);
-        return calendar.getTime();
-    }
+	public static int getYear() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		return calendar.get(Calendar.YEAR);
+	}
 
-    public static String getPassAgeDate() {
+	public static Date addMonth(Date date, int amount) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.setFirstDayOfWeek(Calendar.MONDAY);
+		calendar.add(Calendar.MONTH, amount);
+		return calendar.getTime();
+	}
+
+	public static String getPassAgeDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
 		calendar.add(Calendar.YEAR, -68); //68岁前的人

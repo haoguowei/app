@@ -21,5 +21,10 @@ public class TableQueryParam implements Serializable {
 	private String enterDateStart;
 	private String enterDateEnd;
 
+	private String fromYear;
+	private String fromMonth;
+	private String toYear;
+	private String toMonth;
+
 
 }

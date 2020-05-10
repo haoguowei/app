@@ -2,6 +2,7 @@ package com.hao.app.manager.controller;
 
 import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.TableKey;
+import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.pojo.CostsTypeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +55,17 @@ public class CostsTableController extends BaseController {
         List<CostsTypeDO> allTypeList = costsService.getTableTypes();
         request.setAttribute("allTypeList", allTypeList);
 
+
+        List<String> yearList = Arrays.asList("2019", "2020", "2021", "2022", "2023", "2024", "2025");
+        List<String> monthList = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        request.setAttribute("yearList", yearList);
+        request.setAttribute("monthList", monthList);
+
+        request.setAttribute("fromYear", param.getFromYear());
+        request.setAttribute("fromMonth", param.getFromMonth());
+        request.setAttribute("toYear", param.getToYear());
+        request.setAttribute("toMonth", param.getToMonth());
+
         return "jsp/costtable/initCostsTableMonth";
     }
 
@@ -65,21 +78,30 @@ public class CostsTableController extends BaseController {
 
     private TableQueryParam genParam(HttpServletRequest request) {
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
-        String enterDateStart = request.getParameter("enterDateStart");
-        String enterDateEnd = request.getParameter("enterDateEnd");
+        String fromYear = request.getParameter("fromYear");
+        String fromMonth = request.getParameter("fromMonth");
+        String toYear = request.getParameter("toYear");
+        String toMonth = request.getParameter("toMonth");
+
+        String year = String.valueOf(DateUtil.getYear());
+
+        fromYear = StringUtils.isBlank(fromYear) ? year : fromYear;
+        fromMonth = StringUtils.isBlank(fromMonth) ? "01" : fromMonth;
+        toYear = StringUtils.isBlank(toYear) ? year : toYear;
+        toMonth = StringUtils.isBlank(toMonth) ? "12" : toMonth;
 
         TableQueryParam param = new TableQueryParam();
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
         }
 
-        if (StringUtils.isNotBlank(enterDateStart)) {
-            param.setEnterDateStart(enterDateStart + "-01");
-        }
+        param.setFromYear(fromYear);
+        param.setFromMonth(fromMonth);
+        param.setToYear(toYear);
+        param.setToMonth(toMonth);
 
-        if (StringUtils.isNotBlank(enterDateEnd)) {
-            param.setEnterDateEnd(enterDateEnd + "-31");
-        }
+        param.setEnterDateStart(fromYear + "-" + fromMonth + "-01");
+        param.setEnterDateEnd(toYear + "-" + toMonth + "-01");
 
         return param;
     }

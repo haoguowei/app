@@ -51,7 +51,36 @@
 
 <h4>
     报表月份：
-
+    <select id="fromYear" name="fromYear">
+        <c:forEach items="${yearList }" var="itm">
+            <option
+                    <c:if test="${itm == fromYear }">selected="selected"</c:if>
+                    value="${itm }">${itm }</option>
+        </c:forEach>
+    </select>年
+    <select id="fromMonth" name="fromMonth">
+        <c:forEach items="${monthList }" var="itm">
+            <option
+                    <c:if test="${itm == fromMonth }">selected="selected"</c:if>
+                    value="${itm }">${itm }</option>
+        </c:forEach>
+    </select>月
+    ~
+    <select id="toYear" name="toYear">
+        <c:forEach items="${yearList }" var="itm">
+            <option
+                    <c:if test="${itm == toYear }">selected="selected"</c:if>
+                    value="${itm }">${itm }</option>
+        </c:forEach>
+    </select>年
+    <select id="toMonth" name="toMonth">
+        <c:forEach items="${monthList }" var="itm">
+            <option
+                    <c:if test="${itm == toMonth }">selected="selected"</c:if>
+                    value="${itm }">${itm }</option>
+        </c:forEach>
+    </select>月
+    <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
 </h4>
 
 
@@ -116,6 +145,17 @@
     var height = $(window).height() - 170;
     document.getElementById('m_div_id').style.height = height + "px";
 
+    function searchFunc() {
+        var fromYear = document.getElementById("fromYear").value;
+        var fromMonth = document.getElementById("fromMonth").value;
+        var toYear = document.getElementById("toYear").value;
+        var toMonth = document.getElementById("toMonth").value;
+        window.location.href = "initCostsTableMonth.do?fromYear=" + fromYear
+            + "&fromMonth=" + fromMonth
+            + "&toYear=" + toYear
+            + "&toMonth=" + toMonth
+            + "&t=" + new Date().getTime();
+    }
 
 </script>
 </html>
