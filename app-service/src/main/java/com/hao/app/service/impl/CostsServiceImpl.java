@@ -87,12 +87,14 @@ public class CostsServiceImpl implements CostsService {
             heji.setId(-1);
             heji.setName2(type1.getName() + "合计");
             heji.setLeafIds(leafIds);
+            heji.setBackground("background-color: #F8F8FF;");
             result.add(heji);
 
             CostsTypeDO zhanbi = new CostsTypeDO();
             zhanbi.setId(-2);
             zhanbi.setName2(type1.getName() + "占比");
             zhanbi.setLeafIds(leafIds);
+            zhanbi.setBackground("background-color: #F8F8FF;");
             result.add(zhanbi);
         }
 
@@ -102,18 +104,21 @@ public class CostsServiceImpl implements CostsService {
         chengguo1.setName1("经营成果");
         chengguo1.setName2("费用合计");
         chengguo1.setLeafIds(allLeafIds);
+        chengguo1.setBackground("background-color: #D8BFD8;");
         result.add(chengguo1);
 
         CostsTypeDO chengguo2 = new CostsTypeDO();
         chengguo2.setId(-102);
         chengguo2.setName2("费用合计占比");
         chengguo2.setLeafIds(allLeafIds);
+        chengguo2.setBackground("background-color: #D8BFD8;");
         result.add(chengguo2);
 
         CostsTypeDO chengguo3 = new CostsTypeDO();
         chengguo3.setId(-103);
         chengguo3.setName2("利润率");
         chengguo3.setLeafIds(allLeafIds);
+        chengguo3.setBackground("background-color: #D8BFD8;");
         result.add(chengguo3);
 
         return result;

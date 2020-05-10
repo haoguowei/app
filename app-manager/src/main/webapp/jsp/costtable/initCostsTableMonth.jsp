@@ -81,7 +81,7 @@
         </tr>
 
         <c:forEach items="${allTypeList }" var="typeItem">
-            <tr style="${(typeItem.id == -1 || typeItem.id == -2) ? 'background-color: #D8BFD8;' : 'background-color: #F8F8FF;'} ">
+            <tr style="${typeItem.background} ">
                 <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
                         ${typeItem.name1 }
                 </td>

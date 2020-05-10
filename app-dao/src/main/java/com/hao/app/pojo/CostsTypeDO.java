@@ -30,4 +30,6 @@ public class CostsTypeDO implements Serializable {
 
     private int colpan = 1;
 
+    private String background;
+
 }
