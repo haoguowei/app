@@ -50,6 +50,11 @@ public class CostsTableController extends BaseController {
         request.setAttribute("costTable", costTable);
 
         List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
+        ProjectsDO projectsDO = new ProjectsDO();
+        projectsDO.setName("合计");
+        projectsDO.setId(0);
+        projectsList.add(projectsDO);
+
         request.setAttribute("projectsList", projectsList);
 
         List<CostsTypeDO> allTypeList = costsService.getTableTypes();
