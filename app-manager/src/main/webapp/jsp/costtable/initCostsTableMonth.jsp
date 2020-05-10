@@ -22,7 +22,7 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
-            height: 1000px;
+            /*width: 100%;*/
         }
 
         table td {
@@ -33,29 +33,13 @@
         table th {
             border: 1px solid #99bbe8;
             background-color: #dfe8f6;
-            padding: 5px;
             height: 30px;
         }
 
-        h3 {
+        h4 {
             color: blue;
         }
 
-        h5 {
-            color: red;
-        }
-
-        select {
-            font: 10px Verdana, Arial, Helvetica, sans-serif;
-            width: 140px;
-            margin: 10px 0px 10px 0px;
-        }
-
-        img {
-            cursor: pointer;
-            margin-left: 5px;
-            margin-right: 5px;
-        }
     </style>
     <title>
     </title>
@@ -68,25 +52,26 @@
 
 <h4>报表月份：</h4>
 
-<div style="height: 600px;overflow: auto;margin-bottom: 15px;" id="m_div_id">
+<table style="height: 40px;">
+    <tr>
+        <th style="width: 350px;" colspan="3">
+            核算项
+        </th>
+        <c:forEach items="${projectsList }" var="project">
+            <th style="width: 90px;">
+                    ${project.name }
+            </th>
+        </c:forEach>
+    </tr>
+</table>
+<div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table>
         <tr>
-            <th style="width: 280px;" colspan="3">
-                核算项
-            </th>
-            <c:forEach items="${projectsList }" var="project">
-                <th style="width: 80px;">
-                        ${project.name }
-                </th>
-            </c:forEach>
-        </tr>
-
-        <tr>
-            <td align="center" colspan="3">
+            <td style="width: 350px;" colspan="3">
                 合同收入
             </td>
             <c:forEach items="${projectsList }" var="project">
-                <td align="right">
+                <td align="right" style="width: 90px;">
                         ${WebUtils.getIncomeAmount(project.id, incomeTable)}
                 </td>
             </c:forEach>
@@ -94,13 +79,13 @@
 
         <c:forEach items="${allTypeList }" var="typeItem">
             <tr>
-                <td align="left">
+                <td align="left" type1="${typeItem.id }">
                         ${typeItem.name1 }
                 </td>
-                <td align="left">
+                <td align="left" type2="${typeItem.id }">
                         ${typeItem.name2 }
                 </td>
-                <td align="left">
+                <td align="left" type3="${typeItem.id }">
                         ${typeItem.name3 }
                 </td>
 
@@ -111,14 +96,12 @@
                 </c:forEach>
             </tr>
         </c:forEach>
-
-
     </table>
 </div>
 
 </body>
 <script type="text/javascript">
-    var height = $(window).height() - 120;
+    var height = $(window).height() - 170;
     document.getElementById('m_div_id').style.height = height + "px";
 
 
