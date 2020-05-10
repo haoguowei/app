@@ -55,34 +55,42 @@ public class CostsServiceImpl implements CostsService {
         Set<Integer> allLeafIds = new HashSet<>();
 
         List<CostsTypeDO> type1s = costsTypeMapper.searchByParentId(0);
-        for (CostsTypeDO type1 : type1s) {
+        for (int i = 0; i < type1s.size(); i++) {
+            CostsTypeDO type1 = type1s.get(i);
             Set<Integer> leafIds = new HashSet<>();
-            List<CostsTypeDO> type2s = costsTypeMapper.searchByParentId(type1.getId());
-            for (CostsTypeDO type2 : type2s) {
-                List<CostsTypeDO> type3s = costsTypeMapper.searchByParentId(type2.getId());
 
-                for (CostsTypeDO type3 : type3s) {
+            List<CostsTypeDO> type2s = costsTypeMapper.searchByParentId(type1.getId());
+            for (int j = 0; j < type2s.size(); j++) {
+                CostsTypeDO type2 = type2s.get(j);
+
+                List<CostsTypeDO> type3s = costsTypeMapper.searchByParentId(type2.getId());
+                for (int z = 0; z < type3s.size(); z++) {
+                    CostsTypeDO type3 = type3s.get(z);
                     leafIds.add(type3.getId());
                     allLeafIds.add(type3.getId());
 
-                    type3.setName1(type1.getName());
-                    type3.setName2(type2.getName());
-                    type3.setName3(type3.getName());
+                    if (z == 0) {
+                        type3.setName2(type2.getName());
+                    }
 
+                    if (j == 0 && z == 0) {
+                        type3.setName1(type1.getName());
+
+                    }
+
+                    type3.setName3(type3.getName());
                     result.add(type3);
                 }
             }
 
             CostsTypeDO heji = new CostsTypeDO();
             heji.setId(-1);
-            heji.setName1(type1.getName());
             heji.setName2(type1.getName() + "合计");
             heji.setLeafIds(leafIds);
             result.add(heji);
 
             CostsTypeDO zhanbi = new CostsTypeDO();
             zhanbi.setId(-2);
-            zhanbi.setName1(type1.getName());
             zhanbi.setName2(type1.getName() + "占比");
             zhanbi.setLeafIds(leafIds);
             result.add(zhanbi);
@@ -98,14 +106,12 @@ public class CostsServiceImpl implements CostsService {
 
         CostsTypeDO chengguo2 = new CostsTypeDO();
         chengguo2.setId(-102);
-        chengguo2.setName1("经营成果");
         chengguo2.setName2("费用合计占比");
         chengguo2.setLeafIds(allLeafIds);
         result.add(chengguo2);
 
         CostsTypeDO chengguo3 = new CostsTypeDO();
         chengguo3.setId(-103);
-        chengguo3.setName1("经营成果");
         chengguo3.setName2("利润率");
         chengguo3.setLeafIds(allLeafIds);
         result.add(chengguo3);

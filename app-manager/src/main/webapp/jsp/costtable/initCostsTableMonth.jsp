@@ -82,15 +82,25 @@
 
         <c:forEach items="${allTypeList }" var="typeItem">
             <tr>
-                <td align="left" type1="${typeItem.id }">
+                <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
                         ${typeItem.name1 }
                 </td>
-                <td align="left" type2="${typeItem.id }">
-                        ${typeItem.name2 }
-                </td>
-                <td align="left" type3="${typeItem.id }">
-                        ${typeItem.name3 }
-                </td>
+
+                <c:if test="${typeItem.id > 0}">
+                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
+                            ${typeItem.name2 }
+                    </td>
+                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
+                            ${typeItem.name3 }
+                    </td>
+                </c:if>
+
+                <c:if test="${typeItem.id < 0}">
+                    <td align="center" colspan="2">
+                            ${typeItem.name2 }
+                    </td>
+                </c:if>
+
 
                 <c:forEach items="${projectsList }" var="project">
                     <td align="right">
