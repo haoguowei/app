@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @ToString
@@ -16,9 +16,14 @@ public class CostsTypeDO implements Serializable {
 
     private String name;
 
-    ////////////////////
-    private List<CostsTypeDO> childs;
 
-    private int merges;
+    //////////////////////////////////////////
+    private String name1;
+
+    private String name2;
+
+    private String name3;
+
+    private Set<Integer> leafIds;
 
 }

@@ -22,6 +22,7 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
+            height: 1000px;
         }
 
         table td {
@@ -63,33 +64,63 @@
 </head>
 <body>
 <h1>月度费用</h1>
+<hr>
 
 <h4>报表月份：</h4>
 
-<table>
-    <tr>
-        <th style="width: 280px;">
-            核算项
-        </th>
-        <c:forEach items="${projectsList }" var="project">
-            <th style="width: 80px;">
-                    ${project.name }
+<div style="height: 600px;overflow: auto;margin-bottom: 15px;" id="m_div_id">
+    <table>
+        <tr>
+            <th style="width: 280px;" colspan="3">
+                核算项
             </th>
-        </c:forEach>
-    </tr>
+            <c:forEach items="${projectsList }" var="project">
+                <th style="width: 80px;">
+                        ${project.name }
+                </th>
+            </c:forEach>
+        </tr>
 
-    <tr>
-        <td align="left">
-            合同收入
-        </td>
-        <c:forEach items="${projectsList }" var="project">
-            <td align="right">
-                    ${WebUtils.getIncomeAmount(project.id, incomeTable)}
+        <tr>
+            <td align="center" colspan="3">
+                合同收入
             </td>
+            <c:forEach items="${projectsList }" var="project">
+                <td align="right">
+                        ${WebUtils.getIncomeAmount(project.id, incomeTable)}
+                </td>
+            </c:forEach>
+        </tr>
+
+        <c:forEach items="${allTypeList }" var="typeItem">
+            <tr>
+                <td align="left">
+                        ${typeItem.name1 }
+                </td>
+                <td align="left">
+                        ${typeItem.name2 }
+                </td>
+                <td align="left">
+                        ${typeItem.name3 }
+                </td>
+
+                <c:forEach items="${projectsList }" var="project">
+                    <td align="right">
+                            ${WebUtils.getCostAmount(project.id, typeItem.id, typeItem.leafIds, costTable)}
+                    </td>
+                </c:forEach>
+            </tr>
         </c:forEach>
-    </tr>
 
 
-</table>
+    </table>
+</div>
+
 </body>
+<script type="text/javascript">
+    var height = $(window).height() - 120;
+    document.getElementById('m_div_id').style.height = height + "px";
+
+
+</script>
 </html>

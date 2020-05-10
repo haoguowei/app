@@ -16,9 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CostsServiceImpl implements CostsService {
@@ -53,24 +51,66 @@ public class CostsServiceImpl implements CostsService {
 
     @Override
     public List<CostsTypeDO> getTableTypes() {
+        List<CostsTypeDO> result = new ArrayList<>();
+        Set<Integer> allLeafIds = new HashSet<>();
+
         List<CostsTypeDO> type1s = costsTypeMapper.searchByParentId(0);
-
         for (CostsTypeDO type1 : type1s) {
+            Set<Integer> leafIds = new HashSet<>();
             List<CostsTypeDO> type2s = costsTypeMapper.searchByParentId(type1.getId());
-            type1.setChilds(type2s);
-
-            int merges = 0;
             for (CostsTypeDO type2 : type2s) {
                 List<CostsTypeDO> type3s = costsTypeMapper.searchByParentId(type2.getId());
-                type2.setChilds(type3s);
-                type2.setMerges(type3s.size());
-                merges += type3s.size();
+
+                for (CostsTypeDO type3 : type3s) {
+                    leafIds.add(type3.getId());
+                    allLeafIds.add(type3.getId());
+
+                    type3.setName1(type1.getName());
+                    type3.setName2(type2.getName());
+                    type3.setName3(type3.getName());
+
+                    result.add(type3);
+                }
             }
 
-            type1.setMerges(merges);
+            CostsTypeDO heji = new CostsTypeDO();
+            heji.setId(-1);
+            heji.setName1(type1.getName());
+            heji.setName2(type1.getName() + "合计");
+            heji.setLeafIds(leafIds);
+            result.add(heji);
+
+            CostsTypeDO zhanbi = new CostsTypeDO();
+            zhanbi.setId(-2);
+            zhanbi.setName1(type1.getName());
+            zhanbi.setName2(type1.getName() + "占比");
+            zhanbi.setLeafIds(leafIds);
+            result.add(zhanbi);
         }
 
-        return type1s;
+
+        CostsTypeDO chengguo1 = new CostsTypeDO();
+        chengguo1.setId(-101);
+        chengguo1.setName1("经营成果");
+        chengguo1.setName2("费用合计");
+        chengguo1.setLeafIds(allLeafIds);
+        result.add(chengguo1);
+
+        CostsTypeDO chengguo2 = new CostsTypeDO();
+        chengguo2.setId(-102);
+        chengguo2.setName1("经营成果");
+        chengguo2.setName2("费用合计占比");
+        chengguo2.setLeafIds(allLeafIds);
+        result.add(chengguo2);
+
+        CostsTypeDO chengguo3 = new CostsTypeDO();
+        chengguo3.setId(-103);
+        chengguo3.setName1("经营成果");
+        chengguo3.setName2("利润率");
+        chengguo3.setLeafIds(allLeafIds);
+        result.add(chengguo3);
+
+        return result;
     }
 
     @Override
