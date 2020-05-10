@@ -103,7 +103,7 @@
 
                 <c:forEach items="${projectsList }" var="project">
                     <td align="right">
-                            ${WebUtils.getCostAmount(project.id, typeItem.id, typeItem.leafIds, costTable)}
+                            ${WebUtils.getCostAmount(project.id, typeItem.id, typeItem.leafIds, costTable, incomeTable)}
                     </td>
                 </c:forEach>
             </tr>
