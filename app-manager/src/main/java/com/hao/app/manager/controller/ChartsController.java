@@ -1,8 +1,7 @@
 package com.hao.app.manager.controller;
 
-import com.hao.app.commons.entity.result.ResultStatistics;
+import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.utils.DateUtil;
-import com.hao.app.manager.dto.Chart;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.ProjectsService;
@@ -17,9 +16,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class ChartsController extends BaseController {
@@ -33,144 +31,69 @@ public class ChartsController extends BaseController {
     private ProjectsService projectsService;
 
 
-    @RequestMapping("/initKanban.do")
-    public String initArea(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setAttribute("projectsList", getProjectsList(request));
-        SimpleDateFormat DATE = new SimpleDateFormat("yyyy-MM-dd");
-        String fromDate = request.getParameter("fromDate");
-        String endDate = request.getParameter("endDate");
-        if (StringUtils.isBlank(fromDate)) {
-            fromDate = DATE.format(DateUtil.addMonth(new Date(), -6));
-        }
-        if (StringUtils.isBlank(endDate)) {
-            endDate = DATE.format(new Date());
-        }
-        request.setAttribute("fromDate", fromDate);
-        request.setAttribute("endDate", endDate);
+    @RequestMapping("/initCostCharts.do")
+    public String initCostCharts(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        TableQueryParam param = genParam(request);
 
-        int abc = NumberUtils.toInt(request.getParameter("abc"), 0);
-        Integer projectId = 0;
-        if (abc == 0) {
+        //时间选择
+        List<String> yearList = Arrays.asList("2019", "2020", "2021", "2022", "2023", "2024", "2025");
+        List<String> monthList = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        request.setAttribute("yearList", yearList);
+        request.setAttribute("monthList", monthList);
+
+        request.setAttribute("fromYear", param.getFromYear());
+        request.setAttribute("fromMonth", param.getFromMonth());
+        request.setAttribute("toYear", param.getToYear());
+        request.setAttribute("toMonth", param.getToMonth());
+
+        request.setAttribute("projectsList", getProjectsList(request));
+        request.setAttribute("projectId", param.getProjectsId());
+
+        //项目信息
+        ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
+        request.setAttribute("projectName", projectsDO == null ? "所有项目" : projectsDO.getName());
+
+        //TODO
+
+        return "jsp/charts/initCostCharts";
+    }
+
+    private TableQueryParam genParam(HttpServletRequest request) {
+        String fromYear = request.getParameter("fromYear");
+        String fromMonth = request.getParameter("fromMonth");
+        String toYear = request.getParameter("toYear");
+        String toMonth = request.getParameter("toMonth");
+
+        String year = String.valueOf(DateUtil.getYear());
+
+        fromYear = StringUtils.isBlank(fromYear) ? year : fromYear;
+        fromMonth = StringUtils.isBlank(fromMonth) ? "01" : fromMonth;
+        toYear = StringUtils.isBlank(toYear) ? year : toYear;
+        toMonth = StringUtils.isBlank(toMonth) ? "12" : toMonth;
+
+        TableQueryParam param = new TableQueryParam();
+
+
+        param.setFromYear(fromYear);
+        param.setFromMonth(fromMonth);
+        param.setToYear(toYear);
+        param.setToMonth(toMonth);
+
+        param.setEnterDateStart(fromYear + "-" + fromMonth + "-01");
+        param.setEnterDateEnd(toYear + "-" + toMonth + "-01");
+
+
+        //默认or用户选择
+        int projectId = 0;
+        if (NumberUtils.toInt(request.getParameter("default"), 0) == 0) {
             projectId = getCurrentProjectsId(request);
             projectId = projectId > 0 ? projectId : 0;
         } else {
             projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
         }
+        param.setProjectsId(projectId);
 
-        request.setAttribute("projectId", projectId);
-        ProjectsDO projectsDO = projectsService.getById(projectId);
-
-        //饼状图
-        printPieChart(request, projectsDO, fromDate, endDate);
-
-        //柱状图
-        printColumnChart(request, projectsDO, fromDate, endDate);
-
-        return "jsp/charts/initKanban";
-    }
-
-    private void printColumnChart(HttpServletRequest request, ProjectsDO projectsDO, String fromDate, String endDate) {
-        BigDecimal total = BigDecimal.valueOf(0);
-        Integer projectsId = projectsDO == null ? null : projectsDO.getId();
-
-        //获取所有项目
-        List<Chart> list = new ArrayList<>();
-        List<ProjectsDO> projectList = null;
-        if (projectsDO == null) {
-            projectList = projectsService.search(null).getResultList();
-            projectList = projectList == null ? new ArrayList<>() : projectList;
-        } else {
-            projectList = new ArrayList<>();
-            projectList.add(projectsDO);
-        }
-
-        //生成标题
-        String title = projectsDO != null ? projectsDO.getName() : "所有";
-        title += "项目开支" + total + "元";
-//        request.setAttribute("title2", title);
-        request.setAttribute("title2", "项目开支情况");
-
-//      [{
-//            // x:0, //横轴顺序
-//            label: '阜平',
-//                    y: 100
-//        }, {
-//            label: '行唐',
-//                    y: 200
-//        }, {
-//            label: '保定',
-//                    y: 300
-//        }]
-
-        StringBuffer sbr = new StringBuffer("[");
-        for (int i = 0; i < list.size(); i++) {
-            Chart c = list.get(i);
-            if (i != 0) {
-                sbr.append(",");
-            }
-
-            sbr.append("{label: '" + c.getLabel() + "', y: " + c.getY() + "}");
-        }
-        sbr.append("]");
-        request.setAttribute("datas2", sbr.toString());
-
-    }
-
-    private BigDecimal fmtBigDecimal(BigDecimal v) {
-        if (v == null) {
-            return BigDecimal.valueOf(0);
-        }
-        return v;
-    }
-
-    //饼状图
-    private void printPieChart(HttpServletRequest request, ProjectsDO projectsDO, String fromDate, String endDate) {
-        BigDecimal total = BigDecimal.valueOf(0);
-        Integer projectsId = projectsDO == null ? null : projectsDO.getId();
-
-        //车辆消费
-        List<Chart> list = new ArrayList<>();
-
-
-        //生成标题
-        String pname = projectsDO == null ? "" : projectsDO.getName();
-        String title = fromDate + " 到 " + endDate + pname + "总开支" + total + "元";
-        request.setAttribute("title", title);
-
-        if (total.equals(BigDecimal.valueOf(0))) {
-            return;
-        }
-
-        //生成json
-        StringBuffer sbr = new StringBuffer("[");
-        for (int i = 0; i < list.size(); i++) {
-            Chart c = list.get(i);
-            if (i != 0) {
-                sbr.append(",");
-            }
-
-            double y = c.getPay().multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
-            sbr.append("{ y: " + y + ", pay: " + c.getPay() + ", label: '" + c.getLabel() + "' }");
-
-        }
-        sbr.append("]");
-        request.setAttribute("datas", sbr.toString());
-//      request.setAttribute("datas", "[{ y: 10, pay: 1000, label: 'Chrome' }]");
-    }
-
-
-
-    private Map<Integer, BigDecimal> change2Map(List<ResultStatistics> list) {
-        Map<Integer, BigDecimal> map = new HashMap<>();
-        if (list == null) {
-            return map;
-        }
-
-        for (ResultStatistics rs : list) {
-            map.put(rs.getK(), rs.getVal());
-        }
-
-        return map;
+        return param;
     }
 
 }
