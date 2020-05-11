@@ -25,6 +25,7 @@
 
     <resultMap id="TableResultMap" type="com.hao.app.commons.entity.result.AmountTable">
         <result column="projects" jdbcType="INTEGER" property="projects"/>
+        <result column="months" jdbcType="INTEGER" property="months"/>
         <result column="amount" jdbcType="DECIMAL" property="amount"/>
     </resultMap>
 
@@ -220,7 +221,7 @@
 
     <select id="searchIncomeTable2" parameterType="com.hao.app.commons.entity.param.TableQueryParam"
             resultMap="TableResultMap">
-        SELECT DATE_FORMAT(income_day,'%Y%m') AS projects,sum(income_amount) AS amount
+        SELECT DATE_FORMAT(income_day,'%Y%m') AS months,sum(income_amount) AS amount
         FROM income
         WHERE 1
         <if test="projectsId != null and projectsId > 0">
@@ -232,7 +233,7 @@
         <if test="enterDateEnd != null">
             <![CDATA[ and income_day <= #{enterDateEnd} ]]>
         </if>
-        GROUP BY projects
+        GROUP BY months
 
     </select>
 

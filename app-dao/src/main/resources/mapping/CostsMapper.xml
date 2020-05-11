@@ -261,7 +261,7 @@
 
     <select id="searchCostTable2" parameterType="com.hao.app.commons.entity.param.TableQueryParam"
             resultMap="TableResultMap">
-        SELECT DATE_FORMAT(enter_date,'%Y%m') AS projects, type_3,sum(amount) AS amount
+        SELECT DATE_FORMAT(enter_date,'%Y%m') AS months, type_3,sum(amount) AS amount
         FROM costs
         WHERE status = 1
         <if test="projectsId != null and projectsId > 0">
@@ -273,7 +273,7 @@
         <if test="enterDateEnd != null">
             <![CDATA[ and enter_date <= #{enterDateEnd} ]]>
         </if>
-        GROUP BY projects,type_3
+        GROUP BY months,type_3
 
     </select>
 

@@ -189,7 +189,7 @@ public class CostsServiceImpl implements CostsService {
         Map<TableKey, BigDecimal> map = new HashMap<>();
         if (list != null) {
             for (AmountTable table : list) {
-                map.put(new TableKey(table.getProjects(), table.getType3()), table.getAmount());
+                map.put(new TableKey(table.getMonths(), table.getType3()), table.getAmount());
             }
         }
         return map;

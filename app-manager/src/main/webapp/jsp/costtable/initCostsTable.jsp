@@ -99,7 +99,7 @@
             核算项
         </th>
         <c:forEach items="${allMonth }" var="itm">
-            <th style="width: 90px;" colspan="2">
+            <th style="width: 120px;" colspan="2">
                     ${WebUtils.getMonthName(itm) }
             </th>
         </c:forEach>
@@ -111,41 +111,61 @@
             <td style="width: 350px;" colspan="3">
                 合同收入
             </td>
-            <c:forEach items="${projectsList }" var="project">
-                <td align="right" style="width: 90px;">
-                        ${WebUtils.getIncomeAmount(project.id, incomeTable)}
-                </td>
+            <c:forEach items="${allMonth }" var="month">
+                <c:if test="${month == 0}">
+                    <td align="right" colspan="2">
+                            ${WebUtils.getMshouru(month, incomeTable)}
+                    </td>
+                </c:if>
+                <c:if test="${month > 0}">
+                    <td align="right">
+                            ${WebUtils.getMshouru(month, incomeTable)}
+                    </td>
+                    <td align="right">
+                        占比
+                    </td>
+                </c:if>
             </c:forEach>
         </tr>
 
-        <c:forEach items="${allTypeList }" var="typeItem">
-            <tr style="${typeItem.background} ">
-                <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
-                        ${typeItem.name1 }
-                </td>
+        <%--        <c:forEach items="${allTypeList }" var="typeItem">--%>
+        <%--            <tr style="${typeItem.background} ">--%>
+        <%--                <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">--%>
+        <%--                        ${typeItem.name1 }--%>
+        <%--                </td>--%>
 
-                <c:if test="${typeItem.id > 0}">
-                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
-                            ${typeItem.name2 }
-                    </td>
-                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
-                            ${typeItem.name3 }
-                    </td>
-                </c:if>
-                <c:if test="${typeItem.id < 0}">
-                    <td align="center" colspan="2">
-                            ${typeItem.name2 }
-                    </td>
-                </c:if>
+        <%--                <c:if test="${typeItem.id > 0}">--%>
+        <%--                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">--%>
+        <%--                            ${typeItem.name2 }--%>
+        <%--                    </td>--%>
+        <%--                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">--%>
+        <%--                            ${typeItem.name3 }--%>
+        <%--                    </td>--%>
+        <%--                </c:if>--%>
+        <%--                <c:if test="${typeItem.id < 0}">--%>
+        <%--                    <td align="center" colspan="2">--%>
+        <%--                            ${typeItem.name2 }--%>
+        <%--                    </td>--%>
+        <%--                </c:if>--%>
 
 
-                <c:forEach items="${projectsList }" var="project">
-                    <td align="right">
-                            ${WebUtils.getCostAmount(project.id, typeItem.id, typeItem.leafIds, costTable, incomeTable)}
-                    </td>
-                </c:forEach>
-            </tr>
-        </c:forEach>
+        <%--                <c:forEach items="${allMonth }" var="month">--%>
+        <%--                    <c:if test="${month == 0}">--%>
+        <%--                        <td align="right" colspan="2">--%>
+
+        <%--                        </td>--%>
+        <%--                    </c:if>--%>
+        <%--                    <c:if test="${month > 0}">--%>
+        <%--                        <td align="right">--%>
+        <%--                                ${WebUtils.getMCostAmount(month, typeItem.id, typeItem.leafIds, costTable, incomeTable)}--%>
+        <%--                        </td>--%>
+        <%--                        <td align="right">--%>
+
+        <%--                        </td>--%>
+        <%--                    </c:if>--%>
+        <%--                </c:forEach>--%>
+        <%--            </tr>--%>
+        <%--        </c:forEach>--%>
     </table>
 </div>
 

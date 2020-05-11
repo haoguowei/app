@@ -98,7 +98,7 @@ public class CostsTableController extends BaseController {
 
 
         Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
-        allMonth.add(0);
+        allMonth.add(0); //合计
         request.setAttribute("allMonth", allMonth);
 
         List<CostsTypeDO> allTypeList = costsService.getTableTypes();

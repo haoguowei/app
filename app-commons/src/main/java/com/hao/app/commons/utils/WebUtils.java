@@ -146,9 +146,28 @@ public class WebUtils {
 
     public static String getMonthName(int val) {
         if (val == 0) {
-            return "占合同比";
+            return "合计";
         }
         return String.valueOf(val);
+    }
+
+    public static BigDecimal getMshouru(int month, Map<TableKey, BigDecimal> incomeTable) {
+        if (incomeTable == null) {
+            incomeTable = new HashMap<>();
+        }
+
+        if (month == 0) {
+            BigDecimal total = BigDecimal.valueOf(0);
+            for (TableKey key : incomeTable.keySet()) {
+                BigDecimal val = incomeTable.get(key);
+                total = total.add(val);
+            }
+            return total;
+        } else {
+            TableKey key = new TableKey(month);
+            BigDecimal value = incomeTable.get(key);
+            return value == null ? BigDecimal.valueOf(0) : value;
+        }
     }
 
 }

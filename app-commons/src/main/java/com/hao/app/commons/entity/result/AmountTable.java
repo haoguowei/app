@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public class AmountTable implements Serializable {
 
     private int projects;
+    private int months;
 
     private int type3;
 
