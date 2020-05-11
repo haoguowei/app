@@ -90,7 +90,7 @@
             核算项
         </th>
         <c:forEach items="${projectsList }" var="project">
-            <th style="width: 90px;">
+            <th style="width: 100px;">
                     ${project.name }
             </th>
         </c:forEach>
@@ -103,7 +103,7 @@
                 合同收入
             </td>
             <c:forEach items="${projectsList }" var="project">
-                <td align="right" style="width: 90px;">
+                <td align="right" style="width: 100px;">
                         ${WebUtils.getIncomeAmount(project.id, incomeTable)}
                 </td>
             </c:forEach>
@@ -156,6 +156,12 @@
             + "&toMonth=" + toMonth
             + "&t=" + new Date().getTime();
     }
+
+    $(document).keyup(function (event) {
+        if (event.keyCode == 13) {
+            searchFunc();
+        }
+    });
 
 </script>
 </html>

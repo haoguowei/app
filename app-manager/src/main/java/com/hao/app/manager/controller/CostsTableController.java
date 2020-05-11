@@ -49,7 +49,7 @@ public class CostsTableController extends BaseController {
 
         List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
         ProjectsDO projectsDO = new ProjectsDO();
-        projectsDO.setName("占合同比");
+        projectsDO.setName("占比");
         projectsDO.setId(0);
         projectsList.add(projectsDO);
 
