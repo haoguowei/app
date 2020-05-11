@@ -1,6 +1,7 @@
 package com.hao.app.commons.utils;
 
 import com.hao.app.commons.entity.result.TableKey;
+import org.apache.commons.lang.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class WebUtils {
             return value == null ? BigDecimal.valueOf(0) : value;
         }
     }
+
 
     public static String getCostAmount(int projectId, int type3, Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
         if (costTable == null) {
@@ -148,7 +150,9 @@ public class WebUtils {
         if (val == 0) {
             return "合计";
         }
-        return String.valueOf(val);
+
+        String v = String.valueOf(val);
+        return v.substring(0, 4) + "年" + v.substring(5, 6) + "月";
     }
 
     public static BigDecimal getMshouru(int month, Map<TableKey, BigDecimal> incomeTable) {
@@ -170,5 +174,17 @@ public class WebUtils {
         }
     }
 
+    public static String getZhanbi(int month, String tmp, Map<TableKey, BigDecimal> incomeTable) {
+        if (StringUtils.isBlank(tmp) || tmp.contains("%")) {
+            return "";
+        }
+
+        BigDecimal total = getMshouru(month, incomeTable);
+        BigDecimal tmpv = BigDecimal.valueOf(Double.valueOf(tmp));
+        if (total.doubleValue() == 0D) {
+            return "100%";
+        }
+        return tmpv.multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP).toString() + "%";
+    }
 
 }

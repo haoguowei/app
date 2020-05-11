@@ -112,19 +112,12 @@
                 合同收入
             </td>
             <c:forEach items="${allMonth }" var="month">
-                <c:if test="${month == 0}">
-                    <td align="right" colspan="2" style="width: 170px;">
-                            ${WebUtils.getMshouru(month, incomeTable)}
-                    </td>
-                </c:if>
-                <c:if test="${month > 0}">
-                    <td align="right" style="width: 83px;">
-                            ${WebUtils.getMshouru(month, incomeTable)}
-                    </td>
-                    <td align="right" style="width: 83px;">
-                        占比
-                    </td>
-                </c:if>
+                <td align="right" style="width: 84px;">
+                        ${WebUtils.getMshouru(month, incomeTable)}
+                </td>
+                <td align="right" style="width: 83px;">
+                    占比
+                </td>
             </c:forEach>
         </tr>
 
@@ -150,19 +143,14 @@
 
 
                 <c:forEach items="${allMonth }" var="month">
-                    <c:if test="${month == 0}">
-                        <td align="right" colspan="2">
-                                ${WebUtils.getCostAmount(month, typeItem.id, typeItem.leafIds, costTable, incomeTable)}
-                        </td>
-                    </c:if>
-                    <c:if test="${month > 0}">
-                        <td align="right">
-                                ${WebUtils.getCostAmount(month, typeItem.id, typeItem.leafIds, costTable, incomeTable)}
-                        </td>
-                        <td align="right">
-
-                        </td>
-                    </c:if>
+                    <td align="right">
+                        <c:set var="tmp"
+                               value="${WebUtils.getCostAmount(month, typeItem.id, typeItem.leafIds, costTable, incomeTable)}"/>
+                            ${tmp}
+                    </td>
+                    <td align="right">
+                            ${WebUtils.getZhanbi(month, tmp, incomeTable)}
+                    </td>
                 </c:forEach>
             </tr>
         </c:forEach>

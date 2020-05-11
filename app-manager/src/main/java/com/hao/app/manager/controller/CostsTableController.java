@@ -77,6 +77,9 @@ public class CostsTableController extends BaseController {
         for (TableKey key : incomeTable.keySet()) {
             allMonth.add(key.getProjectId());
         }
+        for (TableKey key : costTable.keySet()) {
+            allMonth.add(key.getProjectId());
+        }
 
         Collections.sort(allMonth);
 
