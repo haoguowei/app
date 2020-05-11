@@ -26,4 +26,6 @@ public interface CostsMapper {
     List<AmountTable> searchCostTable(TableQueryParam param);
 
     int updateStatus(@Param("id") int id);
+
+    List<AmountTable> searchCostTable2(TableQueryParam param);
 }

@@ -32,4 +32,5 @@ public interface CostsService {
 
     boolean updateStatus(int id);
 
+    Map<TableKey, BigDecimal> getCostTable2(TableQueryParam param);
 }

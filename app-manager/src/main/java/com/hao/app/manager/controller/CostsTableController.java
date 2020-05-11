@@ -20,9 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -42,7 +40,7 @@ public class CostsTableController extends BaseController {
     private ProjectsService projectsService;
 
     @RequestMapping("/initCostsTableMonth.do")
-    public String initCostsTable(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String initCostsTableMonth(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TableQueryParam param = genParam(request);
         Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable(param);
         Map<TableKey, BigDecimal> costTable = costsService.getCostTable(param);
@@ -51,7 +49,7 @@ public class CostsTableController extends BaseController {
 
         List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
         ProjectsDO projectsDO = new ProjectsDO();
-        projectsDO.setName("合计");
+        projectsDO.setName("占合同比");
         projectsDO.setId(0);
         projectsList.add(projectsDO);
 
@@ -74,9 +72,53 @@ public class CostsTableController extends BaseController {
         return "jsp/costtable/initCostsTableMonth";
     }
 
+    private Set<Integer> getAllMonths(Map<TableKey, BigDecimal> incomeTable, Map<TableKey, BigDecimal> costTable) {
+        List<Integer> allMonth = new ArrayList<>();
+        for (TableKey key : incomeTable.keySet()) {
+            allMonth.add(key.getProjectId());
+        }
+
+        Collections.sort(allMonth);
+
+        Set<Integer> set = new LinkedHashSet<>();
+        for (Integer i : allMonth) {
+            set.add(i);
+        }
+        return set;
+    }
+
     @RequestMapping("/initCostsTable.do")
-    public String initCostsTableMonth(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String initCostsTable(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TableQueryParam param = genParam(request);
+
+        Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable2(param);
+        Map<TableKey, BigDecimal> costTable = costsService.getCostTable2(param);
+        request.setAttribute("incomeTable", incomeTable);
+        request.setAttribute("costTable", costTable);
+
+
+        Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
+        allMonth.add(0);
+        request.setAttribute("allMonth", allMonth);
+
+        List<CostsTypeDO> allTypeList = costsService.getTableTypes();
+        request.setAttribute("allTypeList", allTypeList);
+
+
+        /////////////
+        List<String> yearList = Arrays.asList("2019", "2020", "2021", "2022", "2023", "2024", "2025");
+        List<String> monthList = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        request.setAttribute("yearList", yearList);
+        request.setAttribute("monthList", monthList);
+
+        request.setAttribute("fromYear", param.getFromYear());
+        request.setAttribute("fromMonth", param.getFromMonth());
+        request.setAttribute("toYear", param.getToYear());
+        request.setAttribute("toMonth", param.getToMonth());
+
+        request.setAttribute("projectsList", getProjectsList(request));
+        request.setAttribute("projectsId", param.getProjectsId());
+
         return "jsp/costtable/initCostsTable";
     }
 

@@ -71,4 +71,16 @@ public class IncomeServiceImpl implements IncomeService {
             return ResultCodeEnum.FAIL;
         }
     }
+
+    @Override
+    public Map<TableKey, BigDecimal> getIncomeTable2(TableQueryParam param) {
+        List<AmountTable> list = incomeMapper.searchIncomeTable(param);
+        Map<TableKey, BigDecimal> map = new HashMap<>();
+        if (list != null) {
+            for (AmountTable table : list) {
+                map.put(new TableKey(table.getProjects(), table.getType3()), table.getAmount());
+            }
+        }
+        return map;
+    }
 }

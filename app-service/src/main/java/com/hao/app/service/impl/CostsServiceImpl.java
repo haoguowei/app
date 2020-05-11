@@ -182,4 +182,16 @@ public class CostsServiceImpl implements CostsService {
         int v = costsMapper.updateStatus(id);
         return v > 0;
     }
+
+    @Override
+    public Map<TableKey, BigDecimal> getCostTable2(TableQueryParam param) {
+        List<AmountTable> list = costsMapper.searchCostTable2(param);
+        Map<TableKey, BigDecimal> map = new HashMap<>();
+        if (list != null) {
+            for (AmountTable table : list) {
+                map.put(new TableKey(table.getProjects(), table.getType3()), table.getAmount());
+            }
+        }
+        return map;
+    }
 }

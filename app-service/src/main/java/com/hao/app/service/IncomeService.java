@@ -22,4 +22,6 @@ public interface IncomeService {
     ResultCodeEnum insert(IncomeDO cost);
 
     ResultCodeEnum update(IncomeDO cost);
+
+    Map<TableKey, BigDecimal> getIncomeTable2(TableQueryParam param);
 }

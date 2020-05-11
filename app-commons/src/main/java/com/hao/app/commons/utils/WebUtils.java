@@ -144,4 +144,11 @@ public class WebUtils {
         return total;
     }
 
+    public static String getMonthName(int val) {
+        if (val == 0) {
+            return "占合同比";
+        }
+        return String.valueOf(val);
+    }
+
 }
