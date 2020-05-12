@@ -213,6 +213,7 @@
         var chart3 = new CanvasJS.Chart("chartContainer3", {
             exportEnabled: false,
             animationEnabled: true,
+            dataPointMaxWidth: 45,
             title: {
                 text: "${title3}"
             },
@@ -250,7 +251,6 @@
                 yValueFormatString: "#,##0.## 元",
                 indexLabelFontSize: 14,
                 indexLabel: "{y}",
-                width: 100,
                 dataPoints: ${data3}
             },
                 {
@@ -261,7 +261,6 @@
                     yValueFormatString: "#,##0.## 元",
                     indexLabelFontSize: 14,
                     indexLabel: "{y}",
-                    width: 100,
                     dataPoints: ${data4}
                 }]
         });
