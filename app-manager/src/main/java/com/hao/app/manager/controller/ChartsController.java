@@ -1,9 +1,11 @@
 package com.hao.app.manager.controller;
 
 import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
+import com.hao.app.service.IncomeService;
 import com.hao.app.service.ProjectsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -16,13 +18,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Controller
 public class ChartsController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(ChartsController.class);
+
+    @Resource
+    private IncomeService incomeService;
 
     @Resource
     private CostsService costsService;
@@ -51,11 +56,83 @@ public class ChartsController extends BaseController {
 
         //项目信息
         ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
-        request.setAttribute("projectName", projectsDO == null ? "所有项目" : projectsDO.getName());
+        String projectName = projectsDO == null ? "所有" : projectsDO.getName();
 
-        //TODO
+        Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable2(param);
+        Map<TableKey, BigDecimal> costTable = costsService.getCostTable2(param);
+
+        Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
+
+        //饼状图合计
+        loadPieChart(request, projectName, incomeTable, costTable);
+
+//        //饼状图明细
+//        loadPieChartDetail(request, projectName, incomeTable, costTable);
+//
+//        //月份收支柱状图
+//        loadColumnChart(request, projectName, incomeTable, costTable, allMonth);
 
         return "jsp/charts/initCostCharts";
+    }
+
+
+    private void loadPieChart(HttpServletRequest request, String projectName, Map<TableKey, BigDecimal> incomeTable, Map<TableKey, BigDecimal> costTable) {
+        String title = projectName + "收支合计";
+
+        //总收入
+        BigDecimal income = BigDecimal.valueOf(0);
+        for (TableKey key : incomeTable.keySet()) {
+            income = income.add(incomeTable.get(key));
+        }
+
+
+        //总支出
+        BigDecimal costs = BigDecimal.valueOf(0);
+        for (TableKey key : costTable.keySet()) {
+            costs = costs.add(costTable.get(key));
+        }
+
+        //合计
+        BigDecimal total = income.add(costs);
+
+
+        StringBuffer sbr = new StringBuffer();
+        if (total.doubleValue() != 0D) {
+            BigDecimal y = income.multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP);
+
+            sbr.append("[");
+            sbr.append("{ y: " + fmtBigDecimal(y) + ", pay: " + fmtBigDecimal(income) + ", label: '收入合计' }").append(",");
+            sbr.append("{ y: " + fmtBigDecimal(BigDecimal.valueOf(100).subtract(y)) + ", pay: " + fmtBigDecimal(costs) + ", label: '费用合计' }");
+            sbr.append("]");
+        }
+
+        request.setAttribute("title1", title);
+        request.setAttribute("data1", sbr.toString());
+    }
+
+    private String fmtBigDecimal(BigDecimal v) {
+        if (v == null) {
+            return "0";
+        }
+        return v.setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+    }
+
+    private Set<Integer> getAllMonths(Map<TableKey, BigDecimal> incomeTable, Map<TableKey, BigDecimal> costTable) {
+        List<Integer> allMonth = new ArrayList<>();
+        for (TableKey key : incomeTable.keySet()) {
+            allMonth.add(key.getProjectId());
+        }
+        for (TableKey key : costTable.keySet()) {
+            allMonth.add(key.getProjectId());
+        }
+
+        Collections.sort(allMonth);
+
+        Set<Integer> set = new LinkedHashSet<>();
+        for (Integer i : allMonth) {
+            set.add(i);
+        }
+        return set;
     }
 
     private TableQueryParam genParam(HttpServletRequest request) {

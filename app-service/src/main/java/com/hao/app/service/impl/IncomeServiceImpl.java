@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,5 +83,14 @@ public class IncomeServiceImpl implements IncomeService {
             }
         }
         return map;
+    }
+
+    @Override
+    public List<AmountTable> getIncomeTableList2(TableQueryParam param) {
+        List<AmountTable> list = incomeMapper.searchIncomeTable2(param);
+        if (list == null) {
+            return new ArrayList<>();
+        }
+        return list;
     }
 }

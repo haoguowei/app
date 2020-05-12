@@ -22,6 +22,7 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
+            width: 100%;
         }
 
         table td {
@@ -93,7 +94,13 @@
 </h4>
 
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
-
+    <table>
+        <tr>
+            <td>
+                <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+            </td>
+        </tr>
+    </table>
 </div>
 
 </body>

@@ -2,6 +2,7 @@ package com.hao.app.service;
 
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.enums.ResultCodeEnum;
@@ -33,4 +34,6 @@ public interface CostsService {
     boolean updateStatus(int id);
 
     Map<TableKey, BigDecimal> getCostTable2(TableQueryParam param);
+
+    List<AmountTable> getCostTableList2(TableQueryParam param);
 }
