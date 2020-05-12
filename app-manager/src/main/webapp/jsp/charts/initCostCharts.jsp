@@ -44,7 +44,7 @@
     <title>
     </title>
     <script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
-
+    <script src="<%=syspath%>/canvasjs/canvasjs.min.js"></script>
 </head>
 <body>
 <h1>费用汇总</h1>
@@ -96,8 +96,11 @@
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table>
         <tr>
-            <td>
+            <td style="width: 50%">
                 <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+            </td>
+            <td style="width: 50%">
+                <div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
             </td>
         </tr>
     </table>
@@ -128,6 +131,38 @@
             searchFunc();
         }
     });
+
+
+    window.onload = function () {
+
+        var dataPoints = [];
+
+        var chart = new CanvasJS.Chart("chartContainer1", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            exportEnabled: false,
+            animationEnabled: true,
+            title: {
+                text: '${title1}'
+            },
+            data: [{
+                type: "pie",
+                startAngle: 25,
+                toolTipContent: "<b>{label}</b>: {pay}元（{y}%）",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 14,
+                indexLabel: "{label} - {pay}元",
+                dataPoints: ${data1}
+            }]
+        });
+
+        // dataPoints.push({
+        //     label: 'aaa',
+        //     y: 100
+        // });
+
+        chart.render();
+    }
 
 </script>
 </html>
