@@ -138,7 +138,7 @@
 
 </body>
 <script type="text/javascript">
-    var height = $(window).height() - 170;
+    var height = $(window).height() - 140;
     document.getElementById('m_div_id').style.height = height + "px";
 
     function searchFunc() {
@@ -211,7 +211,7 @@
         });
 
         var chart3 = new CanvasJS.Chart("chartContainer3", {
-            exportEnabled: true,
+            exportEnabled: false,
             animationEnabled: true,
             title: {
                 text: "${title3}"
@@ -247,7 +247,10 @@
                 type: "column",
                 name: "收入",
                 showInLegend: true,
-                yValueFormatString: "#,###.## 元",
+                yValueFormatString: "#,##0.## 元",
+                indexLabelFontSize: 14,
+                indexLabel: "{y}",
+                width: 100,
                 dataPoints: ${data3}
             },
                 {
@@ -255,7 +258,10 @@
                     name: "费用",
                     // axisYType: "secondary",
                     showInLegend: true,
-                    yValueFormatString: "#,###.## 元",
+                    yValueFormatString: "#,##0.## 元",
+                    indexLabelFontSize: 14,
+                    indexLabel: "{y}",
+                    width: 100,
                     dataPoints: ${data4}
                 }]
         });
