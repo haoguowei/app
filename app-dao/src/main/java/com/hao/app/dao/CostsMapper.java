@@ -28,4 +28,6 @@ public interface CostsMapper {
     int updateStatus(@Param("id") int id);
 
     List<AmountTable> searchCostTable2(TableQueryParam param);
+
+    List<AmountTable> searchCostTable3(TableQueryParam param);
 }

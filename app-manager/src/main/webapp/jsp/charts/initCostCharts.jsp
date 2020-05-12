@@ -97,10 +97,26 @@
     <table>
         <tr>
             <td style="width: 50%">
-                <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                <c:if test="${data1 == ''}">
+                    <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                </c:if>
+                <c:if test="${data1 != ''}">
+                    暂无数据
+                    <div id="chartContainer1" hidden style="height: 370px; max-width: 920px; margin: 0px auto;">
+
+                    </div>
+                </c:if>
             </td>
             <td style="width: 50%">
-                <div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                <c:if test="${data1 == ''}">
+                    <div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                </c:if>
+                <c:if test="${data1 != ''}">
+                    暂无数据
+                    <div id="chartContainer2" hidden style="height: 370px; max-width: 920px; margin: 0px auto;">
+
+                    </div>
+                </c:if>
             </td>
         </tr>
     </table>
@@ -161,7 +177,30 @@
         //     y: 100
         // });
 
+        var chart2 = new CanvasJS.Chart("chartContainer2", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            exportEnabled: false,
+            animationEnabled: true,
+            title: {
+                text: '${title2}'
+            },
+            data: [{
+                type: "pie",
+                startAngle: 25,
+                toolTipContent: "<b>{label}</b>: {pay}元（{y}%）",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 14,
+                indexLabel: "{label} - {pay}元",
+                dataPoints: ${data2}
+            }]
+        });
+
+
         chart.render();
+        chart2.render();
+
+
     }
 
 </script>

@@ -197,7 +197,7 @@ public class CostsServiceImpl implements CostsService {
 
 
     @Override
-    public List<AmountTable> getCostTableList2(TableQueryParam param) {
+    public List<AmountTable> getCostTableList3(TableQueryParam param) {
         List<AmountTable> list = costsMapper.searchCostTable2(param);
         if (list == null) {
             return new ArrayList<>();

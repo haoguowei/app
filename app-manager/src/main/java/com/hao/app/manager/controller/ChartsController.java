@@ -1,6 +1,7 @@
 package com.hao.app.manager.controller;
 
 import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.pojo.ProjectsDO;
@@ -56,23 +57,62 @@ public class ChartsController extends BaseController {
 
         //项目信息
         ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
-        String projectName = projectsDO == null ? "所有" : projectsDO.getName();
+        String projectName = projectsDO == null ? "所有项目" : projectsDO.getName();
 
         Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable2(param);
         Map<TableKey, BigDecimal> costTable = costsService.getCostTable2(param);
-
-        Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
+        List<AmountTable> costTableList = costsService.getCostTableList3(param);
 
         //饼状图合计
         loadPieChart(request, projectName, incomeTable, costTable);
 
-//        //饼状图明细
-//        loadPieChartDetail(request, projectName, incomeTable, costTable);
+
+        //饼状图明细
+        loadPieChartDetail(request, projectName, costTableList);
 //
 //        //月份收支柱状图
+//        Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
 //        loadColumnChart(request, projectName, incomeTable, costTable, allMonth);
 
         return "jsp/charts/initCostCharts";
+    }
+
+    private void loadPieChartDetail(HttpServletRequest request, String projectName, List<AmountTable> costTableList) {
+        String title = projectName + "费用明细";
+
+        //总支出
+        BigDecimal total = BigDecimal.valueOf(0);
+        for (AmountTable at : costTableList) {
+            total = total.add(at.getAmount());
+        }
+
+        Map<Integer, String> typeMap = costsService.mapCostsType();
+
+        StringBuffer sbr = new StringBuffer();
+        if (total.doubleValue() != 0D) {
+            sbr.append("[");
+            BigDecimal tmpTotal = BigDecimal.valueOf(0);
+            for (int i = 0; i < costTableList.size(); i++) {
+                AmountTable costTable = costTableList.get(i);
+                String name = typeMap.get(costTable.getType3());
+                name = StringUtils.isBlank(name) ? "未知" : name;
+
+                BigDecimal y = costTable.getAmount().multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP);
+
+                if (i == (costTableList.size() - 1)) {
+                    //最后一个
+                    sbr.append("{ y: " + fmtBigDecimal(BigDecimal.valueOf(100).subtract(tmpTotal)) + ", pay: " + fmtBigDecimal(costTable.getAmount()) + ", label: '" + name + "' }");
+                } else {
+                    tmpTotal = tmpTotal.add(y);
+                    sbr.append("{ y: " + fmtBigDecimal(y) + ", pay: " + fmtBigDecimal(costTable.getAmount()) + ", label: '" + name + "' }");
+                    sbr.append(",");
+                }
+            }
+            sbr.append("]");
+        }
+
+        request.setAttribute("title2", title);
+        request.setAttribute("data2", sbr.toString());
     }
 
 
