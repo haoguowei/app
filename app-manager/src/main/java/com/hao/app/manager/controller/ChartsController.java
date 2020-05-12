@@ -47,7 +47,7 @@ public class ChartsController extends BaseController {
         request.setAttribute("toMonth", param.getToMonth());
 
         request.setAttribute("projectsList", getProjectsList(request));
-        request.setAttribute("projectId", param.getProjectsId());
+        request.setAttribute("projectsId", param.getProjectsId());
 
         //项目信息
         ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
@@ -84,14 +84,14 @@ public class ChartsController extends BaseController {
 
 
         //默认or用户选择
-        int projectId = 0;
+        int projectsId = 0;
         if (NumberUtils.toInt(request.getParameter("default"), 0) == 0) {
-            projectId = getCurrentProjectsId(request);
-            projectId = projectId > 0 ? projectId : 0;
+            projectsId = getCurrentProjectsId(request);
+            projectsId = projectsId > 0 ? projectsId : 0;
         } else {
-            projectId = NumberUtils.toInt(request.getParameter("projects"), 0);
+            projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
         }
-        param.setProjectsId(projectId);
+        param.setProjectsId(projectsId);
 
         return param;
     }
