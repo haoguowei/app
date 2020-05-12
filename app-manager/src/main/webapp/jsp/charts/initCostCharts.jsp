@@ -96,7 +96,7 @@
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table>
         <tr>
-            <td style="width: 50%">
+            <td style="width: 50%;padding-top: 30px;padding-bottom: 20px;">
                 <c:if test="${data1 != '[]'}">
                     <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
                 </c:if>
@@ -107,7 +107,7 @@
                     </div>
                 </c:if>
             </td>
-            <td style="width: 50%">
+            <td style="width: 50%;padding-top: 30px;padding-bottom: 20px;">
                 <c:if test="${data2 != '[]'}">
                     <div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
                 </c:if>
@@ -120,7 +120,7 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 100%" colspan="2">
+            <td style="width: 100%;padding-top: 30px;padding-bottom: 20px;" colspan="2">
                 <c:if test="${data3 != '[]'}">
                     <div id="chartContainer3" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
                 </c:if>
@@ -211,34 +211,67 @@
         });
 
         var chart3 = new CanvasJS.Chart("chartContainer3", {
+            exportEnabled: true,
             animationEnabled: true,
-            exportEnabled: false,
-            theme: "light2",
             title: {
-                text: '${title3}'
+                text: "${title3}"
             },
-            axisY: {
-                title: "收支（元）"
-            },
+            subtitles: [{
+                text: ""
+            }],
             axisX: {
                 title: ""
             },
+            axisY: {
+                title: "金额（元）",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC"
+            },
+            axisY2: {
+                title: "金额（元）",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
             data: [{
                 type: "column",
+                name: "收入",
+                showInLegend: true,
                 yValueFormatString: "#,###.## 元",
-                indexLabelFontSize: 14,
-                indexLabelFontColor: "#5A5757",
-                indexLabelPlacement: "outside",
-                indexLabel: "{y}",
                 dataPoints: ${data3}
-            }]
+            },
+                {
+                    type: "column",
+                    name: "费用",
+                    // axisYType: "secondary",
+                    showInLegend: true,
+                    yValueFormatString: "#,###.## 元",
+                    dataPoints: ${data4}
+                }]
         });
 
         chart.render();
         chart2.render();
         chart3.render();
 
-
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
     }
 
 </script>

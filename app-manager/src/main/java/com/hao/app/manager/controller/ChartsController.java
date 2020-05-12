@@ -79,40 +79,33 @@ public class ChartsController extends BaseController {
         return "jsp/charts/initCostCharts";
     }
 
-
-    //      [{
-//            // x:0, //横轴顺序
-//            label: '阜平',
-//                    y: 100
-//        }, {
-//            label: '行唐',
-//                    y: 200
-//        }, {
-//            label: '保定',
-//                    y: 300
-//        }]
     private void loadColumnChart(HttpServletRequest request, String projectName, Map<TableKey, BigDecimal> incomeTable, Map<TableKey, BigDecimal> costTable, Set<Integer> allMonth) {
         String title = projectName + "月份收支";
 
-        StringBuffer sbr = new StringBuffer();
-        sbr.append("[");
-
+        StringBuffer inStr = new StringBuffer();
+        inStr.append("[");
+        StringBuffer costStr = new StringBuffer();
+        costStr.append("[");
 
         int i = 0;
         for (Integer month : allMonth) {
             if (i != 0) {
-                sbr.append(",");
+                inStr.append(",");
+                costStr.append(",");
             }
             i += 1;
 
             BigDecimal income = incomeTable.get(new TableKey(month));
             BigDecimal cost = costTable.get(new TableKey(month));
-            sbr.append("{label: '" + WebUtils.getMonthName(month) + "', y: " + fmtBigDecimal(cost) + "}");
+            inStr.append("{label: '" + WebUtils.getMonthName(month) + "', y: " + fmtBigDecimal(income) + "}");
+            costStr.append("{label: '" + WebUtils.getMonthName(month) + "', y: " + fmtBigDecimal(cost) + "}");
         }
 
-        sbr.append("]");
+        inStr.append("]");
+        costStr.append("]");
         request.setAttribute("title3", title);
-        request.setAttribute("data3", sbr.toString());
+        request.setAttribute("data3", inStr.toString());
+        request.setAttribute("data4", costStr.toString());
     }
 
     private void loadPieChartDetail(HttpServletRequest request, String projectName, List<AmountTable> costTableList) {
