@@ -138,7 +138,7 @@
 
 </body>
 <script type="text/javascript">
-    var height = $(window).height() - 140;
+    var height = $(window).height() - 130;
     document.getElementById('m_div_id').style.height = height + "px";
 
     function searchFunc() {
