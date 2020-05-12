@@ -88,9 +88,9 @@ public class ChartsController extends BaseController {
 
         Map<Integer, String> typeMap = costsService.mapCostsType();
 
-        StringBuffer sbr = new StringBuffer("");
+        StringBuffer sbr = new StringBuffer();
+        sbr.append("[");
         if (total.doubleValue() != 0D) {
-            sbr.append("[");
             BigDecimal tmpTotal = BigDecimal.valueOf(0);
             for (int i = 0; i < costTableList.size(); i++) {
                 AmountTable costTable = costTableList.get(i);
@@ -108,8 +108,8 @@ public class ChartsController extends BaseController {
                     sbr.append(",");
                 }
             }
-            sbr.append("]");
         }
+        sbr.append("]");
 
         request.setAttribute("title2", title);
         request.setAttribute("data2", sbr.toString());
@@ -136,15 +136,15 @@ public class ChartsController extends BaseController {
         BigDecimal total = income.add(costs);
 
 
-        StringBuffer sbr = new StringBuffer("");
+        StringBuffer sbr = new StringBuffer();
+        sbr.append("[");
         if (total.doubleValue() != 0D) {
             BigDecimal y = income.multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP);
 
-            sbr.append("[");
             sbr.append("{ y: " + fmtBigDecimal(y) + ", pay: " + fmtBigDecimal(income) + ", label: '收入合计' }").append(",");
             sbr.append("{ y: " + fmtBigDecimal(BigDecimal.valueOf(100).subtract(y)) + ", pay: " + fmtBigDecimal(costs) + ", label: '费用合计' }");
-            sbr.append("]");
         }
+        sbr.append("]");
 
         request.setAttribute("title1", title);
         request.setAttribute("data1", sbr.toString());

@@ -97,10 +97,10 @@
     <table>
         <tr>
             <td style="width: 50%">
-                <c:if test="${data1 != ''}">
+                <c:if test="${data1 != '[]'}">
                     <div id="chartContainer1" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
                 </c:if>
-                <c:if test="${data1 == ''}">
+                <c:if test="${data1 == '[]'}">
                     暂无数据
                     <div id="chartContainer1" hidden style="height: 370px; max-width: 920px; margin: 0px auto;">
 
@@ -108,10 +108,10 @@
                 </c:if>
             </td>
             <td style="width: 50%">
-                <c:if test="${data2 != ''}">
+                <c:if test="${data2 != '[]'}">
                     <div id="chartContainer2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
                 </c:if>
-                <c:if test="${data2 == ''}">
+                <c:if test="${data2 == '[]'}">
                     暂无数据
                     <div id="chartContainer2" hidden style="height: 370px; max-width: 920px; margin: 0px auto;">
 
