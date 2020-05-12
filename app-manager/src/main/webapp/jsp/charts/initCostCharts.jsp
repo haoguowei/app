@@ -119,6 +119,20 @@
                 </c:if>
             </td>
         </tr>
+        <tr>
+            <td style="width: 100%" colspan="2">
+                <c:if test="${data3 != '[]'}">
+                    <div id="chartContainer3" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                </c:if>
+                <c:if test="${data3 == '[]'}">
+                    暂无数据
+                    <div id="chartContainer3" hidden style="height: 370px; max-width: 920px; margin: 0px auto;">
+
+                    </div>
+                </c:if>
+            </td>
+
+        </tr>
     </table>
 </div>
 
@@ -196,9 +210,33 @@
             }]
         });
 
+        var chart3 = new CanvasJS.Chart("chartContainer3", {
+            animationEnabled: true,
+            exportEnabled: false,
+            theme: "light2",
+            title: {
+                text: '${title3}'
+            },
+            axisY: {
+                title: "收支（元）"
+            },
+            axisX: {
+                title: ""
+            },
+            data: [{
+                type: "column",
+                yValueFormatString: "#,###.## 元",
+                indexLabelFontSize: 14,
+                indexLabelFontColor: "#5A5757",
+                indexLabelPlacement: "outside",
+                indexLabel: "{y}",
+                dataPoints: ${data3}
+            }]
+        });
 
         chart.render();
         chart2.render();
+        chart3.render();
 
 
     }

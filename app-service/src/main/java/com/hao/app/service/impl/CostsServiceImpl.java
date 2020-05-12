@@ -198,10 +198,22 @@ public class CostsServiceImpl implements CostsService {
 
     @Override
     public List<AmountTable> getCostTableList3(TableQueryParam param) {
-        List<AmountTable> list = costsMapper.searchCostTable2(param);
+        List<AmountTable> list = costsMapper.searchCostTable3(param);
         if (list == null) {
             return new ArrayList<>();
         }
         return list;
+    }
+
+    @Override
+    public Map<TableKey, BigDecimal> getCostTable4(TableQueryParam param) {
+        List<AmountTable> list = costsMapper.searchCostTable4(param);
+        Map<TableKey, BigDecimal> map = new HashMap<>();
+        if (list != null) {
+            for (AmountTable table : list) {
+                map.put(new TableKey(table.getMonths(), table.getType3()), table.getAmount());
+            }
+        }
+        return map;
     }
 }

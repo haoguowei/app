@@ -4,6 +4,7 @@ import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.AmountTable;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.utils.DateUtil;
+import com.hao.app.commons.utils.WebUtils;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.IncomeService;
@@ -63,18 +64,55 @@ public class ChartsController extends BaseController {
         Map<TableKey, BigDecimal> costTable = costsService.getCostTable2(param);
         List<AmountTable> costTableList = costsService.getCostTableList3(param);
 
+
         //饼状图合计
         loadPieChart(request, projectName, incomeTable, costTable);
 
-
         //饼状图明细
         loadPieChartDetail(request, projectName, costTableList);
-//
-//        //月份收支柱状图
-//        Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
-//        loadColumnChart(request, projectName, incomeTable, costTable, allMonth);
+
+        //月份收支柱状图
+        Set<Integer> allMonth = getAllMonths(incomeTable, costTable);
+        Map<TableKey, BigDecimal> costTableMap = costsService.getCostTable4(param);
+        loadColumnChart(request, projectName, incomeTable, costTableMap, allMonth);
 
         return "jsp/charts/initCostCharts";
+    }
+
+
+    //      [{
+//            // x:0, //横轴顺序
+//            label: '阜平',
+//                    y: 100
+//        }, {
+//            label: '行唐',
+//                    y: 200
+//        }, {
+//            label: '保定',
+//                    y: 300
+//        }]
+    private void loadColumnChart(HttpServletRequest request, String projectName, Map<TableKey, BigDecimal> incomeTable, Map<TableKey, BigDecimal> costTable, Set<Integer> allMonth) {
+        String title = projectName + "月份收支";
+
+        StringBuffer sbr = new StringBuffer();
+        sbr.append("[");
+
+
+        int i = 0;
+        for (Integer month : allMonth) {
+            if (i != 0) {
+                sbr.append(",");
+            }
+            i += 1;
+
+            BigDecimal income = incomeTable.get(new TableKey(month));
+            BigDecimal cost = costTable.get(new TableKey(month));
+            sbr.append("{label: '" + WebUtils.getMonthName(month) + "', y: " + fmtBigDecimal(cost) + "}");
+        }
+
+        sbr.append("]");
+        request.setAttribute("title3", title);
+        request.setAttribute("data3", sbr.toString());
     }
 
     private void loadPieChartDetail(HttpServletRequest request, String projectName, List<AmountTable> costTableList) {
