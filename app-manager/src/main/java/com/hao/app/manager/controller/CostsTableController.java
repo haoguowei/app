@@ -3,6 +3,8 @@ package com.hao.app.manager.controller;
 import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.utils.DateUtil;
+import com.hao.app.manager.export.ExportCostTable;
+import com.hao.app.manager.export.ExportCostTableMonth;
 import com.hao.app.pojo.CostsTypeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
@@ -38,6 +40,25 @@ public class CostsTableController extends BaseController {
 
     @Resource
     private ProjectsService projectsService;
+
+    @Resource
+    private ExportCostTable exportCostTable;
+
+    @Resource
+    private ExportCostTableMonth exportCostTableMonth;
+
+
+    @RequestMapping("/exportCostTable.do")
+    public void exportCostTable(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String modelFile = getModelFilePath(request, "cost.xls");
+        exportCostTable.exportExcel(modelFile, request, response);
+    }
+
+    @RequestMapping("/exportCostTableMonth.do")
+    public void exportCostTableMonth(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String modelFile = getModelFilePath(request, "costMonth.xls");
+        exportCostTableMonth.exportExcel(modelFile, request, response);
+    }
 
     @RequestMapping("/initCostsTableMonth.do")
     public String initCostsTableMonth(HttpServletRequest request, HttpServletResponse response) throws IOException {

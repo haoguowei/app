@@ -7,7 +7,6 @@ import com.hao.app.commons.entity.param.EmployeeQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.EmpStatusEnum;
 import com.hao.app.commons.enums.ResultCodeEnum;
-import com.hao.app.manager.export.ExportAssets;
 import com.hao.app.pojo.AssetsDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.AssetsService;
@@ -17,7 +16,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,8 +42,6 @@ public class AssetsController extends BaseController {
     @Resource
     private ProjectsService projectsService;
 
-    @Autowired
-    private ExportAssets exportAssets;
 
     @RequestMapping("/initAssets.do")
     public String initAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -62,13 +58,6 @@ public class AssetsController extends BaseController {
         AssetsQueryParam param = genQueryParam(request);
         JsonResult<AssetsDO> result = assetsService.searchAssets(param);
         writeResponse(response, result);
-    }
-
-    //导出资产
-    @RequestMapping("/exportAssets.do")
-    public void exportAssets(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String modelFile = getModelFilePath(request, "assets.xls");
-        exportAssets.exportExcel(modelFile, request, response);
     }
 
     private AssetsQueryParam genQueryParam(HttpServletRequest request) {

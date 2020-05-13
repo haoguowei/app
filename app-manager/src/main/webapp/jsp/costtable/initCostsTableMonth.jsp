@@ -81,6 +81,7 @@
         </c:forEach>
     </select>月
     <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+    <input style="margin-left: 20px;" type="button" value="导出Excel" class="Mybotton" onclick="exportCostTableMonth()">
 </h4>
 
 
@@ -151,6 +152,18 @@
         var toYear = document.getElementById("toYear").value;
         var toMonth = document.getElementById("toMonth").value;
         window.location.href = "initCostsTableMonth.do?fromYear=" + fromYear
+            + "&fromMonth=" + fromMonth
+            + "&toYear=" + toYear
+            + "&toMonth=" + toMonth
+            + "&t=" + new Date().getTime();
+    }
+
+    function exportCostTableMonth() {
+        var fromYear = document.getElementById("fromYear").value;
+        var fromMonth = document.getElementById("fromMonth").value;
+        var toYear = document.getElementById("toYear").value;
+        var toMonth = document.getElementById("toMonth").value;
+        window.location.href = "exportCostTableMonth.do?fromYear=" + fromYear
             + "&fromMonth=" + fromMonth
             + "&toYear=" + toYear
             + "&toMonth=" + toMonth

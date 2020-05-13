@@ -76,7 +76,6 @@ public abstract class AbstractExport {
 	 * @param response
 	 */
 	public void exportExcel(String modelFile, HttpServletRequest request, HttpServletResponse response) {
-		logger.info("导出Excel,modelFile={}", modelFile);
 		ServletOutputStream os = null;
 		try {
 			HSSFWorkbook wb;
