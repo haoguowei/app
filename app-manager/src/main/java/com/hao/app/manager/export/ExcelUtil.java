@@ -64,6 +64,7 @@ public class ExcelUtil {
         HSSFFont font = wb.createFont();
         font.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
         cellStyle.setFont(font);
+        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
         return cellStyle;
     }
 

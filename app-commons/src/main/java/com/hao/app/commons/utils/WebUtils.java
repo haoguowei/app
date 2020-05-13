@@ -117,7 +117,7 @@ public class WebUtils {
 
     }
 
-    private static String fmtBigDecimal(BigDecimal v) {
+    public static String fmtBigDecimal(BigDecimal v) {
         if (v == null) {
             return "0";
         }

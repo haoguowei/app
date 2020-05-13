@@ -11,13 +11,13 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("exportCostTableMonth")
 public class ExportCostTableMonth extends AbstractExport {
@@ -34,6 +34,35 @@ public class ExportCostTableMonth extends AbstractExport {
     private ProjectsService projectsService;
 
 
+    public static BigDecimal getZhanbi(BigDecimal income, BigDecimal cost) {
+        if (income.doubleValue() == 0D) {
+            return BigDecimal.valueOf(100);
+        }
+
+        return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public static BigDecimal getValue(Map<TableKey, BigDecimal> map, TableKey key) {
+        BigDecimal val = map.get(key);
+        if (val == null) {
+            return BigDecimal.valueOf(0);
+        }
+        return val;
+    }
+
+    public static BigDecimal format(BigDecimal v) {
+        if (v == null) {
+            return BigDecimal.valueOf(0);
+        }
+        return v.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public static String format2(BigDecimal v) {
+        if (v == null) {
+            return BigDecimal.valueOf(0).toString() + "%";
+        }
+        return v.setScale(2, BigDecimal.ROUND_HALF_UP).toString() + "%";
+    }
 
     @Override
     public String writeExcel(HttpServletRequest request, HSSFWorkbook wb, HSSFSheet sheet) {
@@ -45,68 +74,183 @@ public class ExportCostTableMonth extends AbstractExport {
             title = projectsDO.getName() + "月度费用表";
         }
 
-        //修改标题
-        Row titleRow = sheet.getRow(0);
-        Cell titleCell = getCell(titleRow, 0, title);
-
-        //设置月份
-        Row queryRow = sheet.getRow(1);
-        Cell queryCell = getCell(queryRow, 0, "报表月份：" + param.getTitleName());
-
         List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
         if (projectsList == null) {
             return title;
         }
 
+        HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
+        HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
+
+        //修改标题
+        Row titleRow = sheet.getRow(0);
+        Cell cell = null;
+        for (int i = 0; i < projectsList.size(); i++) {
+            if (i == 0) {
+                cell = getCell(titleRow, 0, title);
+            }
+            if (i >= 3) {
+                titleRow.createCell(i);
+            }
+
+        }
+        //标题合并单元格
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 3 + projectsList.size()));
+        cell.getCellStyle().setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+        //设置月份
+        Row queryRow = sheet.getRow(1);
+        Cell queryCell = getCell(queryRow, 0, "报表月份：" + param.getTitleName());
+
+
         Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable(param);
         Map<TableKey, BigDecimal> costTable = costsService.getCostTable(param);
 
-        HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
-        HSSFCellStyle cellStyleLeft = ExcelUtil.getCellStyleLeft(wb);
-        HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
 
-        int numb = 0; //序号
-        int baseColIndex = 2;
-
-        //为每一行赋值
         if (projectsList == null) {
             return title;
         }
 
-        for (ProjectsDO project : projectsList) {
 
+        int startCol = 3;
+
+        //项目名称
+        Row projectRow = sheet.getRow(2);
+        for (int i = 0; i < projectsList.size(); i++) {
+            ProjectsDO project = projectsList.get(i);
+            genCell(projectRow, cellStyleCenter, startCol + i, project.getName());
+        }
+        genCell(projectRow, cellStyleCenter, startCol + projectsList.size(), "合计");
+
+        //收入
+        Row incomeRow = sheet.getRow(3);
+        BigDecimal incomeTotal = BigDecimal.valueOf(0);
+        for (int i = 0; i < projectsList.size(); i++) {
+            ProjectsDO project = projectsList.get(i);
+            BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
+            genCell(incomeRow, cellStyleRight, startCol + i, format(incomeAmount));
+            incomeTotal = incomeTotal.add(incomeAmount);
+        }
+        genCell(incomeRow, cellStyleRight, startCol + projectsList.size(), format(incomeTotal));
+
+        //固定费用
+        int starRow = 4;
+        List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+        //项目id：项目合计
+        Map<Integer, BigDecimal> gudingTotal = new HashMap<>(projectsList.size());
+        for (int r : gudingIds) {
+            Row itemRow = sheet.getRow(starRow++);
+            BigDecimal itemTotal = BigDecimal.valueOf(0);
+            for (int i = 0; i < projectsList.size(); i++) {
+                ProjectsDO project = projectsList.get(i);
+                BigDecimal costAmount = getValue(costTable, new TableKey(project.getId(), r));
+                genCell(itemRow, cellStyleRight, startCol + i, format(costAmount));
+                itemTotal = itemTotal.add(costAmount);
+
+                //每一个项目的所有类型合计
+                if (gudingTotal.get(project.getId()) == null) {
+                    gudingTotal.put(project.getId(), costAmount);
+                } else {
+                    gudingTotal.put(project.getId(), gudingTotal.get(project.getId()).add(costAmount));
+                }
+            }
+            genCell(itemRow, cellStyleRight, startCol + projectsList.size(), format(itemTotal));
         }
 
+        //固定费用合计/占比
+        Row gudingHejiRow = sheet.getRow(starRow++);
+        Row gudingZhanbiRow = sheet.getRow(starRow++);
+        BigDecimal gudingHejiTotal = BigDecimal.valueOf(0);
+        for (int i = 0; i < projectsList.size(); i++) {
+            ProjectsDO project = projectsList.get(i);
+            BigDecimal cost = gudingTotal.get(project.getId());
+            genCell(gudingHejiRow, cellStyleRight, startCol + i, format(cost));
 
-//        for (AssetsDO assetsDO : list) {
-//            Row row = genRow(sheet, baseRowIndex);
-//
-//            //为每一列赋值
-//            genCell(row, cellStyleCenter, 0, numb += 1);
-//            genCell(row, cellStyleCenter, 1, fmtDate(assetsDO.getBuyTime()));
-//            genCell(row, cellStyleLeft, 2, "车辆");
-//            genCell(row, cellStyleLeft, 3, assetsDO.getName());
-//            genCell(row, cellStyleLeft, 4, assetsDO.getNumber());
-//
-//            genCell(row, cellStyleLeft, 5, assetsDO.getCarType());
-//            genCell(row, cellStyleLeft, 6, assetsDO.getLicense());
-//            genCell(row, cellStyleLeft, 7, assetsDO.getBrand());
-//
-//            genCell(row, cellStyleRight, 8, assetsDO.getPrice()); //单价
-//            genCell(row, cellStyleRight, 9, assetsDO.getPurTax());//购置税
-//            genCell(row, cellStyleRight, 10, assetsDO.getQuantity());//数量
-//
-//            BigDecimal zz = (assetsDO.getPrice().add(assetsDO.getPurTax())).multiply(BigDecimal.valueOf(assetsDO.getQuantity()));
-//            genCell(row, cellStyleRight, 11, zz); //总值=（单价+购置税）* 数量
-//            genCell(row, cellStyleRight, 12, assetsDO.getStaging()); //分摊
-//
-//            BigDecimal je = Objects.equals(assetsDO.getStaging(), 0) ? BigDecimal.valueOf(0) : zz.divide(BigDecimal.valueOf(assetsDO.getStaging()));
-//            genCell(row, cellStyleRight, 13, je); //金额=总值/分摊
-//
-//            genCell(row, cellStyleLeft, 14, assetsDO.getRemark());
-//        }
+            BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
+            genCell(gudingZhanbiRow, cellStyleRight, startCol + i, format2(getZhanbi(incomeAmount, cost)));
+
+            gudingHejiTotal = gudingHejiTotal.add(cost);
+        }
+        genCell(gudingHejiRow, cellStyleRight, startCol + projectsList.size(), format(gudingHejiTotal));
+        genCell(gudingZhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, gudingHejiTotal)));
+
+
+        //非固定
+        List<Integer> zhipeiIds = new ArrayList<>();
+        for (int i = 24; i <= 54; i++) {
+            zhipeiIds.add(i);
+        }
+
+        //项目id：项目合计
+        Map<Integer, BigDecimal> zhipeiTotal = new HashMap<>(projectsList.size());
+        for (int r : zhipeiIds) {
+            Row itemRow = sheet.getRow(starRow++);
+            BigDecimal itemTotal = BigDecimal.valueOf(0);
+            for (int i = 0; i < projectsList.size(); i++) {
+                ProjectsDO project = projectsList.get(i);
+                BigDecimal costAmount = getValue(costTable, new TableKey(project.getId(), r));
+                genCell(itemRow, cellStyleRight, startCol + i, format(costAmount));
+                itemTotal = itemTotal.add(costAmount);
+
+                //每一个项目的所有类型合计
+                if (zhipeiTotal.get(project.getId()) == null) {
+                    zhipeiTotal.put(project.getId(), costAmount);
+                } else {
+                    zhipeiTotal.put(project.getId(), zhipeiTotal.get(project.getId()).add(costAmount));
+                }
+            }
+            genCell(itemRow, cellStyleRight, startCol + projectsList.size(), format(itemTotal));
+        }
+
+        //费用合计/占比
+        Row zhipeiHejiRow = sheet.getRow(starRow++);
+        Row zhipeiZhanbiRow = sheet.getRow(starRow++);
+        BigDecimal zhipeiHejiTotal = BigDecimal.valueOf(0);
+        for (int i = 0; i < projectsList.size(); i++) {
+            ProjectsDO project = projectsList.get(i);
+            BigDecimal cost = zhipeiTotal.get(project.getId());
+            genCell(zhipeiHejiRow, cellStyleRight, startCol + i, format(cost));
+
+            BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
+            genCell(zhipeiZhanbiRow, cellStyleRight, startCol + i, format2(getZhanbi(incomeAmount, cost)));
+
+            zhipeiHejiTotal = zhipeiHejiTotal.add(cost);
+        }
+        genCell(zhipeiHejiRow, cellStyleRight, startCol + projectsList.size(), format(zhipeiHejiTotal));
+        genCell(zhipeiZhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, zhipeiHejiTotal)));
+
+
+        //总合计
+        Row totalRow = sheet.getRow(starRow++);
+        //总占比
+        Row zhanbiRow = sheet.getRow(starRow++);
+        //利润率
+        Row lirunRow = sheet.getRow(starRow++);
+
+//        Map<Integer, BigDecimal> zhipeiTotal = new HashMap<>(projectsList.size());
+//        Map<Integer, BigDecimal> gudingTotal = new HashMap<>(projectsList.size());
+
+        for (int i = 0; i < projectsList.size(); i++) {
+            ProjectsDO project = projectsList.get(i);
+            BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
+
+            BigDecimal tmp = zhipeiTotal.get(project.getId()).add(gudingTotal.get(project.getId()));
+
+            BigDecimal zb = getZhanbi(incomeAmount, tmp);
+            genCell(totalRow, cellStyleRight, startCol + i, format(tmp));
+            genCell(zhanbiRow, cellStyleRight, startCol + i, format2(zb));
+            genCell(lirunRow, cellStyleRight, startCol + i, format2(BigDecimal.valueOf(100).subtract(zb)));
+        }
+
+        BigDecimal tmpt = zhipeiHejiTotal.add(gudingHejiTotal);
+        BigDecimal zbt = getZhanbi(incomeTotal, tmpt);
+        genCell(totalRow, cellStyleRight, startCol + projectsList.size(), format(tmpt));
+        genCell(zhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(zbt));
+        genCell(lirunRow, cellStyleRight, startCol + projectsList.size(), format2(BigDecimal.valueOf(100).subtract(zbt)));
+
 
         return title;
     }
+
 
 }
