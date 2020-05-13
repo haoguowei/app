@@ -1,17 +1,23 @@
 package com.hao.app.manager.export;
 
-import com.hao.app.pojo.AssetsDO;
+import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.TableKey;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.IncomeService;
 import com.hao.app.service.ProjectsService;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Service("exportCostTableMonth")
 public class ExportCostTableMonth extends AbstractExport {
@@ -28,23 +34,50 @@ public class ExportCostTableMonth extends AbstractExport {
     private ProjectsService projectsService;
 
 
-    private List<AssetsDO> searchData(HttpServletRequest request) {
-        return null;
-    }
 
     @Override
     public String writeExcel(HttpServletRequest request, HSSFWorkbook wb, HSSFSheet sheet) {
-        List<AssetsDO> list = searchData(request);
-        String title = "项目月度费用表";
+        TableQueryParam param = genParam(request);
+
+        String title = "所有项目月度费用表";
+        ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
+        if (projectsDO != null) {
+            title = projectsDO.getName() + "月度费用表";
+        }
+
+        //修改标题
+        Row titleRow = sheet.getRow(0);
+        Cell titleCell = getCell(titleRow, 0, title);
+
+        //设置月份
+        Row queryRow = sheet.getRow(1);
+        Cell queryCell = getCell(queryRow, 0, "报表月份：" + param.getTitleName());
+
+        List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
+        if (projectsList == null) {
+            return title;
+        }
+
+        Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable(param);
+        Map<TableKey, BigDecimal> costTable = costsService.getCostTable(param);
 
         HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
         HSSFCellStyle cellStyleLeft = ExcelUtil.getCellStyleLeft(wb);
         HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
 
         int numb = 0; //序号
-        int baseRowIndex = 2;
+        int baseColIndex = 2;
 
         //为每一行赋值
+        if (projectsList == null) {
+            return title;
+        }
+
+        for (ProjectsDO project : projectsList) {
+
+        }
+
+
 //        for (AssetsDO assetsDO : list) {
 //            Row row = genRow(sheet, baseRowIndex);
 //

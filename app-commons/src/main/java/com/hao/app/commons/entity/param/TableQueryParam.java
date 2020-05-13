@@ -26,5 +26,9 @@ public class TableQueryParam implements Serializable {
 	private String toYear;
 	private String toMonth;
 
+	public String getTitleName() {
+		return this.fromYear + "年" + this.fromMonth + "月 ~" + this.toYear + "年" + this.toMonth + "月";
+	}
+
 
 }

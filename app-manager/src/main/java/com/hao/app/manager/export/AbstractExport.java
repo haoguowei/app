@@ -1,7 +1,10 @@
 package com.hao.app.manager.export;
 
+import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.commons.utils.Utils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -64,6 +67,12 @@ public abstract class AbstractExport {
 
 	protected static Cell genCell(Row row, HSSFCellStyle style, int index, double val) {
 		Cell cell = genCell(row, style, index);
+		cell.setCellValue(val);
+		return cell;
+	}
+
+	protected static Cell getCell(Row row, int index, String val) {
+		Cell cell = row.getCell(index);
 		cell.setCellValue(val);
 		return cell;
 	}
@@ -134,4 +143,33 @@ public abstract class AbstractExport {
 	}
 
 
+	public TableQueryParam genParam(HttpServletRequest request) {
+		int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
+		String fromYear = request.getParameter("fromYear");
+		String fromMonth = request.getParameter("fromMonth");
+		String toYear = request.getParameter("toYear");
+		String toMonth = request.getParameter("toMonth");
+
+		String year = String.valueOf(DateUtil.getYear());
+
+		fromYear = StringUtils.isBlank(fromYear) ? year : fromYear;
+		fromMonth = StringUtils.isBlank(fromMonth) ? "01" : fromMonth;
+		toYear = StringUtils.isBlank(toYear) ? year : toYear;
+		toMonth = StringUtils.isBlank(toMonth) ? "12" : toMonth;
+
+		TableQueryParam param = new TableQueryParam();
+		if (projectsId > 0) {
+			param.setProjectsId(projectsId);
+		}
+
+		param.setFromYear(fromYear);
+		param.setFromMonth(fromMonth);
+		param.setToYear(toYear);
+		param.setToMonth(toMonth);
+
+		param.setEnterDateStart(fromYear + "-" + fromMonth + "-01");
+		param.setEnterDateEnd(toYear + "-" + toMonth + "-01");
+
+		return param;
+	}
 }
