@@ -97,7 +97,7 @@ public class ExportCostTable extends AbstractExport {
             genCell(incomeRow, cellStyleRight, startCol++, "占比");
         }
 
-        int startRow = 3;
+        int startRow = 4;
         List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
         for (int typeId : gudingIds) {
             startCol = 3;
