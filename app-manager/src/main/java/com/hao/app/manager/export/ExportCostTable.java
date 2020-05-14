@@ -12,7 +12,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -56,20 +55,16 @@ public class ExportCostTable extends AbstractExport {
 
         //修改标题
         Row titleRow = sheet.getRow(0);
-        Cell cell = null;
-        int tmpIdx = 3;
-        for (int i = 0; i < allMonth.size(); i++) {
-            if (i == 0) {
-                cell = getCell(titleRow, 0, title);
-            }
-            if (i >= 3) {
-                titleRow.createCell(tmpIdx++);
-                titleRow.createCell(tmpIdx++);
-            }
+        Cell cell = getCell(titleRow, 0, title);
 
+        int tmpIdx = 3;
+        for (int month : allMonth) {
+            titleRow.createCell(tmpIdx++).setCellValue("2");
+            titleRow.createCell(tmpIdx++).setCellValue("1");
         }
+
         //标题合并单元格
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, tmpIdx - 1));
+//        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, tmpIdx - 2));
         cell.getCellStyle().setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
         //设置月份
