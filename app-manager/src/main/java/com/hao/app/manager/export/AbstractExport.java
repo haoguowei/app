@@ -1,6 +1,7 @@
 package com.hao.app.manager.export;
 
 import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.commons.utils.Utils;
 import org.apache.commons.lang.StringUtils;
@@ -20,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * 文件导出
@@ -171,5 +172,58 @@ public abstract class AbstractExport {
 		param.setEnterDateEnd(toYear + "-" + toMonth + "-01");
 
 		return param;
+	}
+
+	public static BigDecimal getZhanbi(BigDecimal income, BigDecimal cost) {
+		if (income.doubleValue() == 0D) {
+			return BigDecimal.valueOf(100);
+		}
+
+		return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	public static BigDecimal getValue(Map<TableKey, BigDecimal> map, TableKey key) {
+		BigDecimal val = map.get(key);
+		if (val == null) {
+			return BigDecimal.valueOf(0);
+		}
+		return val;
+	}
+
+	public static BigDecimal format(BigDecimal v) {
+		if (v == null) {
+			return BigDecimal.valueOf(0);
+		}
+		return v.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	public static String format2(BigDecimal v) {
+		if (v == null) {
+			return BigDecimal.valueOf(0).toString() + "%";
+		}
+		return v.setScale(2, BigDecimal.ROUND_HALF_UP).toString() + "%";
+	}
+
+	public List<Integer> getAllMonths(Map<TableKey, BigDecimal> incomeTable, Map<TableKey, BigDecimal> costTable) {
+		List<Integer> allMonth = new ArrayList<>();
+		for (TableKey key : incomeTable.keySet()) {
+			allMonth.add(key.getProjectId());
+		}
+		for (TableKey key : costTable.keySet()) {
+			allMonth.add(key.getProjectId());
+		}
+
+		Collections.sort(allMonth);
+
+		Set<Integer> set = new LinkedHashSet<>();
+		for (Integer i : allMonth) {
+			set.add(i);
+		}
+
+		List<Integer> ls = new ArrayList<>(set.size());
+		for (int x : set) {
+			ls.add(x);
+		}
+		return ls;
 	}
 }

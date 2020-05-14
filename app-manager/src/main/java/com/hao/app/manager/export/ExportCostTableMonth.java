@@ -25,44 +25,12 @@ public class ExportCostTableMonth extends AbstractExport {
     @Resource
     private CostsService costsService;
 
-
     @Resource
     private IncomeService incomeService;
-
 
     @Resource
     private ProjectsService projectsService;
 
-
-    public static BigDecimal getZhanbi(BigDecimal income, BigDecimal cost) {
-        if (income.doubleValue() == 0D) {
-            return BigDecimal.valueOf(100);
-        }
-
-        return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
-    }
-
-    public static BigDecimal getValue(Map<TableKey, BigDecimal> map, TableKey key) {
-        BigDecimal val = map.get(key);
-        if (val == null) {
-            return BigDecimal.valueOf(0);
-        }
-        return val;
-    }
-
-    public static BigDecimal format(BigDecimal v) {
-        if (v == null) {
-            return BigDecimal.valueOf(0);
-        }
-        return v.setScale(2, BigDecimal.ROUND_HALF_UP);
-    }
-
-    public static String format2(BigDecimal v) {
-        if (v == null) {
-            return BigDecimal.valueOf(0).toString() + "%";
-        }
-        return v.setScale(2, BigDecimal.ROUND_HALF_UP).toString() + "%";
-    }
 
     @Override
     public String writeExcel(HttpServletRequest request, HSSFWorkbook wb, HSSFSheet sheet) {
@@ -100,18 +68,11 @@ public class ExportCostTableMonth extends AbstractExport {
 
         //设置月份
         Row queryRow = sheet.getRow(1);
-        Cell queryCell = getCell(queryRow, 0, "报表月份：" + param.getTitleName());
+        getCell(queryRow, 0, "报表月份：" + param.getTitleName());
 
 
         Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable(param);
         Map<TableKey, BigDecimal> costTable = costsService.getCostTable(param);
-
-
-        if (projectsList == null) {
-            return title;
-        }
-
-
         int startCol = 3;
 
         //项目名称
@@ -226,10 +187,6 @@ public class ExportCostTableMonth extends AbstractExport {
         Row zhanbiRow = sheet.getRow(starRow++);
         //利润率
         Row lirunRow = sheet.getRow(starRow++);
-
-//        Map<Integer, BigDecimal> zhipeiTotal = new HashMap<>(projectsList.size());
-//        Map<Integer, BigDecimal> gudingTotal = new HashMap<>(projectsList.size());
-
         for (int i = 0; i < projectsList.size(); i++) {
             ProjectsDO project = projectsList.get(i);
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
@@ -247,7 +204,6 @@ public class ExportCostTableMonth extends AbstractExport {
         genCell(totalRow, cellStyleRight, startCol + projectsList.size(), format(tmpt));
         genCell(zhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(zbt));
         genCell(lirunRow, cellStyleRight, startCol + projectsList.size(), format2(BigDecimal.valueOf(100).subtract(zbt)));
-
 
         return title;
     }

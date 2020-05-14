@@ -1,17 +1,25 @@
 package com.hao.app.manager.export;
 
-import com.hao.app.pojo.AssetsDO;
+import com.hao.app.commons.entity.param.TableQueryParam;
+import com.hao.app.commons.entity.result.TableKey;
+import com.hao.app.commons.utils.WebUtils;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.IncomeService;
 import com.hao.app.service.ProjectsService;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Service("exportCostTable")
 public class ExportCostTable extends AbstractExport {
@@ -19,59 +27,80 @@ public class ExportCostTable extends AbstractExport {
     @Resource
     private CostsService costsService;
 
-
     @Resource
     private IncomeService incomeService;
-
 
     @Resource
     private ProjectsService projectsService;
 
-
-    private List<AssetsDO> searchData(HttpServletRequest request) {
-        return null;
-    }
-
     @Override
     public String writeExcel(HttpServletRequest request, HSSFWorkbook wb, HSSFSheet sheet) {
-        List<AssetsDO> list = searchData(request);
-        String title = "项目费用表";
+        TableQueryParam param = genParam(request);
 
-        HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
-        HSSFCellStyle cellStyleLeft = ExcelUtil.getCellStyleLeft(wb);
+        String title = "所有项目费用表";
+        String proName = "";
+        ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
+        if (projectsDO != null) {
+            title = projectsDO.getName() + "费用表";
+            proName = projectsDO.getName() + "，";
+        }
+
+        Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable2(param);
+        Map<TableKey, BigDecimal> costTable = costsService.getCostTable2(param);
+        List<Integer> allMonth = getAllMonths(incomeTable, costTable);
+        allMonth.add(0); //合计
+
+
         HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
+        HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
 
-        int numb = 0; //序号
-        int baseRowIndex = 2;
+        //修改标题
+        Row titleRow = sheet.getRow(0);
+        Cell cell = null;
+        int tmpIdx = 3;
+        for (int i = 0; i < allMonth.size(); i++) {
+            if (i == 0) {
+                cell = getCell(titleRow, 0, title);
+            }
+            if (i >= 3) {
+                titleRow.createCell(tmpIdx++);
+                titleRow.createCell(tmpIdx++);
+            }
 
-        //为每一行赋值
-//        for (AssetsDO assetsDO : list) {
-//            Row row = genRow(sheet, baseRowIndex);
-//
-//            //为每一列赋值
-//            genCell(row, cellStyleCenter, 0, numb += 1);
-//            genCell(row, cellStyleCenter, 1, fmtDate(assetsDO.getBuyTime()));
-//            genCell(row, cellStyleLeft, 2, "车辆");
-//            genCell(row, cellStyleLeft, 3, assetsDO.getName());
-//            genCell(row, cellStyleLeft, 4, assetsDO.getNumber());
-//
-//            genCell(row, cellStyleLeft, 5, assetsDO.getCarType());
-//            genCell(row, cellStyleLeft, 6, assetsDO.getLicense());
-//            genCell(row, cellStyleLeft, 7, assetsDO.getBrand());
-//
-//            genCell(row, cellStyleRight, 8, assetsDO.getPrice()); //单价
-//            genCell(row, cellStyleRight, 9, assetsDO.getPurTax());//购置税
-//            genCell(row, cellStyleRight, 10, assetsDO.getQuantity());//数量
-//
-//            BigDecimal zz = (assetsDO.getPrice().add(assetsDO.getPurTax())).multiply(BigDecimal.valueOf(assetsDO.getQuantity()));
-//            genCell(row, cellStyleRight, 11, zz); //总值=（单价+购置税）* 数量
-//            genCell(row, cellStyleRight, 12, assetsDO.getStaging()); //分摊
-//
-//            BigDecimal je = Objects.equals(assetsDO.getStaging(), 0) ? BigDecimal.valueOf(0) : zz.divide(BigDecimal.valueOf(assetsDO.getStaging()));
-//            genCell(row, cellStyleRight, 13, je); //金额=总值/分摊
-//
-//            genCell(row, cellStyleLeft, 14, assetsDO.getRemark());
-//        }
+        }
+        //标题合并单元格
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, tmpIdx - 1));
+        cell.getCellStyle().setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+        //设置月份
+        Row queryRow = sheet.getRow(1);
+        getCell(queryRow, 0, proName + "报表月份：" + param.getTitleName());
+
+
+        //月份
+        int startCol = 3;
+        Row projectRow = sheet.getRow(2);
+        for (int month : allMonth) {
+            genCell(projectRow, cellStyleCenter, startCol++, WebUtils.getMonthName(month));
+            genCell(projectRow, cellStyleCenter, startCol++, "");
+        }
+
+        //收入
+        startCol = 3;
+        Row incomeRow = sheet.getRow(3);
+        BigDecimal incomeTotal = BigDecimal.valueOf(0);
+        for (int month : allMonth) {
+            BigDecimal incomeAmount = getValue(incomeTable, new TableKey(month));
+            incomeTotal = incomeTotal.add(incomeAmount);
+
+            if (month == 0) {
+                genCell(incomeRow, cellStyleRight, startCol++, format(incomeTotal));
+            } else {
+                genCell(incomeRow, cellStyleRight, startCol++, format(incomeAmount));
+            }
+            genCell(incomeRow, cellStyleRight, startCol++, "占比");
+        }
+
 
         return title;
     }
