@@ -98,9 +98,9 @@ public class ExportCostTable extends AbstractExport {
         }
 
         int startRow = 3;
-        startCol = 3;
         List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
         for (int typeId : gudingIds) {
+            startCol = 3;
             Row typeRow = sheet.getRow(startRow++);
             for (int month : allMonth) {
                 BigDecimal costAmount = getValue(costTable, new TableKey(month, typeId));
