@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -59,8 +60,8 @@ public class ExportCostTable extends AbstractExport {
 
         int tmpIdx = 3;
         for (int month : allMonth) {
-            titleRow.createCell(tmpIdx++).setCellValue("2");
-            titleRow.createCell(tmpIdx++).setCellValue("1");
+            titleRow.createCell(tmpIdx++);
+            titleRow.createCell(tmpIdx++);
         }
 
         //标题合并单元格
@@ -94,6 +95,20 @@ public class ExportCostTable extends AbstractExport {
                 genCell(incomeRow, cellStyleRight, startCol++, format(incomeAmount));
             }
             genCell(incomeRow, cellStyleRight, startCol++, "占比");
+        }
+
+        int startRow = 3;
+        startCol = 3;
+        List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+        for (int typeId : gudingIds) {
+            Row typeRow = sheet.getRow(startRow++);
+            for (int month : allMonth) {
+                BigDecimal costAmount = getValue(costTable, new TableKey(month, typeId));
+                BigDecimal incomeAmount = getValue(incomeTable, new TableKey(month));
+
+                genCell(typeRow, cellStyleRight, startCol++, format(costAmount));
+                genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(costAmount, incomeAmount))); //占比
+            }
         }
 
 
