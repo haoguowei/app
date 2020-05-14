@@ -10,6 +10,8 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
@@ -48,7 +50,18 @@ public class ExportCostTableMonth extends AbstractExport {
         }
 
         HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
+
+        HSSFCellStyle cellStyleRight2 = ExcelUtil.getCellStyleRight(wb);
+        cellStyleRight2.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        cellStyleRight2.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
+        HSSFCellStyle cellStyleRight3 = ExcelUtil.getCellStyleRight(wb);
+        cellStyleRight3.setFillForegroundColor(IndexedColors.CORNFLOWER_BLUE.getIndex());
+        cellStyleRight3.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
         HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
+        cellStyleCenter.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        cellStyleCenter.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
         //修改标题
         Row titleRow = sheet.getRow(0);
@@ -89,10 +102,10 @@ public class ExportCostTableMonth extends AbstractExport {
         for (int i = 0; i < projectsList.size(); i++) {
             ProjectsDO project = projectsList.get(i);
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
-            genCell(incomeRow, cellStyleRight, startCol + i, format(incomeAmount));
+            genCell(incomeRow, cellStyleRight2, startCol + i, format(incomeAmount));
             incomeTotal = incomeTotal.add(incomeAmount);
         }
-        genCell(incomeRow, cellStyleRight, startCol + projectsList.size(), format(incomeTotal));
+        genCell(incomeRow, cellStyleRight2, startCol + projectsList.size(), format(incomeTotal));
 
         //固定费用
         int starRow = 4;
@@ -125,15 +138,15 @@ public class ExportCostTableMonth extends AbstractExport {
         for (int i = 0; i < projectsList.size(); i++) {
             ProjectsDO project = projectsList.get(i);
             BigDecimal cost = gudingTotal.get(project.getId());
-            genCell(gudingHejiRow, cellStyleRight, startCol + i, format(cost));
+            genCell(gudingHejiRow, cellStyleRight2, startCol + i, format(cost));
 
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
-            genCell(gudingZhanbiRow, cellStyleRight, startCol + i, format2(getZhanbi(incomeAmount, cost)));
+            genCell(gudingZhanbiRow, cellStyleRight2, startCol + i, format2(getZhanbi(incomeAmount, cost)));
 
             gudingHejiTotal = gudingHejiTotal.add(cost);
         }
-        genCell(gudingHejiRow, cellStyleRight, startCol + projectsList.size(), format(gudingHejiTotal));
-        genCell(gudingZhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, gudingHejiTotal)));
+        genCell(gudingHejiRow, cellStyleRight2, startCol + projectsList.size(), format(gudingHejiTotal));
+        genCell(gudingZhanbiRow, cellStyleRight2, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, gudingHejiTotal)));
 
 
         //非固定
@@ -170,15 +183,15 @@ public class ExportCostTableMonth extends AbstractExport {
         for (int i = 0; i < projectsList.size(); i++) {
             ProjectsDO project = projectsList.get(i);
             BigDecimal cost = zhipeiTotal.get(project.getId());
-            genCell(zhipeiHejiRow, cellStyleRight, startCol + i, format(cost));
+            genCell(zhipeiHejiRow, cellStyleRight2, startCol + i, format(cost));
 
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
-            genCell(zhipeiZhanbiRow, cellStyleRight, startCol + i, format2(getZhanbi(incomeAmount, cost)));
+            genCell(zhipeiZhanbiRow, cellStyleRight2, startCol + i, format2(getZhanbi(incomeAmount, cost)));
 
             zhipeiHejiTotal = zhipeiHejiTotal.add(cost);
         }
-        genCell(zhipeiHejiRow, cellStyleRight, startCol + projectsList.size(), format(zhipeiHejiTotal));
-        genCell(zhipeiZhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, zhipeiHejiTotal)));
+        genCell(zhipeiHejiRow, cellStyleRight2, startCol + projectsList.size(), format(zhipeiHejiTotal));
+        genCell(zhipeiZhanbiRow, cellStyleRight2, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, zhipeiHejiTotal)));
 
 
         //总合计
@@ -194,16 +207,16 @@ public class ExportCostTableMonth extends AbstractExport {
             BigDecimal tmp = zhipeiTotal.get(project.getId()).add(gudingTotal.get(project.getId()));
 
             BigDecimal zb = getZhanbi(incomeAmount, tmp);
-            genCell(totalRow, cellStyleRight, startCol + i, format(tmp));
-            genCell(zhanbiRow, cellStyleRight, startCol + i, format2(zb));
-            genCell(lirunRow, cellStyleRight, startCol + i, format2(BigDecimal.valueOf(100).subtract(zb)));
+            genCell(totalRow, cellStyleRight3, startCol + i, format(tmp));
+            genCell(zhanbiRow, cellStyleRight3, startCol + i, format2(zb));
+            genCell(lirunRow, cellStyleRight3, startCol + i, format2(BigDecimal.valueOf(100).subtract(zb)));
         }
 
         BigDecimal tmpt = zhipeiHejiTotal.add(gudingHejiTotal);
         BigDecimal zbt = getZhanbi(incomeTotal, tmpt);
-        genCell(totalRow, cellStyleRight, startCol + projectsList.size(), format(tmpt));
-        genCell(zhanbiRow, cellStyleRight, startCol + projectsList.size(), format2(zbt));
-        genCell(lirunRow, cellStyleRight, startCol + projectsList.size(), format2(BigDecimal.valueOf(100).subtract(zbt)));
+        genCell(totalRow, cellStyleRight3, startCol + projectsList.size(), format(tmpt));
+        genCell(zhanbiRow, cellStyleRight3, startCol + projectsList.size(), format2(zbt));
+        genCell(lirunRow, cellStyleRight3, startCol + projectsList.size(), format2(BigDecimal.valueOf(100).subtract(zbt)));
 
         return title;
     }

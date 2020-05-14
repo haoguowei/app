@@ -11,6 +11,8 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,18 @@ public class ExportCostTable extends AbstractExport {
 
 
         HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
+
+        HSSFCellStyle cellStyleRight2 = ExcelUtil.getCellStyleRight(wb);
+        cellStyleRight2.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        cellStyleRight2.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
+        HSSFCellStyle cellStyleRight3 = ExcelUtil.getCellStyleRight(wb);
+        cellStyleRight3.setFillForegroundColor(IndexedColors.CORNFLOWER_BLUE.getIndex());
+        cellStyleRight3.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
         HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
+        cellStyleCenter.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        cellStyleCenter.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
         //修改标题
         Row titleRow = sheet.getRow(0);
@@ -73,8 +86,11 @@ public class ExportCostTable extends AbstractExport {
         int startCol = 3;
         Row projectRow = sheet.getRow(2);
         for (int month : allMonth) {
+            int from = startCol;
             genCell(projectRow, cellStyleCenter, startCol++, WebUtils.getMonthName(month));
             genCell(projectRow, cellStyleCenter, startCol++, "");
+
+            sheet.addMergedRegion(new CellRangeAddress(2, 2, from, from + 1));
         }
 
         //收入
@@ -82,21 +98,15 @@ public class ExportCostTable extends AbstractExport {
         Row incomeRow = sheet.getRow(3);
         BigDecimal incomeTotal = BigDecimal.valueOf(0);
         for (int month : allMonth) {
-            int from = startCol;
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(month));
             incomeTotal = incomeTotal.add(incomeAmount);
 
-            Cell tmpCell = null;
             if (month == 0) {
-                tmpCell = genCell(incomeRow, cellStyleRight, startCol++, format(incomeTotal));
+                genCell(incomeRow, cellStyleRight2, startCol++, format(incomeTotal));
             } else {
-                tmpCell = genCell(incomeRow, cellStyleRight, startCol++, format(incomeAmount));
+                genCell(incomeRow, cellStyleRight2, startCol++, format(incomeAmount));
             }
-            genCell(incomeRow, cellStyleRight, startCol++, "占比");
-
-
-            sheet.addMergedRegion(new CellRangeAddress(2, 2, from, from + 1));
-            tmpCell.getCellStyle().setAlignment(HSSFCellStyle.ALIGN_CENTER);
+            genCell(incomeRow, cellStyleRight2, startCol++, "占比");
         }
 
 
@@ -144,11 +154,11 @@ public class ExportCostTable extends AbstractExport {
 
             int _i = startCol++;
             int _j = startCol++;
-            genCell(total1, cellStyleRight, _i, format(costA));
-            genCell(total1, cellStyleRight, _j, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total1, cellStyleRight2, _i, format(costA));
+            genCell(total1, cellStyleRight2, _j, format2(getZhanbi(incomeA, costA))); //占比
 
-            genCell(total2, cellStyleRight, _i, format2(getZhanbi(incomeA, costA))); //占比
-            genCell(total2, cellStyleRight, _j, "");
+            genCell(total2, cellStyleRight2, _i, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total2, cellStyleRight2, _j, "");
         }
 
 
@@ -200,11 +210,11 @@ public class ExportCostTable extends AbstractExport {
 
             int _i = startCol++;
             int _j = startCol++;
-            genCell(total3, cellStyleRight, _i, format(costA));
-            genCell(total3, cellStyleRight, _j, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total3, cellStyleRight2, _i, format(costA));
+            genCell(total3, cellStyleRight2, _j, format2(getZhanbi(incomeA, costA))); //占比
 
-            genCell(total4, cellStyleRight, _i, format2(getZhanbi(incomeA, costA))); //占比
-            genCell(total4, cellStyleRight, _j, "");
+            genCell(total4, cellStyleRight2, _i, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total4, cellStyleRight2, _j, "");
         }
 
 
@@ -221,14 +231,14 @@ public class ExportCostTable extends AbstractExport {
             int _j = startCol++;
             BigDecimal zb = getZhanbi(incomeA, costA);
 
-            genCell(total5, cellStyleRight, _i, format(costA));
-            genCell(total5, cellStyleRight, _j, format2(zb)); //占比
+            genCell(total5, cellStyleRight3, _i, format(costA));
+            genCell(total5, cellStyleRight3, _j, format2(zb)); //占比
 
-            genCell(total6, cellStyleRight, _i, format2(zb)); //占比
-            genCell(total6, cellStyleRight, _j, "");
+            genCell(total6, cellStyleRight3, _i, format2(zb)); //占比
+            genCell(total6, cellStyleRight3, _j, "");
 
-            genCell(total7, cellStyleRight, _i, format2(BigDecimal.valueOf(100).subtract(zb))); //占比
-            genCell(total7, cellStyleRight, _j, "");
+            genCell(total7, cellStyleRight3, _i, format2(BigDecimal.valueOf(100).subtract(zb))); //占比
+            genCell(total7, cellStyleRight3, _j, "");
         }
 
 
