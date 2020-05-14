@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,16 +100,53 @@ public class ExportCostTable extends AbstractExport {
 
         int startRow = 4;
         List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+        Map<Integer, BigDecimal> mountMap = new HashMap<>();
+        for (int month : allMonth) {
+            mountMap.put(month, BigDecimal.valueOf(0));
+            mountMap.put(0, BigDecimal.valueOf(0));
+        }
+
         for (int typeId : gudingIds) {
             startCol = 3;
             Row typeRow = sheet.getRow(startRow++);
+            BigDecimal totolCost = BigDecimal.valueOf(0);
+            BigDecimal totolIncome = BigDecimal.valueOf(0);
             for (int month : allMonth) {
-                BigDecimal costAmount = getValue(costTable, new TableKey(month, typeId));
-                BigDecimal incomeAmount = getValue(incomeTable, new TableKey(month));
+                if (month == 0) {
+                    genCell(typeRow, cellStyleRight, startCol++, format(totolCost));
+                    genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(totolIncome, totolCost))); //占比
 
-                genCell(typeRow, cellStyleRight, startCol++, format(costAmount));
-                genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(costAmount, incomeAmount))); //占比
+                    mountMap.put(month, mountMap.get(month).add(totolCost));
+                } else {
+                    BigDecimal incomeAmount = getValue(incomeTable, new TableKey(month));
+                    BigDecimal costAmount = getValue(costTable, new TableKey(month, typeId));
+                    totolIncome = totolIncome.add(incomeAmount);
+                    totolCost = totolCost.add(costAmount);
+
+                    genCell(typeRow, cellStyleRight, startCol++, format(costAmount));
+                    genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(incomeAmount, costAmount))); //占比
+
+                    mountMap.put(month, mountMap.get(month).add(costAmount));
+                }
+
             }
+        }
+
+        //合计
+        startCol = 3;
+        Row total1 = sheet.getRow(startRow++);
+        Row total2 = sheet.getRow(startRow++);
+        for (int month : allMonth) {
+            BigDecimal costA = mountMap.get(month);
+            BigDecimal incomeA = month == 0 ? incomeTotal : getValue(incomeTable, new TableKey(month));
+
+            int _i = startCol++;
+            int _j = startCol++;
+            genCell(total1, cellStyleRight, _i, format(costA));
+            genCell(total1, cellStyleRight, _j, format2(getZhanbi(incomeA, costA))); //占比
+
+            genCell(total2, cellStyleRight, _i, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total2, cellStyleRight, _j, "");
         }
 
 
