@@ -182,7 +182,8 @@ Ext.onReady(function () {
                     if ((a == null || a == '') && (b == null || b == '') && (c == null || c == '')) {
                         return '';
                     }
-                    return a + "-" + b + "-" + c;
+                    var res = a + "-" + b + "-" + c;
+                    return "<span title='" + res + "'>" + res + "</span>";
                 }
             },
             {width: 2, header: '费用金额(元)', align: 'right', sortable: false, dataIndex: 'amount'},
