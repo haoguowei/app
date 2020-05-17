@@ -22,6 +22,7 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
+            width: 2700px;
         }
 
         table td {
@@ -85,22 +86,20 @@
 </h4>
 
 
-<table style="height: 40px;">
-    <tr>
-        <th style="width: 350px;" colspan="3">
-            核算项
-        </th>
-        <c:forEach items="${projectsList }" var="project">
-            <th style="width: 100px;">
-                    ${project.name }
-            </th>
-        </c:forEach>
-    </tr>
-</table>
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table>
+        <tr>
+            <th style="width: 350px;" colspan="3">
+                核算项
+            </th>
+            <c:forEach items="${projectsList }" var="project">
+                <th style="width: 100px;">
+                        ${project.name }
+                </th>
+            </c:forEach>
+        </tr>
         <tr style="background-color: #E6E6FA;">
-            <td style="width: 350px;" colspan="3">
+            <td colspan="3">
                 合同收入
             </td>
             <c:forEach items="${projectsList }" var="project">
@@ -143,7 +142,7 @@
 
 </body>
 <script type="text/javascript">
-    var height = $(window).height() - 170;
+    var height = $(window).height() - 130;
     document.getElementById('m_div_id').style.height = height + "px";
 
     function searchFunc() {

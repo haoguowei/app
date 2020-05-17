@@ -22,6 +22,8 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
+            width: 1200px;
+            max-width: 2000px;
         }
 
         table td {
@@ -94,29 +96,27 @@
 </h4>
 
 
-<table style="height: 40px;">
-    <tr>
-        <th style="width: 350px;" colspan="3">
-            核算项
-        </th>
-        <c:forEach items="${allMonth }" var="itm">
-            <th style="width: 170px;" colspan="2">
-                    ${WebUtils.getMonthName(itm) }
-            </th>
-        </c:forEach>
-    </tr>
-</table>
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table>
+        <tr>
+            <th style="width: 350px;" colspan="3">
+                核算项
+            </th>
+            <c:forEach items="${allMonth }" var="itm">
+                <th style="width: 170px;" colspan="2">
+                        ${WebUtils.getMonthName(itm) }
+                </th>
+            </c:forEach>
+        </tr>
         <tr style="background-color: #E6E6FA;">
-            <td style="width: 350px;" colspan="3">
+            <td colspan="3">
                 合同收入
             </td>
             <c:forEach items="${allMonth }" var="month">
                 <td align="right" style="width: 84px;">
                         ${WebUtils.getMshouru(month, incomeTable)}
                 </td>
-                <td align="right" style="width: 83px;">
+                <td align="right">
                     占比
                 </td>
             </c:forEach>
@@ -160,7 +160,7 @@
 
 </body>
 <script type="text/javascript">
-    var height = $(window).height() - 170;
+    var height = $(window).height() - 130;
     document.getElementById('m_div_id').style.height = height + "px";
 
     function searchFunc() {
