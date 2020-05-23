@@ -1106,8 +1106,8 @@ VALUES
 	(568,'2020-05-05 21:56:32','admin','删除菜单，result : true;menuId：44'),
 	(569,'2020-05-05 21:56:40','admin','删除菜单，result : true;menuId：43'),
 	(570,'2020-05-05 21:56:48','admin','删除菜单，result : true;menuId：33'),
-	(571,'2020-05-05 21:57:03','admin','保存菜单，result : true;menu：SysMenu(id=34, parent=40, name=费用管理, url=initCosts.do, sort=4)'),
-	(572,'2020-05-05 21:57:19','admin','保存权限记录，result : true;privilege：SysPrivilege(id=108, menuId=34, name=费用管理, url=initCosts.do)'),
+	(571,'2020-05-05 21:57:03','admin','保存菜单，result : true;menu：SysMenu(id=34, parent=40, name=项目费用, url=initCosts.do, sort=4)'),
+	(572,'2020-05-05 21:57:19','admin','保存权限记录，result : true;privilege：SysPrivilege(id=108, menuId=34, name=项目费用, url=initCosts.do)'),
 	(573,'2020-05-05 21:57:32','admin','用户登录'),
 	(574,'2020-05-05 22:41:32','admin','用户登录'),
 	(575,'2020-05-07 22:29:26','admin','用户登录'),
@@ -1171,12 +1171,12 @@ VALUES
 	(633,'2020-05-08 23:07:34','admin','用户登录'),
 	(634,'2020-05-08 23:09:32','admin','用户登录'),
 	(635,'2020-05-09 22:21:45','admin','用户登录'),
-	(636,'2020-05-09 22:22:14','admin','保存菜单，result : true;menu：SysMenu(id=0, parent=40, name=月度费用, url=initCostsTableMonth.do, sort=5)'),
-	(637,'2020-05-09 22:22:27','admin','保存权限记录，result : true;privilege：SysPrivilege(id=0, menuId=62, name=月度费用, url=initCostsTableMonth.do)'),
+	(636,'2020-05-09 22:22:14','admin','保存菜单，result : true;menu：SysMenu(id=0, parent=40, name=部门费用, url=initCostsTableMonth.do, sort=5)'),
+	(637,'2020-05-09 22:22:27','admin','保存权限记录，result : true;privilege：SysPrivilege(id=0, menuId=62, name=部门费用, url=initCostsTableMonth.do)'),
 	(638,'2020-05-09 22:22:40','admin','设置角色权限，角色：1;权限：1,2,6,7,8,9,3,10,11,12,4,13,14,15,16,5,101,100,103,102,124,125,126,105,116,120,104,119,121,122,109,118,127,108,129,115,123'),
 	(639,'2020-05-09 22:22:43','admin','用户登录'),
-	(640,'2020-05-09 22:27:26','admin','保存菜单，result : true;menu：SysMenu(id=0, parent=40, name=项目费用, url=initCostsTable.do, sort=11)'),
-	(641,'2020-05-09 22:27:40','admin','保存权限记录，result : true;privilege：SysPrivilege(id=0, menuId=63, name=项目费用, url=initCostsTable.do)'),
+	(640,'2020-05-09 22:27:26','admin','保存菜单，result : true;menu：SysMenu(id=0, parent=40, name=综合费用, url=initCostsTable.do, sort=11)'),
+	(641,'2020-05-09 22:27:40','admin','保存权限记录，result : true;privilege：SysPrivilege(id=0, menuId=63, name=综合费用, url=initCostsTable.do)'),
 	(642,'2020-05-09 22:27:49','admin','设置角色权限，角色：1;权限：1,2,6,7,8,9,3,10,11,12,4,13,14,15,16,5,101,100,103,102,124,125,126,105,116,120,104,119,121,122,109,118,127,108,129,130,115,123'),
 	(643,'2020-05-09 22:27:53','admin','用户登录'),
 	(644,'2020-05-09 22:32:48','admin','用户登录'),
@@ -1431,7 +1431,7 @@ VALUES
 	(22,20,'员工管理','initEmployee.do',3),
 	(30,0,'资产管理','#',40),
 	(32,30,'车辆管理','initAssets.do',2),
-	(34,40,'费用管理','initCosts.do',4),
+	(34,40,'项目费用','initCosts.do',4),
 	(40,0,'成本管理','#',50),
 	(47,0,'汇总管理','#',100),
 	(48,47,'费用汇总','initCostCharts.do',1),
@@ -1445,8 +1445,8 @@ VALUES
 	(58,10,'额定税金','initShuijin.do',6),
 	(59,10,'管理费','initManagerPay.do',7),
 	(60,40,'收入管理','initIncome.do',0),
-	(62,40,'月度费用','initCostsTableMonth.do',5),
-	(63,40,'项目费用','initCostsTable.do',11);
+	(62,40,'部门费用','initCostsTableMonth.do',5),
+	(63,40,'综合费用','initCostsTable.do',11);
 
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1492,7 +1492,7 @@ VALUES
 	(103,13,'编辑项目管理页','saveProjects.do'),
 	(104,22,'访问员工管理页','initEmployee.do'),
 	(105,21,'编辑员工信息页','initEmployeeEdit.do'),
-	(108,34,'费用管理','initCosts.do'),
+	(108,34,'项目费用','initCosts.do'),
 	(109,32,'资产信息','initAssets.do'),
 	(115,48,'费用汇总','initCostCharts.do'),
 	(116,49,'人事申请','initEmpShenqing.do'),
@@ -1505,8 +1505,8 @@ VALUES
 	(125,58,'额定税金','initShuijin.do'),
 	(126,59,'管理费','initManagerPay.do'),
 	(127,60,'收入管理','initIncome.do'),
-	(129,62,'月度费用','initCostsTableMonth.do'),
-	(130,63,'项目费用','initCostsTable.do');
+	(129,62,'部门费用','initCostsTableMonth.do'),
+	(130,63,'综合费用','initCostsTable.do');
 
 /*!40000 ALTER TABLE `sys_privilege` ENABLE KEYS */;
 UNLOCK TABLES;

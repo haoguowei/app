@@ -38,10 +38,10 @@ public class ExportCostTableMonth extends AbstractExport {
     public String writeExcel(HttpServletRequest request, HSSFWorkbook wb, HSSFSheet sheet) {
         TableQueryParam param = genParam(request);
 
-        String title = "所有项目月度费用表";
+        String title = "所有项目部门费用表";
         ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
         if (projectsDO != null) {
-            title = projectsDO.getName() + "月度费用表";
+            title = projectsDO.getName() + "部门费用表";
         }
 
         List<ProjectsDO> projectsList = projectsService.search(null).getResultList();

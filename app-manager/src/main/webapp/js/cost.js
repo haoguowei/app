@@ -232,7 +232,7 @@ Ext.onReady(function () {
         layout: 'border',
         items: [{
             region: 'north',
-            title: '费用管理',
+            title: '项目费用',
             border: false,
             height: 120,
             keys: {

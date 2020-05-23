@@ -163,7 +163,7 @@ public class CostsController extends BaseController {
         }
 
         if (resultCode.equals(ResultCodeEnum.SUCCESS)) {
-            return successResult(request, "费用管理", "initCosts.do");
+            return successResult(request, "项目费用", "initCosts.do");
         } else {
             return failResult(request, resultCode);
         }
