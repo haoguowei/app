@@ -56,15 +56,12 @@ public class WebUtils {
 
             //费用占比
             if (type3 == -2 || type3 == -102) {
-                BigDecimal bg = zhanbi2(leafIds, costTable, incomeTable);
-                return bg.toString() + "%";
+                return zhanbi2Str(leafIds, costTable, incomeTable);
             }
 
             //利润率
             if (type3 == -103) {
-                BigDecimal bg = zhanbi2(leafIds, costTable, incomeTable);
-                BigDecimal val = BigDecimal.valueOf(100).subtract(bg);
-                return fmtBigDecimal(val) + "%";
+                return lirong2Str(leafIds, costTable, incomeTable);
             }
         } else {
             if (type3 > 0) {
@@ -80,41 +77,67 @@ public class WebUtils {
 
             //费用占比
             if (type3 == -2 || type3 == -102) {
-                BigDecimal bg = zhanbi(projectId, leafIds, costTable, incomeTable);
-                return bg.toString() + "%";
+//                BigDecimal bg = zhanbi(projectId, leafIds, costTable, incomeTable);
+//                return bg.toString() + "%";
+                return zhanbiStr(projectId, leafIds, costTable, incomeTable);
             }
 
             //利润率
             if (type3 == -103) {
-                BigDecimal bg = zhanbi(projectId, leafIds, costTable, incomeTable);
-                BigDecimal val = BigDecimal.valueOf(100).subtract(bg);
-                return fmtBigDecimal(val) + "%";
+                return lirongStr(projectId, leafIds, costTable, incomeTable);
             }
         }
 
         return "0";
     }
 
-    private static BigDecimal zhanbi(int projectId, Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
+
+    private static String lirongStr(int projectId, Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
         BigDecimal cost = totalAmount(projectId, leafIds, costTable);
         BigDecimal income = getIncomeAmount(projectId, incomeTable);
         if (income.doubleValue() == 0D) {
-            return BigDecimal.valueOf(100);
+            return "";
         }
 
-        return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal zhanbi = cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal val = BigDecimal.valueOf(100).subtract(zhanbi);
+        return val.toString() + "%";
 
     }
 
-    private static BigDecimal zhanbi2(Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
+    private static String zhanbiStr(int projectId, Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
+        BigDecimal cost = totalAmount(projectId, leafIds, costTable);
+        BigDecimal income = getIncomeAmount(projectId, incomeTable);
+        if (income.doubleValue() == 0D) {
+            return "";
+        }
+
+        return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP).toString() + "%";
+
+    }
+
+    private static String zhanbi2Str(Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
         BigDecimal cost = totalAmount2(leafIds, costTable);
         BigDecimal income = getIncomeAmount(0, incomeTable);
         if (income.doubleValue() == 0D) {
-            return BigDecimal.valueOf(100);
+            return "";
         }
 
-        return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal zhanbi = cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+        return zhanbi.toString() + "%";
+    }
 
+    private static String lirong2Str(Set<Integer> leafIds, Map<TableKey, BigDecimal> costTable, Map<TableKey, BigDecimal> incomeTable) {
+        BigDecimal cost = totalAmount2(leafIds, costTable);
+        BigDecimal income = getIncomeAmount(0, incomeTable);
+        if (income.doubleValue() == 0D) {
+            return "";
+        }
+
+        BigDecimal zhanbi = cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+
+        BigDecimal val = BigDecimal.valueOf(100).subtract(zhanbi);
+        return val.toString() + "%";
     }
 
     public static String fmtBigDecimal(BigDecimal v) {
@@ -182,7 +205,7 @@ public class WebUtils {
         BigDecimal total = getMshouru(month, incomeTable);
         BigDecimal tmpv = BigDecimal.valueOf(Double.valueOf(tmp));
         if (total.doubleValue() == 0D) {
-            return "100%";
+            return "";
         }
         return tmpv.multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP).toString() + "%";
     }
