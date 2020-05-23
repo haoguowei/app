@@ -141,12 +141,12 @@ public class ExportCostTableMonth extends AbstractExport {
             genCell(gudingHejiRow, cellStyleRight2, startCol + i, format(cost));
 
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
-            genCell(gudingZhanbiRow, cellStyleRight2, startCol + i, format2(getZhanbi(incomeAmount, cost)));
+            genCell(gudingZhanbiRow, cellStyleRight2, startCol + i, getZhanbiStr(incomeAmount, cost));
 
             gudingHejiTotal = gudingHejiTotal.add(cost);
         }
         genCell(gudingHejiRow, cellStyleRight2, startCol + projectsList.size(), format(gudingHejiTotal));
-        genCell(gudingZhanbiRow, cellStyleRight2, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, gudingHejiTotal)));
+        genCell(gudingZhanbiRow, cellStyleRight2, startCol + projectsList.size(), getZhanbiStr(incomeTotal, gudingHejiTotal));
 
 
         //非固定
@@ -186,12 +186,12 @@ public class ExportCostTableMonth extends AbstractExport {
             genCell(zhipeiHejiRow, cellStyleRight2, startCol + i, format(cost));
 
             BigDecimal incomeAmount = getValue(incomeTable, new TableKey(project.getId()));
-            genCell(zhipeiZhanbiRow, cellStyleRight2, startCol + i, format2(getZhanbi(incomeAmount, cost)));
+            genCell(zhipeiZhanbiRow, cellStyleRight2, startCol + i, getZhanbiStr(incomeAmount, cost));
 
             zhipeiHejiTotal = zhipeiHejiTotal.add(cost);
         }
         genCell(zhipeiHejiRow, cellStyleRight2, startCol + projectsList.size(), format(zhipeiHejiTotal));
-        genCell(zhipeiZhanbiRow, cellStyleRight2, startCol + projectsList.size(), format2(getZhanbi(incomeTotal, zhipeiHejiTotal)));
+        genCell(zhipeiZhanbiRow, cellStyleRight2, startCol + projectsList.size(), getZhanbiStr(incomeTotal, zhipeiHejiTotal));
 
 
         //总合计
@@ -206,17 +206,15 @@ public class ExportCostTableMonth extends AbstractExport {
 
             BigDecimal tmp = zhipeiTotal.get(project.getId()).add(gudingTotal.get(project.getId()));
 
-            BigDecimal zb = getZhanbi(incomeAmount, tmp);
             genCell(totalRow, cellStyleRight3, startCol + i, format(tmp));
-            genCell(zhanbiRow, cellStyleRight3, startCol + i, format2(zb));
-            genCell(lirunRow, cellStyleRight3, startCol + i, format2(BigDecimal.valueOf(100).subtract(zb)));
+            genCell(zhanbiRow, cellStyleRight3, startCol + i, getZhanbiStr(incomeAmount, tmp));
+            genCell(lirunRow, cellStyleRight3, startCol + i, getLirunStr(incomeAmount, tmp));
         }
 
         BigDecimal tmpt = zhipeiHejiTotal.add(gudingHejiTotal);
-        BigDecimal zbt = getZhanbi(incomeTotal, tmpt);
         genCell(totalRow, cellStyleRight3, startCol + projectsList.size(), format(tmpt));
-        genCell(zhanbiRow, cellStyleRight3, startCol + projectsList.size(), format2(zbt));
-        genCell(lirunRow, cellStyleRight3, startCol + projectsList.size(), format2(BigDecimal.valueOf(100).subtract(zbt)));
+        genCell(zhanbiRow, cellStyleRight3, startCol + projectsList.size(), getZhanbiStr(incomeTotal, tmpt));
+        genCell(lirunRow, cellStyleRight3, startCol + projectsList.size(), getLirunStr(incomeTotal, tmpt));
 
         return title;
     }

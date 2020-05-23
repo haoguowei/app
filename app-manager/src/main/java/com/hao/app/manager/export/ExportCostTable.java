@@ -126,7 +126,7 @@ public class ExportCostTable extends AbstractExport {
             for (int month : allMonth) {
                 if (month == 0) {
                     genCell(typeRow, cellStyleRight, startCol++, format(totolCost));
-                    genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(totolIncome, totolCost))); //占比
+                    genCell(typeRow, cellStyleRight, startCol++, getZhanbiStr(totolIncome, totolCost)); //占比
 
                     mountMap.put(month, mountMap.get(month).add(totolCost));
                 } else {
@@ -136,7 +136,7 @@ public class ExportCostTable extends AbstractExport {
                     totolCost = totolCost.add(costAmount);
 
                     genCell(typeRow, cellStyleRight, startCol++, format(costAmount));
-                    genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(incomeAmount, costAmount))); //占比
+                    genCell(typeRow, cellStyleRight, startCol++, getZhanbiStr(incomeAmount, costAmount)); //占比
 
                     mountMap.put(month, mountMap.get(month).add(costAmount));
                 }
@@ -155,9 +155,9 @@ public class ExportCostTable extends AbstractExport {
             int _i = startCol++;
             int _j = startCol++;
             genCell(total1, cellStyleRight2, _i, format(costA));
-            genCell(total1, cellStyleRight2, _j, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total1, cellStyleRight2, _j, getZhanbiStr(incomeA, costA)); //占比
 
-            genCell(total2, cellStyleRight2, _i, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total2, cellStyleRight2, _i, getZhanbiStr(incomeA, costA)); //占比
             genCell(total2, cellStyleRight2, _j, "");
         }
 
@@ -182,7 +182,7 @@ public class ExportCostTable extends AbstractExport {
             for (int month : allMonth) {
                 if (month == 0) {
                     genCell(typeRow, cellStyleRight, startCol++, format(totolCost));
-                    genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(totolIncome, totolCost))); //占比
+                    genCell(typeRow, cellStyleRight, startCol++, getZhanbiStr(totolIncome, totolCost)); //占比
 
                     mountMap2.put(month, mountMap2.get(month).add(totolCost));
                 } else {
@@ -192,7 +192,7 @@ public class ExportCostTable extends AbstractExport {
                     totolCost = totolCost.add(costAmount);
 
                     genCell(typeRow, cellStyleRight, startCol++, format(costAmount));
-                    genCell(typeRow, cellStyleRight, startCol++, format2(getZhanbi(incomeAmount, costAmount))); //占比
+                    genCell(typeRow, cellStyleRight, startCol++, getZhanbiStr(incomeAmount, costAmount)); //占比
 
                     mountMap2.put(month, mountMap2.get(month).add(costAmount));
                 }
@@ -211,9 +211,9 @@ public class ExportCostTable extends AbstractExport {
             int _i = startCol++;
             int _j = startCol++;
             genCell(total3, cellStyleRight2, _i, format(costA));
-            genCell(total3, cellStyleRight2, _j, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total3, cellStyleRight2, _j, getZhanbiStr(incomeA, costA)); //占比
 
-            genCell(total4, cellStyleRight2, _i, format2(getZhanbi(incomeA, costA))); //占比
+            genCell(total4, cellStyleRight2, _i, getZhanbiStr(incomeA, costA)); //占比
             genCell(total4, cellStyleRight2, _j, "");
         }
 
@@ -229,15 +229,14 @@ public class ExportCostTable extends AbstractExport {
 
             int _i = startCol++;
             int _j = startCol++;
-            BigDecimal zb = getZhanbi(incomeA, costA);
 
             genCell(total5, cellStyleRight3, _i, format(costA));
-            genCell(total5, cellStyleRight3, _j, format2(zb)); //占比
+            genCell(total5, cellStyleRight3, _j, getZhanbiStr(incomeA, costA)); //占比
 
-            genCell(total6, cellStyleRight3, _i, format2(zb)); //占比
+            genCell(total6, cellStyleRight3, _i, getZhanbiStr(incomeA, costA)); //占比
             genCell(total6, cellStyleRight3, _j, "");
 
-            genCell(total7, cellStyleRight3, _i, format2(BigDecimal.valueOf(100).subtract(zb))); //占比
+            genCell(total7, cellStyleRight3, _i, getLirunStr(incomeA, costA));
             genCell(total7, cellStyleRight3, _j, "");
         }
 

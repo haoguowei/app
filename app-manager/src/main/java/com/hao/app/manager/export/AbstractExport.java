@@ -174,12 +174,24 @@ public abstract class AbstractExport {
 		return param;
 	}
 
-	public static BigDecimal getZhanbi(BigDecimal income, BigDecimal cost) {
+
+	public static String getLirunStr(BigDecimal income, BigDecimal cost) {
 		if (income.doubleValue() == 0D) {
-			return BigDecimal.valueOf(100);
+			return "";
 		}
 
-		return cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+		BigDecimal zhanbi = cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+		BigDecimal val = BigDecimal.valueOf(100).subtract(zhanbi);
+		return format2(val);
+	}
+
+	public static String getZhanbiStr(BigDecimal income, BigDecimal cost) {
+		if (income.doubleValue() == 0D) {
+			return "";
+		}
+
+		BigDecimal zhanbi = cost.multiply(BigDecimal.valueOf(100.0)).divide(income, 2, BigDecimal.ROUND_HALF_UP);
+		return format2(zhanbi);
 	}
 
 	public static BigDecimal getValue(Map<TableKey, BigDecimal> map, TableKey key) {
