@@ -81,7 +81,7 @@ public class ExportCostTableMonth extends AbstractExport {
 
         //设置月份
         Row queryRow = sheet.getRow(1);
-        getCell(queryRow, 0, "报表月份：" + param.getTitleName());
+        getCell(queryRow, 0, "报表日期：" + param.getTitleName());
 
 
         Map<TableKey, BigDecimal> incomeTable = incomeService.getIncomeTable(param);

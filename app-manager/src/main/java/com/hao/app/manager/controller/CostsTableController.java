@@ -10,7 +10,6 @@ import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.CostsService;
 import com.hao.app.service.IncomeService;
 import com.hao.app.service.ProjectsService;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,16 +78,8 @@ public class CostsTableController extends BaseController {
         List<CostsTypeDO> allTypeList = costsService.getTableTypes();
         request.setAttribute("allTypeList", allTypeList);
 
-
-        List<String> yearList = Arrays.asList("2019", "2020", "2021", "2022", "2023", "2024", "2025");
-        List<String> monthList = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-        request.setAttribute("yearList", yearList);
-        request.setAttribute("monthList", monthList);
-
-        request.setAttribute("fromYear", param.getFromYear());
-        request.setAttribute("fromMonth", param.getFromMonth());
-        request.setAttribute("toYear", param.getToYear());
-        request.setAttribute("toMonth", param.getToMonth());
+        request.setAttribute("fromDate", param.getEnterDateStart());
+        request.setAttribute("toDate", param.getEnterDateEnd());
 
         return "jsp/costtable/initCostsTableMonth";
     }
@@ -130,15 +121,8 @@ public class CostsTableController extends BaseController {
 
 
         /////////////
-        List<String> yearList = Arrays.asList("2019", "2020", "2021", "2022", "2023", "2024", "2025");
-        List<String> monthList = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
-        request.setAttribute("yearList", yearList);
-        request.setAttribute("monthList", monthList);
-
-        request.setAttribute("fromYear", param.getFromYear());
-        request.setAttribute("fromMonth", param.getFromMonth());
-        request.setAttribute("toYear", param.getToYear());
-        request.setAttribute("toMonth", param.getToMonth());
+        request.setAttribute("fromDate", param.getEnterDateStart());
+        request.setAttribute("toDate", param.getEnterDateEnd());
 
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("projectsId", param.getProjectsId());
@@ -148,32 +132,24 @@ public class CostsTableController extends BaseController {
 
 
     private TableQueryParam genParam(HttpServletRequest request) {
+        int first = NumberUtils.toInt(request.getParameter("first"), 0);
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
-        String fromYear = request.getParameter("fromYear");
-        String fromMonth = request.getParameter("fromMonth");
-        String toYear = request.getParameter("toYear");
-        String toMonth = request.getParameter("toMonth");
+        String fromDate = request.getParameter("fromDate");
+        String toDate = request.getParameter("toDate");
 
-        String year = String.valueOf(DateUtil.getYear());
-
-        fromYear = StringUtils.isBlank(fromYear) ? year : fromYear;
-        fromMonth = StringUtils.isBlank(fromMonth) ? "01" : fromMonth;
-        toYear = StringUtils.isBlank(toYear) ? year : toYear;
-        toMonth = StringUtils.isBlank(toMonth) ? "12" : toMonth;
+        if (first == 0) {
+            int year = DateUtil.getYear();
+            fromDate = year + "-01-01";
+            toDate = year + "-12-31";
+        }
 
         TableQueryParam param = new TableQueryParam();
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
         }
 
-        param.setFromYear(fromYear);
-        param.setFromMonth(fromMonth);
-        param.setToYear(toYear);
-        param.setToMonth(toMonth);
-
-        param.setEnterDateStart(fromYear + "-" + fromMonth + "-01");
-        param.setEnterDateEnd(toYear + "-" + toMonth + "-01");
-
+        param.setEnterDateStart(fromDate);
+        param.setEnterDateEnd(toDate);
         return param;
     }
 

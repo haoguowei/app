@@ -145,32 +145,24 @@ public abstract class AbstractExport {
 
 
 	public TableQueryParam genParam(HttpServletRequest request) {
+		int first = NumberUtils.toInt(request.getParameter("first"), 0);
 		int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
-		String fromYear = request.getParameter("fromYear");
-		String fromMonth = request.getParameter("fromMonth");
-		String toYear = request.getParameter("toYear");
-		String toMonth = request.getParameter("toMonth");
+		String fromDate = request.getParameter("fromDate");
+		String toDate = request.getParameter("toDate");
 
-		String year = String.valueOf(DateUtil.getYear());
-
-		fromYear = StringUtils.isBlank(fromYear) ? year : fromYear;
-		fromMonth = StringUtils.isBlank(fromMonth) ? "01" : fromMonth;
-		toYear = StringUtils.isBlank(toYear) ? year : toYear;
-		toMonth = StringUtils.isBlank(toMonth) ? "12" : toMonth;
+		if (first == 0) {
+			int year = DateUtil.getYear();
+			fromDate = year + "-01-01";
+			toDate = year + "-12-31";
+		}
 
 		TableQueryParam param = new TableQueryParam();
 		if (projectsId > 0) {
 			param.setProjectsId(projectsId);
 		}
 
-		param.setFromYear(fromYear);
-		param.setFromMonth(fromMonth);
-		param.setToYear(toYear);
-		param.setToMonth(toMonth);
-
-		param.setEnterDateStart(fromYear + "-" + fromMonth + "-01");
-		param.setEnterDateEnd(toYear + "-" + toMonth + "-01");
-
+		param.setEnterDateStart(fromDate);
+		param.setEnterDateEnd(toDate);
 		return param;
 	}
 

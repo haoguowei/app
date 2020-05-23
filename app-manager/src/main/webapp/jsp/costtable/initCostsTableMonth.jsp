@@ -18,19 +18,19 @@
             font: 12px Verdana, Arial, Helvetica, sans-serif;
         }
 
-        table {
+        .mytable {
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
             width: 2700px;
         }
 
-        table td {
+        .mytable td {
             border: 1px solid #ededed;
             height: 30px;
         }
 
-        table th {
+        .mytable th {
             border: 1px solid #99bbe8;
             background-color: #dfe8f6;
             height: 30px;
@@ -43,51 +43,56 @@
     </style>
     <title>
     </title>
+    <link rel="stylesheet" type="text/css" href="<%=syspath%>/ext-3.2.1/resources/css/ext-all.css"/>
+    <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/ext-all.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/ext-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/ext-copy.js"></script>
+
+    <script type="text/javascript" src="<%=syspath%>/utils/custom.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/utils/myUtil.js"></script>
+    <script type="text/javascript" src="<%=syspath%>/utils/validatorRegex.js"></script>
+
     <script type="text/javascript" src="<%=syspath%>/utils/jquery.js"></script>
 
 </head>
 <body>
-<h1>部门费用</h1>
+<h1 style="font-size: 25px;">部门费用</h1>
 <hr>
 
-<h4>
-    报表月份：
-    <select id="fromYear" name="fromYear">
-        <c:forEach items="${yearList }" var="itm">
-            <option
-                    <c:if test="${itm == fromYear }">selected="selected"</c:if>
-                    value="${itm }">${itm }</option>
-        </c:forEach>
-    </select>年
-    <select id="fromMonth" name="fromMonth">
-        <c:forEach items="${monthList }" var="itm">
-            <option
-                    <c:if test="${itm == fromMonth }">selected="selected"</c:if>
-                    value="${itm }">${itm }</option>
-        </c:forEach>
-    </select>月
-    ~
-    <select id="toYear" name="toYear">
-        <c:forEach items="${yearList }" var="itm">
-            <option
-                    <c:if test="${itm == toYear }">selected="selected"</c:if>
-                    value="${itm }">${itm }</option>
-        </c:forEach>
-    </select>年
-    <select id="toMonth" name="toMonth">
-        <c:forEach items="${monthList }" var="itm">
-            <option
-                    <c:if test="${itm == toMonth }">selected="selected"</c:if>
-                    value="${itm }">${itm }</option>
-        </c:forEach>
-    </select>月
-    <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
-    <input style="margin-left: 20px;" type="button" value="导出Excel" class="Mybotton" onclick="exportCostTableMonth()">
-</h4>
 
+<input type="hidden" id="hideFromDateDiv" name="hideFromDateDiv" value="${fromDate }">
+<input type="hidden" id="hideToDateDiv" name="hideToDateDiv" value="${toDate }">
+
+<table>
+    <tr>
+        <td>
+            <div style="float:left; "> 选择项目：</div>
+            <div style="float:left; ">
+                <select id="projectsId" name="projectsId">
+                    <c:forEach items="${projectsList }" var="itm">
+                    <option
+                            <c:if test="${itm.id == projectsId }">selected="selected"</c:if>
+                            value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+            </div>
+            <div style="float:left; "> 报表日期：</div>
+            <div id="fromDateDiv" style="float:left; "></div>
+            <div style="float:left; ">~</div>
+            <div id="toDateDiv" style="float:left; "></div>
+            <div style="float:left; "><input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton"
+                                             onclick="searchFunc()">
+            </div>
+            <div style="float:left; "><input style="margin-left: 20px;" type="button" value="导出Excel" class="Mybotton"
+                                             onclick="exportCostTableMonth()"></div>
+
+        </td>
+    </tr>
+</table>
 
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
-    <table>
+    <table class="mytable">
         <tr>
             <th style="width: 350px;" colspan="3">
                 核算项
@@ -142,30 +147,45 @@
 
 </body>
 <script type="text/javascript">
-    var height = $(window).height() - 130;
+    var height = $(window).height() - 90;
     document.getElementById('m_div_id').style.height = height + "px";
 
+
     function searchFunc() {
-        var fromYear = document.getElementById("fromYear").value;
-        var fromMonth = document.getElementById("fromMonth").value;
-        var toYear = document.getElementById("toYear").value;
-        var toMonth = document.getElementById("toMonth").value;
-        window.location.href = "initCostsTableMonth.do?fromYear=" + fromYear
-            + "&fromMonth=" + fromMonth
-            + "&toYear=" + toYear
-            + "&toMonth=" + toMonth
+        var fromDate = document.getElementById("fromDate").value;
+        var toDate = document.getElementById("toDate").value;
+
+        if (fromDate == null || fromDate == '') {
+            alert("请选择开始日期");
+            return;
+        }
+        if (toDate == null || toDate == '') {
+            alert("请选择结束日期");
+            return;
+        }
+
+        window.location.href = "initCostsTableMonth.do?fromDate=" + fromDate
+            + "&toDate=" + toDate
+            + "&first=1"
             + "&t=" + new Date().getTime();
     }
 
     function exportCostTableMonth() {
-        var fromYear = document.getElementById("fromYear").value;
-        var fromMonth = document.getElementById("fromMonth").value;
-        var toYear = document.getElementById("toYear").value;
-        var toMonth = document.getElementById("toMonth").value;
-        window.location.href = "exportCostTableMonth.do?fromYear=" + fromYear
-            + "&fromMonth=" + fromMonth
-            + "&toYear=" + toYear
-            + "&toMonth=" + toMonth
+        var fromDate = document.getElementById("fromDate").value;
+        var toDate = document.getElementById("toDate").value;
+
+        if (fromDate == null || fromDate == '') {
+            alert("请选择开始日期");
+            return;
+        }
+        if (toDate == null || toDate == '') {
+            alert("请选择结束日期");
+            return;
+        }
+
+        window.location.href = "exportCostTableMonth.do?fromDate=" + fromDate
+            + "&toDate=" + toDate
+            + "&first=1"
             + "&t=" + new Date().getTime();
     }
 
@@ -173,6 +193,23 @@
         if (event.keyCode == 13) {
             searchFunc();
         }
+    });
+
+    Ext.onReady(function () {
+        new com.custom.DateField({
+            renderTo: 'fromDateDiv',
+            format: 'Y-m-d',
+            name: 'fromDate',
+            value: document.getElementById("hideFromDateDiv").value,
+            id: 'fromDate'
+        });
+        new com.custom.DateField({
+            renderTo: 'toDateDiv',
+            format: 'Y-m-d',
+            name: 'toDate',
+            value: document.getElementById("hideToDateDiv").value,
+            id: 'toDate'
+        });
     });
 
 </script>
