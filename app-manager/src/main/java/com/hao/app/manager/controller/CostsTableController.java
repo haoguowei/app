@@ -84,6 +84,15 @@ public class CostsTableController extends BaseController {
         request.setAttribute("type2", param.getType2());
         request.setAttribute("type3", param.getType3());
 
+
+        request.setAttribute("type1List", costsService.listCostsTypeByParentId(null));
+        if (param.getType1() != null && param.getType1() > 0) {
+            request.setAttribute("type2List", costsService.listCostsTypeByParentId(param.getType1()));
+        }
+        if (param.getType2() != null && param.getType2() > 0) {
+            request.setAttribute("type3List", costsService.listCostsTypeByParentId(param.getType2()));
+        }
+
         return "jsp/costtable/initCostsZhuanxiang";
     }
 

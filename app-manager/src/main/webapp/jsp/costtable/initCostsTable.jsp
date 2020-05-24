@@ -22,7 +22,7 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
-            width: 1300px;
+            width: 1200px;
             max-width: 2000px;
         }
 

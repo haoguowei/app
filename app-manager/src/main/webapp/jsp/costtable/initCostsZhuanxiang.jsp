@@ -22,7 +22,7 @@
             border: 1px solid #99bbe8;
             border-collapse: collapse;
             text-align: center;
-            width: 1300px;
+            width: 1200px;
             max-width: 2000px;
         }
 
@@ -72,6 +72,41 @@
             <div id="fromDateDiv" style="float:left; "></div>
             <div style="float:left; ">~</div>
             <div id="toDateDiv" style="float:left; "></div>
+
+
+            <div style="float:left; "> 费用类型：</div>
+            <div style="float:left; ">
+                <select id="type1" name="type1" onchange="selectType2()">
+                    <option value="0">请选择...</option>
+                    <c:forEach items="${type1List }" var="itm">
+                    <option
+                            <c:if test="${itm.id == type1 }">selected="selected"</c:if>
+                            value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+            </div>
+            <div style="float:left; ">
+                <select id="type2" name="type2" onchange="selectType3()">
+                    <option value="0">请选择...</option>
+                    <c:forEach items="${type2List }" var="itm">
+                    <option
+                            <c:if test="${itm.id == type2 }">selected="selected"</c:if>
+                            value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+            </div>
+            <div style="float:left; ">
+                <select id="type3" name="type3">
+                    <option value="0">请选择...</option>
+                    <c:forEach items="${type3List }" var="itm">
+                    <option
+                            <c:if test="${itm.id == type3 }">selected="selected"</c:if>
+                            value="${itm.id}">${itm.name}
+                        </c:forEach>
+                </select>
+            </div>
+
+
             <div style="float:left; "><input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton"
                                              onclick="searchFunc()">
             </div>
@@ -85,18 +120,18 @@
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table class="mytable">
         <tr>
-            <th style="width: 100px;">
+            <th align="center" style="width: 100px;">
                 项目名称
             </th>
             <c:forEach items="${allMonth }" var="month">
-                <th style="width: 100px;">
+                <th align="center" style="width: 100px;">
                         ${WebUtils.getMonthName(month) }
                 </th>
             </c:forEach>
         </tr>
 
         <c:forEach items="${projectsList }" var="project">
-            <tr style="${project == 0 ? 'background-color: #D8BFD8;' : '' } ">
+            <tr style="${project.id == 0 ? 'background-color: #D8BFD8;' : '' } ">
                 <td align="left">
                         ${project.name }
                 </td>
@@ -121,6 +156,10 @@
         var fromDate = document.getElementById("fromDate").value;
         var toDate = document.getElementById("toDate").value;
 
+        var type1 = document.getElementById("type1").value;
+        var type2 = document.getElementById("type2").value;
+        var type3 = document.getElementById("type3").value;
+
         if (fromDate == null || fromDate == '') {
             alert("请选择开始日期");
             return;
@@ -130,8 +169,16 @@
             return;
         }
 
+        if (type3 == null || type3 == '' || type3 == 0 || type3 == '0') {
+            alert("请选择费用类型");
+            return;
+        }
+
         window.location.href = "initCostsZhuanxiang.do?fromDate=" + fromDate
             + "&toDate=" + toDate
+            + "&type1=" + type1
+            + "&type2=" + type2
+            + "&type3=" + type3
             + "&first=1"
             + "&t=" + new Date().getTime();
     }
@@ -140,6 +187,10 @@
         var fromDate = document.getElementById("fromDate").value;
         var toDate = document.getElementById("toDate").value;
 
+        var type1 = document.getElementById("type1").value;
+        var type2 = document.getElementById("type2").value;
+        var type3 = document.getElementById("type3").value;
+
         if (fromDate == null || fromDate == '') {
             alert("请选择开始日期");
             return;
@@ -148,9 +199,16 @@
             alert("请选择结束日期");
             return;
         }
+        if (type3 == null || type3 == '' || type3 == 0 || type3 == '0') {
+            alert("请选择费用类型");
+            return;
+        }
 
         window.location.href = "exportCostZhuanxiang.do?fromDate=" + fromDate
             + "&toDate=" + toDate
+            + "&type1=" + type1
+            + "&type2=" + type2
+            + "&type3=" + type3
             + "&first=1"
             + "&t=" + new Date().getTime();
     }
@@ -176,6 +234,59 @@
             value: document.getElementById("hideToDateDiv").value,
             id: 'toDate'
         });
+
+
+        this.selectType2 = function () {
+            var type1 = document.getElementById("type1").value;
+            $("#type2").empty();
+            $("#type2").append("<option value='0'>请选择...</option>");
+
+            $("#type3").empty();
+            $("#type3").append("<option value='0'>请选择...</option>");
+
+            if (type1 == 0) {
+                return;
+            }
+
+            Ext.Ajax.request({
+                url: 'getTypeListByParentId.do?parentId=' + type1,
+                success: function (response) {
+                    var resp = Ext.util.JSON.decode(response.responseText);
+                    if (resp.success) {
+                        resp.info.forEach(function (v) {
+                            $("#type2").append("<option value='" + v.id + "'>" + v.name + "</option>");
+                        })
+                    } else {
+                        alert("消费类型获取失败");
+                    }
+                }
+            });
+        };
+
+        this.selectType3 = function () {
+            var type2 = document.getElementById("type2").value;
+            $("#type3").empty();
+            $("#type3").append("<option value='0'>请选择...</option>");
+
+            if (type2 == 0) {
+                return;
+            }
+
+            Ext.Ajax.request({
+                url: 'getTypeListByParentId.do?parentId=' + type2,
+                success: function (response) {
+                    var resp = Ext.util.JSON.decode(response.responseText);
+                    if (resp.success) {
+                        resp.info.forEach(function (v) {
+                            $("#type3").append("<option value='" + v.id + "'>" + v.name + "</option>");
+                        })
+                    } else {
+                        alert("消费类型获取失败");
+                    }
+                }
+            });
+        };
+
     });
 
 </script>
