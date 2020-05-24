@@ -4,6 +4,7 @@ import com.hao.app.commons.entity.param.TableQueryParam;
 import com.hao.app.commons.entity.result.TableKey;
 import com.hao.app.commons.utils.DateUtil;
 import com.hao.app.commons.utils.Utils;
+import com.hao.app.manager.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -25,11 +26,10 @@ import java.util.*;
 
 /**
  * 文件导出
- * 
- * @author haoguowei
  *
+ * @author haoguowei
  */
-public abstract class AbstractExport {
+public abstract class AbstractExport extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(AbstractExport.class);
 
@@ -189,11 +189,16 @@ public abstract class AbstractExport {
 			param.setType3(type3);
 		}
 
+		//不是管理员,属于项目
+		Integer pid = getCurrentProjectsId(request);
+		if (pid != null && pid > 0) {
+			param.setProjectsId(pid);
+		}
+
 		param.setEnterDateStart(fromDate);
 		param.setEnterDateEnd(toDate);
 		return param;
 	}
-
 
 	public static String getLirunStr(BigDecimal income, BigDecimal cost) {
 		if (income.doubleValue() == 0D) {

@@ -59,13 +59,24 @@ public class BaseController {
         return user == null ? "" : user.getName();
     }
 
-    //-1表示所有项目；
+    //-1表示所有项目；是不是管理员,是不是属于项目
     public Integer getCurrentProjectsId(HttpServletRequest request) {
         SysMember user = getCurrentUser(request);
         if (user == null) {
             return null;
         }
         return user.getProjectsId();
+    }
+
+    public boolean isAdmin(HttpServletRequest request) {
+        Integer pid = getCurrentProjectsId(request);
+        if (pid == null || pid.equals(0)) {
+            return false;
+        }
+        if (pid.equals(-1)) {
+            return true;
+        }
+        return false;
     }
 
     public List<ProjectsDO> getProjectsList(HttpServletRequest request) {

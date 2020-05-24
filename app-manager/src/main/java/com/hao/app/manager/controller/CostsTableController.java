@@ -222,6 +222,12 @@ public class CostsTableController extends BaseController {
             param.setType3(type3);
         }
 
+        //不是管理员
+        Integer pid = getCurrentProjectsId(request);
+        if (pid != null && pid > 0) {
+            param.setProjectsId(pid);
+        }
+
         param.setEnterDateStart(fromDate);
         param.setEnterDateEnd(toDate);
         return param;
