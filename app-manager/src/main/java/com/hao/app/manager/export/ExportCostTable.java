@@ -111,7 +111,7 @@ public class ExportCostTable extends AbstractExport {
 
 
         int startRow = 4;
-        List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+        List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 55);
         Map<Integer, BigDecimal> mountMap = new HashMap<>();
         for (int month : allMonth) {
             mountMap.put(month, BigDecimal.valueOf(0));

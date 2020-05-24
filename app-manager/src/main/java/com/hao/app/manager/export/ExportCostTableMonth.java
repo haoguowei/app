@@ -109,7 +109,7 @@ public class ExportCostTableMonth extends AbstractExport {
 
         //固定费用
         int starRow = 4;
-        List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+        List<Integer> gudingIds = Arrays.asList(12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 55);
         //项目id：项目合计
         Map<Integer, BigDecimal> gudingTotal = new HashMap<>(projectsList.size());
         for (int r : gudingIds) {
