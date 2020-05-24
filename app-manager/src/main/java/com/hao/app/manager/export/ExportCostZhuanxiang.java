@@ -44,8 +44,17 @@ public class ExportCostZhuanxiang extends AbstractExport {
         projectsDO.setId(0);
         projectsList.add(projectsDO);
 
+
         TableQueryParam param = genParam(request);
-        String title = param.getTitleName() + "专项费用表";
+        String typeName = "";
+        if (param.getType3() > 0) {
+            Map<Integer, String> costsMap = costsService.mapCostsType();
+            typeName = costsMap.get(param.getType3());
+            if (typeName == null) {
+                typeName = "";
+            }
+        }
+        String title = param.getTitleName() + typeName + "专项费用表";
 
         //TableKey: projectId表示projectId, type3表示months
         Map<TableKey, BigDecimal> costTable = costsService.getCostTableZhuanxiang(param);
