@@ -144,11 +144,30 @@ public abstract class AbstractExport {
 	}
 
 
+	public Set<Integer> getZhuanxiangMonths(Map<TableKey, BigDecimal> costTable) {
+		List<Integer> allMonth = new ArrayList<>();
+		for (TableKey key : costTable.keySet()) {
+			allMonth.add(key.getType3());
+		}
+
+		Collections.sort(allMonth);
+
+		Set<Integer> set = new LinkedHashSet<>();
+		for (Integer i : allMonth) {
+			set.add(i);
+		}
+		return set;
+	}
+
 	public TableQueryParam genParam(HttpServletRequest request) {
 		int first = NumberUtils.toInt(request.getParameter("first"), 0);
 		int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
 		String fromDate = request.getParameter("fromDate");
 		String toDate = request.getParameter("toDate");
+
+		int type1 = NumberUtils.toInt(request.getParameter("type1"), 0);
+		int type2 = NumberUtils.toInt(request.getParameter("type2"), 0);
+		int type3 = NumberUtils.toInt(request.getParameter("type3"), 0);
 
 		if (first == 0) {
 			int year = DateUtil.getYear();
@@ -159,6 +178,15 @@ public abstract class AbstractExport {
 		TableQueryParam param = new TableQueryParam();
 		if (projectsId > 0) {
 			param.setProjectsId(projectsId);
+		}
+		if (type1 > 0) {
+			param.setType1(type1);
+		}
+		if (type2 > 0) {
+			param.setType2(type2);
+		}
+		if (type3 > 0) {
+			param.setType3(type3);
 		}
 
 		param.setEnterDateStart(fromDate);
