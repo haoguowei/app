@@ -38,11 +38,11 @@ public class ExportCostTable extends AbstractExport {
     public String writeExcel(HttpServletRequest request, HSSFWorkbook wb, HSSFSheet sheet) {
         TableQueryParam param = genParam(request);
 
-        String title = "所有综合费用表";
+        String title = "所有项目综合费用表";
         String proName = "";
         ProjectsDO projectsDO = projectsService.getById(param.getProjectsId());
         if (projectsDO != null) {
-            title = projectsDO.getName() + "费用表";
+            title = projectsDO.getName() + "综合费用表";
             proName = projectsDO.getName() + "，";
         }
 
