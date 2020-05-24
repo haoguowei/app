@@ -59,7 +59,7 @@ public class BaseController {
         return user == null ? "" : user.getName();
     }
 
-    //-1表示所有项目；是不是管理员,是不是属于项目
+    //-1表示所有项目；是不是属于项目
     public Integer getCurrentProjectsId(HttpServletRequest request) {
         SysMember user = getCurrentUser(request);
         if (user == null) {
