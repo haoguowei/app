@@ -199,10 +199,10 @@
             alert("请选择结束日期");
             return;
         }
-        if (type3 == null || type3 == '' || type3 == 0 || type3 == '0') {
-            alert("请选择费用类型");
-            return;
-        }
+        // if (type3 == null || type3 == '' || type3 == 0 || type3 == '0') {
+        //     alert("请选择费用类型");
+        //     return;
+        // }
 
         window.location.href = "exportCostZhuanxiang.do?fromDate=" + fromDate
             + "&toDate=" + toDate

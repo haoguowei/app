@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -55,28 +56,38 @@ public class ExportCostZhuanxiang extends AbstractExport {
 
 
         HSSFCellStyle cellStyleRight = ExcelUtil.getCellStyleRight(wb);
+        HSSFCellStyle cellStyleLefg = ExcelUtil.getCellStyleLeft(wb);
         HSSFCellStyle cellStyleCenter = ExcelUtil.getCellStyleCenter(wb);
-        cellStyleCenter.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        cellStyleCenter.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
         cellStyleCenter.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
-        Row titleRow = sheet.getRow(1);
-        genCell(titleRow, cellStyleRight, 0, "项目名称");
+        int width = 3000;
+
+        Row titleRow = sheet.createRow(1);
+        titleRow.setHeightInPoints(25);
+        genCell(titleRow, cellStyleCenter, 0, "项目名称");
         int colIdx = 1;
         for (Integer month : allMonth) {
-            genCell(titleRow, cellStyleRight, colIdx++, WebUtils.getMonthName(month));
+            int x = colIdx++;
+            genCell(titleRow, cellStyleCenter, x, WebUtils.getMonthName(month));
+            sheet.setColumnWidth(x, width);
         }
 
         int rowIdx = 2;
         for (ProjectsDO project : projectsList) {
             Row projectRow = sheet.createRow(rowIdx++);
+            projectRow.setHeightInPoints(25);
 
-            genCell(projectRow, cellStyleRight, 0, project.getName());
+            genCell(projectRow, cellStyleLefg, 0, project.getName());
             int projectColIdx = 1;
             for (Integer month : allMonth) {
                 genCell(projectRow, cellStyleRight, projectColIdx++, WebUtils.getZhuanxiangAmount(project.getId(), month, costTable));
             }
         }
 
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, colIdx - 1));
+        sheet.getRow(0).getCell(0).setCellValue(title);
+        sheet.getRow(0).getCell(0).getCellStyle().setAlignment(HSSFCellStyle.ALIGN_CENTER);
         return title;
     }
 
