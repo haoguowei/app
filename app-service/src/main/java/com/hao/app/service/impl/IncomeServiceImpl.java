@@ -85,6 +85,19 @@ public class IncomeServiceImpl implements IncomeService {
         return map;
     }
 
+
+    @Override
+    public Map<TableKey, BigDecimal> getIncomeTableZhuanxiang(TableQueryParam param) {
+        Map<TableKey, BigDecimal> map = new HashMap<>();
+        List<AmountTable> list = incomeMapper.searchIncomeTableZhuanxiang(param);
+        if (list != null) {
+            for (AmountTable table : list) {
+                map.put(new TableKey(table.getProjects(), table.getMonths()), table.getAmount());
+            }
+        }
+        return map;
+    }
+
     @Override
     public List<AmountTable> getIncomeTableList2(TableQueryParam param) {
         List<AmountTable> list = incomeMapper.searchIncomeTable2(param);

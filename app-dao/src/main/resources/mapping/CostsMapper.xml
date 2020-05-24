@@ -312,4 +312,26 @@
         GROUP BY months
 
     </select>
+
+
+    <select id="searchCostTableZhuanxiang" parameterType="com.hao.app.commons.entity.param.TableQueryParam"
+            resultMap="TableResultMap">
+        SELECT projects,DATE_FORMAT(enter_date,'%Y%m') AS months, sum(amount) AS amount
+        FROM costs
+        WHERE status = 1
+        <if test="projectsId != null and projectsId > 0">
+            and projects = ${projectsId}
+        </if>
+        <if test="type3 != null and type3 > 0">
+            and type_3 = ${type3}
+        </if>
+        <if test="enterDateStart != null">
+            <![CDATA[ and enter_date >= #{enterDateStart} ]]>
+        </if>
+        <if test="enterDateEnd != null">
+            <![CDATA[ and enter_date <= #{enterDateEnd} ]]>
+        </if>
+        GROUP BY projects,months
+
+    </select>
 </mapper>

@@ -44,7 +44,6 @@
     </style>
     <title>
     </title>
-
     <link rel="stylesheet" type="text/css" href="<%=syspath%>/ext-3.2.1/resources/css/ext-all.css"/>
     <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="<%=syspath%>/ext-3.2.1/ext-all.js"></script>
@@ -59,8 +58,9 @@
 
 </head>
 <body>
-<h1 style="font-size: 25px;">综合费用</h1>
+<h1 style="font-size: 25px;">专项费用</h1>
 <hr>
+
 
 <input type="hidden" id="hideFromDateDiv" name="hideFromDateDiv" value="${fromDate }">
 <input type="hidden" id="hideToDateDiv" name="hideToDateDiv" value="${toDate }">
@@ -68,16 +68,6 @@
 <table>
     <tr>
         <td>
-            <div style="float:left; "> 选择项目：</div>
-            <div style="float:left; ">
-                <select id="projectsId" name="projectsId">
-                    <c:forEach items="${projectsList }" var="itm">
-                    <option
-                            <c:if test="${itm.id == projectsId }">selected="selected"</c:if>
-                            value="${itm.id}">${itm.name}
-                        </c:forEach>
-                </select>
-            </div>
             <div style="float:left; "> 报表日期：</div>
             <div id="fromDateDiv" style="float:left; "></div>
             <div style="float:left; ">~</div>
@@ -86,7 +76,7 @@
                                              onclick="searchFunc()">
             </div>
             <div style="float:left; "><input style="margin-left: 20px;" type="button" value="导出Excel" class="Mybotton"
-                                             onclick="exportCostTable()"></div>
+                                             onclick="exportCostTableMonth()"></div>
 
         </td>
     </tr>
@@ -95,58 +85,25 @@
 <div style="overflow: auto;margin-bottom: 15px;" id="m_div_id">
     <table class="mytable">
         <tr>
-            <th style="width: 350px;" colspan="3">
-                核算项
+            <th style="width: 100px;">
+                项目名称
             </th>
-            <c:forEach items="${allMonth }" var="itm">
-                <th style="width: 170px;" colspan="2">
-                        ${WebUtils.getMonthName(itm) }
+            <c:forEach items="${allMonth }" var="month">
+                <th style="width: 100px;">
+                        ${WebUtils.getMonthName(month) }
                 </th>
             </c:forEach>
         </tr>
-        <tr style="background-color: #E6E6FA;">
-            <td colspan="3">
-                合同收入
-            </td>
-            <c:forEach items="${allMonth }" var="month">
-                <td align="right" style="width: 84px;">
-                        ${WebUtils.getMshouru(month, incomeTable)}
-                </td>
-                <td align="right">
-                    占比
-                </td>
-            </c:forEach>
-        </tr>
 
-        <c:forEach items="${allTypeList }" var="typeItem">
-            <tr style="${typeItem.background} ">
-                <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
-                        ${typeItem.name1 }
+        <c:forEach items="${projectsList }" var="project">
+            <tr style="${project == 0 ? 'background-color: #D8BFD8;' : '' } ">
+                <td align="left">
+                        ${project.name }
                 </td>
-
-                <c:if test="${typeItem.id > 0}">
-                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
-                            ${typeItem.name2 }
-                    </td>
-                    <td align="left" colspan="${typeItem.colpan}" rowspan="${typeItem.rowspan}">
-                            ${typeItem.name3 }
-                    </td>
-                </c:if>
-                <c:if test="${typeItem.id < 0}">
-                    <td align="center" colspan="2">
-                            ${typeItem.name2 }
-                    </td>
-                </c:if>
-
 
                 <c:forEach items="${allMonth }" var="month">
                     <td align="right">
-                        <c:set var="tmp"
-                               value="${WebUtils.getCostAmount(month, typeItem.id, typeItem.leafIds, costTable, incomeTable)}"/>
-                            ${tmp}
-                    </td>
-                    <td align="right">
-                            ${WebUtils.getZhanbi(month, tmp, incomeTable)}
+                            ${WebUtils.getZhuanxiangAmount(project.id, month, costTable)}
                     </td>
                 </c:forEach>
             </tr>
@@ -159,8 +116,8 @@
     var height = $(window).height() - 90;
     document.getElementById('m_div_id').style.height = height + "px";
 
+
     function searchFunc() {
-        var projectsId = document.getElementById("projectsId").value;
         var fromDate = document.getElementById("fromDate").value;
         var toDate = document.getElementById("toDate").value;
 
@@ -173,15 +130,13 @@
             return;
         }
 
-        window.location.href = "initCostsTable.do?fromDate=" + fromDate
-            + "&projectsId=" + projectsId
+        window.location.href = "initCostsZhuanxiang.do?fromDate=" + fromDate
             + "&toDate=" + toDate
             + "&first=1"
             + "&t=" + new Date().getTime();
     }
 
-    function exportCostTable() {
-        var projectsId = document.getElementById("projectsId").value;
+    function exportCostTableMonth() {
         var fromDate = document.getElementById("fromDate").value;
         var toDate = document.getElementById("toDate").value;
 
@@ -194,8 +149,7 @@
             return;
         }
 
-        window.location.href = "exportCostTable.do?fromDate=" + fromDate
-            + "&projectsId=" + projectsId
+        window.location.href = "exportCostZhuanxiang.do?fromDate=" + fromDate
             + "&toDate=" + toDate
             + "&first=1"
             + "&t=" + new Date().getTime();
@@ -206,7 +160,6 @@
             searchFunc();
         }
     });
-
 
     Ext.onReady(function () {
         new com.custom.DateField({

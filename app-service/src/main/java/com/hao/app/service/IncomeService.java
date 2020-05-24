@@ -27,5 +27,7 @@ public interface IncomeService {
 
     Map<TableKey, BigDecimal> getIncomeTable2(TableQueryParam param);
 
+    Map<TableKey, BigDecimal> getIncomeTableZhuanxiang(TableQueryParam param);
+
     List<AmountTable> getIncomeTableList2(TableQueryParam param);
 }

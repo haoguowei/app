@@ -238,5 +238,22 @@
     </select>
 
 
+    <select id="searchIncomeTableZhuanxiang" parameterType="com.hao.app.commons.entity.param.TableQueryParam"
+            resultMap="TableResultMap">
+        SELECT projects,DATE_FORMAT(income_day,'%Y%m') AS months,sum(income_amount) AS amount
+        FROM income
+        WHERE 1
+        <if test="projectsId != null and projectsId > 0">
+            and projects = ${projectsId}
+        </if>
+        <if test="enterDateStart != null">
+            <![CDATA[ and income_day >= #{enterDateStart} ]]>
+        </if>
+        <if test="enterDateEnd != null">
+            <![CDATA[ and income_day <= #{enterDateEnd} ]]>
+        </if>
+        GROUP BY projects,months
+
+    </select>
 
 </mapper>

@@ -32,4 +32,6 @@ public interface CostsMapper {
     List<AmountTable> searchCostTable3(TableQueryParam param);
 
     List<AmountTable> searchCostTable4(TableQueryParam param);
+
+    List<AmountTable> searchCostTableZhuanxiang(TableQueryParam param);
 }

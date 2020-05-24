@@ -38,4 +38,6 @@ public interface CostsService {
     List<AmountTable> getCostTableList3(TableQueryParam param);
 
     Map<TableKey, BigDecimal> getCostTable4(TableQueryParam param);
+
+    Map<TableKey, BigDecimal> getCostTableZhuanxiang(TableQueryParam param);
 }

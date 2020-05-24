@@ -59,6 +59,49 @@ public class CostsTableController extends BaseController {
         exportCostTableMonth.exportExcel(modelFile, request, response);
     }
 
+    @RequestMapping("/initCostsZhuanxiang.do")
+    public String initCostsZhuanxiang(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        TableQueryParam param = genParam(request);
+
+        //TableKey: projectId表示projectId, type3表示months
+        Map<TableKey, BigDecimal> costTable = costsService.getCostTableZhuanxiang(param);
+        request.setAttribute("costTable", costTable);
+
+        Set<Integer> allMonth = getZhuanxiangMonths(costTable);
+        allMonth.add(0); //合计
+        request.setAttribute("allMonth", allMonth);
+
+        List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
+        ProjectsDO projectsDO = new ProjectsDO();
+        projectsDO.setName("合计");
+        projectsDO.setId(0);
+        projectsList.add(projectsDO);
+
+        request.setAttribute("projectsList", projectsList);
+        request.setAttribute("fromDate", param.getEnterDateStart());
+        request.setAttribute("toDate", param.getEnterDateEnd());
+        request.setAttribute("type1", param.getType1());
+        request.setAttribute("type2", param.getType2());
+        request.setAttribute("type3", param.getType3());
+
+        return "jsp/costtable/initCostsZhuanxiang";
+    }
+
+    private Set<Integer> getZhuanxiangMonths(Map<TableKey, BigDecimal> costTable) {
+        List<Integer> allMonth = new ArrayList<>();
+        for (TableKey key : costTable.keySet()) {
+            allMonth.add(key.getType3());
+        }
+
+        Collections.sort(allMonth);
+
+        Set<Integer> set = new LinkedHashSet<>();
+        for (Integer i : allMonth) {
+            set.add(i);
+        }
+        return set;
+    }
+
     @RequestMapping("/initCostsTableMonth.do")
     public String initCostsTableMonth(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TableQueryParam param = genParam(request);
@@ -134,6 +177,9 @@ public class CostsTableController extends BaseController {
     private TableQueryParam genParam(HttpServletRequest request) {
         int first = NumberUtils.toInt(request.getParameter("first"), 0);
         int projectsId = NumberUtils.toInt(request.getParameter("projectsId"), 0);
+        int type1 = NumberUtils.toInt(request.getParameter("type1"), 0);
+        int type2 = NumberUtils.toInt(request.getParameter("type2"), 0);
+        int type3 = NumberUtils.toInt(request.getParameter("type3"), 0);
         String fromDate = request.getParameter("fromDate");
         String toDate = request.getParameter("toDate");
 
@@ -146,6 +192,15 @@ public class CostsTableController extends BaseController {
         TableQueryParam param = new TableQueryParam();
         if (projectsId > 0) {
             param.setProjectsId(projectsId);
+        }
+        if (type1 > 0) {
+            param.setType1(type1);
+        }
+        if (type2 > 0) {
+            param.setType2(type2);
+        }
+        if (type3 > 0) {
+            param.setType3(type3);
         }
 
         param.setEnterDateStart(fromDate);

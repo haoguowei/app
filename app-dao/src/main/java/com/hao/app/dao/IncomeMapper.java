@@ -24,4 +24,6 @@ public interface IncomeMapper {
 
     List<AmountTable> searchIncomeTable2(TableQueryParam param);
 
+    List<AmountTable> searchIncomeTableZhuanxiang(TableQueryParam param);
+
 }

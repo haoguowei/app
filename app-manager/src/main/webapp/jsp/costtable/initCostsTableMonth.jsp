@@ -67,16 +67,6 @@
 <table>
     <tr>
         <td>
-            <div style="float:left; "> 选择项目：</div>
-            <div style="float:left; ">
-                <select id="projectsId" name="projectsId">
-                    <c:forEach items="${projectsList }" var="itm">
-                    <option
-                            <c:if test="${itm.id == projectsId }">selected="selected"</c:if>
-                            value="${itm.id}">${itm.name}
-                        </c:forEach>
-                </select>
-            </div>
             <div style="float:left; "> 报表日期：</div>
             <div id="fromDateDiv" style="float:left; "></div>
             <div style="float:left; ">~</div>

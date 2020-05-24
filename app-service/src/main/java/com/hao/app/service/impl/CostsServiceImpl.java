@@ -216,4 +216,17 @@ public class CostsServiceImpl implements CostsService {
         }
         return map;
     }
+
+
+    @Override
+    public Map<TableKey, BigDecimal> getCostTableZhuanxiang(TableQueryParam param) {
+        List<AmountTable> list = costsMapper.searchCostTableZhuanxiang(param);
+        Map<TableKey, BigDecimal> map = new HashMap<>();
+        if (list != null) {
+            for (AmountTable table : list) {
+                map.put(new TableKey(table.getProjects(), table.getMonths()), table.getAmount());
+            }
+        }
+        return map;
+    }
 }

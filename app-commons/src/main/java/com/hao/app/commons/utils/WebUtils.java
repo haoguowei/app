@@ -210,4 +210,44 @@ public class WebUtils {
         return tmpv.multiply(BigDecimal.valueOf(100.0)).divide(total, 2, BigDecimal.ROUND_HALF_UP).toString() + "%";
     }
 
+    public static BigDecimal getZhuanxiangAmount(int projectId, int month, Map<TableKey, BigDecimal> costTable) {
+        if (costTable == null) {
+            costTable = new HashMap<>();
+        }
+
+        if (projectId == 0 && month == 0) {
+            BigDecimal total = BigDecimal.valueOf(0);
+            for (TableKey key : costTable.keySet()) {
+                total = total.add(costTable.get(key));
+            }
+            return total;
+        }
+
+        if (projectId == 0) {
+            BigDecimal total = BigDecimal.valueOf(0);
+            for (TableKey key : costTable.keySet()) {
+                if (key.getType3() == month) {
+                    total = total.add(costTable.get(key));
+                }
+            }
+            return total;
+        }
+        if (month == 0) {
+            BigDecimal total = BigDecimal.valueOf(0);
+            for (TableKey key : costTable.keySet()) {
+                if (key.getProjectId() == projectId) {
+                    total = total.add(costTable.get(key));
+                }
+            }
+            return total;
+        }
+
+        BigDecimal bigDecimal = costTable.get(new TableKey(projectId, month));
+        if (bigDecimal == null) {
+            return BigDecimal.valueOf(0);
+        } else {
+            return bigDecimal;
+        }
+    }
+
 }
