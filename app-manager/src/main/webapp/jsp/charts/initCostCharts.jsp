@@ -154,7 +154,7 @@
         window.location.href = "initCostCharts.do?fromDate=" + fromDate
             + "&toDate=" + toDate
             + "&projectsId=" + projectsId
-            + "&first=1"
+            + "&default=1"
             + "&t=" + new Date().getTime();
     }
 
