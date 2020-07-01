@@ -23,7 +23,7 @@
 		<!-- version property -->
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<mybatis.version>3.3.1</mybatis.version>
-		<mysql.version>5.1.38</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
 		<dubbo.version>2.5.4-SNAPSHOT</dubbo.version>
 		<zookeeper.version>3.4.8</zookeeper.version>
 	</properties>
