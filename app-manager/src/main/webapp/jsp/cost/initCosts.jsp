@@ -55,6 +55,8 @@
                 <div id="entryDateEndDIV" style="float:left; "></div>
 
                 <input style="margin-left: 50px;" type="button" value="搜索" class="Mybotton" onclick="searchFunc()">
+                <input style="margin-left: 50px;" type="button" value="导出Excel" class="Mybotton"
+                       onclick="exportExcel()">
             </td>
         </tr>
         </tr>

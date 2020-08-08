@@ -37,6 +37,25 @@ Ext.onReady(function () {
         gridStore.reload();
     };
 
+    this.exportExcel = function () {
+        var projectsId = getById("projectsId");
+        var enterDateStart = getById("enterDateStart");
+        var enterDateEnd = getById("enterDateEnd");
+
+        var type1 = getById("type1");
+        var type2 = getById("type2");
+        var type3 = getById("type3");
+
+        window.location.href = "exportCosts.do?" +
+            "  projectsId=" + projectsId
+            + "&enterDateStart=" + enterDateStart
+            + "&enterDateEnd=" + enterDateEnd
+            + "&type1=" + type1
+            + "&type2=" + type2
+            + "&type3=" + type3
+            + "&t=" + new Date().getTime();
+    }
+
     this.updateF = function (id) {
         location.href = "initCostsEdit.do?id=" + id;
     };

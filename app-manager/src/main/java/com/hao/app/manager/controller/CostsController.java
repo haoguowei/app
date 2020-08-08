@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.hao.app.commons.entity.param.CostQueryParam;
 import com.hao.app.commons.entity.result.JsonResult;
 import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.manager.export.ExportCosts;
 import com.hao.app.pojo.CostsDO;
 import com.hao.app.pojo.CostsTypeDO;
 import com.hao.app.pojo.ProjectsDO;
@@ -40,11 +41,20 @@ public class CostsController extends BaseController {
     @Resource
     private ProjectsService projectsService;
 
+    @Resource
+    private ExportCosts exportCosts;
+
     @RequestMapping("/initCosts.do")
     public String initCosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("projectsList", getProjectsList(request));
         request.setAttribute("type1List", costsService.listCostsTypeByParentId(null));
         return "jsp/cost/initCosts";
+    }
+
+    @RequestMapping("/exportCosts.do")
+    public void exportCosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String modelFile = getModelFilePath(request, "costsdetail.xls");
+        exportCosts.exportExcel(modelFile, request, response);
     }
 
 

@@ -92,4 +92,11 @@ public class DateUtil {
 		return new SimpleDateFormat("yyyy-MM-dd").format(dt);
 	}
 
+	public static String fmtDate(Date date) {
+		if (date == null) {
+			return null;
+		}
+		return new SimpleDateFormat("yyyy-MM-dd").format(date);
+	}
+
 }
