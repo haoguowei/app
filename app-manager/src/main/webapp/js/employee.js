@@ -54,6 +54,7 @@ Ext.onReady(function () {
             if (_isNull(path)) {
                 alert("文件上传失败！");
             } else {
+                alert(path);
                 searchFunc();
             }
         } else {
