@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.hao.app.service.EmployeeService;
 import com.hao.app.service.SysUploadService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  * 文件上传
@@ -101,28 +103,23 @@ public class SysUploadController extends BaseController {
             int total = 0;
             int success = 0;
             int err = 0;
-
             while (true) {
                 Row row = sheet.getRow(rowIndex++);
                 if (row == null) {
                     break;
                 }
-
-                //16列
-                String name = getValue(row, 0);
-                if (StringUtils.isBlank(name)) {
+                if (StringUtils.isBlank(getValue(row, 0))) {
                     break;
                 }
 
-                String phone = getValue(row, 1);
-                String idCard = getValue(row, 2);
-                String projectsName = getValue(row, 3);
-
-                //职位 employeeJobTypeMap
-                String jobTypeStr = getValue(row, 4);
-                //民族 minzuMap
-                String minzuStr = getValue(row, 5);
-
+                total += 1;
+                try {
+                    saveItem(row);
+                    success += 1;
+                } catch (Exception e) {
+                    err += 1;
+                    logger.error("=====> ", e);
+                }
             }
 
             JsonObject jsonObject = new JsonObject();
@@ -186,13 +183,70 @@ public class SysUploadController extends BaseController {
 //        logger.info("导入员工信息：{}, result={}", item, res);
     }
 
+    public void saveItem(Row row) {
+//        String name = getValue(row, 0);
+//        String phone = getValue(row, 1);
+//        String idCard = getValue(row, 2);
+//        String projectsName = getValue(row, 3);
+//
+//        //职位 employeeJobTypeMap
+//        String jobTypeStr = getValue(row, 4);
+//        //民族 minzuMap
+//        String minzuStr = getValue(row, 5);
+        //入职日期
+        String ruzhi = getValue(row, 6);
+        //离职日期
+        String lizhi = getValue(row, 7);
+
+        //学历
+        String xueli = getValue(row, 8);
+        //户口类型
+        String hukou = getValue(row, 9);
+
+        //户籍地址
+        String hukouAddr = getValue(row, 10);
+        //现住地址
+        String addr = getValue(row, 11);
+
+        //紧急联系人
+        String jinjiLianxiren = getValue(row, 12);
+        //紧急联系人电话
+        String jinjinPhone = getValue(row, 13);
+
+        //有无入职合同
+        String hetong = getValue(row, 14);
+        //保险类型
+        String baoxian = getValue(row, 15);
+    }
+
     public String getValue(Row row, int cellIndex) {
         Cell cell = row.getCell(cellIndex);
-        if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+        if (cell == null) {
+            return "";
+        }
+        int cellType = cell.getCellType();
+        if (cellType == Cell.CELL_TYPE_STRING) {
             return cell.getStringCellValue();
         } else {
+            if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                if (cell.getDateCellValue() == null) {
+                    return "";
+                }
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                return dateFormat.format(cell.getDateCellValue());
+            }
             return BigDecimal.valueOf(cell.getNumericCellValue()).toPlainString();
         }
     }
 
+    public String getDateValue(Row row, int cellIndex) {
+        Cell cell = row.getCell(cellIndex);
+        if (cell == null) {
+            return "";
+        }
+        String date = String.valueOf(cell.getNumericCellValue());
+
+        return date;
+
+    }
 }
