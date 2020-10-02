@@ -48,6 +48,20 @@ Ext.onReady(function () {
         gridStore.reload();
     };
 
+    var pic = new FileUpLoadWindowV2(function (fp, response) {
+        if (response.result.success) {
+            var path = response.result.data;
+            if (_isNull(path)) {
+                alert("文件上传失败！");
+            } else {
+                searchFunc();
+            }
+        } else {
+            alert(response.result.msg);
+        }
+        pic.hide();
+    });
+
     this.updateF = function (id) {
         location.href = "initEmployeeEdit.do?id=" + id;
     };
@@ -202,14 +216,13 @@ Ext.onReady(function () {
             border: true,
             autoScroll: true,
             items: [grid],
-            tbar: [
-                //     {
-                //     text: '新增员工',
-                //     id: 'bt_add',
-                //     handler: function (b, e) {
-                //         location.href = "initEmployeeEdit.do";
-                //     }
-                // },
+            tbar: [{
+                text: '批量导入员工',
+                id: 'bt_import',
+                handler: function (b, e) {
+                    pic.show();
+                }
+            },
                 '->',
                 new Ext.PagingToolbar({
                     pageSize: PAGESIZE,

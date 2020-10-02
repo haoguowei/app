@@ -44,4 +44,19 @@ public class SysUploadController extends BaseController {
 		response.getWriter().write(jsonObject.toString());
 	}
 
+	/**
+	 * 上传文件
+	 *
+	 * @param file
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping("/fileUploadV2.do")
+	public void fileUploadV2(@RequestParam(value = "file", required = false) MultipartFile file,
+							 HttpServletRequest request, HttpServletResponse response) throws IOException {
+		logger.info(file.getName());
+
+	}
+
 }
