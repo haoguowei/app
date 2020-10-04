@@ -236,7 +236,7 @@ public class SysUploadController extends BaseController {
         if (item.getLeaveDate() == null) {
             item.setStatus(1);
         } else {
-            item.setStatus(0);
+            item.setStatus(99);
         }
 
         item.setEduType(Dicts.getKey(Dicts.xueliMap, xueli));
