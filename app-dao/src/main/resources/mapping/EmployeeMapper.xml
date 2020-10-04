@@ -129,6 +129,12 @@
         from employee
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="getByCard" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from employee
+        where id_card = #{card}
+    </select>
 
     <insert id="insert" parameterType="com.hao.app.pojo.EmployeeDO">
         insert into employee

@@ -3,6 +3,7 @@ package com.hao.app.manager.controller;
 import com.google.gson.JsonObject;
 import com.hao.app.commons.entity.Dicts;
 import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.commons.utils.IdCardUtils;
 import com.hao.app.pojo.EmployeeDO;
 import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.EmployeeService;
@@ -57,6 +58,7 @@ public class SysUploadController extends BaseController {
 
     @Resource
     private ProjectsService projectsService;
+
 
     public static Workbook getWorkbook(InputStream inputStream, String fileType) throws IOException {
         Workbook workbook = null;
@@ -119,6 +121,7 @@ public class SysUploadController extends BaseController {
             int total = 0;
             int success = 0;
             int err = 0;
+            int exit = 0;
             while (true) {
                 Row row = sheet.getRow(rowIndex++);
                 if (row == null) {
@@ -130,7 +133,19 @@ public class SysUploadController extends BaseController {
 
                 total += 1;
                 try {
-                    saveItem(row, projectMap);
+                    String idCard = getValue(row, 2);
+                    if (StringUtils.isBlank(idCard)) {
+                        err += 1;
+                        continue;
+                    }
+
+                    //是否已存在
+                    EmployeeDO edo = employeeService.getByCard(idCard);
+                    if (edo != null) {
+                        logger.info("已存在：" + edo);
+                    } else {
+                        saveItem(row, projectMap);
+                    }
                     success += 1;
                 } catch (Exception e) {
                     err += 1;
@@ -167,7 +182,7 @@ public class SysUploadController extends BaseController {
         return map;
     }
 
-    public void saveItem(Row row, Map<String, Integer> projectMap) {
+    public void saveItem(Row row, Map<String, Integer> projectMap) throws ParseException {
         String name = getValue(row, 0);
         String phone = getValue(row, 1);
         String idCard = getValue(row, 2);
@@ -205,12 +220,11 @@ public class SysUploadController extends BaseController {
 
         EmployeeDO item = new EmployeeDO();
         item.setName(name);
+        item.setPhone(phone);
+        item.setIdCard(idCard);
 
         item.setProjects(projectMap.get(projectsName));
         item.setProjectsName(projectsName);
-
-        item.setPhone(phone);
-        item.setIdCard(idCard);
 
         item.setJobType(Dicts.getKey(Dicts.employeeJobTypeMap, jobTypeStr));
         item.setJobTypeStr(jobTypeStr);
@@ -228,6 +242,7 @@ public class SysUploadController extends BaseController {
 
         item.setEduType(Dicts.getKey(Dicts.xueliMap, xueli));
         item.setHukouType(Dicts.getKey(Dicts.hukouTypeMap, hukou));
+        item.setHetong(hetong(hetong));
 
         item.setHujiAddress(hukouAddr);
         item.setAddress(addr);
@@ -239,9 +254,17 @@ public class SysUploadController extends BaseController {
         item.setSafeType(baoxian);
 
         item.setRemark("批量导入");
+        item.setCreater("导入");
         item.setCreateTime(new Date());
         item.setUpdateTime(new Date());
-        item.setHetong(hetong(hetong));
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Map<String, String> map = IdCardUtils.getBirAgeSex(item.getIdCard());
+        if (map != null) {
+            if (StringUtils.isNotBlank(map.get("birthday"))) {
+                item.setBirthDay(format.parse(map.get("birthday")));
+            }
+        }
 
         ResultCodeEnum res = employeeService.insert(item);
         logger.info("导入员工信息：{}, result={}", item, res);

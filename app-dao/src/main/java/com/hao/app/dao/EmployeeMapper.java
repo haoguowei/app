@@ -24,4 +24,6 @@ public interface EmployeeMapper {
     int passdOrNot(@Param("id") int id, @Param("status") int status, @Param("descr") String descr);
 
     int leave(@Param("id") int id, @Param("status") int status, @Param("leaveDate") String leaveDate);
+
+    EmployeeDO getByCard(@Param("card") String card);
 }

@@ -11,6 +11,8 @@ public interface EmployeeService {
 
     EmployeeDO getById(int id);
 
+    EmployeeDO getByCard(String card);
+
     ResultCodeEnum insert(EmployeeDO employee);
 
     ResultCodeEnum update(EmployeeDO employee);

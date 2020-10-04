@@ -48,6 +48,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         return item;
     }
 
+    @Override
+    public EmployeeDO getByCard(String card) {
+        if (StringUtils.isBlank(card)) {
+            return null;
+        }
+        return employeeMapper.getByCard(card);
+    }
+
     private void fill(EmployeeDO item) {
         if (item != null) {
             Map<String, String> map = IdCardUtils.getBirAgeSex(item.getIdCard());
