@@ -133,7 +133,7 @@ public class SysUploadController extends BaseController {
                 total += 1;
                 try {
                     String idCard = getValue(row, 2);
-                    if (StringUtils.isBlank(idCard)) {
+                    if (StringUtils.isBlank(idCard) || idCard.equals("0.0")) {
                         err += 1;
                         continue;
                     }
@@ -219,7 +219,7 @@ public class SysUploadController extends BaseController {
 
         EmployeeDO item = new EmployeeDO();
         item.setName(name);
-        item.setPhone(phone);
+        item.setPhone(phone.equals("0.0") ? "" : phone);
         item.setIdCard(idCard);
 
         item.setProjects(projectMap.get(projectsName));
@@ -234,9 +234,9 @@ public class SysUploadController extends BaseController {
         item.setEntryDate(getDate(ruzhi));
         item.setLeaveDate(getDate(lizhi));
         if (item.getLeaveDate() == null) {
-            item.setStatus(0);
-        } else {
             item.setStatus(1);
+        } else {
+            item.setStatus(0);
         }
 
         item.setEduType(Dicts.getKey(Dicts.xueliMap, xueli));
@@ -246,8 +246,8 @@ public class SysUploadController extends BaseController {
         item.setHujiAddress(hukouAddr);
         item.setAddress(addr);
 
-        item.setEmergencyContact(jinjiLianxiren);
-        item.setEmergencyContactPhone(jinjinPhone);
+        item.setEmergencyContact(jinjiLianxiren.equals("0.0") ? "" : jinjiLianxiren);
+        item.setEmergencyContactPhone(jinjinPhone.equals("0.0") ? "" : jinjinPhone);
 
         //保险类型
         item.setSafeType(baoxian);
