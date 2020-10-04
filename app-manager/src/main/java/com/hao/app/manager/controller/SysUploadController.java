@@ -1,7 +1,12 @@
 package com.hao.app.manager.controller;
 
 import com.google.gson.JsonObject;
+import com.hao.app.commons.entity.Dicts;
+import com.hao.app.commons.enums.ResultCodeEnum;
+import com.hao.app.pojo.EmployeeDO;
+import com.hao.app.pojo.ProjectsDO;
 import com.hao.app.service.EmployeeService;
+import com.hao.app.service.ProjectsService;
 import com.hao.app.service.SysUploadService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -15,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +31,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 文件上传
@@ -43,6 +54,9 @@ public class SysUploadController extends BaseController {
 
     @Resource
     private EmployeeService employeeService;
+
+    @Resource
+    private ProjectsService projectsService;
 
     public static Workbook getWorkbook(InputStream inputStream, String fileType) throws IOException {
         Workbook workbook = null;
@@ -97,6 +111,8 @@ public class SysUploadController extends BaseController {
                 return;
             }
 
+            Map<String, Integer> projectMap = getProjects();
+
             int rowIndex = 1;
             Sheet sheet = workbook.getSheetAt(0);
 
@@ -114,7 +130,7 @@ public class SysUploadController extends BaseController {
 
                 total += 1;
                 try {
-                    saveItem(row);
+                    saveItem(row, projectMap);
                     success += 1;
                 } catch (Exception e) {
                     err += 1;
@@ -136,63 +152,31 @@ public class SysUploadController extends BaseController {
             jsonObject.addProperty("data", "员工信息导入失败");
             response.getWriter().write(jsonObject.toString());
         }
-
-//        EmployeeDO item = new EmployeeDO();
-//        item.setStatus();
-//        item.setName();
-//
-//        item.setProjects();
-//        item.setProjectsName();
-//
-//        item.setPhone();
-//        item.setIdCard();
-//
-//        item.setJobType();
-//        item.setJobTypeStr();
-//        item.setGenderStr();
-//
-//        item.setEthnic();
-//        item.setAge();
-//
-//        item.setEntryDate();
-//        item.setLeaveDate();
-//        item.setBirthDay();
-//        item.setBirthDate();
-//
-//        item.setEduType();
-//        item.setHukouType();
-//
-//        item.setHujiAddress();
-//        item.setAddress();
-//
-//        item.setEmergencyContact();
-//        item.setEmergencyContactPhone();
-//
-//        item.setSafeType();
-//
-//        item.setRemark("批量导入");
-//        item.setCreateTime(new Date());
-//        item.setUpdateTime(new Date());
-//
-//        item.setHetong();
-//        item.setHetongStr();
-//        item.setShenqing();
-//        item.setDescr();
-//
-//        ResultCodeEnum res = employeeService.insert(item);
-//        logger.info("导入员工信息：{}, result={}", item, res);
     }
 
-    public void saveItem(Row row) {
-//        String name = getValue(row, 0);
-//        String phone = getValue(row, 1);
-//        String idCard = getValue(row, 2);
-//        String projectsName = getValue(row, 3);
-//
-//        //职位 employeeJobTypeMap
-//        String jobTypeStr = getValue(row, 4);
-//        //民族 minzuMap
-//        String minzuStr = getValue(row, 5);
+    private Map<String, Integer> getProjects() {
+        Map<String, Integer> map = new HashMap<>();
+        List<ProjectsDO> projectsList = projectsService.search(null).getResultList();
+        if (CollectionUtils.isEmpty(projectsList)) {
+            return map;
+        }
+
+        for (ProjectsDO p : projectsList) {
+            map.put(p.getName(), p.getId());
+        }
+        return map;
+    }
+
+    public void saveItem(Row row, Map<String, Integer> projectMap) {
+        String name = getValue(row, 0);
+        String phone = getValue(row, 1);
+        String idCard = getValue(row, 2);
+        String projectsName = getValue(row, 3);
+
+        //职位 employeeJobTypeMap
+        String jobTypeStr = getValue(row, 4);
+        //民族 minzuMap
+        String minzuStr = getValue(row, 5);
         //入职日期
         String ruzhi = getValue(row, 6);
         //离职日期
@@ -217,6 +201,59 @@ public class SysUploadController extends BaseController {
         String hetong = getValue(row, 14);
         //保险类型
         String baoxian = getValue(row, 15);
+
+
+        EmployeeDO item = new EmployeeDO();
+        item.setName(name);
+
+        item.setProjects(projectMap.get(projectsName));
+        item.setProjectsName(projectsName);
+
+        item.setPhone(phone);
+        item.setIdCard(idCard);
+
+        item.setJobType(Dicts.getKey(Dicts.employeeJobTypeMap, jobTypeStr));
+        item.setJobTypeStr(jobTypeStr);
+
+        //民族
+        item.setEthnic(Dicts.getKey(Dicts.minzuMap, minzuStr));
+
+        item.setEntryDate(getDate(ruzhi));
+        item.setLeaveDate(getDate(lizhi));
+        if (item.getLeaveDate() == null) {
+            item.setStatus(0);
+        } else {
+            item.setStatus(1);
+        }
+
+        item.setEduType(Dicts.getKey(Dicts.xueliMap, xueli));
+        item.setHukouType(Dicts.getKey(Dicts.hukouTypeMap, hukou));
+
+        item.setHujiAddress(hukouAddr);
+        item.setAddress(addr);
+
+        item.setEmergencyContact(jinjiLianxiren);
+        item.setEmergencyContactPhone(jinjinPhone);
+
+        //保险类型
+        item.setSafeType(baoxian);
+
+        item.setRemark("批量导入");
+        item.setCreateTime(new Date());
+        item.setUpdateTime(new Date());
+        item.setHetong(hetong(hetong));
+
+        ResultCodeEnum res = employeeService.insert(item);
+        logger.info("导入员工信息：{}, result={}", item, res);
+    }
+
+    //0-否，1-是
+    private Integer hetong(String hetong) {
+        if (StringUtils.isBlank(hetong)) {
+            return 0;
+        }
+
+        return hetong.equals("有") ? 1 : 0;
     }
 
     public String getValue(Row row, int cellIndex) {
@@ -239,14 +276,16 @@ public class SysUploadController extends BaseController {
         }
     }
 
-    public String getDateValue(Row row, int cellIndex) {
-        Cell cell = row.getCell(cellIndex);
-        if (cell == null) {
-            return "";
+    public Date getDate(String date) {
+        if (StringUtils.isBlank(date)) {
+            return null;
         }
-        String date = String.valueOf(cell.getNumericCellValue());
-
-        return date;
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

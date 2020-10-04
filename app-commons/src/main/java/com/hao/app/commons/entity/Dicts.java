@@ -223,4 +223,13 @@ public class Dicts {
         yunyingPayTypeMap.put(100, "其他运营费用");
 
     }
+
+    public static int getKey(Map<Integer, String> map, String name) {
+        for (Integer key : map.keySet()) {
+            if (map.get(key).equals(name)) {
+                return key;
+            }
+        }
+        return 0;
+    }
 }
