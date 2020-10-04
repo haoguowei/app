@@ -121,7 +121,6 @@ public class SysUploadController extends BaseController {
             int total = 0;
             int success = 0;
             int err = 0;
-            int exit = 0;
             while (true) {
                 Row row = sheet.getRow(rowIndex++);
                 if (row == null) {
