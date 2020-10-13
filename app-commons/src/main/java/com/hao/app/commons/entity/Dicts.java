@@ -139,6 +139,7 @@ public class Dicts {
         employeeJobTypeMap.put(11, "车队长");
         employeeJobTypeMap.put(12, "操作员");
         employeeJobTypeMap.put(13, "质检员");
+        employeeJobTypeMap.put(14, "会计");
 
         //收集容器、中转容器、保洁车辆
         assetsTypeMap.put(1, "收集容器");
