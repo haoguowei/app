@@ -275,7 +275,7 @@ public class SysUploadController extends BaseController {
             return 0;
         }
 
-        return hetong.equals("有") ? 1 : 0;
+        return (hetong.equals("有") || hetong.equals("是")) ? 1 : 0;
     }
 
     public String getValue(Row row, int cellIndex) {
