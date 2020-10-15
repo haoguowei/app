@@ -131,8 +131,9 @@ public class SysUploadController extends BaseController {
                 }
 
                 total += 1;
+                String idCard = "";
                 try {
-                    String idCard = getValue(row, 2);
+                    idCard = getValue(row, 2);
                     if (StringUtils.isBlank(idCard) || idCard.equals("0.0")) {
                         err += 1;
                         continue;
@@ -148,6 +149,7 @@ public class SysUploadController extends BaseController {
                     success += 1;
                 } catch (Exception e) {
                     err += 1;
+                    System.out.println("error ===> " + idCard);
                     e.printStackTrace();
                 }
             }
@@ -159,6 +161,7 @@ public class SysUploadController extends BaseController {
             jsonObject.addProperty("data", msg);
             response.getWriter().write(jsonObject.toString());
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error("员工信息导入失败！", e);
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("success", false);
