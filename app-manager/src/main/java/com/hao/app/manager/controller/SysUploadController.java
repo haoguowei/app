@@ -148,7 +148,7 @@ public class SysUploadController extends BaseController {
                     success += 1;
                 } catch (Exception e) {
                     err += 1;
-                    logger.error("=====> ", e);
+                    e.printStackTrace();
                 }
             }
 
