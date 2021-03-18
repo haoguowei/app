@@ -15,13 +15,7 @@ public class DateUtil {
 	public static final SimpleDateFormat DATE = new SimpleDateFormat("yyyy-MM-dd");
 	public static final SimpleDateFormat CNDATE = new SimpleDateFormat("yyyy年MM月dd日");
 
-	/**
-	 * 将日期时间变为unix时间戳
-	 * 
-	 * @param dateTime
-	 *            日期类型
-	 * @return
-	 */
+
 	public static long getUnixTimes(Date dateTime) {
 		return dateTime.getTime() / 1000;
 	}
